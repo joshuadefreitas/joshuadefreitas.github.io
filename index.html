@@ -62,14 +62,14 @@
       width: 100%;
       max-width: var(--max-width);
       margin: 0 auto;
-      padding: 24px 20px 40px;
+      padding: 28px 20px 40px;
     }
 
     header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
 
     .brand {
@@ -78,12 +78,11 @@
       gap: 10px;
     }
 
-    /* NEW: DF logo in header */
-    .brand-logo {
+    .avatar-circle {
       width: 34px;
       height: 34px;
       border-radius: 50%;
-      object-fit: cover;
+      background: radial-gradient(circle at 30% 0, #f97316 0%, #7c2d12 38%, #020617 100%);
       box-shadow: 0 0 18px rgba(249, 115, 22, 0.5);
     }
 
@@ -171,7 +170,7 @@
     }
 
     .hero-title {
-      font-size: clamp(32px, 3.8vw, 38px);
+      font-size: clamp(32px, 4vw, 40px);
       font-weight: 800;
       letter-spacing: 0.02em;
       line-height: 1.1;
@@ -273,15 +272,13 @@
       overflow: hidden;
       background: radial-gradient(circle at top, rgba(249, 115, 22, 0.2), transparent 60%),
                   radial-gradient(circle at bottom, rgba(15, 23, 42, 0.95), #020617);
-      padding: 8px;
+      padding: 10px;
       box-shadow: var(--shadow-soft);
       border: 1px solid rgba(31, 41, 55, 0.95);
-      max-width: 430px;          /* shrink banner */
-      justify-self: end;         /* align with right edge */
     }
 
     .hero-visual-inner {
-      border-radius: 20px;       /* same rounded corners as before */
+      border-radius: 22px;
       overflow: hidden;
       border: 1px solid rgba(75, 85, 99, 0.7);
       background: radial-gradient(circle at top left, rgba(249, 115, 22, 0.15), transparent 55%),
@@ -292,9 +289,8 @@
       display: block;
       width: 100%;
       height: auto;
-      max-height: 260px;         /* keep it from getting too tall */
-      object-fit: cover;
-      opacity: 0.98;
+      opacity: 0.97;
+      mix-blend-mode: screen;
     }
 
     .hero-chip {
@@ -373,8 +369,6 @@
 
       .hero-visual {
         order: -1;
-        justify-self: stretch;
-        max-width: 100%;
       }
 
       .section-subtitle {
@@ -616,8 +610,7 @@
     <div class="page-inner">
       <header>
         <div class="brand">
-          <!-- NEW: header uses df-logo.png -->
-          <img src="https://raw.githubusercontent.com/joshuadefreitas/Portfolio/main/logo.png" alt="Data & AI Portfolio Banner" />
+          <div class="avatar-circle"></div>
           <div class="brand-text">
             <div class="brand-name">JOSHUA DE FREITAS</div>
             <div class="brand-tagline">Data · AI · Markets</div>
@@ -664,8 +657,7 @@
 
         <div class="hero-visual">
           <div class="hero-visual-inner">
-            <!-- NEW: use local Banner.png -->
-            <img src="https://raw.githubusercontent.com/joshuadefreitas/Portfolio/main/df-logo.png" alt="Data & AI Portfolio Banner" />
+            <img src="https://raw.githubusercontent.com/joshuadefreitas/Portfolio/main/Banner.png" alt="Data & AI Portfolio Banner" />
           </div>
           <div class="hero-chip">
             <span></span>
@@ -673,11 +665,6 @@
           </div>
         </div>
       </section>
-
-      <!-- PROJECTS -->
-      <!-- (rest of your sections unchanged, exactly as you had them) -->
-      <!-- I’ll leave them as-is since the layout issue was in the hero. -->
-      <!-- ... paste your existing Projects, Skills/About, Contact, Footer here ... -->
 
       <!-- PROJECTS -->
       <section id="projects">
@@ -693,17 +680,206 @@
         </div>
 
         <div class="projects-grid">
-          <!-- Project cards unchanged -->
-          <!-- ... (keep your existing 6 project cards here) ... -->
+          <!-- Project 1 -->
+          <article class="project-card">
+            <div class="project-heading-row">
+              <h3 class="project-title">📈 Time Series Forecasting — Remittances to Mexico</h3>
+              <span class="project-tag">Forecasting</span>
+            </div>
+            <p class="project-meta">R · SARIMA · Uncertainty analysis</p>
+            <p class="project-body">
+              A full forecasting workflow for monthly remittance flows to Mexico, including exploration,
+              stationarity checks, SARIMA modeling, diagnostics, and scenario analysis.
+            </p>
+            <p class="project-tech">
+              <span>Stack:</span> R, forecast, stats, ggplot2
+            </p>
+            <div class="project-footer">
+              <span>End-to-end time series study</span>
+              <a class="project-link" href="https://github.com/joshuadefreitas/Portfolio/tree/main/forecasting-remittances" target="_blank">
+                View project → 
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project-card">
+            <div class="project-heading-row">
+              <h3 class="project-title">🧠 AI Document Platform — Invoice & Contract Intelligence</h3>
+              <span class="project-tag">Data Platform</span>
+            </div>
+            <p class="project-meta">Python · FastAPI · SQLAlchemy · ETL</p>
+            <p class="project-body">
+              A modular invoice & contract intelligence platform: data model, ETL pipelines, validation,
+              SQLite/SQL back-end, and a versioned FastAPI layer designed as a foundation for
+              compliance checks, analytics, and LLM-powered document understanding.
+            </p>
+            <p class="project-tech">
+              <span>Stack:</span> Python, FastAPI, SQLAlchemy, Pandas, SQLite (Postgres-ready)
+            </p>
+            <div class="project-footer">
+              <span>Production-style architecture</span>
+              <a class="project-link" href="https://github.com/joshuadefreitas/Portfolio/tree/main/ai-document-platform" target="_blank">
+                View project → 
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project-card">
+            <div class="project-heading-row">
+              <h3 class="project-title">📉 DeepLOB — Deep Learning on Limit Order Books</h3>
+              <span class="project-tag">Deep Learning</span>
+            </div>
+            <p class="project-meta">PyTorch · Market microstructure · Backtesting</p>
+            <p class="project-body">
+              An end-to-end implementation of a DeepLOB-style pipeline on synthetic limit order
+              book data: simulator, sliding-window tensor builder, PyTorch dataset, CNN-Inception-LSTM
+              model, training loop, evaluation, and a simple backtest engine.
+            </p>
+            <p class="project-tech">
+              <span>Stack:</span> Python, NumPy, PyTorch, Pandas
+            </p>
+            <div class="project-footer">
+              <span>Bridging research & trading</span>
+              <a class="project-link" href="https://github.com/joshuadefreitas/Portfolio/tree/main/deep-lob" target="_blank">
+                View project → 
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 4 -->
+          <article class="project-card">
+            <div class="project-heading-row">
+              <h3 class="project-title">🤖 RL Agent for Futures Trading <span style="font-size: 11px; font-weight:400; color:#9ca3af;">(planned)</span></h3>
+              <span class="project-tag">RL · Markets</span>
+            </div>
+            <p class="project-meta">Gym-style environment · PPO/SAC</p>
+            <p class="project-body">
+              A custom trading environment where an RL agent learns when to enter, hold, or exit
+              futures positions under drawdown and risk constraints, benchmarked against
+              simple rule-based strategies.
+            </p>
+            <p class="project-tech">
+              <span>Planned:</span> Python, Gymnasium, PyTorch, vectorized backtests
+            </p>
+            <div class="project-footer">
+              <span>Research-grade trading lab</span>
+              <span>Coming soon</span>
+            </div>
+          </article>
+
+          <!-- Project 5 -->
+          <article class="project-card">
+            <div class="project-heading-row">
+              <h3 class="project-title">🌌 Generative Market Simulator <span style="font-size: 11px; font-weight:400; color:#9ca3af;">(planned)</span></h3>
+              <span class="project-tag">Generative</span>
+            </div>
+            <p class="project-meta">GANs / Diffusion · Regime modeling</p>
+            <p class="project-body">
+              Deep generative models to simulate realistic market regimes — calm, trending, stress —
+              for more robust backtesting, scenario analysis, and risk research across portfolios and strategies.
+            </p>
+            <p class="project-tech">
+              <span>Planned:</span> PyTorch, GANs/Diffusion, evaluation metrics for realism
+            </p>
+            <div class="project-footer">
+              <span>Stress-testing the future</span>
+              <span>Coming soon</span>
+            </div>
+          </article>
+
+          <!-- Project 6 -->
+          <article class="project-card">
+            <div class="project-heading-row">
+              <h3 class="project-title">🔍 Statistical Modeling Suite <span style="font-size: 11px; font-weight:400; color:#9ca3af;">(planned)</span></h3>
+              <span class="project-tag">Math & Stats</span>
+            </div>
+            <p class="project-meta">Econometrics · Bayesian modeling</p>
+            <p class="project-body">
+              A set of focused notebooks that re-derive classic models from scratch:
+              logistic regression, Gibbs sampling, ARMA/ARCH, and maximum likelihood estimators
+              in both Python and R, with a focus on clarity and intuition.
+            </p>
+            <p class="project-tech">
+              <span>Planned:</span> Python, R, NumPy, Stan/PyMC
+            </p>
+            <div class="project-footer">
+              <span>Foundations that compound</span>
+              <span>Coming soon</span>
+            </div>
+          </article>
         </div>
       </section>
 
       <!-- SKILLS & ABOUT -->
-      <!-- ... keep your existing sections here ... -->
+      <section id="skills">
+        <div class="section-header">
+          <div>
+            <div class="section-pill">PROFILE</div>
+            <div class="section-title">Skills, focus areas & how I think about data</div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="card-soft">
+            <div class="card-title">Technical stack</div>
+            <div class="pill-row">
+              <span class="pill">Python · R · SQL</span>
+              <span class="pill">PyTorch · scikit-learn</span>
+              <span class="pill">Time series & forecasting</span>
+              <span class="pill">APIs · FastAPI</span>
+              <span class="pill">Data modeling · ETL</span>
+              <span class="pill">Backtesting & metrics</span>
+              <span class="pill">Pandas · NumPy</span>
+              <span class="pill">Financial data & microstructure</span>
+            </div>
+          </div>
+
+          <div id="about" class="card-soft">
+            <div class="card-title">How I approach problems</div>
+            <p class="about-body">
+              I like problems where <strong>statistics, engineering, and incentives</strong> intersect:
+              forecasting processes, building decision systems, and designing data models that reflect
+              the underlying economics.
+            </p>
+            <p class="about-body">
+              A lot of my work sits between <strong>data science</strong> and
+              <strong>analytics engineering</strong>: structuring raw data, designing metrics,
+              building models, and then pushing everything into workflows that people can actually use.
+            </p>
+            <p class="about-body">
+              I’m particularly curious about <strong>financial markets, econometric forecasting, and
+              AI-augmented research</strong> — areas where modeling, uncertainty, and behavior all meet.
+            </p>
+          </div>
+        </div>
+      </section>
 
       <!-- CONTACT -->
-      <!-- ... keep your existing contact section here ... -->
-
+      <section id="contact">
+        <div class="section-header">
+          <div>
+            <div class="section-pill">CONTACT</div>
+            <div class="section-title">Let’s talk about data, AI, or markets</div>
+          </div>
+        </div>
+        <div class="card-soft">
+          <p class="about-body">
+            I’m open to discussing roles, collaborations, or ideas around
+            <strong>AI systems, analytics platforms, and quantitative research</strong>.
+          </p>
+          <p class="about-body" style="margin-bottom: 12px;">
+            If something here resonates with the kind of work your team is doing, I’d be happy to dive deeper.
+          </p>
+          <div class="pill-row">
+            <a class="pill" href="mailto:joshuadefreitas1992@gmail.com">Email</a>
+            <a class="pill" href="https://github.com/joshuadefreitas" target="_blank">GitHub</a>
+            <!-- Add LinkedIn here if you want -->
+            <!-- <a class="pill" href="LINKEDIN_URL" target="_blank">LinkedIn</a> -->
+          </div>
+        </div>
+      </section>
     </div>
 
     <footer>
@@ -719,7 +895,10 @@
   </div>
 
   <script>
+    // Set current year in footer
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
+
+the banner is too large and top is also not nicely aligned with the header, can you polish everything like you suggested under 1. 
