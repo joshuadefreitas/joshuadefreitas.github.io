@@ -272,13 +272,15 @@
       overflow: hidden;
       background: radial-gradient(circle at top, rgba(249, 115, 22, 0.2), transparent 60%),
                   radial-gradient(circle at bottom, rgba(15, 23, 42, 0.95), #020617);
-      padding: 10px;
+      padding: 8px;
       box-shadow: var(--shadow-soft);
       border: 1px solid rgba(31, 41, 55, 0.95);
+      max-width: 430px;          /* shrink banner */
+      justify-self: end;         /* align with right edge */
     }
 
     .hero-visual-inner {
-      border-radius: 22px;
+      border-radius: 20px;       /* same rounded corners as before */
       overflow: hidden;
       border: 1px solid rgba(75, 85, 99, 0.7);
       background: radial-gradient(circle at top left, rgba(249, 115, 22, 0.15), transparent 55%),
@@ -289,8 +291,9 @@
       display: block;
       width: 100%;
       height: auto;
-      opacity: 0.97;
-      mix-blend-mode: screen;
+      max-height: 260px;         /* keep it from getting too tall */
+      object-fit: cover;
+      opacity: 0.98;
     }
 
     .hero-chip {
@@ -657,7 +660,7 @@
 
         <div class="hero-visual">
           <div class="hero-visual-inner">
-            <img src="https://raw.githubusercontent.com/joshuadefreitas/Portfolio/main/Banner.png" alt="Data & AI Portfolio Banner" />
+            <img src="https://raw.githubusercontent.com/joshuadefreitas/Portfolio/main/df-logo.png" alt="Data & AI Portfolio Banner" />
           </div>
           <div class="hero-chip">
             <span></span>
@@ -902,3 +905,4 @@
 </html>
 
 the banner is too large and top is also not nicely aligned with the header, can you polish everything like you suggested under 1. 
+
