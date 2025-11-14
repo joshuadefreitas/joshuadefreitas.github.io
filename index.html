@@ -78,14 +78,12 @@
       gap: 10px;
     }
 
-    /* LOGO */
-    .brand-logo {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      object-fit: cover;
-      box-shadow: 0 0 22px rgba(255, 140, 60, 0.35);
-      background: radial-gradient(circle at 30% 0, #f97316 0%, #7c2d12 45%, #020617 100%);
+    .avatar-circle {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 0, #f97316 0%, #7c2d12 38%, #020617 100%);
+      box-shadow: 0 0 18px rgba(249, 115, 22, 0.5);
     }
 
     .brand-text {
@@ -319,6 +317,8 @@
       box-shadow: 0 0 18px rgba(249, 115, 22, 0.8);
     }
 
+    /* SECTIONS */
+
     section {
       margin-bottom: 40px;
     }
@@ -353,6 +353,8 @@
       max-width: 420px;
       text-align: right;
     }
+
+    /* PROJECT GRID */
 
     .projects-grid {
       display: grid;
@@ -499,6 +501,8 @@
       width: 100%;
     }
 
+    /* SKILLS / ABOUT */
+
     .two-col {
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
@@ -553,6 +557,8 @@
       font-weight: 500;
     }
 
+    /* FOOTER */
+
     footer {
       border-top: 1px solid rgba(31, 41, 55, 0.95);
       margin-top: auto;
@@ -596,6 +602,7 @@
     .footer-links a:hover::after {
       width: 100%;
     }
+
   </style>
 </head>
 <body>
@@ -603,8 +610,7 @@
     <div class="page-inner">
       <header>
         <div class="brand">
-          <!-- Put df-logo.png in the same folder as this file -->
-          <img src="./df-logo.png" class="brand-logo" alt="De Freitas Research Logo" />
+          <img src="assets/df-logo.png" class="brand-logo" alt="De Freitas Research Logo"/>
           <div class="brand-text">
             <div class="brand-name">JOSHUA DE FREITAS</div>
             <div class="brand-tagline">Data · AI · Quant Research</div>
@@ -652,8 +658,7 @@
 
         <div class="hero-visual">
           <div class="hero-visual-inner">
-            <!-- Overwrite Banner.png in your repo with your new banner design -->
-            <img src="./Banner.png" alt="Data & AI Portfolio Banner" />
+            <img src="https://raw.githubusercontent.com/joshuadefreitas/Portfolio/main/Banner.png" alt="Data & AI Portfolio Banner" />
           </div>
           <div class="hero-chip">
             <span></span>
@@ -880,6 +885,7 @@
           <div class="pill-row">
             <a class="pill" href="mailto:jamesdefreitas@outlook.com">Email</a>
             <a class="pill" href="https://github.com/joshuadefreitas" target="_blank">GitHub</a>
+            <!-- Add LinkedIn here if you want -->
             <!-- <a class="pill" href="LINKEDIN_URL" target="_blank">LinkedIn</a> -->
           </div>
         </div>
@@ -899,6 +905,7 @@
   </div>
 
   <script>
+    // Set current year in footer
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
