@@ -1,214 +1,685 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-  <title>Joshua de Freitas · Data & AI Portfolio</title>
+  <meta charset="UTF-8" />
   <title>Joshua de Freitas · Data, AI & Quantitative Research</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta
-name="description"
-    content="Portfolio of Joshua de Freitas — Data Scientist, Analytics Engineer, and AI Systems Builder working on deep learning, financial modeling, and modern data platforms."
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
     content="Portfolio of Joshua de Freitas — Data Scientist, Analytics Engineer, and Quantitative Researcher working on financial modeling, econometric forecasting, time series, and modern data & AI platforms."
-/>
+  />
 
-<!-- Google Font -->
-@@ -613,7 +613,7 @@
-<div class="avatar-circle"></div>
-<div class="brand-text">
-<div class="brand-name">JOSHUA DE FREITAS</div>
-            <div class="brand-tagline">Data · AI · Markets</div>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #050608;
+      --bg-elevated: #0b0c10;
+      --bg-soft: #111827;
+      --accent: #f97316;
+      --accent-soft: rgba(249, 115, 22, 0.12);
+      --accent-strong: rgba(249, 115, 22, 0.35);
+      --text-main: #f9fafb;
+      --text-soft: #9ca3af;
+      --text-subtle: #6b7280;
+      --card-border: #1f2933;
+      --radius-lg: 18px;
+      --radius-xl: 26px;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.65);
+      --shadow-glow: 0 0 40px rgba(249, 115, 22, 0.32);
+      --transition-fast: 150ms ease-out;
+      --transition-med: 220ms ease-out;
+      --max-width: 1100px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #111827 0%, #02040a 35%, #020308 100%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page-shell {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page-inner {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 28px 20px 40px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* LOGO */
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 0 22px rgba(255, 140, 60, 0.35);
+      background: radial-gradient(circle at 30% 0, #f97316 0%, #7c2d12 45%, #020617 100%);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-name {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .brand-tagline {
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 2px;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), #fbbf24);
+      transition: width var(--transition-fast);
+      border-radius: 999px;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* HERO */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.3fr);
+      gap: 32px;
+      align-items: center;
+      margin-bottom: 44px;
+    }
+
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(55, 65, 81, 0.8);
+      width: fit-content;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .hero-pill-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 14px rgba(249, 115, 22, 0.9);
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 4vw, 40px);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      line-height: 1.1;
+    }
+
+    .hero-highlight {
+      background: linear-gradient(90deg, #f97316, #fbbf24);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-soft);
+      max-width: 520px;
+    }
+
+    .hero-subtitle strong {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .btn-primary {
+      padding: 9px 18px;
+      border-radius: 999px;
+      border: none;
+      background: radial-gradient(circle at 0 0, #fed7aa 0%, #f97316 40%, #7c2d12 100%);
+      color: #020617;
+      font-weight: 600;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: var(--shadow-glow);
+      cursor: pointer;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+      box-shadow: 0 0 40px rgba(249, 115, 22, 0.45);
+    }
+
+    .btn-ghost {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(75, 85, 99, 0.9);
+      background: rgba(15, 23, 42, 0.6);
+      color: var(--text-soft);
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: border-color var(--transition-fast), background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      background: rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      transform: translateY(-1px);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--text-subtle);
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .meta-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(148, 163, 184, 0.9);
+    }
+
+    .hero-visual {
+      position: relative;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background: radial-gradient(circle at top, rgba(249, 115, 22, 0.2), transparent 60%),
+                  radial-gradient(circle at bottom, rgba(15, 23, 42, 0.95), #020617);
+      padding: 10px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(31, 41, 55, 0.95);
+    }
+
+    .hero-visual-inner {
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(75, 85, 99, 0.7);
+      background: radial-gradient(circle at top left, rgba(249, 115, 22, 0.15), transparent 55%),
+                  #020617;
+    }
+
+    .hero-visual img {
+      display: block;
+      width: 100%;
+      height: auto;
+      opacity: 0.97;
+      mix-blend-mode: screen;
+    }
+
+    .hero-chip {
+      position: absolute;
+      left: 14px;
+      bottom: 14px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--text-soft);
+      font-size: 11px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-chip span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 0, #f97316 0%, #7c2d12 60%, transparent 100%);
+      box-shadow: 0 0 18px rgba(249, 115, 22, 0.8);
+    }
+
+    section {
+      margin-bottom: 40px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      gap: 10px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #f9fafb;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-pill {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-subtle);
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--text-subtle);
+      max-width: 420px;
+      text-align: right;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    @media (max-width: 880px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-visual {
+        order: -1;
+      }
+
+      .section-subtitle {
+        text-align: left;
+      }
+
+      .projects-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .page-inner {
+        padding-inline: 16px;
+      }
+    }
+
+    .project-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      padding: 16px 16px 14px;
+      background: radial-gradient(circle at top left, rgba(249, 115, 22, 0.18), transparent 55%),
+                  rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      box-shadow: 0 18px 35px rgba(15, 23, 42, 0.9);
+      overflow: hidden;
+      transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med), background var(--transition-med);
+    }
+
+    .project-card::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      border: 1px solid transparent;
+      background: radial-gradient(circle at 0 0, rgba(249, 115, 22, 0.7), transparent 55%);
+      opacity: 0;
+      transition: opacity var(--transition-med);
+      pointer-events: none;
+    }
+
+    .project-card:hover {
+      transform: translateY(-2px) translateZ(0);
+      box-shadow: var(--shadow-glow);
+      border-color: rgba(249, 115, 22, 0.65);
+      background: radial-gradient(circle at top left, rgba(249, 115, 22, 0.25), transparent 65%),
+                  rgba(15, 23, 42, 0.98);
+    }
+
+    .project-card:hover::before {
+      opacity: 0.35;
+    }
+
+    .project-heading-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .project-title {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .project-tag {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 1);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      color: var(--text-soft);
+    }
+
+    .project-meta {
+      font-size: 12px;
+      color: var(--text-subtle);
+      margin-bottom: 8px;
+    }
+
+    .project-body {
+      font-size: 13px;
+      color: var(--text-soft);
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    .project-tech {
+      font-size: 11px;
+      color: #e5e7eb;
+      margin-bottom: 8px;
+    }
+
+    .project-tech span {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .project-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--text-subtle);
+      margin-top: 2px;
+    }
+
+    .project-link {
+      font-size: 12px;
+      color: #fed7aa;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      text-decoration: none;
+      position: relative;
+    }
+
+    .project-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, #fed7aa, var(--accent));
+      transition: width var(--transition-fast);
+      border-radius: 999px;
+    }
+
+    .project-link:hover::after {
+      width: 100%;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 880px) {
+      .two-col {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card-soft {
+      border-radius: var(--radius-lg);
+      padding: 16px 16px 14px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.85);
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #f9fafb;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 1);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      color: var(--text-soft);
+    }
+
+    .about-body {
+      font-size: 13px;
+      color: var(--text-soft);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    .about-body strong {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    footer {
+      border-top: 1px solid rgba(31, 41, 55, 0.95);
+      margin-top: auto;
+    }
+
+    .footer-inner {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 14px 20px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: var(--text-subtle);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 12px;
+      font-size: 11px;
+    }
+
+    .footer-links a {
+      color: var(--text-subtle);
+      position: relative;
+    }
+
+    .footer-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width var(--transition-fast);
+    }
+
+    .footer-links a:hover::after {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <div class="page-inner">
+      <header>
+        <div class="brand">
+          <img src="assets/df-logo.png" class="brand-logo" alt="De Freitas Research Logo" />
+          <div class="brand-text">
+            <div class="brand-name">JOSHUA DE FREITAS</div>
             <div class="brand-tagline">Data · AI · Quant Research</div>
-</div>
-</div>
-<nav class="nav-links">
-@@ -629,14 +629,15 @@
-<div class="hero-text">
-<div class="hero-pill">
-<div class="hero-pill-dot"></div>
-            Exploring the frontier between data, AI, and markets
+          </div>
+        </div>
+        <nav class="nav-links">
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
+
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero-text">
+          <div class="hero-pill">
+            <div class="hero-pill-dot"></div>
             Exploring the frontier between data, AI, and quantitative finance
-</div>
-<h1 class="hero-title">
-            I build <span class="hero-highlight">end-to-end data & AI systems</span> from model to production.
+          </div>
+          <h1 class="hero-title">
             I build <span class="hero-highlight">end-to-end data &amp; AI systems</span> from model to production.
-</h1>
-<p class="hero-subtitle">
-            I’m Joshua, a data scientist and analytics engineer with a strong foundation in
-            <strong>statistics</strong>, <strong>finance</strong>, and <strong>data platforms</strong>.  
+          </h1>
+          <p class="hero-subtitle">
             I’m Joshua, a data scientist and analytics engineer with a strong focus on
             <strong>financial modeling</strong>, <strong>time series &amp; econometrics</strong>, and
             <strong>market microstructure</strong>.  
-I enjoy turning noisy, high-frequency or complex business data into systems that forecast,
-decide, and scale.
-</p>
-@@ -650,7 +651,7 @@ <h1 class="hero-title">
-</a>
-</div>
-<div class="hero-meta">
-            <span><span class="meta-dot"></span> Deep learning · Time series · Microstructure</span>
+            I enjoy turning noisy, high-frequency or complex business data into systems that forecast,
+            decide, and scale.
+          </p>
+          <div class="hero-actions">
+            <a class="btn-primary" href="https://github.com/joshuadefreitas" target="_blank">
+              View GitHub
+              <span>↗</span>
+            </a>
+            <a class="btn-ghost" href="https://github.com/joshuadefreitas/Portfolio" target="_blank">
+              Portfolio repository
+            </a>
+          </div>
+          <div class="hero-meta">
             <span><span class="meta-dot"></span> Time series · Econometrics · Microstructure</span>
-<span><span class="meta-dot"></span> Data engineering · APIs · Backtesting</span>
-</div>
-</div>
-@@ -671,7 +672,7 @@ <h1 class="hero-title">
-<div class="section-header">
-<div>
-<div class="section-pill">FEATURED WORK</div>
-            <div class="section-title">Projects at the intersection of AI, markets & data systems</div>
-            <div class="section-title">Projects at the intersection of AI, markets &amp; quantitative research</div>
-</div>
-<p class="section-subtitle">
-A mix of production-style platforms, research-grade experiments, and
-@@ -684,12 +685,13 @@ <h1 class="hero-title">
-<article class="project-card">
-<div class="project-heading-row">
-<h3 class="project-title">📈 Time Series Forecasting — Remittances to Mexico</h3>
-              <span class="project-tag">Forecasting</span>
-              <span class="project-tag">Econometrics</span>
-</div>
-<p class="project-meta">R · SARIMA · Uncertainty analysis</p>
-<p class="project-body">
-A full forecasting workflow for monthly remittance flows to Mexico, including exploration,
-              stationarity checks, SARIMA modeling, diagnostics, and scenario analysis.
-              stationarity checks, SARIMA modeling, diagnostics, and scenario analysis. Built the way
-              an analyst or researcher would actually interrogate a time series.
-</p>
-<p class="project-tech">
-<span>Stack:</span> R, forecast, stats, ggplot2
-@@ -705,14 +707,15 @@ <h3 class="project-title">📈 Time Series Forecasting — Remittances to Mexico
-<!-- Project 2 -->
-<article class="project-card">
-<div class="project-heading-row">
-              <h3 class="project-title">🧠 AI Document Platform — Invoice & Contract Intelligence</h3>
-              <h3 class="project-title">🧠 AI Document Platform — Invoice &amp; Contract Intelligence</h3>
-<span class="project-tag">Data Platform</span>
-</div>
-<p class="project-meta">Python · FastAPI · SQLAlchemy · ETL</p>
-<p class="project-body">
-              A modular invoice & contract intelligence platform: data model, ETL pipelines, validation,
-              A modular invoice &amp; contract intelligence platform: data model, ETL pipelines, validation,
-SQLite/SQL back-end, and a versioned FastAPI layer designed as a foundation for
-              compliance checks, analytics, and LLM-powered document understanding.
-              compliance checks, analytics, and LLM-powered document understanding — the kind of
-              infrastructure that underpins real finance and risk workflows.
-</p>
-<p class="project-tech">
-<span>Stack:</span> Python, FastAPI, SQLAlchemy, Pandas, SQLite (Postgres-ready)
-@@ -729,19 +732,20 @@ <h3 class="project-title">🧠 AI Document Platform — Invoice & Contract Intel
-<article class="project-card">
-<div class="project-heading-row">
-<h3 class="project-title">📉 DeepLOB — Deep Learning on Limit Order Books</h3>
-              <span class="project-tag">Deep Learning</span>
-              <span class="project-tag">Quant Research</span>
-</div>
-<p class="project-meta">PyTorch · Market microstructure · Backtesting</p>
-<p class="project-body">
-An end-to-end implementation of a DeepLOB-style pipeline on synthetic limit order
-              book data: simulator, sliding-window tensor builder, PyTorch dataset, CNN-Inception-LSTM
-              model, training loop, evaluation, and a simple backtest engine.
-              book data: simulator, sliding-window tensor builder, PyTorch dataset, CNN–Inception–LSTM
-              and TCN models, training loop, evaluation, and a simple backtest engine to turn
-              predictions into a trading signal.
-</p>
-<p class="project-tech">
-<span>Stack:</span> Python, NumPy, PyTorch, Pandas
-</p>
-<div class="project-footer">
-              <span>Bridging research & trading</span>
-              <span>Bridging research &amp; trading</span>
-<a class="project-link" href="https://github.com/joshuadefreitas/Portfolio/tree/main/deep-lob" target="_blank">
-View project → 
-</a>
-@@ -758,7 +762,7 @@ <h3 class="project-title">🤖 RL Agent for Futures Trading <span style="font-si
-<p class="project-body">
-A custom trading environment where an RL agent learns when to enter, hold, or exit
-futures positions under drawdown and risk constraints, benchmarked against
-              simple rule-based strategies.
-              simple rule-based strategies and classical risk metrics.
-</p>
-<p class="project-tech">
-<span>Planned:</span> Python, Gymnasium, PyTorch, vectorized backtests
-@@ -793,13 +797,13 @@ <h3 class="project-title">🌌 Generative Market Simulator <span style="font-siz
-<article class="project-card">
-<div class="project-heading-row">
-<h3 class="project-title">🔍 Statistical Modeling Suite <span style="font-size: 11px; font-weight:400; color:#9ca3af;">(planned)</span></h3>
-              <span class="project-tag">Math & Stats</span>
-              <span class="project-tag">Math &amp; Stats</span>
-</div>
-<p class="project-meta">Econometrics · Bayesian modeling</p>
-<p class="project-body">
-A set of focused notebooks that re-derive classic models from scratch:
-logistic regression, Gibbs sampling, ARMA/ARCH, and maximum likelihood estimators
-              in both Python and R, with a focus on clarity and intuition.
-              in both Python and R, with a focus on clarity, intuition, and links to real financial data.
-</p>
-<p class="project-tech">
-<span>Planned:</span> Python, R, NumPy, Stan/PyMC
-@@ -817,7 +821,7 @@ <h3 class="project-title">🔍 Statistical Modeling Suite <span style="font-size
-<div class="section-header">
-<div>
-<div class="section-pill">PROFILE</div>
-            <div class="section-title">Skills, focus areas & how I think about data</div>
-            <div class="section-title">Skills, focus areas &amp; how I think about data</div>
-</div>
-</div>
+            <span><span class="meta-dot"></span> Data engineering · APIs · Backtesting</span>
+          </div>
+        </div>
 
-@@ -827,12 +831,14 @@ <h3 class="project-title">🔍 Statistical Modeling Suite <span style="font-size
-<div class="pill-row">
-<span class="pill">Python · R · SQL</span>
-<span class="pill">PyTorch · scikit-learn</span>
-              <span class="pill">Time series & forecasting</span>
-              <span class="pill">Time series &amp; forecasting</span>
-              <span class="pill">Econometrics &amp; panel data</span>
-              <span class="pill">Market microstructure</span>
-<span class="pill">APIs · FastAPI</span>
-<span class="pill">Data modeling · ETL</span>
-              <span class="pill">Backtesting & metrics</span>
-              <span class="pill">Backtesting &amp; risk metrics</span>
-<span class="pill">Pandas · NumPy</span>
-              <span class="pill">Financial data & microstructure</span>
-              <span class="pill">Financial data &amp; pricing</span>
-</div>
-</div>
+        <div class="hero-visual">
+          <div class="hero-visual-inner">
+            <img src="https://raw.githubusercontent.com/joshuadefreitas/Portfolio/main/Banner.png" alt="Data & AI Portfolio Banner" />
+          </div>
+          <div class="hero-chip">
+            <span></span>
+            Building systems that think in probabilities, not opinions.
+          </div>
+        </div>
+      </section>
 
-@@ -846,11 +852,14 @@ <h3 class="project-title">🔍 Statistical Modeling Suite <span style="font-size
-<p class="about-body">
-A lot of my work sits between <strong>data science</strong> and
-<strong>analytics engineering</strong>: structuring raw data, designing metrics,
-              building models, and then pushing everything into workflows that people can actually use.
-              building models, and then pushing everything into workflows that people can actually use
-              — whether that’s in finance, the public sector, or operations.
-</p>
-<p class="about-body">
-              I’m particularly curious about <strong>financial markets, econometric forecasting, and
-              AI-augmented research</strong> — areas where modeling, uncertainty, and behavior all meet.
-              I’m particularly curious about <strong>financial markets, quantitative research,
-              and AI-augmented analysis</strong>. In the medium term, I’m moving deeper into
-              formal finance and investment research, complementing my work in AI systems with
-              stronger credentials in the finance domain.
-</p>
-</div>
-</div>
-@@ -861,13 +870,14 @@ <h3 class="project-title">🔍 Statistical Modeling Suite <span style="font-size
-<div class="section-header">
-<div>
-<div class="section-pill">CONTACT</div>
-            <div class="section-title">Let’s talk about data, AI, or markets</div>
-            <div class="section-title">Let’s talk about data, AI, or quantitative markets work</div>
-</div>
-</div>
-<div class="card-soft">
-<p class="about-body">
-I’m open to collaboration or discussing ideas around
-            <strong>AI systems, analytics platforms, and quantitative research</strong>.
-            <strong>AI systems, analytics platforms, and quantitative research</strong> — especially
-            where financial modeling, risk, or forecasting are involved.
-</p>
-<p class="about-body" style="margin-bottom: 12px;">
-If something here resonates with the kind of work your team is doing, I’d be happy to dive deeper.
-@@ -900,6 +910,3 @@ <h3 class="project-title">🔍 Statistical Modeling Suite <span style="font-size
-</script>
+      <!-- PROJECTS -->
+      <!-- (keep your existing projects / skills / contact sections here, unchanged) -->
+      <!-- ... -->
+
+    </div>
+
+    <footer>
+      <div class="footer-inner">
+        <span>© <span id="year"></span> Joshua de Freitas</span>
+        <div class="footer-links">
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
-
-
-
