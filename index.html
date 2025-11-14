@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Joshua de Freitas | Data & AI Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Portfolio of Joshua de Freitas — Data Scientist, Analytics Engineer & AI Workflow Architect." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <h1>Joshua de Freitas</h1>
+        <h2>Data Scientist · Analytics Engineer · AI Workflow Architect</h2>
+        <p>
+          I build end-to-end data and AI systems — from pipelines and APIs to deep learning models and
+          backtesting engines — with a strong focus on finance, forecasting, and analytics engineering.
+        </p>
+        <div class="hero-links">
+          <a href="https://github.com/joshuadefreitas" target="_blank" class="btn primary">GitHub</a>
+          <a href="mailto:joshuadefreitas1992@gmail.com" class="btn ghost">Contact</a>
+        </div>
+      </div>
+      <div class="hero-banner">
+        <img src="https://raw.githubusercontent.com/joshuadefreitas/Portfolio/main/Banner.png"
+             alt="Portfolio Banner of Joshua de Freitas" />
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- About -->
+    <section class="section" id="about">
+      <h3 class="section-title">About</h3>
+      <p class="section-text">
+        I work at the intersection of <strong>data science</strong>, <strong>analytics engineering</strong>,
+        and <strong>applied finance</strong>. I enjoy designing systems that combine:
+      </p>
+      <ul class="pill-list">
+        <li>Machine learning &amp; deep learning (time series, structured data, microstructure)</li>
+        <li>Financial analytics &amp; market behavior</li>
+        <li>Econometric modeling &amp; forecasting</li>
+        <li>Data engineering, APIs, and automation</li>
+      </ul>
+      <p class="section-text">
+        My work is research-driven but implementation-focused: I like to go from idea → prototype → robust,
+        inspectable pipeline that others can build on.
+      </p>
+    </section>
+
+    <!-- Skills -->
+    <section class="section" id="skills">
+      <h3 class="section-title">Skills &amp; Tools</h3>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h4>Machine Learning &amp; Stats</h4>
+          <p>Time series, forecasting, classification, deep learning on structured data, evaluation &amp; backtesting.</p>
+          <p class="tags">Python, R, PyTorch, scikit-learn</p>
+        </div>
+        <div class="skill-card">
+          <h4>Data Engineering</h4>
+          <p>ETL pipelines, SQL modeling, API design, document processing, analytics-ready datasets.</p>
+          <p class="tags">SQL, FastAPI, SQLite/Postgres, Git</p>
+        </div>
+        <div class="skill-card">
+          <h4>Finance &amp; Microstructure</h4>
+          <p>Market microstructure, limit order books, PnL modeling, Sharpe, drawdown, scenario analysis.</p>
+          <p class="tags">Backtesting, synthetic data, trading workflow logic</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="section" id="projects">
+      <h3 class="section-title">Featured Projects</h3>
+
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <article class="project-card">
+          <h4>📈 Time Series Forecasting – Remittances to Mexico</h4>
+          <p class="project-meta">R · Time series · SARIMA · Econometrics</p>
+          <p>
+            A full forecasting workflow analyzing monthly remittance flows to Mexico, from exploratory analysis
+            to SARIMA modeling and evaluation.
+          </p>
+          <ul class="project-bullets">
+            <li>Classical time series pipeline: stationarity checks, decomposition, diagnostics.</li>
+            <li>Forecasting with SARIMA and uncertainty estimation.</li>
+            <li>Demonstrates statistical rigor and econometric thinking.</li>
+          </ul>
+          <a class="project-link" href="https://github.com/joshuadefreitas/Portfolio/tree/main/forecasting-remittances" target="_blank">
+            View project on GitHub →
+          </a>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="project-card">
+          <h4>🧠 AI Document Platform – Invoice &amp; Contract Intelligence</h4>
+          <p class="project-meta">Python · ETL · SQL · API · Document AI</p>
+          <p>
+            A modular document intelligence platform that ingests invoices and contracts, stores them in a
+            structured database, and exposes them via an API for analytics and AI workflows.
+          </p>
+          <ul class="project-bullets">
+            <li>SQLite schema with vendors, invoices, and metadata via SQLAlchemy.</li>
+            <li>ETL pipeline from CSV → validated database rows.</li>
+            <li>FastAPI backend and versioned API spec for future LLM-based extraction and RAG.</li>
+          </ul>
+          <a class="project-link" href="https://github.com/joshuadefreitas/Portfolio/tree/main/ai-document-platform" target="_blank">
+            View project on GitHub →
+          </a>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="project-card">
+          <h4>📉 DeepLOB – Deep Learning on Limit Order Books</h4>
+          <p class="project-meta">PyTorch · Market microstructure · Backtesting</p>
+          <p>
+            An end-to-end implementation of a DeepLOB-style pipeline for short-horizon mid-price prediction
+            using synthetic limit order book data.
+          </p>
+          <ul class="project-bullets">
+            <li>LOB simulator generating multi-level bid/ask snapshots.</li>
+            <li>Sliding-window tensorization (T × features) for model input.</li>
+            <li>CNN + Inception + LSTM model with evaluation and simple backtester.</li>
+          </ul>
+          <a class="project-link" href="https://github.com/joshuadefreitas/Portfolio/tree/main/deep-lob" target="_blank">
+            View project on GitHub →
+          </a>
+        </article>
+
+        <!-- Project 4 -->
+        <article class="project-card project-soon">
+          <h4>🤖 RL Agent for Futures Trading <span class="soon-pill">coming soon</span></h4>
+          <p class="project-meta">Reinforcement learning · Trading simulation</p>
+          <p>
+            A custom trading environment where an RL agent learns to open, hold, and close futures positions
+            under risk constraints and transaction costs.
+          </p>
+          <ul class="project-bullets">
+            <li>Gym-style environment with realistic PnL and drawdown.</li>
+            <li>PPO/SAC agents with risk-aware reward functions.</li>
+            <li>Benchmarking vs simple systematic strategies.</li>
+          </ul>
+        </article>
+
+        <!-- Project 5 -->
+        <article class="project-card project-soon">
+          <h4>🌌 Generative Market Simulator <span class="soon-pill">coming soon</span></h4>
+          <p class="project-meta">GANs / Diffusion · Synthetic time series</p>
+          <p>
+            Deep generative models for realistic synthetic price paths, volatility regimes, and stress scenarios,
+            supporting robust backtesting and risk research.
+          </p>
+          <ul class="project-bullets">
+            <li>GAN/diffusion-based generation of multi-regime price series.</li>
+            <li>Calibration metrics to compare synthetic vs. real data.</li>
+            <li>Scenario generation for stress-testing strategies.</li>
+          </ul>
+        </article>
+
+        <!-- Project 6 -->
+        <article class="project-card project-soon">
+          <h4>🔍 Statistical Modeling Suite <span class="soon-pill">coming soon</span></h4>
+          <p class="project-meta">Statistics · Econometrics · Teaching</p>
+          <p>
+            A curated set of notebooks demonstrating statistical and econometric modeling techniques,
+            written with clarity and educational focus.
+          </p>
+          <ul class="project-bullets">
+            <li>Logistic regression and GLMs from first principles.</li>
+            <li>Bayesian regression with Gibbs sampling.</li>
+            <li>ARMA/ARCH models and maximum likelihood estimators in Python &amp; R.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section" id="contact">
+      <h3 class="section-title">Contact</h3>
+      <p class="section-text">
+        If you’re building something at the intersection of <strong>data, AI, and finance</strong> and you think my
+        profile could be a fit, feel free to reach out.
+      </p>
+      <p class="section-text">
+        📧 <a href="mailto:joshuadefreitas1992@gmail.com">joshuadefreitas1992@gmail.com</a><br/>
+        🧑‍💻 <a href="https://github.com/joshuadefreitas" target="_blank">GitHub – @joshuadefreitas</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Built with curiosity, long-term thinking, and a bias for experimentation.</p>
+  </footer>
+</body>
+</html>
