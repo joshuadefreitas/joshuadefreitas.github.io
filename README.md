@@ -8,10 +8,18 @@ The public portfolio of [Joshua de Freitas](https://github.com/joshuadefreitas),
 
 I work across dependable data products, intelligent software, analytical research, simulation, and visual computing. This site is the editorial front door to that work: a small, dependency-free GitHub Pages project with the code and decisions kept intentionally visible.
 
+## Field Studies
+
+Field Studies is a public program of deterministic, browser-visible experiments across scientific and industrial domains. Each study starts with a clear question, a narrow proof, reproducible evidence, and explicit limits.
+
+- [Neural Field Study](https://joshuadefreitas.github.io/neural-field-study/) - current study of excitation, inhibition, topology, and activity propagation.
+- Subsurface Signal Lab - next study, focused on dense spatial signals, layers, and uncertainty.
+
 ## Selected work
 
 | Repository | What it shows |
 | --- | --- |
+| [`neural-field-study`](https://github.com/joshuadefreitas/neural-field-study) | A deterministic computational-neuroscience study with a live browser proof and explicit scientific limits. |
 | [`dbx-core`](https://github.com/joshuadefreitas/dbx-core) | Notebook-free Databricks engineering built around real Python packages, local development, and remote execution. |
 | [`deep-lob`](https://github.com/joshuadefreitas/deep-lob) | An end-to-end PyTorch experiment using synthetic limit order book data, evaluation, and a simple backtest. |
 | [`time-series-experiments`](https://github.com/joshuadefreitas/time-series-experiments) | Reproducible forecasting experiments across volatility, regimes, structural breaks, chaos, and multivariate dynamics. |
