@@ -7,7 +7,7 @@
       name="description"
       content="Joshua de Freitas is a data engineer at EY building reliable data platforms, AI-enabled workflows, simulations, and applied research systems."
     />
-    <meta name="theme-color" content="#141817" />
+    <meta name="theme-color" content="#070908" />
     <meta property="og:title" content="Joshua de Freitas | Data Engineer" />
     <meta
       property="og:description"
@@ -29,54 +29,69 @@
       <div class="shell header-inner">
         <a class="wordmark" href="#top" aria-label="Joshua de Freitas home">
           <span class="wordmark-mark">JD</span>
-          <span>Joshua de Freitas</span>
+          <span class="wordmark-name">Joshua de Freitas</span>
         </a>
         <nav class="site-nav" aria-label="Primary navigation">
           <a href="#work">Work</a>
-          <a href="#approach">Approach</a>
+          <a href="#approach">Method</a>
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
         </nav>
+        <span class="header-signal"><span></span> Available for good problems</span>
       </div>
     </header>
 
     <main id="main">
       <section class="hero shell" id="top">
         <div class="hero-copy">
-          <p class="eyebrow"><span class="status-dot"></span> Data engineer · EY · Amsterdam</p>
-          <h1>Joshua de Freitas</h1>
+          <p class="eyebrow"><span class="status-dot"></span> Data engineer at EY <span class="eyebrow-divider">/</span> Amsterdam</p>
+          <h1>Data systems with a <em>point of view.</em></h1>
           <p class="hero-lede">
             I build dependable data and AI systems that turn complex inputs into clear,
             useful outcomes.
           </p>
           <p class="hero-supporting">
-            My work sits between data engineering, analytics, software design, and applied
-            research. I care about reliable foundations, measurable behavior, and interfaces
-            that make technical work easier to understand.
+            My work moves between data engineering, analytics, software design, and applied
+            research. The common thread is making complicated behavior legible enough to trust,
+            test, and use.
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="#work">Explore selected work <span aria-hidden="true">↘</span></a>
             <a class="button button-secondary" href="https://github.com/joshuadefreitas" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
           </div>
           <div class="hero-facts" aria-label="Focus areas">
-            <span>Data platforms</span>
-            <span>AI-enabled workflows</span>
-            <span>Simulation &amp; research</span>
+            <span><b>01</b> Data platforms</span>
+            <span><b>02</b> AI workflows</span>
+            <span><b>03</b> Simulation &amp; research</span>
           </div>
         </div>
         <div class="hero-art" aria-label="Joshua de Freitas Data Science, AI, Analytics banner">
+          <div class="art-topline"><span>PUBLIC WORK / 2026</span><span>JD—01</span></div>
           <img src="assets/portfolio-banner.png" alt="Joshua de Freitas Data Science, AI, Analytics" />
-          <div class="art-caption"><span>01</span><span>Systems with a point of view</span></div>
+          <div class="art-caption"><span class="caption-index">01</span><span>Systems with a point of view</span></div>
+          <div class="art-corner">FIELD NOTES<br />DATA / AI / SYSTEMS</div>
+        </div>
+      </section>
+
+      <section class="signal-band" aria-label="Current focus">
+        <div class="shell signal-inner">
+          <span class="signal-label">Current focus</span>
+          <span>Reliable data products</span>
+          <span>AI-assisted analysis</span>
+          <span>Deterministic simulation</span>
+          <span class="signal-end">03 / 03</span>
         </div>
       </section>
 
       <section class="section shell" id="work">
-        <div class="section-intro">
-          <p class="eyebrow">Selected work</p>
-          <h2>Public projects with a job to do.</h2>
-          <p>
-            A small set of repositories that show how I think: build a useful foundation,
-            make the behavior visible, and document the trade-offs.
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Selected work</p>
+            <h2>A public record of how I build.</h2>
+          </div>
+          <p class="section-summary">
+            Small systems, visible decisions, and enough evidence for another person to pick up
+            the thread.
           </p>
         </div>
         <div class="project-list">
@@ -87,13 +102,11 @@
                 <h3>dbx-core</h3>
                 <span class="project-status">Data engineering</span>
               </div>
-              <p>
-                A minimal, notebook-free Databricks project organized around real Python
-                packages, local development, and remote execution.
-              </p>
+              <p>A minimal, notebook-free Databricks project organized around real Python packages, local development, and remote execution.</p>
               <div class="project-meta"><span>Python</span><span>Databricks</span><span>Jobs over notebooks</span></div>
               <a class="text-link" href="https://github.com/joshuadefreitas/dbx-core" target="_blank" rel="noreferrer">View repository <span aria-hidden="true">↗</span></a>
             </div>
+            <div class="project-aside">FOUNDATION<br />01 / 03</div>
           </article>
           <article class="project-row">
             <div class="project-index">02</div>
@@ -102,13 +115,11 @@
                 <h3>DeepLOB</h3>
                 <span class="project-status">Applied research</span>
               </div>
-              <p>
-                An end-to-end experiment in market microstructure: synthetic order-book data,
-                PyTorch models, evaluation, and a deliberately simple backtest.
-              </p>
+              <p>An end-to-end experiment in market microstructure: synthetic order-book data, PyTorch models, evaluation, and a deliberately simple backtest.</p>
               <div class="project-meta"><span>Python</span><span>PyTorch</span><span>Reproducible experiments</span></div>
               <a class="text-link" href="https://github.com/joshuadefreitas/deep-lob" target="_blank" rel="noreferrer">View repository <span aria-hidden="true">↗</span></a>
             </div>
+            <div class="project-aside">RESEARCH<br />02 / 03</div>
           </article>
           <article class="project-row">
             <div class="project-index">03</div>
@@ -117,31 +128,29 @@
                 <h3>Time-Series Experiments</h3>
                 <span class="project-status">Research notebook</span>
               </div>
-              <p>
-                A code-driven study of forecasting behavior across volatility, regime shifts,
-                structural breaks, chaos, and multivariate dynamics.
-              </p>
+              <p>A code-driven study of forecasting behavior across volatility, regime shifts, structural breaks, chaos, and multivariate dynamics.</p>
               <div class="project-meta"><span>Python</span><span>Statsmodels</span><span>Walk-forward evaluation</span></div>
               <a class="text-link" href="https://github.com/joshuadefreitas/time-series-experiments" target="_blank" rel="noreferrer">View repository <span aria-hidden="true">↗</span></a>
             </div>
+            <div class="project-aside">METHOD<br />03 / 03</div>
           </article>
         </div>
       </section>
 
-      <section class="section section-split shell" id="approach">
-        <div class="section-intro">
-          <p class="eyebrow">How I work</p>
-          <h2>Clarity is an engineering feature.</h2>
-        </div>
-        <div class="approach-copy">
-          <p>
-            I like work where the hard part is not only choosing a model, but shaping the
-            surrounding system so the result can be trusted, tested, and used.
-          </p>
+      <section class="method-band" id="approach">
+        <div class="shell method-grid">
+          <div class="method-heading">
+            <p class="eyebrow">How I work</p>
+            <h2>Make the invisible <em>legible.</em></h2>
+            <p>
+              The hard part is rarely choosing a model in isolation. It is shaping the surrounding
+              system so the result can be trusted, tested, and used.
+            </p>
+          </div>
           <div class="principles">
-            <div><span>01</span><strong>Start with the boundary</strong><p>Define the data contract, the consumer, and the evidence before adding complexity.</p></div>
-            <div><span>02</span><strong>Make behavior observable</strong><p>Prefer reproducible runs, explicit decisions, and results that another person can inspect.</p></div>
-            <div><span>03</span><strong>Earn the abstraction</strong><p>Keep the first useful system narrow, then deepen it where the work proves the need.</p></div>
+            <div class="principle"><span>01</span><strong>Start with the boundary</strong><p>Define the data contract, the consumer, and the evidence before adding complexity.</p></div>
+            <div class="principle"><span>02</span><strong>Make behavior observable</strong><p>Prefer reproducible runs, explicit decisions, and results another person can inspect.</p></div>
+            <div class="principle"><span>03</span><strong>Earn the abstraction</strong><p>Keep the first useful system narrow, then deepen it where the work proves the need.</p></div>
           </div>
         </div>
       </section>
@@ -150,7 +159,7 @@
         <div class="about-grid">
           <div>
             <p class="eyebrow">About</p>
-            <h2>Data engineering, with range.</h2>
+            <h2>Engineering with range.</h2>
           </div>
           <div class="about-copy">
             <p>
@@ -160,9 +169,9 @@
               research code that can survive contact with real users.
             </p>
             <p>
-              Outside client work, I use public projects to explore the ideas that keep pulling
-              me forward: dependable data products, intelligent automation, deterministic
-              simulation, visualization, and the space between research and implementation.
+              Outside client work, I use public projects to explore dependable data products,
+              intelligent automation, deterministic simulation, visualization, and the space
+              between research and implementation.
             </p>
             <div class="skill-lines">
               <span>Python · SQL · TypeScript</span>
