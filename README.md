@@ -1,6 +1,6 @@
 # Joshua de Freitas — personal site
 
-The public personal site for [Joshua de Freitas](https://github.com/joshuadefreitas), a data engineer at EY working across data platforms, AI-enabled workflows, simulation, and applied research.
+The public personal site for [Joshua de Freitas](https://github.com/joshuadefreitas), a Senior Data Engineer at EY Wavespace in Madrid working across data platforms, agentic AI, simulation, and applied research.
 
 This is a dependency-free static site intended for GitHub Pages.
 
