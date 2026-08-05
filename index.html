@@ -22,7 +22,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=3" />
+    <link rel="stylesheet" href="styles.css?v=4" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -70,10 +70,10 @@
           </div>
         </div>
         <div class="hero-art" aria-label="Abstract field study about systems, signals, and useful complexity">
-          <div class="art-topline"><span>FIELD STUDY / 2026</span></div>
+          <div class="art-topline" aria-hidden="true"><span>FIELD STUDY / 2026</span></div>
           <img src="assets/hero-field-study.png" alt="Abstract dark field study with a luminous path moving through layered architectural and computational structures" />
-          <div class="art-caption"><span>Signals into systems</span></div>
-          <div class="art-corner">OBSERVATIONS<br />STRUCTURE / MOTION / MEANING</div>
+          <div class="art-caption" aria-hidden="true"><span>Signals into systems</span></div>
+          <div class="art-corner" aria-hidden="true">OBSERVATIONS<br />STRUCTURE / MOTION / MEANING</div>
         </div>
       </section>
 
@@ -99,10 +99,26 @@
             Small systems, visible decisions, and enough evidence for another person to pick up
             the thread.
           </p>
+          <p class="section-note">
+            <a class="text-link" href="https://joshuadefreitas.github.io/neural-field-study/" target="_blank" rel="noreferrer">Field Studies, an ongoing public research line <span aria-hidden="true">↗</span></a>
+          </p>
         </div>
         <div class="project-list">
           <article class="project-row project-featured">
             <div class="project-index">01</div>
+            <div class="project-content">
+              <div class="project-heading">
+                <h3>Neural Field Study</h3>
+                <span class="project-status">Field study</span>
+              </div>
+              <p>A deterministic computational-neuroscience study of how local excitation, inhibition, and topology shape activity propagation through an inspectable field.</p>
+              <div class="project-meta"><span>JavaScript</span><span>Deterministic simulation</span><span>Live browser evidence</span></div>
+              <a class="text-link" href="https://joshuadefreitas.github.io/neural-field-study/" target="_blank" rel="noreferrer">Open live study <span aria-hidden="true">↗</span></a>
+            </div>
+            <div class="project-aside">FIELD STUDY<br />01 / 03</div>
+          </article>
+          <article class="project-row">
+            <div class="project-index">02</div>
             <div class="project-content">
               <div class="project-heading">
                 <h3>dbx-core</h3>
@@ -112,10 +128,10 @@
               <div class="project-meta"><span>Python</span><span>Databricks</span><span>Jobs over notebooks</span></div>
               <a class="text-link" href="https://github.com/joshuadefreitas/dbx-core" target="_blank" rel="noreferrer">View repository <span aria-hidden="true">↗</span></a>
             </div>
-            <div class="project-aside">FOUNDATION<br />01 / 03</div>
+            <div class="project-aside">FOUNDATION<br />02 / 03</div>
           </article>
           <article class="project-row">
-            <div class="project-index">02</div>
+            <div class="project-index">03</div>
             <div class="project-content">
               <div class="project-heading">
                 <h3>DeepLOB</h3>
@@ -125,20 +141,7 @@
               <div class="project-meta"><span>Python</span><span>PyTorch</span><span>Reproducible experiments</span></div>
               <a class="text-link" href="https://github.com/joshuadefreitas/deep-lob" target="_blank" rel="noreferrer">View repository <span aria-hidden="true">↗</span></a>
             </div>
-            <div class="project-aside">RESEARCH<br />02 / 03</div>
-          </article>
-          <article class="project-row">
-            <div class="project-index">03</div>
-            <div class="project-content">
-              <div class="project-heading">
-                <h3>Time-Series Experiments</h3>
-                <span class="project-status">Research notebook</span>
-              </div>
-              <p>A code-driven study of forecasting behavior across volatility, regime shifts, structural breaks, chaos, and multivariate dynamics.</p>
-              <div class="project-meta"><span>Python</span><span>Statsmodels</span><span>Walk-forward evaluation</span></div>
-              <a class="text-link" href="https://github.com/joshuadefreitas/time-series-experiments" target="_blank" rel="noreferrer">View repository <span aria-hidden="true">↗</span></a>
-            </div>
-            <div class="project-aside">METHOD<br />03 / 03</div>
+            <div class="project-aside">RESEARCH<br />03 / 03</div>
           </article>
         </div>
       </section>
@@ -195,7 +198,7 @@
           <h2>Interested in thoughtful data work?</h2>
         </div>
         <div class="contact-actions">
-          <a class="button button-primary" href="mailto:jamesdefreitas@outlook.com">Send an email <span aria-hidden="true">↗</span></a>
+          <a class="button button-primary" href="mailto:jamesdefreitas@outlook.com" aria-label="Send an email to Joshua de Freitas at jamesdefreitas@outlook.com">Send an email <span aria-hidden="true">↗</span></a>
           <a class="button button-secondary" href="https://www.linkedin.com/in/defreitasjoshua/" target="_blank" rel="noreferrer">Connect on LinkedIn <span aria-hidden="true">↗</span></a>
         </div>
       </section>
