@@ -65,7 +65,7 @@ h1 em, h2 em { color: var(--orange); font-style: normal; }
 .caption-index { color: var(--orange); }
 .art-corner { bottom: 2px; left: 0; color: var(--dim); line-height: 1.5; }
 .signal-band { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--surface); }
-.signal-inner { display: grid; grid-template-columns: 1.1fr repeat(3, 1fr) 0.5fr; align-items: center; min-height: 72px; gap: 20px; color: var(--muted); font: 400 10px var(--mono); }
+.signal-inner { display: grid; grid-template-columns: 1.1fr repeat(5, 1fr) 0.5fr; align-items: center; min-height: 72px; gap: 16px; color: var(--muted); font: 400 10px var(--mono); }
 .signal-label { color: var(--orange); text-transform: uppercase; }
 .signal-inner > span:not(.signal-label):not(.signal-end)::before { content: "/"; margin-right: 9px; color: var(--teal); }
 .signal-end { color: var(--dim); text-align: right; }
