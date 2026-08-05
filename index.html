@@ -70,11 +70,41 @@
             <span>Visual computing</span>
           </div>
         </div>
-        <div class="hero-art" aria-label="Abstract field study about systems, signals, and useful complexity">
-          <div class="art-topline" aria-hidden="true"><span>FIELD STUDY / 2026</span></div>
-          <img src="assets/hero-field-study.png" alt="Abstract dark field study with a luminous path moving through layered architectural and computational structures" />
-          <div class="art-caption" aria-hidden="true"><span>Signals into systems</span></div>
-          <div class="art-corner" aria-hidden="true">OBSERVATIONS<br />STRUCTURE / MOTION / MEANING</div>
+        <section class="project-carousel" aria-roledescription="carousel" aria-label="Selected project studies">
+          <div class="carousel-frame" id="project-carousel">
+            <article class="project-slide is-active" data-slide aria-label="1 of 3: Neural Field Study">
+              <div class="art-topline" aria-hidden="true"><span>FIELD STUDY / 2026</span></div>
+              <img src="assets/hero-field-study.png" alt="Abstract dark field study with a luminous path moving through layered architectural and computational structures" />
+              <div class="art-caption" aria-hidden="true"><span>Signals into systems</span></div>
+              <div class="art-corner" aria-hidden="true">NEURAL FIELD<br />01 / 03</div>
+            </article>
+            <article class="project-slide project-slide-core" data-slide hidden aria-label="2 of 3: dbx-core">
+              <div class="project-visual core-visual" aria-hidden="true">
+                <span class="visual-kicker">DBX-CORE / 2026</span>
+                <div class="core-pipeline"><span>LOCAL</span><i></i><span>TEST</span><i></i><span>JOBS</span><i></i><span>REMOTE</span></div>
+                <div class="core-grid"></div>
+                <span class="visual-caption">PACKAGES / NOT NOTEBOOKS</span>
+              </div>
+              <div class="slide-copy"><span>Data engineering</span><strong>dbx-core</strong><p>Python packages, local tests, remote execution.</p></div>
+            </article>
+            <article class="project-slide project-slide-lob" data-slide hidden aria-label="3 of 3: DeepLOB">
+              <div class="project-visual lob-visual" aria-hidden="true">
+                <span class="visual-kicker">DEEPLOB / 2026</span>
+                <div class="lob-book"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                <div class="lob-signal"></div>
+                <span class="visual-caption">SIGNAL / EVALUATION / REPLAY</span>
+              </div>
+              <div class="slide-copy"><span>Applied research</span><strong>DeepLOB</strong><p>Inspectable market microstructure, end to end.</p></div>
+            </article>
+          </div>
+          <div class="carousel-controls">
+            <div class="carousel-status" aria-live="polite"><span data-slide-label>Neural Field Study</span><span data-slide-count>01 / 03</span></div>
+            <div class="carousel-buttons">
+              <button class="carousel-button" type="button" data-carousel-prev aria-controls="project-carousel" aria-label="Show previous project">←</button>
+              <button class="carousel-button" type="button" data-carousel-next aria-controls="project-carousel" aria-label="Show next project">→</button>
+            </div>
+          </div>
+        </section>
         </div>
       </section>
 
@@ -206,7 +236,7 @@
         </div>
         <div class="contact-cta">
           <div class="contact-actions">
-            <a class="button button-primary" href="mailto:jamesdefreitas@outlook.com" aria-label="Send an email to Joshua de Freitas at jamesdefreitas@outlook.com">Send an email <span aria-hidden="true">↗</span></a>
+            <a class="button button-primary" href="https://outlook.office.com/mail/deeplink/compose?to=jamesdefreitas%40outlook.com" target="_blank" rel="noreferrer" aria-label="Compose an email to Joshua de Freitas in Outlook">Open Outlook <span aria-hidden="true">↗</span></a>
             <a class="button button-secondary" href="https://www.linkedin.com/in/defreitasjoshua/" target="_blank" rel="noreferrer">Connect on LinkedIn <span aria-hidden="true">↗</span></a>
           </div>
           <p class="contact-address"><span class="sr-only">Email address: </span>jamesdefreitas@outlook.com</p>
@@ -218,6 +248,52 @@
       <span>© <span id="year"></span> Joshua de Freitas</span>
       <span>Built with care, kept intentionally small.</span>
     </footer>
-    <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      const carousel = document.querySelector(".project-carousel");
+      const slides = [...carousel.querySelectorAll("[data-slide]")];
+      const label = carousel.querySelector("[data-slide-label]");
+      const count = carousel.querySelector("[data-slide-count]");
+      const names = ["Neural Field Study", "dbx-core", "DeepLOB"];
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      let activeIndex = 0;
+      let intervalId;
+
+      function showSlide(index) {
+        activeIndex = (index + slides.length) % slides.length;
+        slides.forEach((slide, slideIndex) => {
+          const active = slideIndex === activeIndex;
+          slide.hidden = !active;
+          slide.classList.toggle("is-active", active);
+        });
+        label.textContent = names[activeIndex];
+        count.textContent = `${String(activeIndex + 1).padStart(2, "0")} / 03`;
+      }
+
+      function stopAutoplay() {
+        window.clearInterval(intervalId);
+      }
+
+      function startAutoplay() {
+        stopAutoplay();
+        if (!reduceMotion.matches) intervalId = window.setInterval(() => showSlide(activeIndex + 1), 6400);
+      }
+
+      carousel.querySelector("[data-carousel-prev]").addEventListener("click", () => {
+        showSlide(activeIndex - 1);
+        startAutoplay();
+      });
+      carousel.querySelector("[data-carousel-next]").addEventListener("click", () => {
+        showSlide(activeIndex + 1);
+        startAutoplay();
+      });
+      carousel.addEventListener("mouseenter", stopAutoplay);
+      carousel.addEventListener("mouseleave", startAutoplay);
+      carousel.addEventListener("focusin", stopAutoplay);
+      carousel.addEventListener("focusout", startAutoplay);
+      reduceMotion.addEventListener("change", startAutoplay);
+      startAutoplay();
+    </script>
   </body>
 </html>
