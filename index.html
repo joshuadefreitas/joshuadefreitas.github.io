@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Joshua de Freitas is a Senior Data Engineer at EY Wavespace in Madrid. He builds data platforms, agentic AI systems, and pursues public research in computational neuroscience, neural architectures, and visual computing."
+      content="Joshua de Freitas is a Senior Data Engineer at EY Wavespace in Madrid, working on data platforms and agentic AI systems, with a public research practice in deterministic simulation, neural architectures and developer tools."
     />
     <meta name="theme-color" content="#070908" />
-    <meta property="og:title" content="Joshua de Freitas | Data Engineer" />
+    <meta property="og:title" content="Joshua de Freitas | Data Engineer &amp; Researcher" />
     <meta
       property="og:description"
-      content="A public record of data engineering, intelligent software, simulation, visual computing, and applied research."
+      content="Systems whose correctness is checkable. Deterministic simulation, reproducible research, and developer tools that state what they cannot prove."
     />
     <meta property="og:image" content="https://joshuadefreitas.github.io/assets/hero-field-study.png" />
     <title>Joshua de Freitas | Data Engineer &amp; Researcher</title>
@@ -22,7 +22,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=4" />
+    <link rel="stylesheet" href="styles.css?v=16" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -39,6 +39,7 @@
           <a href="https://www.linkedin.com/in/defreitasjoshua/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
           <a href="#contact">Contact</a>
         </nav>
+        <button class="palette-trigger" type="button" id="palette-open" aria-label="Open command palette">Jump to <kbd>⌘K</kbd></button>
         <span class="header-signal"><span></span> Available for good problems</span>
       </div>
     </header>
@@ -49,74 +50,58 @@
           <p class="eyebrow"><span class="status-dot"></span> Senior Data Engineer <span class="eyebrow-divider">/</span> EY Wavespace <span class="eyebrow-divider">/</span> Madrid</p>
           <h1>Build what survives contact with the <em>real world.</em></h1>
           <p class="hero-lede">
-            I build data platforms and intelligent systems — then follow the thread into
-            computational neuroscience, neural architectures, and visual computing.
+            I build data platforms and agentic AI systems, and run a public research practice
+            alongside them.
           </p>
           <p class="hero-supporting">
-            As a Senior Data Engineer at EY Wavespace in Madrid, I build data platforms and
-            agentic AI systems for complex organisational problems. Outside client work, I study
-            deterministic simulation, neural network architectures, WebGPU rendering, and market
-            microstructure — public projects held to the same standard as the production work.
+            At EY Wavespace in Madrid I work on pipeline architecture, analytical workflows and
+            intelligent automation. Outside client work: deterministic simulation, neural
+            architectures, WebGPU, market microstructure, and small developer tools — published
+            with their evidence and their limits.
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="#work">Explore selected work <span aria-hidden="true">↘</span></a>
             <a class="button button-secondary" href="https://github.com/joshuadefreitas" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
           </div>
-          <div class="hero-facts" aria-label="Areas of interest">
-            <span>Data platforms</span>
-            <span>Agentic AI</span>
-            <span>Simulation</span>
-            <span>Neural architectures</span>
-            <span>Visual computing</span>
-          </div>
         </div>
-        <section class="project-carousel" aria-roledescription="carousel" aria-label="Selected project studies">
-          <div class="carousel-frame" id="project-carousel">
-            <article class="project-slide is-active" data-slide aria-label="1 of 3: Neural Field Study">
-              <div class="art-topline" aria-hidden="true"><span>FIELD STUDY / 2026</span></div>
-              <img src="assets/hero-field-study.png" alt="Abstract dark field study with a luminous path moving through layered architectural and computational structures" />
-              <div class="art-caption" aria-hidden="true"><span>Signals into systems</span></div>
-              <div class="art-corner" aria-hidden="true">NEURAL FIELD<br />01 / 03</div>
-            </article>
-            <article class="project-slide project-slide-core" data-slide hidden aria-label="2 of 3: dbx-core">
-              <div class="project-visual core-visual" aria-hidden="true">
-                <span class="visual-kicker">DBX-CORE / 2026</span>
-                <div class="core-pipeline"><span>LOCAL</span><i></i><span>TEST</span><i></i><span>JOBS</span><i></i><span>REMOTE</span></div>
-                <div class="core-grid"></div>
-                <span class="visual-caption">PACKAGES / NOT NOTEBOOKS</span>
-              </div>
-              <div class="slide-copy"><span>Data engineering</span><strong>dbx-core</strong><p>Python packages, local tests, remote execution.</p></div>
-            </article>
-            <article class="project-slide project-slide-lob" data-slide hidden aria-label="3 of 3: DeepLOB">
-              <div class="project-visual lob-visual" aria-hidden="true">
-                <span class="visual-kicker">DEEPLOB / 2026</span>
-                <div class="lob-book"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-                <div class="lob-signal"></div>
-                <span class="visual-caption">SIGNAL / EVALUATION / REPLAY</span>
-              </div>
-              <div class="slide-copy"><span>Applied research</span><strong>DeepLOB</strong><p>Inspectable market microstructure, end to end.</p></div>
-            </article>
-          </div>
-          <div class="carousel-controls">
-            <div class="carousel-status" aria-live="polite"><span data-slide-label>Neural Field Study</span><span data-slide-count>01 / 03</span></div>
-            <div class="carousel-buttons">
-              <button class="carousel-button" type="button" data-carousel-prev aria-controls="project-carousel" aria-label="Show previous project">←</button>
-              <button class="carousel-button" type="button" data-carousel-next aria-controls="project-carousel" aria-label="Show next project">→</button>
-            </div>
-          </div>
-        </section>
+
+        <figure class="field-stage" aria-label="Live reaction-diffusion field, deterministic and seeded by today's date">
+          <canvas id="field" width="390" height="270" role="img"
+            aria-label="A reaction-diffusion simulation running live in the browser. Identical for every visitor today."></canvas>
+          <img class="field-fallback" src="assets/hero-field-study.png" alt="" hidden />
+          <div class="field-progress" aria-hidden="true"><i id="field-bar"></i></div>
+          <figcaption class="field-meta">
+            <span class="field-kicker" id="field-name">GRAY–SCOTT</span>
+            <span class="field-seed">seed <b id="field-seed">—</b> · deterministic · <span id="field-step">0</span> steps</span>
+          </figcaption>
+          <span class="field-hint" aria-hidden="true"><b id="field-project">Ghalvera engine</b> · move the cursor</span>
+        </figure>
+      </section>
+
+      <section class="evidence-band" aria-label="Evidence">
+        <div class="shell evidence-inner">
+          <span class="evidence-label">Evidence</span>
+          <a class="evidence-item" href="https://github.com/joshuadefreitas/deep-lob" target="_blank" rel="noreferrer">
+            <b>Leakage audit published</b><span>DeepLOB</span>
+          </a>
+          <a class="evidence-item" href="https://joshuadefreitas.github.io/neural-field-study/" target="_blank" rel="noreferrer">
+            <b>Rejected baseline published</b><span>Neural Field Study</span>
+          </a>
+          <a class="evidence-item" href="https://github.com/joshuadefreitas/trace-npm" target="_blank" rel="noreferrer">
+            <b>Every report states its limits</b><span>trace-npm</span>
+          </a>
+          <a class="evidence-item" href="https://github.com/joshuadefreitas/deep-lob" target="_blank" rel="noreferrer">
+            <b>Baselines reported alongside results</b><span>DeepLOB</span>
+          </a>
         </div>
       </section>
 
-      <section class="signal-band" aria-label="Areas of exploration">
-        <div class="shell signal-inner">
-          <span class="signal-label">Exploring</span>
-          <span>Production data platforms</span>
-          <span>Agentic AI systems</span>
-          <span>Deterministic simulation</span>
-          <span>Neural architectures</span>
-          <span>WebGPU &amp; visual computing</span>
-          <span class="signal-end">OPEN / ENDED</span>
+
+      <section class="now-band" aria-label="Currently">
+        <div class="shell now-inner">
+          <span class="now-label">Now</span>
+          <p>Shipping small developer tools, building a WebGPU compute engine, and writing up the neural field study. Latest: <a href="https://www.npmjs.com/package/trace-npm" target="_blank" rel="noreferrer">trace-npm</a> published to npm.</p>
+          <span class="now-date">Aug 2026</span>
         </div>
       </section>
 
@@ -130,50 +115,110 @@
             Small, complete systems. Enough evidence for another person to test, extend, or argue
             with.
           </p>
-          <p class="section-note">
-            <a class="text-link" href="https://joshuadefreitas.github.io/neural-field-study/" target="_blank" rel="noreferrer">Field Studies — an ongoing public research line <span aria-hidden="true">↗</span></a>
-          </p>
         </div>
-        <div class="project-list">
-          <article class="project-row project-featured">
-            <div class="project-index">01</div>
-            <div class="project-content">
-              <div class="project-heading">
-                <h3>Neural Field Study</h3>
-                <span class="project-status">Field study</span>
+
+        <div class="stream">
+          <div class="stream-head">
+            <h3 class="stream-title">Studies</h3>
+            <p class="stream-note">Research held to production standards. The audits are published with the results.</p>
+          </div>
+
+          <div class="card-grid">
+            <article class="card card-study">
+              <div class="card-visual study-visual" aria-hidden="true">
+                <span class="visual-kicker">FIELD STUDY / 2026</span>
+                <img src="assets/hero-field-study.png" alt="" />
               </div>
-              <p>A live computational-neuroscience study with deterministic rules and a seeded replay: local excitation opens paths, inhibitory control decides what survives, topology shapes what propagates. All of it observable in the browser.</p>
-              <div class="project-meta"><span>JavaScript</span><span>Deterministic simulation</span><span>Live browser evidence</span></div>
-              <a class="text-link" href="https://joshuadefreitas.github.io/neural-field-study/" target="_blank" rel="noreferrer">Open live study <span aria-hidden="true">↗</span></a>
-            </div>
-            <div class="project-aside">FIELD STUDY<br />01 / 03</div>
-          </article>
-          <article class="project-row">
-            <div class="project-index">02</div>
-            <div class="project-content">
-              <div class="project-heading">
-                <h3>dbx-core</h3>
-                <span class="project-status">Data engineering</span>
+              <div class="card-body">
+                <div class="card-heading">
+                  <h4>Neural Field Study</h4>
+                  <span class="card-tag">Computational neuroscience</span>
+                </div>
+                <p>Local excitation opens paths, inhibitory control decides what survives, topology shapes what propagates. Deterministic rules, a seeded replay, all of it observable in the browser.</p>
+                <p class="card-limit"><span>Does not establish</span> a continuum limit, biological plausibility, or a discovery about neural tissue.</p>
+                <div class="card-meta"><span>JavaScript</span><span>Deterministic simulation</span><span>Numerical audit</span></div>
+                <div class="card-links">
+                  <a class="text-link" href="https://joshuadefreitas.github.io/neural-field-study/" target="_blank" rel="noreferrer">Open live study <span aria-hidden="true">↗</span></a>
+                  <a class="text-link text-link-muted" href="https://github.com/joshuadefreitas/neural-field-study" target="_blank" rel="noreferrer">Repository <span aria-hidden="true">↗</span></a>
+                </div>
               </div>
-              <p>Databricks without the notebook sprawl: real Python packages, local tests, remote execution. The foundation a data platform should actually rest on.</p>
-              <div class="project-meta"><span>Python</span><span>Databricks</span><span>Jobs over notebooks</span></div>
-              <a class="text-link" href="https://github.com/joshuadefreitas/dbx-core" target="_blank" rel="noreferrer">View repository <span aria-hidden="true">↗</span></a>
-            </div>
-            <div class="project-aside">FOUNDATION<br />02 / 03</div>
-          </article>
-          <article class="project-row">
-            <div class="project-index">03</div>
-            <div class="project-content">
-              <div class="project-heading">
-                <h3>DeepLOB</h3>
-                <span class="project-status">Applied research</span>
+            </article>
+
+            <article class="card card-study">
+              <div class="card-visual lob-visual" aria-hidden="true">
+                <span class="visual-kicker">DEEPLOB / 2026</span>
+                <div class="lob-book"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                <div class="lob-signal"></div>
+                <span class="visual-caption">SIGNAL / EVALUATION / REPLAY</span>
               </div>
-              <p>Limit order book dynamics studied end-to-end: synthetic data generation, PyTorch model training, evaluation, and a deliberately constrained backtest. No hidden steps, no borrowed results.</p>
-              <div class="project-meta"><span>Python</span><span>PyTorch</span><span>Reproducible experiments</span></div>
-              <a class="text-link" href="https://github.com/joshuadefreitas/deep-lob" target="_blank" rel="noreferrer">View repository <span aria-hidden="true">↗</span></a>
-            </div>
-            <div class="project-aside">RESEARCH<br />03 / 03</div>
-          </article>
+              <div class="card-body">
+                <div class="card-heading">
+                  <h4>DeepLOB</h4>
+                  <span class="card-tag">Applied research</span>
+                </div>
+                <p>Limit order book dynamics end to end: synthetic data generation, PyTorch training, evaluation against a TCN baseline, and a deliberately constrained backtest. No hidden steps, no borrowed results.</p>
+                <p class="card-limit"><span>Does not establish</span> tradability. Synthetic data, constrained backtest, leakage audit published alongside.</p>
+                <div class="card-meta"><span>Python</span><span>PyTorch</span><span>Reproducible experiments</span></div>
+                <div class="card-links">
+                  <a class="text-link" href="https://github.com/joshuadefreitas/deep-lob" target="_blank" rel="noreferrer">Repository <span aria-hidden="true">↗</span></a>
+                  <a class="text-link text-link-muted" href="https://github.com/joshuadefreitas/deep-lob/blob/main/docs/deeplob_paper.pdf" target="_blank" rel="noreferrer">Read the write-up <span aria-hidden="true">↗</span></a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="stream">
+          <div class="stream-head">
+            <h3 class="stream-title">Tools</h3>
+            <p class="stream-note">Less glamorous, more used. Things I needed and built.</p>
+          </div>
+
+          <div class="card-grid">
+            <article class="card card-tool">
+              <div class="card-visual tool-visual">
+                <img src="https://raw.githubusercontent.com/joshuadefreitas/trace-npm/main/docs/demo.gif"
+                  alt="trace-npm catching a package that reads ~/.ssh/id_rsa and sends it to a remote host" loading="lazy" />
+              </div>
+              <div class="card-body">
+                <div class="card-heading">
+                  <h4>trace-npm</h4>
+                  <span class="card-tag">Supply chain forensics <b class="live-badge" id="npm-live" hidden></b></span>
+                </div>
+                <p>npm now asks you to approve install scripts. Nothing tells you what they do. trace-npm runs one under a syscall tracer and reports what it read, spawned and contacted — including the planted credential it took the bait on.</p>
+                <pre class="card-terminal"><button class="copy-btn" type="button" aria-label="Copy command">copy</button><code>npx trace-npm run --package suspect --script postinstall</code></pre>
+                <p class="card-limit"><span>Does not establish</span> that a package is safe. Evidence, not verdicts — and the report lists what it could not see.</p>
+                <div class="card-meta"><span>Node.js</span><span>Linux · strace</span><span>0 dependencies</span></div>
+                <div class="card-links">
+                  <a class="text-link" href="https://www.npmjs.com/package/trace-npm" target="_blank" rel="noreferrer">npm package <span aria-hidden="true">↗</span></a>
+                  <a class="text-link text-link-muted" href="https://github.com/joshuadefreitas/trace-npm" target="_blank" rel="noreferrer">Repository <span aria-hidden="true">↗</span></a>
+                </div>
+              </div>
+            </article>
+
+            <article class="card card-tool">
+              <div class="card-visual core-visual" aria-hidden="true">
+                <span class="visual-kicker">DBX-CORE / 2026</span>
+                <div class="core-pipeline"><span>LOCAL</span><i></i><span>TEST</span><i></i><span>JOBS</span><i></i><span>REMOTE</span></div>
+                <div class="core-grid"></div>
+                <span class="visual-caption">PACKAGES / NOT NOTEBOOKS</span>
+              </div>
+              <div class="card-body">
+                <div class="card-heading">
+                  <h4>dbx-core</h4>
+                  <span class="card-tag">Data engineering</span>
+                </div>
+                <p>Databricks without the notebook sprawl: real Python packages, local tests, remote execution. The foundation a data platform should actually rest on.</p>
+                <pre class="card-terminal"><button class="copy-btn" type="button" aria-label="Copy command">copy</button><code>pytest tests/ &amp;&amp; dbx deploy</code></pre>
+                <p class="card-limit"><span>Opinionated</span> about jobs over notebooks. That constraint is the point, and it will not suit every team.</p>
+                <div class="card-meta"><span>Python</span><span>Databricks</span><span>Jobs over notebooks</span></div>
+                <div class="card-links">
+                  <a class="text-link" href="https://github.com/joshuadefreitas/dbx-core" target="_blank" rel="noreferrer">Repository <span aria-hidden="true">↗</span></a>
+                  <a class="text-link text-link-muted" href="https://github.com/joshuadefreitas/dbx-core#readme" target="_blank" rel="noreferrer">Documentation <span aria-hidden="true">↗</span></a>
+                </div>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
 
@@ -212,9 +257,9 @@
             <p>
               My background spans data strategy, analytics, applied economic research, finance,
               and ESG. Outside client work, I run a parallel research practice: deterministic
-              simulation, neural network architectures, WebGPU and visual computing, and market
-              microstructure. The public projects on this site are the legible version of that
-              work.
+              simulation, neural network architectures, WebGPU and visual computing, market
+              microstructure, and developer tooling. The public projects on this site are the
+              legible version of that work.
             </p>
             <div class="skill-lines">
               <span>Python · SQL · PySpark · TypeScript</span>
@@ -244,56 +289,454 @@
       </section>
     </main>
 
+
+    <div class="palette" id="palette" hidden role="dialog" aria-modal="true" aria-label="Command palette">
+      <div class="palette-box">
+        <input id="palette-input" type="text" placeholder="Jump to…  (esc to close)" autocomplete="off" spellcheck="false" />
+        <ul id="palette-list" role="listbox"></ul>
+        <div class="palette-foot"><kbd>↑</kbd><kbd>↓</kbd> navigate <kbd>↵</kbd> open <kbd>esc</kbd> close</div>
+      </div>
+    </div>
+
     <footer class="site-footer shell">
       <span>© <span id="year"></span> Joshua de Freitas</span>
       <span>Built with care, kept intentionally small.</span>
     </footer>
+
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
 
-      const carousel = document.querySelector(".project-carousel");
-      const slides = [...carousel.querySelectorAll("[data-slide]")];
-      const label = carousel.querySelector("[data-slide-label]");
-      const count = carousel.querySelector("[data-slide-count]");
-      const names = ["Neural Field Study", "dbx-core", "DeepLOB"];
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-      let activeIndex = 0;
-      let intervalId;
+      /* ---------------------------------------------------------------
+         Hero: a rotating set of deterministic simulations, one per
+         project. All are seeded from today's UTC date, so every visitor
+         sees the identical run. No Math.random anywhere.
 
-      function showSlide(index) {
-        activeIndex = (index + slides.length) % slides.length;
-        slides.forEach((slide, slideIndex) => {
-          const active = slideIndex === activeIndex;
-          slide.hidden = !active;
-          slide.classList.toggle("is-active", active);
+           gray-scott   reaction-diffusion   → Ghalvera engine
+           cascade      threshold network    → emergence
+           neural       excitation/inhibition→ Neural Field Study
+           book         synthetic order book → DeepLOB
+         --------------------------------------------------------------- */
+      (function heroField() {
+        const canvas = document.getElementById("field");
+        const fallback = document.querySelector(".field-fallback");
+        const ctx = canvas && canvas.getContext("2d", { alpha: false });
+        if (!ctx) { if (canvas) canvas.hidden = true; if (fallback) fallback.hidden = false; return; }
+
+        const nameOut = document.getElementById("field-name");
+        const projOut = document.getElementById("field-project");
+        const seedOut = document.getElementById("field-seed");
+        const stepOut = document.getElementById("field-step");
+        const bar = document.getElementById("field-bar");
+
+        const W = canvas.width, H = canvas.height, N = W * H;
+        const today = new Date();
+        const SEED = today.getUTCFullYear() * 10000 + (today.getUTCMonth() + 1) * 100 + today.getUTCDate();
+        seedOut.textContent = String(SEED);
+
+        function prng(seed) {
+          let s = seed >>> 0;
+          return () => {
+            s = (s + 0x6d2b79f5) >>> 0;
+            let t = s;
+            t = Math.imul(t ^ (t >>> 15), t | 1);
+            t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+            return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+          };
+        }
+        const img = ctx.createImageData(W, H), px = img.data;
+        const idx = (x, y) => ((y + H) % H) * W + ((x + W) % W);
+        const lerp = (a, b, t) => a + (b - a) * t;
+
+        /* ---- 1. Gray-Scott ------------------------------------------- */
+        function grayScott() {
+          const rand = prng(SEED);
+          /* Scattered seed discs land too far apart at this resolution and
+             decay before they interact — identical parameters nucleate at
+             160x100 and die at 260x180. A central noisy patch is the standard
+             init and is resolution-independent. F/K chosen by sweep: this pair
+             keeps growing (16% → 48% → 62% coverage at 400/2000/8000 steps)
+             rather than settling to a still image. */
+          const F = 0.046, K = 0.060;
+          let a = new Float32Array(N).fill(1), b = new Float32Array(N),
+              a2 = new Float32Array(N), b2 = new Float32Array(N);
+          {
+            const x0 = (W*0.28)|0, x1 = (W*0.72)|0, y0 = (H*0.28)|0, y1 = (H*0.72)|0;
+            for (let y = y0; y < y1; y++) for (let x = x0; x < x1; x++)
+              if (rand() < 0.55) { const i = y*W + x; a[i] = 0.5; b[i] = 0.25; }
+          }
+          const put = (cx, cy, r, v) => {
+            for (let y = -r; y <= r; y++) for (let x = -r; x <= r; x++)
+              if (x * x + y * y <= r * r) b[idx(cx + x, cy + y)] = Math.min(1, b[idx(cx + x, cy + y)] + v);
+          };
+          return {
+            name: "GRAY–SCOTT", project: "Ghalvera engine", warm: 500, perStep: 9,
+            step() {
+              // Row offsets hoisted; neighbour indices inlined. Calling a
+              // helper eight times per cell cost ~8x — 2.3ms/step vs 0.3.
+              for (let y = 0; y < H; y++) {
+                const yU = ((y-1+H)%H)*W, yD = ((y+1)%H)*W, yC = y*W;
+                for (let x = 0; x < W; x++) {
+                  const xL = (x-1+W)%W, xR = (x+1)%W, i = yC + x;
+                  const la = a[yC+xL]+a[yC+xR]+a[yU+x]+a[yD+x]
+                    + 0.25*(a[yU+xL]+a[yU+xR]+a[yD+xL]+a[yD+xR]) - 5*a[i];
+                  const lb = b[yC+xL]+b[yC+xR]+b[yU+x]+b[yD+x]
+                    + 0.25*(b[yU+xL]+b[yU+xR]+b[yD+xL]+b[yD+xR]) - 5*b[i];
+                  const av = a[i], bv = b[i], abb = av*bv*bv;
+                  a2[i] = av + (la*0.2 - abb + F*(1-av));
+                  b2[i] = bv + (0.5*lb*0.2 + abb - (K+F)*bv);
+                }
+              }
+              [a,a2]=[a2,a]; [b,b2]=[b2,b];
+            },
+            poke(cx, cy) { put(cx, cy, 2, 0.35); },
+            paint() {
+              for (let i = 0; i < N; i++) {
+                let v = a[i]-b[i]; v = v<0?0:v>1?1:v;
+                const t = 1-v, hot = t>0.55;
+                // Substrate is pure black so `mix-blend-mode: screen` leaves
+                // the page background untouched — screen(x,0) = x exactly.
+                px[i*4  ] = t*(hot?150:237);
+                px[i*4+1] = t*(hot?205:115);
+                px[i*4+2] = t*(hot?185:61);
+                px[i*4+3] = 255;
+              }
+            }
+          };
+        }
+
+        /* ---- 2. Cascade field ---------------------------------------- */
+        function cascade() {
+          /* Random per-cell thresholds render as uniform noise: nothing
+             propagates visibly. Spatially correlated thresholds give the field
+             terrain — cascades then run along channels of low resistance, and
+             painting activity rather than load makes the avalanche the subject
+             instead of the background. */
+          const rand = prng(SEED + 11);
+          const w = W >> 1, hh = H >> 1, n = w * hh;
+          const thr = new Float32Array(n), tmp = new Float32Array(n);
+          for (let i = 0; i < n; i++) thr[i] = rand();
+          for (let pass = 0; pass < 6; pass++) {           // smooth into terrain
+            for (let y = 0; y < hh; y++) for (let x = 0; x < w; x++) {
+              const i = y*w + x;
+              tmp[i] = 0.25*thr[i]
+                + 0.1875*(thr[y*w+((x+1)%w)] + thr[y*w+((x-1+w)%w)]
+                        + thr[((y+1)%hh)*w+x] + thr[((y-1+hh)%hh)*w+x]);
+            }
+            thr.set(tmp);
+          }
+          let lo = 1, hi = 0;
+          for (let i = 0; i < n; i++) { if (thr[i] < lo) lo = thr[i]; if (thr[i] > hi) hi = thr[i]; }
+          for (let i = 0; i < n; i++) thr[i] = 0.55 + 0.55 * ((thr[i]-lo)/(hi-lo));
+
+          const load = new Float32Array(n), act = new Float32Array(n), links = new Int32Array(n);
+          for (let i = 0; i < n; i++) { load[i] = rand()*0.25; links[i] = (rand()*n)|0; }
+          let t = 0;
+          return {
+            name: "CASCADE FIELD", project: "emergence", warm: 120, perStep: 3,
+            step() {
+              t++;
+              if (t % 26 === 0) load[(rand()*n)|0] += 3.2;    // sparse seeded shocks
+              for (let i = 0; i < n; i++) load[i] += 0.0009;
+              for (let y = 0; y < hh; y++) for (let x = 0; x < w; x++) {
+                const i = y*w + x;
+                if (load[i] > thr[i]) {
+                  const share = load[i] * 0.30;
+                  load[i] = 0; act[i] = 1;
+                  load[y*w+((x+1)%w)]      += share*0.28;
+                  load[y*w+((x-1+w)%w)]    += share*0.28;
+                  load[((y+1)%hh)*w+x]     += share*0.28;
+                  load[((y-1+hh)%hh)*w+x]  += share*0.28;
+                  load[links[i]]           += share*0.55;    // long-range coupling
+                }
+              }
+              for (let i = 0; i < n; i++) act[i] *= 0.935;
+            },
+            poke(cx, cy) { load[((cy>>1)%hh)*w + ((cx>>1)%w)] += 4.5; },
+            paint() {
+              for (let y = 0; y < H; y++) { const sy = (y>>1)*w, row = y*W;
+                for (let x = 0; x < W; x++) {
+                  const s = sy + (x>>1), i = (row + x)*4;
+                  const terr = (thr[s]-0.55)/0.55;           // faint landscape
+                  const a2 = act[s], glow = a2*a2;
+                  px[i  ] = terr*16 + glow*225;
+                  px[i+1] = terr*10 + glow*105;
+                  px[i+2] = terr*34 + glow*250;
+                  px[i+3] = 255;
+                } }
+            }
+          };
+        }
+
+        /* ---- 3. Neural field ----------------------------------------- */
+        function neuralField() {
+          /* A difference of Gaussians is separable: exp(-(dx²+dy²)/s) factors
+             into exp(-dx²/s)·exp(-dy²/s). Two 1D passes per lobe replace an
+             81-tap 2D convolution. Run at half resolution and upscale on
+             paint: together that took 110ms/step down to single digits. */
+          const rand = prng(SEED + 23);
+          const w = W >> 1, hh = H >> 1, n = w * hh;
+          let u = new Float32Array(n), tmp = new Float32Array(n),
+              exc = new Float32Array(n), inh = new Float32Array(n);
+          for (let i = 0; i < n; i++) u[i] = rand() * 0.35;
+
+          const R = 4;
+          const mk = (s) => { const k = []; let sum = 0;
+            for (let d = -R; d <= R; d++) { const v = Math.exp(-(d*d)/s); k.push(v); sum += v; }
+            return k.map((v) => v / sum); };
+          const gE = mk(3.2), gI = mk(16);
+
+          function blur(src, dst, k) {
+            for (let y = 0; y < hh; y++) { const row = y*w;
+              for (let x = 0; x < w; x++) { let s = 0;
+                for (let d = -R; d <= R; d++) s += k[d+R] * src[row + ((x+d+w)%w)];
+                tmp[row + x] = s; } }
+            for (let y = 0; y < hh; y++) { const row = y*w;
+              for (let x = 0; x < w; x++) { let s = 0;
+                for (let d = -R; d <= R; d++) s += k[d+R] * tmp[(((y+d+hh)%hh))*w + x];
+                dst[row + x] = s; } }
+          }
+
+          return {
+            name: "NEURAL FIELD", project: "Neural Field Study", warm: 80, perStep: 2,
+            step() {
+              blur(u, exc, gE); blur(u, inh, gI);
+              for (let i = 0; i < n; i++) {
+                const s = 2.6*exc[i] - 1.9*inh[i];
+                u[i] += 0.24 * (1/(1 + Math.exp(-(s - 0.34)*5.5)) - u[i]);
+              }
+            },
+            poke(cx, cy) {
+              const x = cx >> 1, y = cy >> 1;
+              for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++)
+                u[(((y+dy+hh)%hh))*w + ((x+dx+w)%w)] = 1;
+            },
+            paint() {
+              for (let y = 0; y < H; y++) { const sy = (y>>1)*w, row = y*W;
+                for (let x = 0; x < W; x++) {
+                  const v0 = u[sy + (x>>1)], v = v0 < 0 ? 0 : v0 > 1 ? 1 : v0, i = (row + x)*4;
+                  px[i  ] = v*236;
+                  px[i+1] = v*150;
+                  px[i+2] = v*52;
+                  px[i+3] = 255;
+                } }
+            }
+          };
+        }
+
+        /* ---- 4. Order book ------------------------------------------- */
+        function orderBook() {
+          const rand = prng(SEED + 37);
+          const LV = 48;
+          const bid = new Float32Array(LV), ask = new Float32Array(LV);
+          for (let i = 0; i < LV; i++) { bid[i] = 0.35 + rand()*0.5; ask[i] = 0.35 + rand()*0.5; }
+          let mid = H/2, drift = 0, t = 0;
+          const trail = new Float32Array(N);
+          return {
+            name: "ORDER BOOK", project: "DeepLOB", warm: 40, perStep: 2,
+            step() {
+              t++;
+              drift = drift*0.94 + (rand()-0.5)*0.55;
+              mid = Math.max(H*0.25, Math.min(H*0.75, mid + drift*1.15));
+              for (let i = 0; i < LV; i++) {
+                bid[i] = Math.max(0.05, Math.min(1, bid[i] + (rand()-0.5)*0.16 - drift*0.01));
+                ask[i] = Math.max(0.05, Math.min(1, ask[i] + (rand()-0.5)*0.16 + drift*0.01));
+              }
+              for (let i = 0; i < N; i++) trail[i] *= 0.965;
+              const c = t % W;
+              for (let y = 0; y < H; y++) {
+                const d = y - mid;
+                const lvl = Math.min(LV-1, (Math.abs(d) * (48/(H*0.42)))|0);
+                const depth = d < 0 ? ask[lvl] : bid[lvl];
+                trail[idx(c,y)] = Math.abs(d) < 2 ? 1 : depth * Math.exp(-Math.abs(d)/(H*0.145));
+              }
+            },
+            poke(cx, cy) { mid = cy; },
+            paint() {
+              const c = t % W;
+              for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+                const i = idx(x,y);
+                const v = trail[i];
+                const bidSide = y > mid;
+                const head = ((x - c + W) % W) < 6;
+                px[i*4  ] = v*(bidSide?  40 : 236) + (head ? 40 : 0);
+                px[i*4+1] = v*(bidSide? 200 : 118) + (head ? 40 : 0);
+                px[i*4+2] = v*(bidSide? 170 :  62) + (head ? 40 : 0);
+                px[i*4+3] = 255;
+              }
+            }
+          };
+        }
+
+        const builders = [grayScott, cascade, neuralField, orderBook];
+        const DWELL = 15000, FADE = 900;
+        let cur = builders[0](), nextSim = null, curIdx = 0;
+        let steps = 0, running = true, fadeStart = 0, lastSwap = performance.now();
+        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+        function label(sim) { nameOut.textContent = sim.name; projOut.textContent = sim.project; }
+        function warm(sim) { for (let i = 0; i < sim.warm; i++) sim.step(); }
+
+        warm(cur); label(cur); cur.paint(); ctx.putImageData(img, 0, 0);
+
+        let lastPoke = 0;
+        canvas.addEventListener("pointermove", (e) => {
+          const now = performance.now();
+          if (now - lastPoke < 90) return;
+          lastPoke = now;
+          const r = canvas.getBoundingClientRect();
+          cur.poke(
+            Math.floor(((e.clientX - r.left) / r.width) * W),
+            Math.floor(((e.clientY - r.top) / r.height) * H)
+          );
         });
-        label.textContent = names[activeIndex];
-        count.textContent = `${String(activeIndex + 1).padStart(2, "0")} / 03`;
-      }
 
-      function stopAutoplay() {
-        window.clearInterval(intervalId);
-      }
+        if ("IntersectionObserver" in window) {
+          new IntersectionObserver((es) => { running = es[0].isIntersecting; }, { threshold: 0 })
+            .observe(canvas);
+        }
 
-      function startAutoplay() {
-        stopAutoplay();
-        if (!reduceMotion.matches) intervalId = window.setInterval(() => showSlide(activeIndex + 1), 6400);
-      }
+        function frame(now) {
+          requestAnimationFrame(frame);
+          if (!running) { lastSwap = now - (now - lastSwap); return; }
 
-      carousel.querySelector("[data-carousel-prev]").addEventListener("click", () => {
-        showSlide(activeIndex - 1);
-        startAutoplay();
+          if (!nextSim && now - lastSwap > DWELL) {
+            curIdx = (curIdx + 1) % builders.length;
+            nextSim = builders[curIdx]();
+            warm(nextSim);
+            fadeStart = now;
+          }
+
+          for (let i = 0; i < cur.perStep; i++) cur.step();
+          steps += cur.perStep;
+
+          if (nextSim) {
+            const k = Math.min(1, (now - fadeStart) / FADE);
+            for (let i = 0; i < nextSim.perStep; i++) nextSim.step();
+            cur.paint();
+            const under = new Uint8ClampedArray(px);
+            nextSim.paint();
+            for (let i = 0; i < px.length; i++) px[i] = lerp(under[i], px[i], k);
+            if (k >= 1) { cur = nextSim; nextSim = null; lastSwap = now; label(cur); steps = 0; }
+            else if (k > 0.5) label(nextSim);
+          } else {
+            cur.paint();
+          }
+
+          ctx.putImageData(img, 0, 0);
+          stepOut.textContent = String(steps);
+          bar.style.width = nextSim ? "100%" : ((now - lastSwap) / DWELL * 100).toFixed(1) + "%";
+        }
+
+        if (!reduce.matches) requestAnimationFrame(frame);
+        else { bar.style.width = "100%"; }
+      })();
+    </script>
+
+    <script>
+      /* Copy buttons on terminal blocks. */
+      document.querySelectorAll(".copy-btn").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          const code = btn.parentElement.querySelector("code");
+          try {
+            await navigator.clipboard.writeText(code.textContent.trim());
+            btn.textContent = "copied";
+            setTimeout(() => (btn.textContent = "copy"), 1600);
+          } catch { btn.textContent = "select it"; }
+        });
       });
-      carousel.querySelector("[data-carousel-next]").addEventListener("click", () => {
-        showSlide(activeIndex + 1);
-        startAutoplay();
-      });
-      carousel.addEventListener("mouseenter", stopAutoplay);
-      carousel.addEventListener("mouseleave", startAutoplay);
-      carousel.addEventListener("focusin", stopAutoplay);
-      carousel.addEventListener("focusout", startAutoplay);
-      reduceMotion.addEventListener("change", startAutoplay);
-      startAutoplay();
+
+      /* Live npm metadata. The site checks its own claim rather than asserting it. */
+      (async function npmLive() {
+        const el = document.getElementById("npm-live");
+        if (!el) return;
+        try {
+          const r = await fetch("https://registry.npmjs.org/trace-npm", { cache: "no-store" });
+          if (!r.ok) return;
+          const j = await r.json();
+          const v = (j["dist-tags"] && (j["dist-tags"].latest || j["dist-tags"].alpha)) || null;
+          if (!v) return;
+          el.textContent = "v" + v + " on npm";
+          el.hidden = false;
+        } catch { /* offline or blocked — the card reads fine without it */ }
+      })();
+
+      /* Reveal on scroll. Respects reduced motion. */
+      (function reveal() {
+        const rm = window.matchMedia("(prefers-reduced-motion: reduce)");
+        const targets = document.querySelectorAll(".card, .stream-head, .principle, .section-heading");
+        if (rm.matches || !("IntersectionObserver" in window)) {
+          targets.forEach((t) => t.classList.add("is-in"));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => entries.forEach((e) => {
+            if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); }
+          }),
+          { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+        );
+        targets.forEach((t) => { t.classList.add("reveal"); io.observe(t); });
+      })();
+
+      /* Command palette. ⌘K / Ctrl+K. */
+      (function palette() {
+        const items = [
+          { label: "Work", hint: "section", href: "#work" },
+          { label: "Method", hint: "section", href: "#approach" },
+          { label: "About", hint: "section", href: "#about" },
+          { label: "Contact", hint: "section", href: "#contact" },
+          { label: "Neural Field Study", hint: "live study", href: "https://joshuadefreitas.github.io/neural-field-study/" },
+          { label: "DeepLOB", hint: "repository", href: "https://github.com/joshuadefreitas/deep-lob" },
+          { label: "trace-npm", hint: "npm package", href: "https://www.npmjs.com/package/trace-npm" },
+          { label: "dbx-core", hint: "repository", href: "https://github.com/joshuadefreitas/dbx-core" },
+          { label: "GitHub", hint: "profile", href: "https://github.com/joshuadefreitas" },
+          { label: "LinkedIn", hint: "profile", href: "https://www.linkedin.com/in/defreitasjoshua/" },
+          { label: "Email", hint: "jamesdefreitas@outlook.com", href: "mailto:jamesdefreitas@outlook.com" }
+        ];
+        const root = document.getElementById("palette");
+        const input = document.getElementById("palette-input");
+        const list = document.getElementById("palette-list");
+        let filtered = items, active = 0;
+
+        function render() {
+          list.innerHTML = filtered
+            .map((it, i) =>
+              `<li role="option" aria-selected="${i === active}" class="${i === active ? "is-active" : ""}" data-i="${i}">` +
+              `<span>${it.label}</span><em>${it.hint}</em></li>`)
+            .join("");
+        }
+        function open() {
+          root.hidden = false; input.value = ""; filtered = items; active = 0; render();
+          requestAnimationFrame(() => input.focus());
+        }
+        function close() { root.hidden = true; }
+        function go() {
+          const it = filtered[active];
+          if (!it) return;
+          close();
+          if (it.href.startsWith("#")) document.querySelector(it.href).scrollIntoView({ behavior: "smooth" });
+          else window.open(it.href, it.href.startsWith("mailto:") ? "_self" : "_blank", "noopener");
+        }
+
+        document.getElementById("palette-open").addEventListener("click", open);
+        document.addEventListener("keydown", (e) => {
+          if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); root.hidden ? open() : close(); }
+          if (root.hidden) return;
+          if (e.key === "Escape") close();
+          if (e.key === "ArrowDown") { e.preventDefault(); active = (active + 1) % filtered.length; render(); }
+          if (e.key === "ArrowUp") { e.preventDefault(); active = (active - 1 + filtered.length) % filtered.length; render(); }
+          if (e.key === "Enter") { e.preventDefault(); go(); }
+        });
+        input.addEventListener("input", () => {
+          const q = input.value.toLowerCase();
+          filtered = items.filter((it) => (it.label + " " + it.hint).toLowerCase().includes(q));
+          active = 0; render();
+        });
+        list.addEventListener("click", (e) => {
+          const li = e.target.closest("li"); if (!li) return;
+          active = Number(li.dataset.i); go();
+        });
+        root.addEventListener("click", (e) => { if (e.target === root) close(); });
+      })();
     </script>
   </body>
 </html>
