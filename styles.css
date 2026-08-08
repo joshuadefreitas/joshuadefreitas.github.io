@@ -839,3 +839,488 @@ a:focus-visible, button:focus-visible {
   color: var(--dim); opacity: 0.65; margin-left: auto;
 }
 @media (max-width: 720px) { .field-claim { display: none; } }
+
+/* ===================================================================
+   v18 — legibility, optical polish, and depth
+   -------------------------------------------------------------------
+   Measured problems this fixes, in order of severity:
+
+   1. --dim (#64716a) sits at 3.91:1 on --black. WCAG AA wants 4.5:1 for
+      normal text, and --dim is used 24 times, mostly at 9-10px, which is
+      the worst case. .field-claim compounded it with opacity 0.65 for an
+      effective 2.28:1. Raised to #7e8b83 = 5.62:1 on black, 4.92:1 on
+      --surface-2. Still clearly subordinate to --muted (8.21:1), so the
+      hierarchy is unchanged; it is now readable rather than implied.
+
+   2. The type scale had no floor. 9px, 0.52rem (8.3px) and 0.55rem
+      (8.8px) mono labels against 72px headings. Floor raised to 11px.
+      Tracking is increased at the same time, because small mono set
+      tight reads as a smudge.
+
+   3. Large type carried letter-spacing: 0. Display sizes need slight
+      negative tracking or the counters drift apart optically; the
+      correction scales with size, so h1 gets more than h3.
+   =================================================================== */
+
+:root {
+  --dim: #7e8b83;          /* was #64716a — see note 1 */
+  --dim-decor: #64716a;    /* the old value, for non-text decoration only */
+}
+
+/* --- 1. optical text rendering ------------------------------------ */
+body {
+  font-optical-sizing: auto;
+  text-rendering: optimizeLegibility;
+}
+
+/* --- 2. display tracking and rag control -------------------------- */
+h1 { letter-spacing: -0.019em; text-wrap: balance; }
+h2 { letter-spacing: -0.013em; text-wrap: balance; }
+h3, h4 { letter-spacing: -0.006em; text-wrap: balance; }
+.hero-lede { letter-spacing: -0.008em; text-wrap: balance; }
+
+/* text-wrap: pretty prevents single-word last lines in body copy. */
+.hero-supporting, .section-summary, .card-body p, .now-inner p { text-wrap: pretty; }
+
+/* --- 3. body copy: 14px is below comfortable reading size --------- */
+.hero-supporting { font-size: 15px; line-height: 1.75; }
+.section-summary { font-size: 15px; line-height: 1.75; }
+
+/* --- 4. raise the small-type floor to 11px ------------------------ */
+.art-topline, .art-caption, .art-corner { font-size: 11px; letter-spacing: 0.05em; }
+.visual-kicker, .visual-caption { font-size: 11px; letter-spacing: 0.08em; }
+.lob-visual .visual-caption { font-size: 11px; }
+.header-signal, .hero-facts, .carousel-status, .signal-inner,
+.project-meta, .principle > span, .skill-lines, .site-footer { font-size: 11px; }
+.eyebrow { font-size: 11px; letter-spacing: 0.11em; }
+.card-meta span { font-size: 0.7rem; }
+.field-controls button { font-size: 0.7rem; }
+.core-visual .core-pipeline { font-size: 0.72rem !important; }
+
+/* .field-claim was --dim at 0.65 opacity = 2.28:1. Opacity removed;
+   the colour token now carries the recession on its own. */
+.field-claim { font-size: 0.7rem; opacity: 1; color: var(--dim); }
+
+/* --- 5. live counters must not reflow as digits change ------------ */
+/* #field-step counts up continuously. Proportional digits change width
+   per frame, so the caption jitters. Tabular figures fix the advance. */
+.field-meta, .field-seed, #field-seed, #field-step,
+.evidence-item b, .hero-facts { font-variant-numeric: tabular-nums; }
+
+/* --- 6. depth: a vignette so the page sits in a pool of light ----- */
+/* html::after is the last child of the root, so it paints above the two
+   body layers and below the z-index:1 content. No extra markup. */
+html::after {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  content: "";
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(115, 215, 195, 0.045), transparent 55%),
+    radial-gradient(100% 100% at 50% 45%, transparent 38%, rgba(2, 4, 3, 0.55) 100%);
+}
+/* The grain was at 0.9 and read as noise over text at small sizes. */
+body::before { opacity: 0.62; }
+
+/* --- 7. selection, focus, scrollbar, motion ----------------------- */
+::selection { background: var(--orange); color: var(--black); }
+
+:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Anchor links landed flush against the viewport top. */
+:where(section, [id]) { scroll-margin-top: 96px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
+
+* { scrollbar-width: thin; scrollbar-color: var(--line-light) transparent; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--line-light); border-radius: 6px; border: 3px solid var(--black); }
+::-webkit-scrollbar-thumb:hover { background: var(--dim); }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* --- 8. small-screen reading size --------------------------------- */
+@media (max-width: 720px) {
+  .hero-supporting, .section-summary { font-size: 15.5px; }
+  .field-claim { display: none; }
+}
+
+/* --- 9. the rest of the sub-11px floor ---------------------------- */
+/* Found by cross-referencing every font-size in this file against the
+   class names actually present in index.html — the first pass above hit
+   several selectors left over from the previous site version and did
+   nothing. These are the live ones, smallest first: 8.3px through 10.6px. */
+.core-visual .visual-kicker,
+.core-visual .visual-caption,
+.lob-visual .visual-caption { font-size: 0.7rem; }
+.copy-btn        { font-size: 0.7rem; }
+.live-badge      { font-size: 0.7rem; letter-spacing: 0.09em; }
+.card-limit span { font-size: 0.7rem; }
+.card-tag        { font-size: 0.7rem; letter-spacing: 0.08em; }
+.field-hint      { font-size: 0.7rem; }
+.field-meta      { font-size: 0.72rem; }
+.now-label       { font-size: 0.7rem; letter-spacing: 0.13em; }
+.now-date        { font-size: 0.7rem; }
+.evidence-label  { font-size: 0.7rem; letter-spacing: 0.13em; }
+.evidence-item span { font-size: 0.7rem; }
+.palette-trigger kbd { font-size: 0.7rem; }
+.palette-foot    { font-size: 0.7rem; }
+#palette-list li em  { font-size: 0.72rem; }
+
+/* --- 10. hover affordance on the evidence band -------------------- */
+/* Four claims that link to their proof, currently indistinguishable
+   from static text until the cursor is already on them. */
+.evidence-item {
+  text-decoration: none;
+  transition: color 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+.evidence-item:hover, .evidence-item:focus-visible { transform: translateY(-1px); }
+.evidence-item:hover b, .evidence-item:focus-visible b { color: var(--teal); }
+.evidence-item b { transition: color 160ms ease; }
+
+/* --- 11. the field caption is the thesis; let it read ------------- */
+.field-meta { line-height: 1.6; }
+.field-seed b { color: var(--cream); font-weight: 500; }
+
+/* ===================================================================
+   v19 — depth, weight, and the Standard section
+   -------------------------------------------------------------------
+   The page was typographically strong but physically flat: every
+   surface sat on the same plane, borders were uniformly 1px, and the
+   only depth cue was a 2px hover lift. This pass introduces a single
+   consistent light source (above, slightly front) and expresses it the
+   way real materials do — a bright top rim, a dark bottom shadow, and
+   shadow that grows softer and wider as an element rises.
+   =================================================================== */
+
+:root {
+  --rim: rgba(242, 238, 229, 0.08);      /* top highlight — light from above */
+  --rim-strong: rgba(242, 238, 229, 0.14);
+  --cast-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --cast-2: 0 2px 6px rgba(0, 0, 0, 0.35), 0 8px 24px rgba(0, 0, 0, 0.3);
+  --cast-3: 0 4px 10px rgba(0, 0, 0, 0.4), 0 18px 48px rgba(0, 0, 0, 0.42);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* --- 1. sticky glass header --------------------------------------- */
+/* Nav was scrolling away, so on a long page there was no way back up
+   except the palette. Sticky + blur keeps it available without
+   occupying visual weight. scroll-margin-top (v18) already accounts
+   for it on anchor jumps. */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(7, 9, 8, 0.72);
+  backdrop-filter: saturate(150%) blur(14px);
+  -webkit-backdrop-filter: saturate(150%) blur(14px);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 1px 0 var(--rim) inset, 0 8px 28px rgba(0, 0, 0, 0.35);
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .site-header { background: rgba(7, 9, 8, 0.97); }
+}
+
+/* Nav links: an underline that grows from the left rather than
+   appearing all at once. */
+.site-nav a { position: relative; padding-bottom: 3px; }
+.site-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 1px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 260ms var(--ease-out);
+}
+.site-nav a:hover::after, .site-nav a:focus-visible::after { transform: scaleX(1); }
+
+/* --- 2. scroll progress ------------------------------------------- */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 30;
+  height: 2px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: linear-gradient(90deg, var(--teal), var(--orange));
+  pointer-events: none;
+}
+
+/* --- 3. cards: give them a body ----------------------------------- */
+/* Uniform 1px borders read as diagram, not object. A card now has a lit
+   top edge, a cast shadow, and a pointer-tracked tilt of at most 4
+   degrees — enough to register as a physical plane, small enough that
+   it never becomes a gimmick. */
+.card {
+  /* 14px, matching the existing .card radius — not a new value. */
+  box-shadow: 0 1px 0 var(--rim) inset, var(--cast-2);
+  transform-style: preserve-3d;
+  transition:
+    transform 320ms var(--ease-out),
+    box-shadow 320ms var(--ease-out),
+    border-color 260ms ease;
+  will-change: transform;
+}
+.card:hover {
+  border-color: var(--line-light);
+  box-shadow: 0 1px 0 var(--rim-strong) inset, var(--cast-3);
+}
+/* The v17 rule lifted with translateY; the JS tilt supersedes it. */
+.card:hover { transform: none; }
+.card.is-tilting {
+  transform:
+    perspective(900px)
+    rotateX(var(--tilt-x, 0deg))
+    rotateY(var(--tilt-y, 0deg))
+    translateY(-4px)
+    scale(1.006);
+}
+/* A specular sweep that follows the cursor across the card face. */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 320ms ease;
+  background: radial-gradient(
+    420px circle at var(--px, 50%) var(--py, 0%),
+    rgba(115, 215, 195, 0.07),
+    transparent 42%
+  );
+}
+.card { position: relative; }
+.card:hover::after { opacity: 1; }
+
+/* --- 4. buttons with mass ----------------------------------------- */
+.button {
+  min-height: 52px;
+  padding: 0 22px;
+  border-radius: 7px;
+  border-width: 1px;
+  letter-spacing: 0.02em;
+  box-shadow: 0 1px 0 var(--rim) inset, var(--cast-1);
+  transition:
+    transform 220ms var(--ease-out),
+    box-shadow 220ms var(--ease-out),
+    border-color 200ms ease,
+    background 200ms ease,
+    color 200ms ease;
+}
+.button:hover, .button:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 1px 0 var(--rim-strong) inset, var(--cast-2);
+}
+.button:active { transform: translateY(0); box-shadow: 0 1px 0 var(--rim) inset, var(--cast-1); }
+.button-primary {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.28) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.18) inset,
+    var(--cast-2);
+}
+
+/* --- 5. the field: deliberately NOT framed ------------------------ */
+/* I built an instrument frame here — rim, recessed well, corner ticks —
+   and then removed it. The canvas composites with mix-blend-mode:
+   screen, and screen(x, 0) = x, so it is only correct over pure black.
+   Any panel background or glow behind it gets added into every pixel of
+   the field and washes the contrast out. The existing rule setting
+   `border: 0; background: transparent; box-shadow: none` is load-
+   bearing, not an oversight. Leave the substrate black.
+   Only the tracking on the hint survives. */
+.field-hint { letter-spacing: 0.08em; }
+
+/* --- 6. section separators with weight ---------------------------- */
+.method-band, .evidence-band, .now-band {
+  box-shadow: 0 1px 0 var(--rim) inset;
+}
+.contact-band { border-top-width: 2px; }
+
+/* --- 7. The Standard ---------------------------------------------- */
+/* Seven rules, each carrying the incident that produced it. Set as a
+   ledger rather than a feature grid: the rule is the claim, the cost
+   line is the evidence, and the evidence is what makes it worth
+   reading. The orange bar is the only place on the page where a colour
+   marks a whole block, because this is the section that should stop a
+   skim. */
+.standard-band {
+  position: relative;
+  padding-top: clamp(64px, 8vw, 104px);
+  padding-bottom: clamp(64px, 8vw, 104px);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background:
+    radial-gradient(90% 60% at 50% 0%, rgba(244, 124, 69, 0.045), transparent 65%),
+    var(--ink);
+  box-shadow: 0 1px 0 var(--rim) inset;
+}
+
+.standard-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: end;
+  margin-bottom: clamp(40px, 5vw, 68px);
+}
+.standard-head h2 { max-width: 15ch; }
+.standard-intro {
+  margin: 0 0 0.35rem;
+  max-width: 46ch;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-wrap: pretty;
+}
+
+.standard-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: var(--line);          /* the 1px gap becomes hairlines */
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 0 var(--rim) inset, var(--cast-2);
+}
+
+.rule {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1.1rem;
+  padding: 1.6rem 1.7rem 1.75rem;
+  background: var(--surface);
+  transition: background 260ms ease;
+}
+.rule:hover { background: var(--surface-2); }
+
+.rule-no {
+  font: 500 0.72rem var(--mono);
+  letter-spacing: 0.1em;
+  color: var(--orange);
+  padding-top: 0.28rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.rule-body h3 {
+  margin: 0 0 0.55rem;
+  font-size: 1.06rem;
+  line-height: 1.3;
+  letter-spacing: -0.004em;
+  color: var(--cream);
+}
+.rule-body p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+.rule-cost {
+  margin-top: 0.9rem !important;
+  padding-left: 0.85rem;
+  border-left: 2px solid var(--orange-deep);
+  color: var(--dim) !important;
+  font-size: 13px !important;
+  line-height: 1.65 !important;
+}
+.rule-cost span {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--orange);
+  font: 500 0.68rem var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.rule-cost code {
+  font-family: var(--mono);
+  font-size: 0.92em;
+  color: var(--cream);
+  background: rgba(7, 9, 8, 0.6);
+  padding: 0.05em 0.35em;
+  border-radius: 3px;
+}
+
+.standard-foot {
+  max-width: 68ch;
+  margin: clamp(28px, 3.5vw, 44px) auto 0;
+  color: var(--dim);
+  font-size: 14px;
+  line-height: 1.75;
+  text-align: center;
+  text-wrap: pretty;
+}
+
+@media (max-width: 900px) {
+  .standard-head { grid-template-columns: 1fr; align-items: start; }
+  .standard-head h2 { max-width: none; }
+  .standard-list { grid-template-columns: 1fr; }
+  .rule { padding: 1.35rem 1.25rem 1.5rem; }
+}
+
+/* --- 8. reduced motion opt-out for the new depth ------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .card.is-tilting { transform: none; }
+  .card::after { display: none; }
+  .scroll-progress { display: none; }
+}
+
+/* --- 9. current section in the nav -------------------------------- */
+.site-nav a.is-current { color: var(--cream); }
+.site-nav a.is-current::after { transform: scaleX(1); background: var(--teal); }
+
+/* --- 10. bands lifted off the page -------------------------------- */
+/* Full-bleed bands previously differed from the page only by a 1px
+   border. A lit top edge plus a faint inner floor reads as a slab. */
+.evidence-band, .now-band {
+  box-shadow:
+    0 1px 0 var(--rim) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.5) inset;
+}
+.evidence-item {
+  border-radius: 7px;
+  padding: 0.55rem 0.75rem;
+  margin: -0.55rem -0.15rem;
+  transition: background 200ms ease, transform 200ms var(--ease-out), color 200ms ease;
+}
+.evidence-item:hover, .evidence-item:focus-visible {
+  background: rgba(115, 215, 195, 0.06);
+}
+.now-band a {
+  text-decoration-color: var(--orange);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color 180ms ease;
+}
+.now-band a:hover { color: var(--orange); }
+
+/* --- 11. the wordmark reacts on hover ----------------------------- */
+.wordmark-mark { transition: transform 420ms var(--ease-out); }
+.wordmark:hover .wordmark-mark { transform: rotate(-8deg) scale(1.06); }
+
+/* --- 12. skip link must outrank the sticky header ----------------- */
+/* The header went to z-index 20 in this pass. The skip link was at 5,
+   so keyboard users would have focused an invisible control sitting
+   behind it. It also needs to be fixed rather than absolute now that
+   the header no longer scrolls away. */
+.skip-link {
+  position: fixed;
+  z-index: 40;
+  border-radius: 0 0 7px 0;
+  font-weight: 700;
+  box-shadow: var(--cast-2);
+}

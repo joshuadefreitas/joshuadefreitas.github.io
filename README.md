@@ -1,6 +1,6 @@
 # Joshua de Freitas | Personal site
 
-The public portfolio of [Joshua de Freitas](https://github.com/joshuadefreitas), Senior Data Engineer at EY Wavespace in Madrid.
+The public portfolio of [Joshua de Freitas](https://github.com/joshuadefreitas), senior data engineer in Madrid.
 
 **Live site:** [joshuadefreitas.github.io](https://joshuadefreitas.github.io)
 
