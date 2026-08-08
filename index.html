@@ -22,7 +22,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=16" />
+    <link rel="stylesheet" href="styles.css?v=17" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -75,6 +75,15 @@
             <span class="field-seed">seed <b id="field-seed">—</b> · deterministic · <span id="field-step">0</span> steps</span>
           </figcaption>
           <span class="field-hint" aria-hidden="true"><b id="field-project">Ghalvera engine</b> · move the cursor</span>
+          <div class="field-controls">
+            <button type="button" id="field-replay" title="Re-run this simulation from step zero with the same seed">
+              <span aria-hidden="true">↻</span> replay
+            </button>
+            <button type="button" id="field-newseed" title="Run a different seed">
+              <span aria-hidden="true">⇄</span> new seed
+            </button>
+            <span class="field-claim">same seed &rarr; same run, every time</span>
+          </div>
         </figure>
       </section>
 
@@ -330,7 +339,13 @@
 
         const W = canvas.width, H = canvas.height, N = W * H;
         const today = new Date();
-        const SEED = today.getUTCFullYear() * 10000 + (today.getUTCMonth() + 1) * 100 + today.getUTCDate();
+        /* The seed is the whole point, so let the visitor test it: replay
+           re-runs the identical sequence from step zero, and a new seed gives a
+           different-but-equally-reproducible one. A claim you can check in five
+           seconds beats a claim you have to believe. */
+        let SEED = today.getUTCFullYear() * 10000 + (today.getUTCMonth() + 1) * 100 + today.getUTCDate();
+        const url = new URLSearchParams(location.search);
+        if (url.has("seed")) { const v = parseInt(url.get("seed"), 10); if (Number.isFinite(v)) SEED = v >>> 0; }
         seedOut.textContent = String(SEED);
 
         function prng(seed) {
@@ -626,6 +641,28 @@
           stepOut.textContent = String(steps);
           bar.style.width = nextSim ? "100%" : ((now - lastSwap) / DWELL * 100).toFixed(1) + "%";
         }
+
+        function restart(newSeed) {
+          if (newSeed !== undefined) { SEED = newSeed >>> 0; seedOut.textContent = String(SEED); }
+          nextSim = null;
+          cur = builders[curIdx]();
+          warm(cur);
+          label(cur);
+          steps = 0;
+          lastSwap = performance.now();
+          cur.paint();
+          ctx.putImageData(img, 0, 0);
+          stepOut.textContent = "0";
+        }
+
+        const replayBtn = document.getElementById("field-replay");
+        const seedBtn = document.getElementById("field-newseed");
+        if (replayBtn) replayBtn.addEventListener("click", () => restart());
+        if (seedBtn) seedBtn.addEventListener("click", () => {
+          // Deterministic even in how it picks the next seed: derived from the
+          // current one, so the sequence of seeds is itself reproducible.
+          restart((SEED * 1103515245 + 12345) >>> 8);
+        });
 
         if (!reduce.matches) requestAnimationFrame(frame);
         else { bar.style.width = "100%"; }
