@@ -1,6 +1,6 @@
 # Joshua de Freitas | Personal site
 
-The public portfolio of [Joshua de Freitas](https://github.com/joshuadefreitas), senior data engineer in Madrid.
+The public portfolio of [Joshua de Freitas](https://github.com/joshuadefreitas), senior data engineer at EY in Madrid.
 
 **Live site:** [joshuadefreitas.github.io](https://joshuadefreitas.github.io)
 
@@ -56,6 +56,7 @@ The site also links to the [full public repository list](https://github.com/josh
 - `assets/social-card.svg` / `.jpg` — editable source and rendered social preview
 - `assets/fonts/` — self-hosted OFL fonts and their licence texts
 - `tests/site-contract.test.mjs` — dependency-free checks for the site's central contracts
+- `.github/workflows/site-contract.yml` — runs those contracts on every push and pull request
 
 ## Local preview
 
@@ -73,11 +74,11 @@ Requires Node.js 22 or newer. No package installation is needed.
 
 | Command | Purpose |
 | --- | --- |
-| `npm test` | Compile inline scripts and check navigation, metadata, local assets, accessibility state, claim boundaries, asset budgets, and the DeepLOB study link. |
+| `npm test` | Compile inline scripts and check navigation, metadata, local assets, theme contrast, accessibility state, claim boundaries, asset budgets, employment framing, and the DeepLOB study link. |
 | `npm run check` | Alias for the full dependency-free check. |
 
-These checks enforce structural and evidence contracts. Theme quality, responsive composition, focus behavior, motion, and console output still require browser verification before publication.
+The same suite runs in GitHub Actions on every push and pull request. These checks enforce structural and evidence contracts. Theme quality, responsive composition, focus behavior, motion, and console output still require browser verification before publication.
 
 ## Content policy
 
-The site links only to public repositories and describes technical interests at a high level. It does not publish employer, client, or confidential project details. Fonts and imagery are self-hosted; the page contains no analytics or tracking scripts.
+The site identifies EY as the current employer, but every linked project is personal, publicly released work and the page is not a solicitation for employment or consulting. It does not publish employer, client, or confidential project details. Fonts and imagery are self-hosted; the page contains no analytics or tracking scripts.

@@ -84,12 +84,14 @@
   --ink-2: #494d54;
   --ink-3: #676c74;
 
-  --line: #e4e6ea;
-  --line-2: #cfd3d9;
-  --line-3: #b3b8c0;
+  --line: #cfd4db;
+  --line-2: #aeb5bf;
+  --line-3: #858d98;
+  --silver-edge: #aab1bb;
+  --silver-glint: rgba(255, 255, 255, 0.78);
 
   --sheen: linear-gradient(100deg, #c3c8cf 0%, #f4f5f7 20%, #adb3bb 46%, #eceef1 70%, #bcc1c9 100%);
-  --sheen-hair: linear-gradient(90deg, transparent 0%, #cfd3d9 12%, #9ca2ab 50%, #cfd3d9 88%, transparent 100%);
+  --sheen-hair: linear-gradient(90deg, transparent 0%, #c8cdd4 10%, #9da5af 34%, #eef0f3 50%, #969faa 66%, #cbd0d6 90%, transparent 100%);
 
   --on-accent: #fafafb;
   --accent: #17191d;
@@ -97,7 +99,8 @@
   --field-blend: multiply;
   --field-opacity: 0.62;
   --notation-blend: multiply;
-  --notation-opacity: 0.42;
+  --notation-ink: #272a2f;
+  --notation-opacity: 0.47;
   --plate-image: grayscale(1) contrast(1.04);
   --study-image: grayscale(1) invert(1) contrast(0.96);
 
@@ -105,18 +108,18 @@
      dark theme redefines them below, because a page that is already dark
      cannot go darker to signal "different". */
   /* Section grounds. Faint enough to read as paper rather than pattern. */
-  --hair: rgba(18, 20, 23, 0.055);
-  --sheen-soft: rgba(18, 20, 23, 0.05);
-  --contour-opacity: 0.5;
+  --hair: rgba(18, 20, 23, 0.07);
+  --sheen-soft: rgba(18, 20, 23, 0.06);
+  --contour-opacity: 0.72;
 
   --raised: #f0f1f4;
   --invert-bg: #101114;
   --invert-ink: #f4f5f7;
   --invert-ink-2: #b9bec6;
   --invert-ink-3: #8b9199;
-  --invert-line: #26282d;
-  --invert-line-2: #383b42;
-  --invert-line-3: #4d515a;
+  --invert-line: #393d44;
+  --invert-line-2: #555b64;
+  --invert-line-3: #757d88;
 }
 
 /* -- dark ----------------------------------------------------------------- */
@@ -132,12 +135,14 @@
   --ink-2: #a7acb4;
   --ink-3: #83888f;
 
-  --line: #23252a;
-  --line-2: #33363c;
-  --line-3: #474b53;
+  --line: #353941;
+  --line-2: #505660;
+  --line-3: #737b87;
+  --silver-edge: #737b86;
+  --silver-glint: rgba(255, 255, 255, 0.11);
 
   --sheen: linear-gradient(100deg, #565b63 0%, #aab0b9 20%, #6a7079 46%, #c1c7cf 70%, #616770 100%);
-  --sheen-hair: linear-gradient(90deg, transparent 0%, #33363c 12%, #7a8089 50%, #33363c 88%, transparent 100%);
+  --sheen-hair: linear-gradient(90deg, transparent 0%, #3b4048 10%, #858d98 34%, #c8cdd4 50%, #777f8a 66%, #3e434b 90%, transparent 100%);
 
   --on-accent: #0c0d0f;
   --accent: #e6e8eb;
@@ -145,22 +150,23 @@
   --field-blend: screen;
   --field-opacity: 0.72;
   --notation-blend: screen;
+  --notation-ink: var(--ink-2);
   --notation-opacity: 0.38;
   --plate-image: grayscale(1) contrast(1.02) brightness(0.96);
   --study-image: grayscale(1) contrast(1.05);
 
-  --hair: rgba(237, 238, 241, 0.05);
-  --sheen-soft: rgba(237, 238, 241, 0.045);
-  --contour-opacity: 0.42;
+  --hair: rgba(237, 238, 241, 0.065);
+  --sheen-soft: rgba(237, 238, 241, 0.055);
+  --contour-opacity: 0.62;
 
   --raised: #131418;
   --invert-bg: #16181c;
   --invert-ink: #f2f3f5;
   --invert-ink-2: #aeb3bb;
   --invert-ink-3: #888d95;
-  --invert-line: #2b2e34;
-  --invert-line-2: #3c4047;
-  --invert-line-3: #51555e;
+  --invert-line: #393d44;
+  --invert-line-2: #555b64;
+  --invert-line-3: #757d88;
 }
 
 /* ============================================================================
@@ -656,8 +662,9 @@ code {
   left: 50%;
   z-index: 3;
   width: min(var(--shell), calc(100% - (var(--gutter) * 2)));
-  height: 1px;
+  height: 2px;
   background: var(--sheen-hair);
+  opacity: 0.82;
   transform: translateX(-50%);
   content: "";
 }
@@ -679,6 +686,7 @@ code {
   --accent: var(--invert-ink);
   --on-accent: var(--invert-bg);
   --notation-blend: screen;
+  --notation-ink: var(--ink-2);
   --notation-opacity: 0.40;
 }
 .section-invert::before { background: none; }
@@ -737,13 +745,15 @@ code {
   animation-duration: 64s;
 }
 
-/* About — contour bands from a turbulence field. Static geometry, drifting
-   slowly; the only image on the page that is generated rather than drawn. */
+/* About — thin topographic rings from crossed centres. The field keeps its
+   geometry irregular without placing solid tone beneath long-form copy. */
 .ground-contour::after {
   opacity: var(--contour-opacity);
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%271100%27%20height%3D%27760%27%3E%3Cfilter%20id%3D%27c%27%20x%3D%27-20%25%27%20y%3D%27-20%25%27%20width%3D%27140%25%27%20height%3D%27140%25%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.0042%200.0065%27%20numOctaves%3D%272%27%20seed%3D%2731%27%20stitchTiles%3D%27stitch%27%20result%3D%27n%27%2F%3E%3CfeColorMatrix%20in%3D%27n%27%20type%3D%27matrix%27%20values%3D%270%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200.5%200.5%200.5%200%200%27%20result%3D%27l%27%2F%3E%3CfeComponentTransfer%20in%3D%27l%27%20result%3D%27b%27%3E%3CfeFuncA%20type%3D%27discrete%27%20tableValues%3D%270%200%200%200.5%200%200%200%200.5%200%200%27%2F%3E%3C%2FfeComponentTransfer%3E%3CfeFlood%20flood-color%3D%27%238b9199%27%20result%3D%27f%27%2F%3E%3CfeComposite%20in%3D%27f%27%20in2%3D%27b%27%20operator%3D%27in%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url%28%23c%29%27%2F%3E%3C%2Fsvg%3E");
-  background-size: 1100px 760px;
-  background-repeat: repeat;
+  background-image:
+    repeating-radial-gradient(ellipse at 78% 28%, transparent 0 58px, var(--hair) 59px 60px, transparent 61px 96px),
+    repeating-radial-gradient(ellipse at 24% 76%, transparent 0 74px, var(--hair) 75px 76px, transparent 77px 122px);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
   -webkit-mask-image: linear-gradient(100deg, transparent 6%, #000 46%, #000 72%, transparent 96%);
   mask-image: linear-gradient(100deg, transparent 6%, #000 46%, #000 72%, transparent 96%);
   animation-duration: 120s;
@@ -769,7 +779,7 @@ code {
   inset: -7% -5%;
   z-index: 1;
   overflow: hidden;
-  color: var(--ink-2);
+  color: var(--notation-ink);
   opacity: var(--notation-opacity);
   mix-blend-mode: var(--notation-blend);
   pointer-events: none;
@@ -851,7 +861,7 @@ code {
 .section-head {
   margin-bottom: clamp(44px, 5vw, 68px);
   padding-top: 22px;
-  border-top: 1px solid var(--line-2);
+  border-top: 1.5px solid var(--line-2);
 }
 .section-head h2 { margin-bottom: 18px; }
 
@@ -893,13 +903,22 @@ code {
 }
 
 .card {
+  position: relative;
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--line);
+  border: 1.5px solid var(--line-2);
   background: var(--surface);
-  transition: border-color 260ms var(--ease), background-color 260ms var(--ease);
+  box-shadow:
+    inset 0 1px 0 var(--silver-glint),
+    0 0 0 0.5px color-mix(in srgb, var(--silver-edge) 24%, transparent);
+  transition: border-color 260ms var(--ease), background-color 260ms var(--ease), box-shadow 260ms var(--ease);
 }
-.card:hover { border-color: var(--line-2); }
+.card:hover {
+  border-color: var(--line-3);
+  box-shadow:
+    inset 0 1px 0 var(--silver-glint),
+    0 0 0 0.5px color-mix(in srgb, var(--silver-edge) 48%, transparent);
+}
 
 .card-visual {
   position: relative;
@@ -908,7 +927,7 @@ code {
   margin: 0;
   overflow: hidden;
   padding: 18px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1.5px solid var(--line-2);
   background: var(--plate);
 }
 .card-visual img {
@@ -1125,7 +1144,7 @@ code {
   margin: 0;
   padding: 14px 62px 14px 16px;
   overflow-x: auto;
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-2);
   background: var(--surface-2);
   font-family: var(--mono);
   font-size: 12.5px;
@@ -1190,7 +1209,7 @@ code {
   grid-template-columns: 34px minmax(0, 1fr);
   gap: 0 8px;
   padding-top: 18px;
-  border-top: 1px solid var(--line-2);
+  border-top: 1.5px solid var(--line-2);
 }
 .principle-no {
   color: var(--ink-3);
@@ -1214,125 +1233,6 @@ code {
   line-height: 1.65;
 }
 
-.rules {
-  margin: 0;
-  border-top: 1px solid var(--line-2);
-  border-bottom: 1px solid var(--line-2);
-}
-.rules-summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  padding: 24px 0;
-  cursor: pointer;
-  list-style: none;
-}
-.rules-summary::-webkit-details-marker { display: none; }
-.rules-summary .rail-label {
-  display: block;
-  margin-bottom: 7px;
-}
-.rules-summary strong {
-  display: block;
-  color: var(--ink);
-  font-family: var(--serif);
-  font-size: clamp(22px, 2.4vw, 28px);
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1.15;
-}
-.rules-summary-action {
-  flex: 0 0 auto;
-  color: var(--ink-3);
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-}
-.rules-action-close { display: none; }
-.rules[open] .rules-action-open { display: none; }
-.rules[open] .rules-action-close { display: inline; }
-.rules-summary-action i {
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  margin: 0 3px 3px 10px;
-  border-right: 1px solid currentColor;
-  border-bottom: 1px solid currentColor;
-  transform: rotate(45deg);
-  transition: transform 220ms var(--ease);
-}
-.rules[open] .rules-summary-action i { transform: translateY(4px) rotate(225deg); }
-.rules-content { padding: 10px 0 32px; }
-.rules-head {
-  margin-bottom: 8px;
-  padding-bottom: 22px;
-  border-bottom: 1px solid var(--line);
-}
-.rules-head p {
-  max-width: 40em;
-  color: var(--ink-2);
-  font-size: 15px;
-  line-height: 1.7;
-}
-
-.rule-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.rule {
-  display: grid;
-  grid-template-columns: 56px minmax(0, 1fr);
-  gap: 0 8px;
-  padding: 28px 0;
-  border-bottom: 1px solid var(--line);
-}
-.rule-no {
-  padding-top: 5px;
-  color: var(--ink-3);
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-}
-.rule-body h3 {
-  margin-bottom: 10px;
-  font-family: var(--serif);
-  font-size: 21px;
-  font-weight: 400;
-}
-.rule-body > p {
-  max-width: 44em;
-  margin: 0;
-  color: var(--ink-2);
-  font-size: 15px;
-  line-height: 1.7;
-  text-wrap: pretty;
-}
-.rule-body > .rule-cost {
-  max-width: 44em;
-  margin-top: 12px;
-  color: var(--ink-3);
-  font-size: 14px;
-}
-.rule-cost span {
-  margin-right: 10px;
-  color: var(--ink);
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.rules-foot {
-  max-width: 44em;
-  margin-top: 26px;
-  color: var(--ink-3);
-  font-size: 14px;
-  line-height: 1.7;
-}
-
 /* ============================================================================
    About
    ========================================================================= */
@@ -1345,6 +1245,14 @@ code {
   text-wrap: pretty;
 }
 .prose p + p { margin-top: 1.15em; }
+.prose .professional-boundary {
+  margin-top: 1.65em;
+  padding-top: 1.25em;
+  border-top: 1.5px solid var(--line-2);
+  color: var(--ink-3);
+  font-size: 14px;
+  line-height: 1.65;
+}
 
 .facts {
   display: grid;
@@ -1466,20 +1374,17 @@ code {
 
 @media (max-width: 560px) {
   body { font-size: 15.5px; }
-  .notation-field { inset-inline: -18%; opacity: 0.30; }
+  .notation-field { inset-inline: -18%; opacity: calc(var(--notation-opacity) * 0.78); }
   .notation-layer .notation-mark:nth-child(n + 7) { display: none; }
+  .ground-contour::after { display: none; }
   .card-visual { min-height: 148px; }
   .lob-study { top: 43px; right: 16px; bottom: 29px; left: 16px; gap: 9px; }
   .lob-protocol-label { font-size: 7.8px; }
   .lob-boundary span { font-size: 7px; }
-  .rule { grid-template-columns: minmax(0, 1fr); gap: 8px; }
-  .rule-no { padding-top: 0; }
   .principle { grid-template-columns: minmax(0, 1fr); gap: 6px; }
   .field-controls { margin-left: 0; }
   .hero-inner .button-primary { flex: 1 1 100%; }
   .hero-inner .button-secondary { flex: 1 1 calc(50% - 5px); }
-  .rules-summary-action { font-size: 0; }
-  .rules-summary-action span { font-size: 10px; }
 }
 
 @media (max-width: 380px) {

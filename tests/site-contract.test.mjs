@@ -8,9 +8,36 @@ import test from "node:test";
 const root = fileURLToPath(new URL("..", import.meta.url));
 const html = readFileSync(path.join(root, "index.html"), "utf8");
 const css = readFileSync(path.join(root, "styles.css"), "utf8");
+const workflowPath = path.join(root, ".github/workflows/site-contract.yml");
+const workflow = existsSync(workflowPath) ? readFileSync(workflowPath, "utf8") : "";
 
 function localPath(relativePath) {
   return path.join(root, relativePath.replace(/[?#].*$/, ""));
+}
+
+function themeToken(theme, name) {
+  const selector = theme === "light"
+    ? /:root,\s*\[data-theme="light"\]\s*\{([\s\S]*?)\n\}/
+    : /\[data-theme="dark"\]\s*\{([\s\S]*?)\n\}/;
+  const block = css.match(selector)?.[1];
+  assert.ok(block, `missing ${theme} theme block`);
+  const value = block.match(new RegExp(`--${name}:\\s*(#[0-9a-f]{6})`, "i"))?.[1];
+  assert.ok(value, `missing hexadecimal --${name} token in ${theme} theme`);
+  return value;
+}
+
+function relativeLuminance(hex) {
+  const channels = hex.match(/[0-9a-f]{2}/gi).map((value) => parseInt(value, 16) / 255);
+  const linear = channels.map((value) => (
+    value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4
+  ));
+  return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2];
+}
+
+function contrastRatio(a, b) {
+  const light = Math.max(relativeLuminance(a), relativeLuminance(b));
+  const dark = Math.min(relativeLuminance(a), relativeLuminance(b));
+  return (light + 0.05) / (dark + 0.05);
 }
 
 test("inline scripts are syntactically valid", () => {
@@ -19,6 +46,36 @@ test("inline scripts are syntactically valid", () => {
   scripts.forEach((match, index) => {
     assert.doesNotThrow(() => new Function(match[1]), `inline script ${index + 1} must compile`);
   });
+});
+
+test("the production field generator preserves its seeded sequence", () => {
+  const match = html.match(/        function prng\(seed\) \{([\s\S]*?)\n        \}/);
+  assert.ok(match, "production PRNG must remain directly testable");
+  const source = `function prng(seed) {${match[1]}\n}`;
+  const prng = new Function(`${source}\nreturn prng;`)();
+  const actual = Array.from({ length: 8 }, prng(20260810));
+  assert.deepEqual(actual, [
+    0.5459702829830348,
+    0.8996801879256964,
+    0.47586432425305247,
+    0.29149732063524425,
+    0.7152024004608393,
+    0.4520007197279483,
+    0.17685140459798276,
+    0.44571845466271043
+  ]);
+  assert.deepEqual(actual, Array.from({ length: 8 }, prng(20260810)));
+  assert.notDeepEqual(actual, Array.from({ length: 8 }, prng(20260811)));
+  actual.forEach((value) => assert.ok(value >= 0 && value < 1));
+});
+
+test("the site contracts are enforced on pushes and pull requests", () => {
+  assert.ok(workflow, "the tracked GitHub Actions workflow is required");
+  assert.match(workflow, /push:/);
+  assert.match(workflow, /pull_request:/);
+  assert.match(workflow, /node-version: 22/);
+  assert.match(workflow, /run: npm test/);
+  assert.match(workflow, /permissions:\s*\n\s+contents: read/);
 });
 
 test("document ids are unique and navigation fragments resolve", () => {
@@ -86,6 +143,24 @@ test("fonts are self-hosted and transfer assets stay within their budgets", () =
   });
 });
 
+test("theme text remains readable and the structural edge scale stays deliberate", () => {
+  for (const theme of ["light", "dark"]) {
+    const paper = themeToken(theme, "paper");
+    assert.ok(contrastRatio(themeToken(theme, "ink"), paper) >= 12, `${theme} primary ink is too faint`);
+    assert.ok(contrastRatio(themeToken(theme, "ink-2"), paper) >= 7, `${theme} body ink is too faint`);
+    assert.ok(contrastRatio(themeToken(theme, "ink-3"), paper) >= 4.5, `${theme} muted ink is too faint`);
+    assert.ok(contrastRatio(themeToken(theme, "line"), paper) >= 1.25, `${theme} hairline is disappearing`);
+    assert.ok(contrastRatio(themeToken(theme, "line-2"), paper) >= 1.6, `${theme} component edge is too faint`);
+    assert.ok(contrastRatio(themeToken(theme, "line-3"), paper) >= 2.4, `${theme} active edge is too faint`);
+  }
+  assert.match(css, /--silver-edge: #[0-9a-f]{6}/i);
+  assert.match(css, /\.section \+ \.section::before\s*\{[\s\S]*?height: 2px/);
+  assert.match(css, /\.section-head\s*\{[\s\S]*?border-top: 1\.5px solid var\(--line-2\)/);
+  assert.match(css, /\.card\s*\{[\s\S]*?border: 1\.5px solid var\(--line-2\)/);
+  assert.match(css, /\.card-visual\s*\{[\s\S]*?border-bottom: 1\.5px solid var\(--line-2\)/);
+  assert.match(css, /--notation-ink: #272a2f/);
+});
+
 test("every project card carries its own claim boundary", () => {
   const cards = [...html.matchAll(/<article class="card">([\s\S]*?)<\/article>/g)].map((match) => match[1]);
   assert.equal(cards.length, 4, "selected work should remain a deliberate four-project set");
@@ -94,28 +169,53 @@ test("every project card carries its own claim boundary", () => {
   });
 });
 
+test("each study explains its mechanism before its specialist framing", () => {
+  assert.match(html, /Each active cell encourages its nearest neighbours and suppresses a wider ring around it/);
+  assert.match(html, /near-duplicates appear in both training and validation/);
+  assert.match(html, /which patterns come from the rule and which depend on numerical choices/);
+  assert.match(html, /how a flawed test can manufacture confidence/);
+});
+
+test("the personal-work boundary cannot read as a job or consulting solicitation", () => {
+  assert.match(html, /senior data engineer and AI practitioner based in Madrid, working at EY/i);
+  assert.doesNotMatch(html, /\bESG\b/);
+  assert.match(html, /personal, publicly released work and separate from\s+my role at\s+EY/i);
+  assert.match(html, /not a solicitation for employment or consulting/i);
+  assert.doesNotMatch(html, /available for consulting|permanent roles|outside client work|alongside client work/i);
+  assert.match(html, /Questions about the published work are welcome/);
+  assert.match(css, /\.professional-boundary\s*\{[\s\S]*?border-top: 1\.5px solid var\(--line-2\)/);
+});
+
 test("DeepLOB foregrounds the active leakage study rather than legacy results", () => {
   assert.match(html, /Random split[\s\S]*overlap 1\.00/);
   assert.match(html, /Purged \+ embargoed[\s\S]*overlap 0\.00/);
   assert.match(html, /when-overlapping-windows-invent-predictability\.md/);
   assert.doesNotMatch(html, /deeplob_paper\.pdf/);
-  assert.match(html, /Does not establish<\/span> tradability, model performance on real exchange data, or validated alpha/);
+  assert.match(html, /Does not establish<\/span> tradability, profit or a real market signal/);
 });
 
 test("the deterministic field exposes reproducible and accessible state", () => {
   assert.equal((html.match(/aria-pressed="(?:true|false)"/g) || []).length, 4);
   assert.doesNotMatch(html, /function orderBook\(|Show the order book|synthetic order book  → DeepLOB/);
   assert.match(html, /function waveField\(\)/);
-  assert.match(html, /function flowField\(\)/);
-  assert.match(html, /const builders = \[grayScott, neuralField, waveField, flowField\]/);
-  assert.match(html, /const flowX = new Float32Array\(N\), flowY = new Float32Array\(N\)/);
   assert.match(html, /const fieldAspect = Math\.min\(2\.4, Math\.max\(0\.42,/);
   assert.match(html, /const cellBudget = narrow \? 112000 : 196000/);
-  assert.match(html, /function deposit\(qx, qy, amount\)[\s\S]*?const px = Math\.floor\(qx\), py = Math\.floor\(qy\);[\s\S]*?const fx = qx - px, fy = qy - py/);
-  assert.match(html, /const samples = Math\.max\(1, Math\.ceil\(Math\.max\(Math\.abs\(dx\), Math\.abs\(dy\)\)\)\)/);
-  assert.match(html, /trail\[row \+ x2L\] \+ 4 \* trail\[row \+ xL\] \+ 6 \* trail\[row \+ x\][\s\S]*?\+ 4 \* trail\[row \+ xR\] \+ trail\[row \+ x2R\]/);
-  assert.match(html, /flowX\[y2U \+ x\] \+ 4 \* flowX\[yU \+ x\] \+ 6 \* flowX\[i\][\s\S]*?\+ 4 \* flowX\[yD \+ x\] \+ flowX\[y2D \+ x\]/);
-  assert.match(html, /const v = 1 - Math\.exp\(-flowY\[i\] \* 1\.65\)/);
+  assert.match(html, /function levelSetField\(\)/);
+  assert.match(html, /const phaseSinA = new Float32Array\(N\)/);
+  assert.match(html, /const phaseCosB = new Float32Array\(N\)/);
+  assert.match(html, /const rowsPerWarmStep = Math\.ceil\(H \/ warm\)/);
+  assert.match(html, /const builders = \[grayScott, neuralField, waveField, levelSetField\]/);
+  assert.doesNotMatch(html, /function flowField\(\)|const trail = new Float32Array\(N\)|Math\.exp\(-flowY/);
+  assert.match(html, /const sources = \[/);
+  assert.match(html, /const rowsPerWarmStep = Math\.ceil\(H \/ warm\)/);
+  assert.match(html, /Math\.sqrt\(dx \* dx \+ dy \* dy\) \* source\.frequency/);
+  assert.match(html, /if \(builtRows < H\) return/);
+  assert.match(html, /INVERT \? 0\.56 : 0\.48/);
+  assert.match(html, /Math\.abs\(contourA\) \/ 0\.18/);
+  assert.match(html, /Math\.abs\(contourB\) \/ 0\.14/);
+  assert.match(html, /ridgeA = ridgeA \* ridgeA \* \(3 - 2 \* ridgeA\)/);
+  assert.match(html, /INVERT \? 0\.66 : 0\.56/);
+  assert.match(html, /name: "Level-set topology", warm, perStep: 1, tickMs: 80/);
   assert.match(html, /nextSim && !fading && \(!nextSim\.pending \|\| prime\(nextSim, PRIME_MS, false\)\)/);
   assert.match(html, /Math\.imul\(SEED, 1664525\) \+ 1013904223/);
   assert.match(html, /const seedParam = url\.get\("seed"\);[\s\S]*?Number\.isSafeInteger\(parsedSeed\)/);
@@ -147,10 +247,10 @@ test("the below-hero manuscript field is original, nonlinear, and motion-safe", 
   assert.match(html, /assert overlap === 0/);
   assert.doesNotMatch(html + css, /shutterstock|<video\b/i);
   assert.match(css, /\.notation-field[\s\S]*?pointer-events: none/);
-  assert.match(css, /--notation-opacity: 0\.42/);
+  assert.match(css, /--notation-opacity: 0\.47/);
   assert.match(css, /\[data-theme="dark"\][\s\S]*?--notation-opacity: 0\.38/);
-  assert.match(css, /@media \(max-width: 560px\)[\s\S]*?\.notation-field \{ inset-inline: -18%; opacity: 0\.30; \}/);
-  assert.match(css, /\.notation-field[\s\S]*?color: var\(--ink-2\)/);
+  assert.match(css, /@media \(max-width: 560px\)[\s\S]*?\.notation-field \{ inset-inline: -18%; opacity: calc\(var\(--notation-opacity\) \* 0\.78\); \}/);
+  assert.match(css, /\.notation-field\s*\{[\s\S]*?color: var\(--notation-ink\)/);
   assert.match(html, /const KEYFRAME_COUNT = 25/);
   assert.match(html, /function makeDriftPath\(rand, depth, handedness\)/);
   assert.match(html, /Math\.cos\(t \+ phase\)[\s\S]*?Math\.sin\(2 \* t \+ twist\)[\s\S]*?Math\.cos\(3 \* t - twist\)/);
@@ -165,10 +265,12 @@ test("the below-hero manuscript field is original, nonlinear, and motion-safe", 
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.notation-field \{ display: none; \}/);
 });
 
-test("the operating standard remains complete but does not dominate the default page", () => {
-  assert.match(html, /<details class="rules">/);
-  const ruleNumbers = [...html.matchAll(/class="rule-no">(\d{2})</g)].map((match) => match[1]);
-  assert.deepEqual(ruleNumbers, ["01", "02", "03", "04", "05", "06", "07"]);
+test("the practice section stays concise, personal and operational", () => {
+  assert.equal((html.match(/class="principle"/g) || []).length, 3);
+  assert.match(html, /A polished answer to the wrong question is still wrong/);
+  assert.match(html, /Clever is useful; legible is better/);
+  assert.match(html, /without its author in the room/);
+  assert.doesNotMatch(html, /<details class="rules">|class="rule-no"|Seven rules|Operating standard/);
 });
 
 test("the page has one primary heading and no third-party analytics", () => {
