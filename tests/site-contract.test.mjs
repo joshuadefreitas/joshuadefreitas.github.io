@@ -199,31 +199,43 @@ test("the deterministic field exposes reproducible and accessible state", () => 
   assert.doesNotMatch(html, /function orderBook\(|Show the order book|synthetic order book  → DeepLOB/);
   assert.match(html, /function waveField\(\)/);
   assert.match(html, /const fieldAspect = Math\.min\(2\.4, Math\.max\(0\.42,/);
-  assert.match(html, /const cellBudget = narrow \? 112000 : 196000/);
-  assert.match(html, /function levelSetField\(\)/);
-  assert.match(html, /const phaseSinA = new Float32Array\(N\)/);
-  assert.match(html, /const phaseCosB = new Float32Array\(N\)/);
+  assert.match(html, /const cellBudget = narrow \? 150000 : 280000/);
+  assert.match(html, /function cliffordAttractor\(\)/);
+  assert.match(html, /const density = new Float32Array\(N\)/);
+  assert.match(html, /const particleCount = narrow \? 1800 : 3200/);
   assert.match(html, /const rowsPerWarmStep = Math\.ceil\(H \/ warm\)/);
-  assert.match(html, /const builders = \[grayScott, neuralField, waveField, levelSetField\]/);
+  assert.match(html, /const builders = \[grayScott, neuralField, waveField, cliffordAttractor\]/);
+  assert.doesNotMatch(html, /function levelSetField\(|Level-set topology|Hamiltonian/);
   assert.doesNotMatch(html, /function flowField\(\)|const trail = new Float32Array\(N\)|Math\.exp\(-flowY/);
   assert.match(html, /const sources = \[/);
   assert.match(html, /const rowsPerWarmStep = Math\.ceil\(H \/ warm\)/);
   assert.match(html, /Math\.sqrt\(dx \* dx \+ dy \* dy\) \* source\.frequency/);
   assert.match(html, /if \(builtRows < H\) return/);
-  assert.match(html, /INVERT \? 0\.56 : 0\.48/);
-  assert.match(html, /Math\.abs\(contourA\) \/ 0\.18/);
-  assert.match(html, /Math\.abs\(contourB\) \/ 0\.14/);
-  assert.match(html, /ridgeA = ridgeA \* ridgeA \* \(3 - 2 \* ridgeA\)/);
-  assert.match(html, /INVERT \? 0\.66 : 0\.56/);
-  assert.match(html, /name: "Level-set topology", warm, perStep: 1, tickMs: 80/);
+  assert.match(html, /INVERT \? 0\.64 : 0\.56/);
+  assert.match(html, /name: "Clifford attractor", warm: 46, perStep: 1, tickMs: 50/);
+  assert.match(html, /name: "Gray–Scott", warm: 140, perStep: 2, tickMs: 65/);
+  assert.match(html, /const batch = Math\.min\(sim\.perStep, sim\.pending\)/);
+  assert.match(html, /nextSim && n === nextIdx[\s\S]*?1 - nextSim\.pending \/ nextSim\.warm/);
+  assert.doesNotMatch(html, /if \(nextSim\) return/);
+  assert.match(html, /const waveCurve = curveLut\(1\.32\)/);
+  assert.match(html, /const attractorCurve = curveLut\(0\.62\)/);
+  assert.doesNotMatch(html, /Math\.pow\(v, (?:1\.32|0\.62)\)/);
+  assert.match(html, /const x = Math\.round\(cx \* internalScale\), y = Math\.round\(cy \* internalScale\)/);
   assert.match(html, /nextSim && !fading && \(!nextSim\.pending \|\| prime\(nextSim, PRIME_MS, false\)\)/);
   assert.match(html, /Math\.imul\(SEED, 1664525\) \+ 1013904223/);
   assert.match(html, /const seedParam = url\.get\("seed"\);[\s\S]*?Number\.isSafeInteger\(parsedSeed\)/);
   assert.match(html, /if \(reduce\.matches\) segs\.forEach\(\(s, n\) =>[\s\S]*?n === curIdx \? "1" : "0"/);
   assert.match(html, /setAttribute\("aria-pressed", String\(active\)\)/);
   assert.match(html, /history\.replaceState/);
-  assert.doesNotMatch(html, /class="field-note" aria-live=/);
-  assert.match(html, /<span aria-live="polite">[\s\S]*?id="field-context"[\s\S]*?id="field-seed"[\s\S]*?<\/span>/);
+  assert.doesNotMatch(html, /Shared daily seed|Shareable seed|field-context/);
+  assert.match(html, /<form class="field-seed-editor" id="field-seed-form">[\s\S]*?id="field-seed-input"[\s\S]*?id="field-apply-seed"/);
+  for (const label of ["Gray–Scott", "Neural field", "Wave interference", "Clifford attractor"]) {
+    assert.match(html, new RegExp(`<button[^>]+data-sim="[0-3]"[^>]*>[\\s\\S]*?<span>${label}</span>`));
+  }
+  assert.match(html, /seedForm\.addEventListener\("submit"/);
+  assert.match(html, /seedInput\.setCustomValidity/);
+  assert.doesNotMatch(html, /class="field-readout"[^>]*aria-live/);
+  assert.match(html, /id="field-name" aria-live="polite"/);
   assert.match(html, /document\.addEventListener\("visibilitychange"/);
   assert.doesNotMatch(html, /const W = narrow \? 360 : 560/);
   assert.match(html, /requestIdleCallback\(heroField/);
@@ -231,7 +243,9 @@ test("the deterministic field exposes reproducible and accessible state", () => 
   assert.match(html, /media="\(prefers-reduced-motion: reduce\)" srcset="assets\/trace-npm-demo-still\.webp"/);
   assert.match(css, /:where\(main\[id\], section\[id\]\) \{ scroll-margin-top: var\(--anchor-offset\); \}/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
-  assert.match(css, /@media \(max-width: 380px\)[\s\S]*?\.field-segments \{ flex: 1 1 100%;/);
+  assert.match(css, /\.field-segments button\s*\{[\s\S]*?min-width:/);
+  assert.match(css, /\.field-segments button:focus-visible\s*\{[\s\S]*?outline: 1px solid var\(--ink-2\)/);
+  assert.match(css, /@media \(max-width: 560px\)[\s\S]*?\.field-segments \{[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/);
 });
 
 test("the below-hero manuscript field is original, nonlinear, and motion-safe", () => {

@@ -59,7 +59,7 @@
     <link rel="preload" href="assets/fonts/newsreader-display-300.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="assets/fonts/newsreader-text-300.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="styles.css?v=36" />
+    <link rel="stylesheet" href="styles.css?v=37" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -123,24 +123,25 @@
         </div>
 
         <div class="shell hero-meta">
-          <span class="field-name" id="field-name">Gray–Scott</span>
-          <span class="field-note">
-            <span aria-live="polite">
-              <span id="field-context">Shared daily seed</span>
-              <b id="field-seed">—</b>
-            </span>
-            · <span id="field-step">0</span> steps · deterministic replay
-          </span>
-          <span class="field-controls">
-            <span class="field-segments" id="field-segments" role="group" aria-label="Simulation">
-              <button type="button" data-sim="0" aria-label="Show the Gray–Scott field" aria-pressed="true"><i></i></button>
-              <button type="button" data-sim="1" aria-label="Show the neural field" aria-pressed="false"><i></i></button>
-              <button type="button" data-sim="2" aria-label="Show the wave interference field" aria-pressed="false"><i></i></button>
-              <button type="button" data-sim="3" aria-label="Show the level-set topology field" aria-pressed="false"><i></i></button>
-            </span>
+          <div class="field-readout">
+            <span class="field-name" id="field-name" aria-live="polite">Gray–Scott</span>
+            <span class="field-note"><span id="field-step">0</span> steps · deterministic replay</span>
+          </div>
+          <div class="field-controls">
+            <div class="field-segments" id="field-segments" role="group" aria-label="Choose hero field">
+              <button type="button" data-sim="0" aria-label="Show the Gray–Scott field" aria-pressed="true"><span>Gray–Scott</span><i></i></button>
+              <button type="button" data-sim="1" aria-label="Show the neural field" aria-pressed="false"><span>Neural field</span><i></i></button>
+              <button type="button" data-sim="2" aria-label="Show the wave interference field" aria-pressed="false"><span>Wave interference</span><i></i></button>
+              <button type="button" data-sim="3" aria-label="Show the Clifford attractor field" aria-pressed="false"><span>Clifford attractor</span><i></i></button>
+            </div>
+            <form class="field-seed-editor" id="field-seed-form">
+              <label for="field-seed-input">Seed</label>
+              <input id="field-seed-input" name="seed" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="10" autocomplete="off" spellcheck="false" aria-label="Simulation seed" />
+              <button type="submit" id="field-apply-seed">Apply</button>
+            </form>
             <button type="button" id="field-replay" title="Re-run from step zero with the same seed">Replay</button>
             <button type="button" id="field-newseed" title="Run a different seed">New seed</button>
-          </span>
+          </div>
         </div>
       </section>
 
@@ -504,11 +505,11 @@
         if (!vctx) { if (view) view.hidden = true; if (fallback) fallback.hidden = false; return; }
 
         const nameOut = document.getElementById("field-name");
-        const contextOut = document.getElementById("field-context");
-        const seedOut = document.getElementById("field-seed");
         const stepOut = document.getElementById("field-step");
         const segWrap = document.getElementById("field-segments");
         const segs = segWrap ? [...segWrap.querySelectorAll("button")] : [];
+        const seedForm = document.getElementById("field-seed-form");
+        const seedInput = document.getElementById("field-seed-input");
 
         /* Simulation grid. Keep its aspect close to the rendered hero so one
            simulation cell remains roughly square after the final upscale.
@@ -517,7 +518,7 @@
         const fieldRect = view.getBoundingClientRect();
         const fieldAspect = Math.min(2.4, Math.max(0.42,
           fieldRect.width / Math.max(1, fieldRect.height)));
-        const cellBudget = narrow ? 112000 : 196000;
+        const cellBudget = narrow ? 150000 : 280000;
         const W = Math.max(200, Math.round(Math.sqrt(cellBudget * fieldAspect)));
         const H = Math.max(160, Math.round(cellBudget / W));
         const N = W * H;
@@ -525,18 +526,15 @@
         const today = new Date();
         const DAILY_SEED = today.getUTCFullYear() * 10000 + (today.getUTCMonth() + 1) * 100 + today.getUTCDate();
         let SEED = DAILY_SEED;
-        let shareableSeed = false;
         const url = new URLSearchParams(location.search);
         const seedParam = url.get("seed");
         if (seedParam !== null && /^\d{1,10}$/.test(seedParam)) {
           const parsedSeed = Number(seedParam);
           if (Number.isSafeInteger(parsedSeed) && parsedSeed <= 0xffffffff) {
             SEED = parsedSeed >>> 0;
-            shareableSeed = true;
           }
         }
-        contextOut.textContent = shareableSeed ? "Shareable seed" : "Shared daily seed";
-        seedOut.textContent = String(SEED);
+        if (seedInput) seedInput.value = String(SEED);
 
         let INVERT = document.documentElement.getAttribute("data-theme") !== "dark";
 
@@ -565,6 +563,14 @@
           const o = i * 4;
           px[o] = g; px[o + 1] = g; px[o + 2] = g; px[o + 3] = 255;
         }
+
+        function curveLut(exponent) {
+          const curve = new Float32Array(256);
+          for (let i = 0; i < curve.length; i++) curve[i] = Math.pow(i / 255, exponent);
+          return curve;
+        }
+        const waveCurve = curveLut(1.32);
+        const attractorCurve = curveLut(0.62);
 
         /* Two opaque plates. Crossfading is drawing B over A at an alpha,
            which for opaque sources is exactly a linear interpolation. */
@@ -597,7 +603,7 @@
               if (x * x + y * y <= r * r) b[idx(cx + x, cy + y)] = Math.min(1, b[idx(cx + x, cy + y)] + v);
           };
           return {
-            name: "Gray–Scott", warm: 260, perStep: 1, tickMs: 75,
+            name: "Gray–Scott", warm: 140, perStep: 2, tickMs: 65,
             step() {
               /* Row offsets hoisted; neighbour indices inlined. Calling a
                  helper eight times per cell cost roughly 8x. */
@@ -632,13 +638,27 @@
         /* ---- 2. Neural field ----------------------------------------- */
         function neuralField() {
           /* A difference of Gaussians is separable, so two 1D passes per lobe
-             replace a 2D convolution. Run on a half-resolution grid and
-             upscaled on paint. */
+             replace a 2D convolution. The internal grid is deliberately above
+             half resolution: enough economy for a live convolution, without
+             the soft, enlarged cells of the former 0.5-scale field. */
           const rand = prng(SEED + 23);
-          const w = W >> 1, hh = H >> 1, n = w * hh;
+          const internalScale = 0.64;
+          const w = Math.max(160, Math.round(W * internalScale));
+          const hh = Math.max(120, Math.round(H * internalScale));
+          const n = w * hh;
           let u = new Float32Array(n), tmp = new Float32Array(n),
               exc = new Float32Array(n), inh = new Float32Array(n);
           for (let i = 0; i < n; i++) u[i] = rand() * 0.35;
+          const driveSin = new Float32Array(n), driveCos = new Float32Array(n);
+          let drivePhase = rand() * Math.PI * 2;
+          for (let y = 0; y < hh; y++) {
+            const row = y * w;
+            for (let x = 0; x < w; x++) {
+              const phase = x * 0.031 + y * 0.047;
+              driveSin[row + x] = Math.sin(phase);
+              driveCos[row + x] = Math.cos(phase);
+            }
+          }
 
           const R = 4;
           const mk = (s) => { const k = []; let sum = 0;
@@ -652,14 +672,14 @@
              handful of array reads. */
           const xi0 = new Int32Array(W), xi1 = new Int32Array(W), xwt = new Float32Array(W);
           for (let x = 0; x < W; x++) {
-            const fx = (x - 0.5) * 0.5, x0 = Math.floor(fx);
+            const fx = (x + 0.5) * w / W - 0.5, x0 = Math.floor(fx);
             xi0[x] = ((x0 % w) + w) % w;
             xi1[x] = (((x0 + 1) % w) + w) % w;
             xwt[x] = fx - x0;
           }
           const yi0 = new Int32Array(H), yi1 = new Int32Array(H), ywt = new Float32Array(H);
           for (let y = 0; y < H; y++) {
-            const fy = (y - 0.5) * 0.5, y0 = Math.floor(fy);
+            const fy = (y + 0.5) * hh / H - 0.5, y0 = Math.floor(fy);
             yi0[y] = ((((y0 % hh) + hh) % hh)) * w;
             yi1[y] = (((((y0 + 1) % hh) + hh) % hh)) * w;
             ywt[y] = fy - y0;
@@ -677,16 +697,19 @@
           }
 
           return {
-            name: "Neural field", warm: 60, perStep: 1, tickMs: 100,
+            name: "Neural field", warm: 52, perStep: 1, tickMs: 65,
             step() {
               blur(u, exc, gE); blur(u, inh, gI);
+              drivePhase += 0.072;
+              const sinP = Math.sin(drivePhase), cosP = Math.cos(drivePhase);
               for (let i = 0; i < n; i++) {
                 const s = 2.6*exc[i] - 1.9*inh[i];
-                u[i] += 0.24 * (1/(1 + Math.exp(-(s - 0.34)*5.5)) - u[i]);
+                const movingDrive = 0.038 * (driveSin[i] * cosP + driveCos[i] * sinP);
+                u[i] += 0.27 * (1/(1 + Math.exp(-(s - 0.34 + movingDrive)*5.5)) - u[i]);
               }
             },
             poke(cx, cy) {
-              const x = cx >> 1, y = cy >> 1;
+              const x = Math.round(cx * internalScale), y = Math.round(cy * internalScale);
               for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++)
                 u[(((y+dy+hh)%hh))*w + ((x+dx+w)%w)] = 1;
             },
@@ -725,17 +748,17 @@
           const sources = [
             {
               x: -W * (0.02 + rand() * 0.06), y: H * (0.12 + rand() * 0.42),
-              frequency: 0.052 + rand() * 0.012, offset: rand() * TAU,
+              frequency: 0.076 + rand() * 0.015, offset: rand() * TAU,
               speed: 1
             },
             {
               x: W * (1.01 + rand() * 0.06), y: H * (0.45 + rand() * 0.44),
-              frequency: 0.062 + rand() * 0.013, offset: rand() * TAU,
+              frequency: 0.091 + rand() * 0.017, offset: rand() * TAU,
               speed: -0.71
             },
             {
               x: W * (0.22 + rand() * 0.56), y: -H * (0.03 + rand() * 0.07),
-              frequency: 0.047 + rand() * 0.011, offset: rand() * TAU,
+              frequency: 0.069 + rand() * 0.014, offset: rand() * TAU,
               speed: 0.43
             }
           ];
@@ -763,10 +786,10 @@
           }
 
           return {
-            name: "Wave interference", warm, perStep: 1, tickMs: 90,
+            name: "Wave interference", warm, perStep: 1, tickMs: 60,
             step() {
               if (builtRows < H) { buildRows(); return; }
-              phase += 0.046;
+              phase += 0.105;
               nudge *= 0.94;
             },
             poke(cx, cy) {
@@ -791,89 +814,79 @@
                 let v = Math.min(1, Math.abs(a * b + 0.58 * b * c - 0.36 * c * a) / 1.12);
                 v = Math.max(0, (v - 0.08) / 0.92);
                 v = v * v * (3 - 2 * v);
+                v = waveCurve[Math.min(255, (v * 255) | 0)];
                 /* Theme-specific weights keep the same visual density after
                    multiply on paper and screen on the dark plate. */
-                put(i, v * (INVERT ? 0.56 : 0.48));
+                put(i, v * (INVERT ? 0.64 : 0.56));
               }
             }
           };
         }
 
-        /* ---- 4. Level-set topology ---------------------------------- */
-        function levelSetField() {
+        /* ---- 4. Clifford attractor ---------------------------------- */
+        function cliffordAttractor() {
           const rand = prng(SEED + 71);
-          const TAU = Math.PI * 2;
-          const warm = narrow ? 14 : 20;
-          const aspect = W / H;
-          const phaseSinA = new Float32Array(N);
-          const phaseCosA = new Float32Array(N);
-          const phaseSinB = new Float32Array(N);
-          const phaseCosB = new Float32Array(N);
-          const offsetA = rand() * TAU, offsetB = rand() * TAU;
-          const rowsPerWarmStep = Math.ceil(H / warm);
-          let builtRows = 0, time = rand() * TAU, nudge = 0;
+          const particleCount = narrow ? 1800 : 3200;
+          const density = new Float32Array(N);
+          const particlesX = new Float32Array(particleCount);
+          const particlesY = new Float32Array(particleCount);
+          let time = rand() * Math.PI * 2, nudge = 0;
 
-          /* Two non-separable polynomial scalar fields form an asymmetric
-             family of level sets. Their spatial trigonometry is paid once
-             during warm-up; the live field is one allocation-free pass. */
-          function buildRows() {
-            const end = Math.min(H, builtRows + rowsPerWarmStep);
-            for (let y = builtRows; y < end; y++) {
-              const ny = (y / Math.max(1, H - 1) - 0.5) * 2;
-              const row = y * W;
-              for (let x = 0; x < W; x++) {
-                const nx = (x / Math.max(1, W - 1) - 0.5) * 2 * aspect;
-                const hA = 0.68 * nx * ny + 0.17 * nx * nx - 0.29 * ny * ny
-                  + 0.055 * nx * ny * ny + 0.035 * nx * nx * ny;
-                const hB = 0.44 * (nx * nx - ny * ny) - 0.37 * nx * ny
-                  + 0.065 * ny * nx * nx - 0.025 * ny * ny * ny;
-                const a = hA * 14 + offsetA;
-                const b = hB * 18 + offsetB;
-                const i = row + x;
-                phaseSinA[i] = Math.sin(a); phaseCosA[i] = Math.cos(a);
-                phaseSinB[i] = Math.sin(b); phaseCosB[i] = Math.cos(b);
-              }
-            }
-            builtRows = end;
+          for (let i = 0; i < particleCount; i++) {
+            particlesX[i] = (rand() - 0.5) * 3.6;
+            particlesY[i] = (rand() - 0.5) * 3.2;
+          }
+
+          function deposit(fx, fy) {
+            const x0 = Math.floor(fx), y0 = Math.floor(fy);
+            if (x0 < 0 || x0 >= W - 1 || y0 < 0 || y0 >= H - 1) return;
+            const tx = fx - x0, ty = fy - y0;
+            const i = y0 * W + x0;
+            density[i] += (1 - tx) * (1 - ty);
+            density[i + 1] += tx * (1 - ty);
+            density[i + W] += (1 - tx) * ty;
+            density[i + W + 1] += tx * ty;
           }
 
           return {
-            name: "Level-set topology", warm, perStep: 1, tickMs: 80,
+            name: "Clifford attractor", warm: 46, perStep: 1, tickMs: 50,
             step() {
-              if (builtRows < H) { buildRows(); return; }
-              time += 0.034;
-              nudge *= 0.91;
+              time += 0.024 + nudge * 0.002;
+              nudge *= 0.92;
+              const a = -1.42 + 0.075 * Math.sin(time * 0.61);
+              const b = 1.61 + 0.068 * Math.cos(time * 0.73);
+              const c = 1.02 + 0.055 * Math.sin(time * 0.47 + 1.2);
+              const d = 0.71 + 0.052 * Math.cos(time * 0.83 - 0.7);
+
+              for (let i = 0; i < N; i++) density[i] *= 0.925;
+              for (let p = 0; p < particleCount; p++) {
+                let x = particlesX[p], y = particlesY[p];
+                for (let iteration = 0; iteration < 4; iteration++) {
+                  const nx = Math.sin(a * y) + c * Math.cos(a * x);
+                  const ny = Math.sin(b * x) + d * Math.cos(b * y);
+                  x = nx; y = ny;
+                }
+                particlesX[p] = x; particlesY[p] = y;
+                deposit((x + 2.35) / 4.7 * (W - 1), (y + 2.05) / 4.1 * (H - 1));
+              }
             },
             poke(cx, cy) {
-              nudge = (cx / W - 0.5) * 1.1 + (cy / H - 0.5) * 0.7;
+              nudge = (cx / W - 0.5) * 1.6 + (cy / H - 0.5) * 1.1;
             },
             paint() {
-              if (builtRows < H) return;
-              const a = time + nudge;
-              const b = -time * 0.73 + nudge * 0.41;
-              const sinA = Math.sin(a), cosA = Math.cos(a);
-              const sinB = Math.sin(b), cosB = Math.cos(b);
-
               for (let i = 0; i < N; i++) {
-                const contourA = phaseSinA[i] * cosA + phaseCosA[i] * sinA;
-                const contourB = phaseSinB[i] * cosB + phaseCosB[i] * sinB;
-                let ridgeA = 1 - Math.min(1, Math.abs(contourA) / 0.18);
-                let ridgeB = 1 - Math.min(1, Math.abs(contourB) / 0.14);
-                /* Smoothstep gives the moving contours a quiet antialiased
-                   shoulder without restoring the old soft, candy-like fill. */
-                ridgeA = ridgeA * ridgeA * (3 - 2 * ridgeA);
-                ridgeB = ridgeB * ridgeB * (3 - 2 * ridgeB);
-                const v = ridgeA > ridgeB * 0.62 ? ridgeA : ridgeB * 0.62;
-                put(i, v * (INVERT ? 0.66 : 0.56));
+                let v = Math.min(1, density[i] * 0.31);
+                v = attractorCurve[Math.min(255, (v * 255) | 0)];
+                put(i, v * (INVERT ? 0.7 : 0.62));
               }
             }
           };
         }
 
-        const builders = [grayScott, neuralField, waveField, levelSetField];
+        const builders = [grayScott, neuralField, waveField, cliffordAttractor];
         /* This is ground beneath the type, so its dwell is deliberately long:
            frequent swaps read as distraction rather than ambient change. */
-        const DWELL = 26000, FADE = 1800;
+        const DWELL = 19000, FADE = 1200;
 
         /* Warm-up is expensive at this grid: several hundred steps of a few
            milliseconds each. Run in one go it froze the page for well over a
@@ -894,7 +907,10 @@
         function prime(sim, budget, count) {
           const t0 = performance.now();
           while (sim.pending > 0 && performance.now() - t0 < budget) {
-            sim.step(); sim.pending--; if (count) steps++;
+            const batch = Math.min(sim.perStep, sim.pending);
+            for (let i = 0; i < batch; i++) sim.step();
+            sim.pending -= batch;
+            if (count) steps += batch;
           }
           return sim.pending === 0;
         }
@@ -1000,12 +1016,15 @@
         document.addEventListener("visibilitychange", () => setRunning(inViewport && !document.hidden));
 
         function beginFade(to) {
-          if (nextSim) return;
           const t = ((to === undefined ? curIdx + 1 : to) + builders.length) % builders.length;
-          if (t === curIdx) return;
+          if (t === curIdx) {
+            nextSim = null; fading = false; compose(0);
+            return;
+          }
           nextIdx = t;
           nextSim = make(t);
           fading = false;
+          compose(0);
         }
 
         let lastProgress = 0;
@@ -1013,8 +1032,16 @@
           if (now - lastProgress < 120) return;
           lastProgress = now;
           stepOut.textContent = String(steps);
-          const p = cur.pending ? 0 : fading || nextSim ? 1 : Math.min(1, (now - lastSwap) / DWELL);
-          segs.forEach((s, n) => s.style.setProperty("--p", n === curIdx ? p.toFixed(3) : "0"));
+          const p = cur.pending
+            ? 1 - cur.pending / cur.warm
+            : fading || nextSim ? 1 : Math.min(1, (now - lastSwap) / DWELL);
+          segs.forEach((s, n) => {
+            let progress = n === curIdx ? p : 0;
+            if (nextSim && n === nextIdx && !fading) {
+              progress = 1 - nextSim.pending / nextSim.warm;
+            }
+            s.style.setProperty("--p", Math.max(0, progress).toFixed(3));
+          });
         }
 
         function frame(now) {
@@ -1078,21 +1105,17 @@
           if (cur.pending) settleRaf = requestAnimationFrame(settle);
         }
 
-        function restart(newSeed, publishSeed) {
+        function restart(newSeed, updateUrl) {
           if (newSeed !== undefined) {
             SEED = newSeed >>> 0;
-            seedOut.textContent = String(SEED);
-            let context = "Shareable seed";
-            if (publishSeed) {
+            if (seedInput) seedInput.value = String(SEED);
+            if (updateUrl) {
               try {
-                const shareUrl = new URL(location.href);
-                shareUrl.searchParams.set("seed", String(SEED));
-                history.replaceState(null, "", shareUrl);
-              } catch (error) {
-                context = "Local seed";
-              }
+                const seededUrl = new URL(location.href);
+                seededUrl.searchParams.set("seed", String(SEED));
+                history.replaceState(null, "", seededUrl);
+              } catch (error) {}
             }
-            contextOut.textContent = context;
           }
           if (settleRaf) { cancelAnimationFrame(settleRaf); settleRaf = 0; }
           nextSim = null; fading = false;
@@ -1111,6 +1134,23 @@
         const replayBtn = document.getElementById("field-replay");
         const seedBtn = document.getElementById("field-newseed");
         if (replayBtn) replayBtn.addEventListener("click", () => restart());
+        if (seedForm && seedInput) {
+          seedForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const value = seedInput.value.trim();
+            const parsed = Number(value);
+            const valid = /^\d{1,10}$/.test(value)
+              && Number.isSafeInteger(parsed) && parsed >= 0 && parsed <= 0xffffffff;
+            seedInput.setCustomValidity(valid ? "" : "Enter a whole number from 0 to 4294967295.");
+            seedInput.toggleAttribute("aria-invalid", !valid);
+            if (!valid) { seedInput.reportValidity(); return; }
+            restart(parsed, true);
+          });
+          seedInput.addEventListener("input", () => {
+            seedInput.setCustomValidity("");
+            seedInput.removeAttribute("aria-invalid");
+          });
+        }
         if (seedBtn) seedBtn.addEventListener("click", () => {
           /* Deterministic even in how it picks the next seed: derived from the
              current one with explicit 32-bit arithmetic, so the sequence of
@@ -1118,7 +1158,11 @@
           restart((Math.imul(SEED, 1664525) + 1013904223) >>> 0, true);
         });
         segs.forEach((s, n) => s.addEventListener("click", () => {
-          if (n === curIdx) { restart(); return; }
+          if (n === curIdx) {
+            if (nextSim) { nextSim = null; fading = false; compose(0); }
+            else restart();
+            return;
+          }
           if (reduce.matches) { curIdx = n; restart(); }
           else beginFade(n);
         }));
