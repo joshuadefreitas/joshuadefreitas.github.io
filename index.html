@@ -5,435 +5,621 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Joshua de Freitas is a senior data engineer in Madrid, working on data platforms and agentic AI systems, with a public research practice in deterministic simulation, neural architectures and developer tools."
+      content="Joshua de Freitas is a senior data engineer in Madrid. Data platforms, analytical workflows and applied AI systems, alongside published work in simulation, neural architectures and developer tooling."
     />
-    <meta name="theme-color" content="#070908" />
-    <meta property="og:title" content="Joshua de Freitas | Data Engineer &amp; Researcher" />
+    <meta name="author" content="Joshua de Freitas" />
+    <meta name="theme-color" id="theme-color" content="#fafafb" />
+    <link rel="canonical" href="https://joshuadefreitas.github.io/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://joshuadefreitas.github.io/" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:site_name" content="Joshua de Freitas" />
+    <meta property="og:title" content="Joshua de Freitas — Data Engineer" />
     <meta
       property="og:description"
-      content="Systems whose correctness is checkable. Deterministic simulation, reproducible research, and developer tools that state what they cannot prove."
+      content="Data platforms, analytical workflows and applied AI systems. Madrid."
     />
-    <meta property="og:image" content="https://joshuadefreitas.github.io/assets/hero-field-study.png" />
-    <title>Joshua de Freitas | Data Engineer &amp; Researcher</title>
-    <link rel="icon" type="image/png" href="assets/brand-mark.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
+    <meta property="og:image" content="https://joshuadefreitas.github.io/assets/social-card.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:alt" content="Joshua de Freitas — Senior Data Engineer in Madrid" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Joshua de Freitas — Data Engineer" />
+    <meta
+      name="twitter:description"
+      content="Data platforms, analytical workflows and applied AI systems. Madrid."
     />
-    <link rel="stylesheet" href="styles.css?v=19" />
+    <meta name="twitter:image" content="https://joshuadefreitas.github.io/assets/social-card.jpg" />
+    <meta name="twitter:image:alt" content="Joshua de Freitas — Senior Data Engineer in Madrid" />
+    <title>Joshua de Freitas — Data Engineer</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icon-180.png" />
+
+    <!-- Theme is resolved before first paint so the page never flashes the
+         wrong background. Stored preference wins; otherwise the OS decides. -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          var theme = stored === "light" || stored === "dark"
+            ? stored
+            : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+          document.getElementById("theme-color").setAttribute(
+            "content",
+            theme === "dark" ? "#0c0d0f" : "#fafafb"
+          );
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      })();
+    </script>
+
+    <link rel="preload" href="assets/fonts/newsreader-display-300.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="assets/fonts/newsreader-text-300.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="styles.css?v=32" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
     <header class="site-header">
       <div class="shell header-inner">
-        <a class="wordmark" href="#top" aria-label="Joshua de Freitas home">
-          <img class="wordmark-mark" src="assets/brand-mark.png" alt="" />
-          <span class="wordmark-name">Joshua de Freitas</span>
-        </a>
-        <nav class="site-nav" aria-label="Primary navigation">
+        <a class="wordmark" href="#top">Joshua de Freitas</a>
+        <nav class="site-nav" aria-label="Primary">
           <a href="#work">Work</a>
-          <a href="#approach">Method</a>
-          <a href="#standard">Standard</a>
+          <a href="#practice">Practice</a>
           <a href="#about">About</a>
-          <a href="https://www.linkedin.com/in/defreitasjoshua/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
           <a href="#contact">Contact</a>
         </nav>
-        <button class="palette-trigger" type="button" id="palette-open" aria-label="Open command palette">Jump to <kbd>⌘K</kbd></button>
-        <span class="header-signal"><span></span> Available for good problems</span>
+        <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Switch colour theme">
+          <span data-theme-label>Dark</span>
+        </button>
       </div>
     </header>
 
     <main id="main">
-      <section class="hero shell" id="top">
-        <div class="hero-copy">
-          <p class="eyebrow"><span class="status-dot"></span> Senior Data Engineer <span class="eyebrow-divider">/</span> Data &amp; agentic AI <span class="eyebrow-divider">/</span> Madrid</p>
-          <h1>Build what survives contact with the <em>real world.</em></h1>
+      <section class="hero" id="top">
+        <!-- The field is the hero's ground, not a picture in it: full bleed,
+             masked so it thins out under the text and gathers to the right. -->
+        <div class="hero-field">
+          <!-- width/height are placeholders; the script sizes the canvas to
+               its own device pixels as soon as it has a box to measure. -->
+          <canvas id="field" width="1600" height="900" role="img"
+            aria-label="A deterministic simulation running live in the browser."></canvas>
+          <img
+            class="field-fallback"
+            src="assets/hero-field-study-600.webp"
+            srcset="assets/hero-field-study-600.webp 600w, assets/hero-field-study-800.webp 800w, assets/hero-field-study.webp 1200w"
+            sizes="100vw"
+            alt=""
+            width="1200"
+            height="800"
+            loading="lazy"
+            decoding="async"
+            hidden
+          />
+        </div>
+
+        <div class="shell hero-inner">
+          <p class="rail-label hero-eyebrow">Senior Data Engineer <i>/</i> Madrid</p>
+          <h1>Joshua de Freitas</h1>
           <p class="hero-lede">
-            I build data platforms and agentic AI systems, and run a public research practice
-            alongside them.
+            I design data platforms and the systems that keep them dependable — pipeline
+            architecture, analytical workflows and applied AI for organisations with real
+            complexity to handle.
           </p>
           <p class="hero-supporting">
-            By day: pipeline architecture, analytical workflows and intelligent automation for
-            organisations with real complexity to handle. Outside that: deterministic simulation,
-            neural architectures, WebGPU, market microstructure, and small developer tools —
-            published with their evidence, their limits, and the occasional confession.
+            Alongside client work I build smaller things and publish them: deterministic
+            simulation, neural architectures, WebGPU, market microstructure and developer
+            tooling. Each one carries its evidence and its limits.
           </p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#work">Explore selected work <span aria-hidden="true">↘</span></a>
-            <a class="button button-secondary" href="https://github.com/joshuadefreitas" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+            <a class="button button-primary" href="#work">Selected work</a>
+            <a class="button button-secondary" href="https://github.com/joshuadefreitas" target="_blank" rel="noreferrer">GitHub <span class="ext" aria-hidden="true">↗</span></a>
+            <a class="button button-secondary" href="https://www.linkedin.com/in/defreitasjoshua/" target="_blank" rel="noreferrer">LinkedIn <span class="ext" aria-hidden="true">↗</span></a>
           </div>
         </div>
 
-        <figure class="field-stage" aria-label="Live reaction-diffusion field, deterministic and seeded by today's date">
-          <canvas id="field" width="390" height="270" role="img"
-            aria-label="A reaction-diffusion simulation running live in the browser. Identical for every visitor today."></canvas>
-          <img class="field-fallback" src="assets/hero-field-study.png" alt="" hidden />
-          <div class="field-progress" aria-hidden="true"><i id="field-bar"></i></div>
-          <figcaption class="field-meta">
-            <span class="field-kicker" id="field-name">GRAY–SCOTT</span>
-            <span class="field-seed">seed <b id="field-seed">—</b> · deterministic · <span id="field-step">0</span> steps</span>
-          </figcaption>
-          <span class="field-hint" aria-hidden="true"><b id="field-project">Ghalvera engine</b> · move the cursor</span>
-          <div class="field-controls">
-            <button type="button" id="field-replay" title="Re-run this simulation from step zero with the same seed">
-              <span aria-hidden="true">↻</span> replay
-            </button>
-            <button type="button" id="field-newseed" title="Run a different seed">
-              <span aria-hidden="true">⇄</span> new seed
-            </button>
-            <span class="field-claim">same seed &rarr; same run, every time</span>
-          </div>
-        </figure>
-      </section>
-
-      <section class="evidence-band" aria-label="Evidence">
-        <div class="shell evidence-inner">
-          <span class="evidence-label">Evidence</span>
-          <a class="evidence-item" href="https://github.com/joshuadefreitas/deep-lob" target="_blank" rel="noreferrer">
-            <b>Leakage audit published</b><span>DeepLOB</span>
-          </a>
-          <a class="evidence-item" href="https://joshuadefreitas.github.io/neural-field-study/" target="_blank" rel="noreferrer">
-            <b>Rejected baseline published</b><span>Neural Field Study</span>
-          </a>
-          <a class="evidence-item" href="https://github.com/joshuadefreitas/trace-npm" target="_blank" rel="noreferrer">
-            <b>Every report states its limits</b><span>trace-npm</span>
-          </a>
-          <a class="evidence-item" href="https://github.com/joshuadefreitas/deep-lob" target="_blank" rel="noreferrer">
-            <b>Baselines reported alongside results</b><span>DeepLOB</span>
-          </a>
+        <div class="shell hero-meta">
+          <span class="field-name" id="field-name">Gray–Scott</span>
+          <span class="field-note">
+            <span aria-live="polite">
+              <span id="field-context">Shared daily seed</span>
+              <b id="field-seed">—</b>
+            </span>
+            · <span id="field-step">0</span> steps · deterministic replay
+          </span>
+          <span class="field-controls">
+            <span class="field-segments" id="field-segments" role="group" aria-label="Simulation">
+              <button type="button" data-sim="0" aria-label="Show the Gray–Scott field" aria-pressed="true"><i></i></button>
+              <button type="button" data-sim="1" aria-label="Show the neural field" aria-pressed="false"><i></i></button>
+              <button type="button" data-sim="2" aria-label="Show the wave interference field" aria-pressed="false"><i></i></button>
+              <button type="button" data-sim="3" aria-label="Show the flow field" aria-pressed="false"><i></i></button>
+            </span>
+            <button type="button" id="field-replay" title="Re-run from step zero with the same seed">Replay</button>
+            <button type="button" id="field-newseed" title="Run a different seed">New seed</button>
+          </span>
         </div>
       </section>
 
-
-      <section class="now-band" aria-label="Currently">
-        <div class="shell now-inner">
-          <span class="now-label">Now</span>
-          <p>Shipping small developer tools, building a WebGPU compute engine, and writing up the neural field study. Latest: <a href="https://www.npmjs.com/package/trace-npm" target="_blank" rel="noreferrer">trace-npm</a> on npm — a forensics tool for install scripts, which is exactly as popular as that sounds.</p>
-          <span class="now-date">Aug 2026</span>
-        </div>
-      </section>
-
-      <section class="section shell" id="work">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">Selected work</p>
-            <h2>A public record of how I build.</h2>
+      <section class="section ground ground-grid" id="work">
+        <div class="notation-field" data-notation="work" aria-hidden="true"></div>
+        <div class="shell section-inner">
+          <div class="rail">
+            <p class="rail-label">01 &mdash; Work</p>
           </div>
-          <p class="section-summary">
-            Small, complete systems. Enough evidence for someone else to test it, extend it, or
-            tell me where I went wrong — ideally in that order.
-          </p>
-        </div>
-
-        <div class="stream">
-          <div class="stream-head">
-            <h3 class="stream-title">Studies</h3>
-            <p class="stream-note">Research held to production standards, which mostly means the audits get published even when they are unflattering.</p>
-          </div>
-
-          <div class="card-grid">
-            <article class="card card-study">
-              <div class="card-visual study-visual" aria-hidden="true">
-                <span class="visual-kicker">FIELD STUDY / 2026</span>
-                <img src="assets/hero-field-study.png" alt="" />
-              </div>
-              <div class="card-body">
-                <div class="card-heading">
-                  <h4>Neural Field Study</h4>
-                  <span class="card-tag">Computational neuroscience</span>
-                </div>
-                <p>Local excitation opens paths, inhibitory control decides what survives, topology shapes what propagates. Deterministic rules, a seeded replay, all of it observable in the browser.</p>
-                <p class="card-limit"><span>Does not establish</span> a continuum limit, biological plausibility, or anything about real neural tissue. It is a simulation that behaves convincingly, which is a different achievement.</p>
-                <div class="card-meta"><span>JavaScript</span><span>Deterministic simulation</span><span>Numerical audit</span></div>
-                <div class="card-links">
-                  <a class="text-link" href="https://joshuadefreitas.github.io/neural-field-study/" target="_blank" rel="noreferrer">Open live study <span aria-hidden="true">↗</span></a>
-                  <a class="text-link text-link-muted" href="https://github.com/joshuadefreitas/neural-field-study" target="_blank" rel="noreferrer">Repository <span aria-hidden="true">↗</span></a>
-                </div>
-              </div>
-            </article>
-
-            <article class="card card-study">
-              <div class="card-visual lob-visual" aria-hidden="true">
-                <span class="visual-kicker">DEEPLOB / 2026</span>
-                <div class="lob-book"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-                <div class="lob-signal"></div>
-                <span class="visual-caption">SIGNAL / EVALUATION / REPLAY</span>
-              </div>
-              <div class="card-body">
-                <div class="card-heading">
-                  <h4>DeepLOB</h4>
-                  <span class="card-tag">Applied research</span>
-                </div>
-                <p>Limit order book dynamics end to end: synthetic data generation, PyTorch training, evaluation against a TCN baseline, and a deliberately constrained backtest. No hidden steps, no borrowed results.</p>
-                <p class="card-limit"><span>Does not establish</span> tradability. Synthetic data, deliberately constrained backtest, and a leakage audit published alongside — including the leakage it found.</p>
-                <div class="card-meta"><span>Python</span><span>PyTorch</span><span>Reproducible experiments</span></div>
-                <div class="card-links">
-                  <a class="text-link" href="https://github.com/joshuadefreitas/deep-lob" target="_blank" rel="noreferrer">Repository <span aria-hidden="true">↗</span></a>
-                  <a class="text-link text-link-muted" href="https://github.com/joshuadefreitas/deep-lob/blob/main/docs/deeplob_paper.pdf" target="_blank" rel="noreferrer">Read the write-up <span aria-hidden="true">↗</span></a>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
-
-        <div class="stream">
-          <div class="stream-head">
-            <h3 class="stream-title">Tools</h3>
-            <p class="stream-note">Less glamorous, more used. Built because I needed them and nothing else would do it.</p>
-          </div>
-
-          <div class="card-grid">
-            <article class="card card-tool">
-              <div class="card-visual tool-visual">
-                <img src="https://raw.githubusercontent.com/joshuadefreitas/trace-npm/main/docs/demo.gif"
-                  alt="trace-npm catching a package that reads ~/.ssh/id_rsa and sends it to a remote host" loading="lazy" />
-              </div>
-              <div class="card-body">
-                <div class="card-heading">
-                  <h4>trace-npm</h4>
-                  <span class="card-tag">Supply chain forensics <b class="live-badge" id="npm-live" hidden></b></span>
-                </div>
-                <p>npm now asks you to approve install scripts. Nothing tells you what they do. trace-npm runs one under a syscall tracer and reports what it read, spawned and contacted — including the planted credential it took the bait on.</p>
-                <pre class="card-terminal"><button class="copy-btn" type="button" aria-label="Copy command">copy</button><code>npx trace-npm run --package suspect --script postinstall</code></pre>
-                <p class="card-limit"><span>Does not establish</span> that a package is safe. Evidence, not verdicts — and the report lists what it could not see.</p>
-                <div class="card-meta"><span>Node.js</span><span>Linux · strace</span><span>0 dependencies</span></div>
-                <div class="card-links">
-                  <a class="text-link" href="https://www.npmjs.com/package/trace-npm" target="_blank" rel="noreferrer">npm package <span aria-hidden="true">↗</span></a>
-                  <a class="text-link text-link-muted" href="https://github.com/joshuadefreitas/trace-npm" target="_blank" rel="noreferrer">Repository <span aria-hidden="true">↗</span></a>
-                </div>
-              </div>
-            </article>
-
-            <article class="card card-tool">
-              <div class="card-visual core-visual" aria-hidden="true">
-                <span class="visual-kicker">DBX-CORE / 2026</span>
-                <div class="core-pipeline"><span>LOCAL</span><i></i><span>TEST</span><i></i><span>JOBS</span><i></i><span>REMOTE</span></div>
-                <div class="core-grid"></div>
-                <span class="visual-caption">PACKAGES / NOT NOTEBOOKS</span>
-              </div>
-              <div class="card-body">
-                <div class="card-heading">
-                  <h4>dbx-core</h4>
-                  <span class="card-tag">Data engineering</span>
-                </div>
-                <p>Databricks without the notebook sprawl: real Python packages, local tests, remote execution. The foundation a data platform should actually rest on.</p>
-                <pre class="card-terminal"><button class="copy-btn" type="button" aria-label="Copy command">copy</button><code>pytest tests/ &amp;&amp; dbx deploy</code></pre>
-                <p class="card-limit"><span>Opinionated</span> about jobs over notebooks. That constraint is the point, and it will not suit every team.</p>
-                <div class="card-meta"><span>Python</span><span>Databricks</span><span>Jobs over notebooks</span></div>
-                <div class="card-links">
-                  <a class="text-link" href="https://github.com/joshuadefreitas/dbx-core" target="_blank" rel="noreferrer">Repository <span aria-hidden="true">↗</span></a>
-                  <a class="text-link text-link-muted" href="https://github.com/joshuadefreitas/dbx-core#readme" target="_blank" rel="noreferrer">Documentation <span aria-hidden="true">↗</span></a>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="method-band" id="approach">
-        <div class="shell method-grid">
-          <div class="method-heading">
-            <p class="eyebrow">How I work</p>
-            <h2>Make the invisible <em>legible.</em></h2>
-            <p>
-              The hard part is rarely choosing a model. It’s shaping everything around it so the
-              result can be trusted, tested, and handed over without a long note explaining which
-              parts to ignore.
-            </p>
-          </div>
-          <div class="principles">
-            <div class="principle"><span>01</span><strong>Start with the boundary</strong><p>Define the data contract, the consumer, and the evidence. Complexity comes later, if at all.</p></div>
-            <div class="principle"><span>02</span><strong>Make behaviour observable</strong><p>Reproducible runs, explicit decisions, and results someone can inspect without taking my word for any of it.</p></div>
-            <div class="principle"><span>03</span><strong>Earn the abstraction</strong><p>The first system should be narrow enough to be right. Depth comes when the evidence demands it.</p></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="standard-band" id="standard">
-        <div class="shell">
-          <div class="standard-head">
-            <div>
-              <p class="eyebrow">The standard</p>
-              <h2>Seven rules. Each one <em>used to be a bug.</em></h2>
+          <div class="column">
+            <div class="section-head">
+              <h2>Selected projects</h2>
+              <p class="section-summary">
+                Small, complete systems, published with enough evidence for someone else to test
+                them, extend them, or find the mistake.
+              </p>
             </div>
-            <p class="standard-intro">
-              Principles are cheap — you can hold any of them for free. These each cost something,
-              so the receipt is printed underneath. Every incident below comes from my own
-              open-source projects, where the only thing at stake was my own time. It is a list of
-              times I was wrong, arranged to look like expertise.
-            </p>
-          </div>
 
-          <ol class="standard-list">
-            <li class="rule">
-              <span class="rule-no">01</span>
-              <div class="rule-body">
-                <h3>Enforced, not documented</h3>
-                <p>A property that is described but not checked by a machine is not a property. It is an intention.</p>
-                <p class="rule-cost"><span>Cost</span> Seven test files guarding a bit-exact contract, all gated behind an environment variable set precisely nowhere. They passed for months by never running. Elsewhere, a drift check that passed by comparing an empty folder with itself, which it did flawlessly.</p>
+            <div class="stream">
+              <div class="stream-head">
+                <h3>Studies</h3>
+                <p>Research held to production standards, which mostly means the audits are published even when they are unflattering.</p>
               </div>
-            </li>
-            <li class="rule">
-              <span class="rule-no">02</span>
-              <div class="rule-body">
-                <h3>Fixtures come from reality</h3>
-                <p>Generated by running the real thing and committing what it produced — never hand-authored to match what the implementation expects.</p>
-                <p class="rule-cost"><span>Cost</span> Four defects shipped green because I wrote the fixtures to match what I believed the parser did. Fixture and parser agreed with each other completely. They were both wrong in the same direction, which is the worst possible kind of agreement.</p>
-              </div>
-            </li>
-            <li class="rule">
-              <span class="rule-no">03</span>
-              <div class="rule-body">
-                <h3>The builder does not verify its own work</h3>
-                <p>Verification means running it and reading the output, not reading the diff. The verifier should lack the ability to change the code. The asymmetry is the point.</p>
-                <p class="rule-cost"><span>Cost</span> Nine of twenty-two defects in a first release existed only in the gap between “I ran it” and running it.</p>
-              </div>
-            </li>
-            <li class="rule">
-              <span class="rule-no">04</span>
-              <div class="rule-body">
-                <h3>Loss must be visible</h3>
-                <p>Anything dropped, filtered, skipped or approximated is counted and surfaced. Silent filtering is the defect; disclosed filtering is a feature.</p>
-                <p class="rule-cost"><span>Cost</span> Seventeen percent of a trace quietly discarded. No number anywhere admitted it, so for a while it looked like a very clean trace.</p>
-              </div>
-            </li>
-            <li class="rule">
-              <span class="rule-no">05</span>
-              <div class="rule-body">
-                <h3>State the limits where the output is read</h3>
-                <p>The README is not where limits belong, because output gets pasted into issue threads and chat windows, detached from the repo that explains it. Every artifact has to carry its own.</p>
-                <p class="rule-cost"><span>Cost</span> Every limitation was written down, in the README, where it stayed. The output travelled on its own and read as a clean result.</p>
-              </div>
-            </li>
-            <li class="rule">
-              <span class="rule-no">06</span>
-              <div class="rule-body">
-                <h3>Know which direction failure runs</h3>
-                <p>Missing something is bad. Confidently reporting absence when something happened is disqualifying, because the reader acts on it.</p>
-                <p class="rule-cost"><span>Cost</span> A credential theft that worked, reported as <code>(failed)</code>, because a non-blocking socket returns <code>-1 EINPROGRESS</code>. Impeccable at the syscall level. A lie everywhere it was going to be read.</p>
-              </div>
-            </li>
-            <li class="rule">
-              <span class="rule-no">07</span>
-              <div class="rule-body">
-                <h3>Claims are scoped to what was tested</h3>
-                <p>“Verified” names the environment: which platform, which backend, which version. If it was checked against one implementation, the claim is about that implementation.</p>
-                <p class="rule-cost"><span>Cost</span> Bit-exact parity claimed in general, having been observed on exactly one graphics backend. It later held on a second one too — which was luck wearing the costume of rigour.</p>
-              </div>
-            </li>
-          </ol>
 
-          <p class="standard-foot">
-            Reviewed quarterly. Any rule I didn’t actually follow gets enforced or deleted, because a
-            standard nobody follows is just a list of things you admire from a distance — and admiring
-            a check is not the same as running one.
-          </p>
-        </div>
-      </section>
+              <div class="card-grid">
+                <article class="card">
+                  <div class="card-visual study-visual" aria-hidden="true">
+                    <span class="visual-kicker">Field study &middot; 2026</span>
+                    <img
+                      src="assets/hero-field-study-600.webp"
+                      srcset="assets/hero-field-study-600.webp 600w, assets/hero-field-study-800.webp 800w, assets/hero-field-study.webp 1200w"
+                      sizes="(min-width: 920px) 544px, calc(100vw - 48px)"
+                      alt=""
+                      width="1200"
+                      height="800"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="card-body">
+                    <div class="card-heading">
+                      <h4>Neural Field Study</h4>
+                      <span class="card-tag">Computational neuroscience</span>
+                    </div>
+                    <p>Local excitation opens paths, inhibitory control decides what survives, topology shapes what propagates. Deterministic rules, a seeded replay, all of it observable in the browser.</p>
+                    <p class="card-limit"><span>Does not establish</span> a continuum limit, biological plausibility, or anything about real neural tissue. It is a simulation that behaves convincingly, which is a different achievement.</p>
+                    <div class="card-meta"><span>JavaScript</span><span>Deterministic simulation</span><span>Numerical audit</span></div>
+                    <div class="card-links">
+                      <a class="text-link" href="https://joshuadefreitas.github.io/neural-field-study/" target="_blank" rel="noreferrer">Open live study <span class="ext" aria-hidden="true">↗</span></a>
+                      <a class="text-link" href="https://github.com/joshuadefreitas/neural-field-study" target="_blank" rel="noreferrer">Repository <span class="ext" aria-hidden="true">↗</span></a>
+                    </div>
+                  </div>
+                </article>
 
-      <section class="section shell about-section" id="about">
-        <div class="about-grid">
-          <div>
-            <p class="eyebrow">About</p>
-            <h2>Engineering with range.</h2>
-          </div>
-          <div class="about-copy">
-            <p>
-              I’m a senior data engineer in Madrid, building data platforms and agentic AI systems
-              for organisations navigating real complexity. My day-to-day runs from pipeline
-              architecture and analytical workflows to intelligent automation — the kind of work
-              that has to hold under production conditions, where nobody is impressed by a clever
-              solution that needs supervision.
-            </p>
-            <p>
-              My background spans data strategy, analytics, applied economic research, finance,
-              and ESG — a route that looks deliberate in hindsight and did not at the time. Outside
-              client work I run a parallel research practice: deterministic simulation, neural
-              network architectures, WebGPU and visual computing, market microstructure, and
-              developer tooling. The projects here are the legible version of that; the rest is
-              mostly failed branches and very long log files.
-            </p>
-            <div class="skill-lines">
-              <span>Python · SQL · PySpark · TypeScript</span>
-              <span>Databricks · Delta Lake · Neo4j · APIs</span>
-              <span>Machine learning · Simulation · WebGPU · Visualization</span>
+                <article class="card">
+                  <figure
+                    class="card-visual lob-visual"
+                    role="img"
+                    aria-label="Random splitting puts overlapping windows on both sides of the train and validation boundary; purging creates a clean boundary with zero overlap."
+                  >
+                    <span class="visual-kicker">DeepLOB &middot; negative control</span>
+                    <div class="lob-study" aria-hidden="true">
+                      <div class="lob-boundary"><span>train</span><span>validation</span></div>
+                      <div class="lob-protocol lob-protocol-random">
+                        <div class="lob-protocol-label"><span>Random split</span><b>overlap 1.00</b></div>
+                        <div class="lob-windows"><i></i><i></i><i></i><i></i></div>
+                      </div>
+                      <div class="lob-protocol lob-protocol-purged">
+                        <div class="lob-protocol-label"><span>Purged + embargoed</span><b>overlap 0.00</b></div>
+                        <div class="lob-windows"><i></i><i></i><i></i><i></i></div>
+                      </div>
+                    </div>
+                    <figcaption class="visual-caption">Same null data &middot; different boundary</figcaption>
+                  </figure>
+                  <div class="card-body">
+                    <div class="card-heading">
+                      <h4>DeepLOB</h4>
+                      <span class="card-tag">Evaluation integrity</span>
+                    </div>
+                    <p>On synthetic data built to contain no predictive signal, random splitting of overlapping windows manufactured apparent skill. Purging removed it. The study derives the leakage ceiling and tests the remedy.</p>
+                    <p class="card-limit"><span>Does not establish</span> tradability, model performance on real exchange data, or validated alpha. It isolates an evaluation failure on a synthetic negative control.</p>
+                    <div class="card-meta"><span>Python</span><span>PyTorch</span><span>Negative-control study</span></div>
+                    <div class="card-links">
+                      <a class="text-link" href="https://github.com/joshuadefreitas/deep-lob/blob/main/docs/when-overlapping-windows-invent-predictability.md" target="_blank" rel="noreferrer">Read the study <span class="ext" aria-hidden="true">↗</span></a>
+                      <a class="text-link" href="https://github.com/joshuadefreitas/deep-lob" target="_blank" rel="noreferrer">Repository <span class="ext" aria-hidden="true">↗</span></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <div class="stream">
+              <div class="stream-head">
+                <h3>Tools</h3>
+                <p>Less visible, more used. Built because I needed them and nothing else would do the job.</p>
+              </div>
+
+              <div class="card-grid">
+                <article class="card">
+                  <div class="card-visual tool-visual">
+                    <picture>
+                      <source media="(prefers-reduced-motion: reduce)" srcset="assets/trace-npm-demo-still.webp" />
+                      <img src="assets/trace-npm-demo.webp" width="983" height="1030"
+                        alt="trace-npm catching a package that reads ~/.ssh/id_rsa and sends it to a remote host" loading="lazy" decoding="async" />
+                    </picture>
+                  </div>
+                  <div class="card-body">
+                    <div class="card-heading">
+                      <h4>trace-npm</h4>
+                      <span class="card-tag">Supply chain forensics<b class="live-badge">Alpha on npm</b></span>
+                    </div>
+                    <p>npm now asks you to approve install scripts. Nothing tells you what they do. trace-npm runs one under a syscall tracer and reports what it read, spawned and contacted — including the planted credential it took the bait on.</p>
+                    <pre class="card-terminal"><button class="copy-btn" type="button" aria-label="Copy command">Copy</button><code>npx trace-npm run --package suspect --script postinstall</code></pre>
+                    <p class="card-limit"><span>Does not establish</span> that a package is safe. Evidence, not verdicts — and the report lists what it could not see.</p>
+                    <div class="card-meta"><span>Node.js</span><span>Linux &middot; strace</span><span>No dependencies</span></div>
+                    <div class="card-links">
+                      <a class="text-link" href="https://www.npmjs.com/package/trace-npm" target="_blank" rel="noreferrer">npm package <span class="ext" aria-hidden="true">↗</span></a>
+                      <a class="text-link" href="https://github.com/joshuadefreitas/trace-npm" target="_blank" rel="noreferrer">Repository <span class="ext" aria-hidden="true">↗</span></a>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="card">
+                  <div class="card-visual core-visual" aria-hidden="true">
+                    <span class="visual-kicker">dbx-core &middot; 2026</span>
+                    <div class="core-grid"></div>
+                    <div class="core-pipeline"><span>Local</span><i></i><span>Test</span><i></i><span>Jobs</span><i></i><span>Remote</span></div>
+                    <span class="visual-caption">Packages, not notebooks</span>
+                  </div>
+                  <div class="card-body">
+                    <div class="card-heading">
+                      <h4>dbx-core</h4>
+                      <span class="card-tag">Data engineering</span>
+                    </div>
+                    <p>Databricks without the notebook sprawl: real Python packages, local tests, remote execution. The foundation a data platform should actually rest on.</p>
+                    <pre class="card-terminal"><button class="copy-btn" type="button" aria-label="Copy command">Copy</button><code>pytest tests/ &amp;&amp; dbx deploy</code></pre>
+                    <p class="card-limit"><span>Opinionated</span> about jobs over notebooks. That constraint is the point, and it will not suit every team.</p>
+                    <div class="card-meta"><span>Python</span><span>Databricks</span><span>Jobs over notebooks</span></div>
+                    <div class="card-links">
+                      <a class="text-link" href="https://github.com/joshuadefreitas/dbx-core" target="_blank" rel="noreferrer">Repository <span class="ext" aria-hidden="true">↗</span></a>
+                      <a class="text-link" href="https://github.com/joshuadefreitas/dbx-core#readme" target="_blank" rel="noreferrer">Documentation <span class="ext" aria-hidden="true">↗</span></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="contact-band shell" id="contact">
-        <div>
-          <p class="eyebrow">Contact</p>
-          <h2>Good problems, open conversations.</h2>
-          <p class="contact-supporting">
-            Based in Madrid. Client work by day, public projects alongside it. If the problem is
-            genuinely hard I would like to hear about it, and if it is genuinely hard and someone
-            has already told you it is impossible, more so.
-          </p>
-        </div>
-        <div class="contact-cta">
-          <div class="contact-actions">
-            <a class="button button-primary" href="https://outlook.office.com/mail/deeplink/compose?to=jamesdefreitas%40outlook.com" target="_blank" rel="noreferrer" aria-label="Compose an email to Joshua de Freitas in Outlook">Open Outlook <span aria-hidden="true">↗</span></a>
-            <a class="button button-secondary" href="https://www.linkedin.com/in/defreitasjoshua/" target="_blank" rel="noreferrer">Connect on LinkedIn <span aria-hidden="true">↗</span></a>
+      <section class="section section-raised ground ground-sheen" id="practice">
+        <div class="notation-field" data-notation="practice" aria-hidden="true"></div>
+        <div class="shell section-inner">
+          <div class="rail">
+            <p class="rail-label">02 &mdash; Practice</p>
           </div>
-          <p class="contact-address"><span class="sr-only">Email address: </span>jamesdefreitas@outlook.com</p>
+          <div class="column">
+            <div class="section-head">
+              <h2>How I work</h2>
+              <p class="section-summary">
+                The hard part is rarely choosing a model. It is shaping everything around it so the
+                result can be trusted, tested and handed over without a long note explaining which
+                parts to ignore.
+              </p>
+            </div>
+
+            <ol class="principles">
+              <li class="principle">
+                <span class="principle-no">01</span>
+                <div>
+                  <strong>Start with the boundary</strong>
+                  <p>Define the data contract, the consumer and the evidence. Complexity comes later, if at all.</p>
+                </div>
+              </li>
+              <li class="principle">
+                <span class="principle-no">02</span>
+                <div>
+                  <strong>Make behaviour observable</strong>
+                  <p>Reproducible runs, explicit decisions, and results someone can inspect without taking my word for any of it.</p>
+                </div>
+              </li>
+              <li class="principle">
+                <span class="principle-no">03</span>
+                <div>
+                  <strong>Earn the abstraction</strong>
+                  <p>The first system should be narrow enough to be right. Depth comes when the evidence demands it.</p>
+                </div>
+              </li>
+            </ol>
+
+            <details class="rules">
+              <summary class="rules-summary">
+                <span>
+                  <span class="rail-label">Operating standard</span>
+                  <strong>Seven rules, each learned the hard way</strong>
+                </span>
+                <span class="rules-summary-action" aria-hidden="true">
+                  <span class="rules-action-open">Read all seven</span>
+                  <span class="rules-action-close">Close standard</span>
+                  <i></i>
+                </span>
+              </summary>
+              <div class="rules-content">
+                <div class="rules-head">
+                  <p>
+                    Principles are free to hold, so the cost of each rule is printed underneath.
+                    Every incident comes from my own open-source work, where the only thing at stake was my own time.
+                  </p>
+                </div>
+
+              <ol class="rule-list">
+                <li class="rule">
+                  <span class="rule-no">01</span>
+                  <div class="rule-body">
+                    <h3>Enforced, not documented</h3>
+                    <p>A property that is described but not checked by a machine is not a property. It is an intention.</p>
+                    <p class="rule-cost"><span>Cost</span> Seven test files guarding a bit-exact contract, all gated behind an environment variable set precisely nowhere. They passed for months by never running. Elsewhere, a drift check that passed by comparing an empty folder with itself, which it did flawlessly.</p>
+                  </div>
+                </li>
+                <li class="rule">
+                  <span class="rule-no">02</span>
+                  <div class="rule-body">
+                    <h3>Fixtures come from reality</h3>
+                    <p>Generated by running the real thing and committing what it produced — never hand-authored to match what the implementation expects.</p>
+                    <p class="rule-cost"><span>Cost</span> Four defects shipped green because I wrote the fixtures to match what I believed the parser did. Fixture and parser agreed with each other completely. They were both wrong in the same direction, which is the worst possible kind of agreement.</p>
+                  </div>
+                </li>
+                <li class="rule">
+                  <span class="rule-no">03</span>
+                  <div class="rule-body">
+                    <h3>The builder does not verify its own work</h3>
+                    <p>Verification means running it and reading the output, not reading the diff. The verifier should lack the ability to change the code. The asymmetry is the point.</p>
+                    <p class="rule-cost"><span>Cost</span> Nine of twenty-two defects in a first release existed only in the gap between “I ran it” and running it.</p>
+                  </div>
+                </li>
+                <li class="rule">
+                  <span class="rule-no">04</span>
+                  <div class="rule-body">
+                    <h3>Loss must be visible</h3>
+                    <p>Anything dropped, filtered, skipped or approximated is counted and surfaced. Silent filtering is the defect; disclosed filtering is a feature.</p>
+                    <p class="rule-cost"><span>Cost</span> Seventeen percent of a trace quietly discarded. No number anywhere admitted it, so for a while it looked like a very clean trace.</p>
+                  </div>
+                </li>
+                <li class="rule">
+                  <span class="rule-no">05</span>
+                  <div class="rule-body">
+                    <h3>State the limits where the output is read</h3>
+                    <p>The README is not where limits belong, because output gets pasted into issue threads and chat windows, detached from the repository that explains it. Every artifact has to carry its own.</p>
+                    <p class="rule-cost"><span>Cost</span> Every limitation was written down, in the README, where it stayed. The output travelled on its own and read as a clean result.</p>
+                  </div>
+                </li>
+                <li class="rule">
+                  <span class="rule-no">06</span>
+                  <div class="rule-body">
+                    <h3>Know which direction failure runs</h3>
+                    <p>Missing something is bad. Confidently reporting absence when something happened is disqualifying, because the reader acts on it.</p>
+                    <p class="rule-cost"><span>Cost</span> A credential theft that worked, reported as <code>(failed)</code>, because a non-blocking socket returns <code>-1 EINPROGRESS</code>. Impeccable at the syscall level. A lie everywhere it was going to be read.</p>
+                  </div>
+                </li>
+                <li class="rule">
+                  <span class="rule-no">07</span>
+                  <div class="rule-body">
+                    <h3>Claims are scoped to what was tested</h3>
+                    <p>“Verified” names the environment: which platform, which backend, which version. If it was checked against one implementation, the claim is about that implementation.</p>
+                    <p class="rule-cost"><span>Cost</span> Bit-exact parity claimed in general, having been observed on exactly one graphics backend. It later held on a second one too — which was luck wearing the costume of rigour.</p>
+                  </div>
+                </li>
+              </ol>
+
+              <p class="rules-foot">
+                Reviewed quarterly. Any rule I have not actually followed gets enforced or deleted,
+                because a standard nobody follows is a list of things you admire from a distance.
+              </p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="section ground ground-contour" id="about">
+        <div class="notation-field" data-notation="about" aria-hidden="true"></div>
+        <div class="shell section-inner">
+          <div class="rail">
+            <p class="rail-label">03 &mdash; About</p>
+          </div>
+          <div class="column">
+            <div class="section-head">
+              <h2>Background</h2>
+            </div>
+            <div class="prose">
+              <p>
+                I am a senior data engineer in Madrid, building data platforms and applied AI
+                systems for organisations navigating real complexity. The day-to-day runs from
+                pipeline architecture and analytical workflows through to intelligent automation —
+                work that has to hold under production conditions, where nobody is impressed by a
+                clever solution that needs supervision.
+              </p>
+              <p>
+                My background spans data strategy, analytics, applied economic research, finance
+                and ESG — a route that looks deliberate in hindsight and did not at the time.
+                Outside client work I build in the open: deterministic simulation, neural network
+                architectures, WebGPU and visual computing, market microstructure, and developer
+                tooling. The projects here are the legible part of that; the rest is mostly failed
+                branches and very long log files.
+              </p>
+            </div>
+
+            <dl class="facts">
+              <div>
+                <dt>Currently</dt>
+                <dd>
+                  Building a WebGPU compute engine, writing up the neural field study, and
+                  maintaining <a class="text-link" href="https://www.npmjs.com/package/trace-npm" target="_blank" rel="noreferrer">trace-npm</a>
+                  on npm. <span class="facts-date">August 2026</span>
+                </dd>
+              </div>
+              <div>
+                <dt>Languages &amp; data</dt>
+                <dd>Python, SQL, PySpark, TypeScript</dd>
+              </div>
+              <div>
+                <dt>Platform</dt>
+                <dd>Databricks, Delta Lake, Neo4j, APIs</dd>
+              </div>
+              <div>
+                <dt>Research</dt>
+                <dd>Machine learning, simulation, WebGPU, visualisation</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-invert ground ground-glow" id="contact">
+        <div class="notation-field" data-notation="contact" aria-hidden="true"></div>
+        <div class="shell section-inner">
+          <div class="rail">
+            <p class="rail-label">04 &mdash; Contact</p>
+          </div>
+          <div class="column">
+            <div class="section-head">
+              <h2>Get in touch</h2>
+              <p class="section-summary">
+                Based in Madrid, available for consulting and permanent roles. If the problem is
+                genuinely hard, I would like to hear about it.
+              </p>
+            </div>
+            <p class="contact-address">
+              <a class="text-link" href="mailto:jamesdefreitas@outlook.com">jamesdefreitas@outlook.com</a>
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="mailto:jamesdefreitas@outlook.com">Send an email</a>
+              <a class="button button-secondary" href="https://www.linkedin.com/in/defreitasjoshua/" target="_blank" rel="noreferrer">LinkedIn <span class="ext" aria-hidden="true">↗</span></a>
+            </div>
+          </div>
         </div>
       </section>
     </main>
 
-
-    <div class="palette" id="palette" hidden role="dialog" aria-modal="true" aria-label="Command palette">
-      <div class="palette-box">
-        <input id="palette-input" type="text" placeholder="Jump to…  (esc to close)" autocomplete="off" spellcheck="false" />
-        <ul id="palette-list" role="listbox"></ul>
-        <div class="palette-foot"><kbd>↑</kbd><kbd>↓</kbd> navigate <kbd>↵</kbd> open <kbd>esc</kbd> close</div>
+    <footer class="site-footer">
+      <div class="shell footer-inner">
+        <span>&copy; <span id="year"></span> Joshua de Freitas</span>
+        <span>Hand-built, self-hosted and free of analytics or tracking.</span>
       </div>
-    </div>
-
-    <footer class="site-footer shell">
-      <span>© <span id="year"></span> Joshua de Freitas</span>
-      <span>Hand-built, kept small on purpose. No analytics — though Google does see the font request, so I won’t claim more than that.</span>
     </footer>
 
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
 
       /* ---------------------------------------------------------------
-         Hero: a rotating set of deterministic simulations, one per
-         project. All are seeded from today's UTC date, so every visitor
-         sees the identical run. No Math.random anywhere.
+         Theme. Resolved before paint by the inline script in <head>;
+         this only handles the toggle and keeps the label honest. A stored
+         preference wins over the OS, but until one exists the OS keeps
+         control — including if it changes while the page is open.
+      --------------------------------------------------------------- */
+      (function theme() {
+        const root = document.documentElement;
+        const btn = document.getElementById("theme-toggle");
+        const label = btn && btn.querySelector("[data-theme-label]");
+        const themeMeta = document.getElementById("theme-color");
+        const mq = window.matchMedia("(prefers-color-scheme: dark)");
 
-           gray-scott   reaction-diffusion   → Ghalvera engine
-           cascade      threshold network    → emergence
-           neural       excitation/inhibition→ Neural Field Study
-           book         synthetic order book → DeepLOB
+        function sync() {
+          const current = root.getAttribute("data-theme");
+          const next = current === "dark" ? "light" : "dark";
+          if (label) label.textContent = next === "dark" ? "Dark" : "Light";
+          if (btn) btn.setAttribute("aria-label", "Switch to " + next + " theme");
+          if (themeMeta) themeMeta.setAttribute("content", current === "dark" ? "#0c0d0f" : "#fafafb");
+          window.dispatchEvent(new CustomEvent("themechange", { detail: current }));
+        }
+        function set(theme, persist) {
+          root.setAttribute("data-theme", theme);
+          if (persist) { try { localStorage.setItem("theme", theme); } catch (e) {} }
+          sync();
+        }
+        sync();
+        if (btn) btn.addEventListener("click", () => {
+          set(root.getAttribute("data-theme") === "dark" ? "light" : "dark", true);
+        });
+        mq.addEventListener("change", (e) => {
+          let stored = null;
+          try { stored = localStorage.getItem("theme"); } catch (err) {}
+          if (!stored) set(e.matches ? "dark" : "light", false);
+        });
+      })();
+
+      /* ---------------------------------------------------------------
+         The hero's ground: a rotating set of deterministic simulations,
+         one per project. All are seeded from today's UTC date, so every
+         visitor sees the identical run. No Math.random anywhere.
+
+           gray-scott   reaction-diffusion    → live field
+           neural       excitation/inhibition → Neural Field Study
+           wave         coupled standing waves → interference field
+           flow         particle advection     → vector field
+         Each simulation paints one intensity channel rather than a colour.
+         put() maps that intensity to the current theme: ink on a white
+         substrate for light (composited with multiply, so the white drops
+         out), light on black for dark (screen, so the black drops out).
+         One field, two themes, no second code path.
+
+         Three separations keep the cost down while the detail goes up:
+
+           simulation vs. display   the field is computed at a fixed grid
+                                    and scaled onto a canvas sized to the
+                                    element's own device pixels, so the GPU
+                                    does the interpolation and the result
+                                    has no visible cell edges;
+           simulation vs. frame     each field advances on its own interval
+                                    rather than once per animation frame —
+                                    a reaction-diffusion pattern does not
+                                    need sixty updates a second;
+           crossfade vs. pixels     the fade is two drawImage calls with an
+                                    alpha, not a per-byte interpolation of
+                                    the whole buffer.
          --------------------------------------------------------------- */
-      (function heroField() {
-        const canvas = document.getElementById("field");
-        const fallback = document.querySelector(".field-fallback");
-        const ctx = canvas && canvas.getContext("2d", { alpha: false });
-        if (!ctx) { if (canvas) canvas.hidden = true; if (fallback) fallback.hidden = false; return; }
+      function heroField() {
+        const view = document.getElementById("field");
+        const fieldLayer = view && view.closest(".hero-field");
+        const fallback = fieldLayer && fieldLayer.querySelector(".field-fallback");
+        const vctx = view && view.getContext("2d", { alpha: false });
+        if (!vctx) { if (view) view.hidden = true; if (fallback) fallback.hidden = false; return; }
 
         const nameOut = document.getElementById("field-name");
-        const projOut = document.getElementById("field-project");
+        const contextOut = document.getElementById("field-context");
         const seedOut = document.getElementById("field-seed");
         const stepOut = document.getElementById("field-step");
-        const bar = document.getElementById("field-bar");
+        const segWrap = document.getElementById("field-segments");
+        const segs = segWrap ? [...segWrap.querySelectorAll("button")] : [];
 
-        const W = canvas.width, H = canvas.height, N = W * H;
+        /* Simulation grid. Keep its aspect close to the rendered hero so one
+           simulation cell remains roughly square after the final upscale.
+           The fixed cell budgets bound CPU work across viewport shapes. */
+        const narrow = window.matchMedia("(max-width: 700px)").matches;
+        const fieldRect = view.getBoundingClientRect();
+        const fieldAspect = Math.min(2.4, Math.max(0.42,
+          fieldRect.width / Math.max(1, fieldRect.height)));
+        const cellBudget = narrow ? 112000 : 196000;
+        const W = Math.max(200, Math.round(Math.sqrt(cellBudget * fieldAspect)));
+        const H = Math.max(160, Math.round(cellBudget / W));
+        const N = W * H;
+
         const today = new Date();
-        /* The seed is the whole point, so let the visitor test it: replay
-           re-runs the identical sequence from step zero, and a new seed gives a
-           different-but-equally-reproducible one. A claim you can check in five
-           seconds beats a claim you have to believe. */
-        let SEED = today.getUTCFullYear() * 10000 + (today.getUTCMonth() + 1) * 100 + today.getUTCDate();
+        const DAILY_SEED = today.getUTCFullYear() * 10000 + (today.getUTCMonth() + 1) * 100 + today.getUTCDate();
+        let SEED = DAILY_SEED;
+        let shareableSeed = false;
         const url = new URLSearchParams(location.search);
-        if (url.has("seed")) { const v = parseInt(url.get("seed"), 10); if (Number.isFinite(v)) SEED = v >>> 0; }
+        const seedParam = url.get("seed");
+        if (seedParam !== null && /^\d{1,10}$/.test(seedParam)) {
+          const parsedSeed = Number(seedParam);
+          if (Number.isSafeInteger(parsedSeed) && parsedSeed <= 0xffffffff) {
+            SEED = parsedSeed >>> 0;
+            shareableSeed = true;
+          }
+        }
+        contextOut.textContent = shareableSeed ? "Shareable seed" : "Shared daily seed";
         seedOut.textContent = String(SEED);
+
+        let INVERT = document.documentElement.getAttribute("data-theme") !== "dark";
 
         function prng(seed) {
           let s = seed >>> 0;
@@ -445,36 +631,57 @@
             return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
           };
         }
-        const img = ctx.createImageData(W, H), px = img.data;
+
+        /* One scratch buffer, blitted to whichever offscreen needs it. */
+        const scratch = document.createElement("canvas");
+        scratch.width = W; scratch.height = H;
+        const sctx = scratch.getContext("2d", { alpha: false });
+        const img = sctx.createImageData(W, H), px = img.data;
+
         const idx = (x, y) => ((y + H) % H) * W + ((x + W) % W);
-        const lerp = (a, b, t) => a + (b - a) * t;
+
+        /* Write one intensity value: 0 is substrate, 1 is full ink. */
+        function put(i, v) {
+          const g = (INVERT ? 255 - v * 255 : v * 255) | 0;
+          const o = i * 4;
+          px[o] = g; px[o + 1] = g; px[o + 2] = g; px[o + 3] = 255;
+        }
+
+        /* Two opaque plates. Crossfading is drawing B over A at an alpha,
+           which for opaque sources is exactly a linear interpolation. */
+        function plate() {
+          const c = document.createElement("canvas");
+          c.width = W; c.height = H;
+          return { el: c, ctx: c.getContext("2d", { alpha: false }) };
+        }
+        const plateA = plate(), plateB = plate();
 
         /* ---- 1. Gray-Scott ------------------------------------------- */
         function grayScott() {
           const rand = prng(SEED);
-          /* Scattered seed discs land too far apart at this resolution and
-             decay before they interact — identical parameters nucleate at
-             160x100 and die at 260x180. A central noisy patch is the standard
-             init and is resolution-independent. F/K chosen by sweep: this pair
-             keeps growing (16% → 48% → 62% coverage at 400/2000/8000 steps)
-             rather than settling to a still image. */
+          /* F/K chosen by sweep: this pair keeps growing rather than
+             settling to a still image. */
           const F = 0.046, K = 0.060;
           let a = new Float32Array(N).fill(1), b = new Float32Array(N),
               a2 = new Float32Array(N), b2 = new Float32Array(N);
           {
-            const x0 = (W*0.28)|0, x1 = (W*0.72)|0, y0 = (H*0.28)|0, y1 = (H*0.72)|0;
-            for (let y = y0; y < y1; y++) for (let x = x0; x < x1; x++)
-              if (rand() < 0.55) { const i = y*W + x; a[i] = 0.5; b[i] = 0.25; }
+            /* Seeded across the whole grid. An inset patch has to grow to the
+               edges during the warm-up, and at this resolution it does not get
+               there — it left the pattern floating as an island with a rounded
+               border. The grid wraps, so a full seed is also the only one that
+               is seamless at the edges. */
+            for (let i = 0; i < N; i++)
+              if (rand() < 0.55) { a[i] = 0.5; b[i] = 0.25; }
           }
-          const put = (cx, cy, r, v) => {
+          const disc = (cx, cy, r, v) => {
             for (let y = -r; y <= r; y++) for (let x = -r; x <= r; x++)
               if (x * x + y * y <= r * r) b[idx(cx + x, cy + y)] = Math.min(1, b[idx(cx + x, cy + y)] + v);
           };
           return {
-            name: "GRAY–SCOTT", project: "Ghalvera engine", warm: 500, perStep: 9,
+            name: "Gray–Scott", warm: 260, perStep: 1, tickMs: 75,
             step() {
-              // Row offsets hoisted; neighbour indices inlined. Calling a
-              // helper eight times per cell cost ~8x — 2.3ms/step vs 0.3.
+              /* Row offsets hoisted; neighbour indices inlined. Calling a
+                 helper eight times per cell cost roughly 8x. */
               for (let y = 0; y < H; y++) {
                 const yU = ((y-1+H)%H)*W, yD = ((y+1)%H)*W, yC = y*W;
                 for (let x = 0; x < W; x++) {
@@ -490,91 +697,24 @@
               }
               [a,a2]=[a2,a]; [b,b2]=[b2,b];
             },
-            poke(cx, cy) { put(cx, cy, 2, 0.35); },
+            poke(cx, cy) { disc(cx, cy, 3, 0.35); },
             paint() {
               for (let i = 0; i < N; i++) {
                 let v = a[i]-b[i]; v = v<0?0:v>1?1:v;
-                const t = 1-v, hot = t>0.55;
-                // Substrate is pure black so `mix-blend-mode: screen` leaves
-                // the page background untouched — screen(x,0) = x exactly.
-                px[i*4  ] = t*(hot?150:237);
-                px[i*4+1] = t*(hot?205:115);
-                px[i*4+2] = t*(hot?185:61);
-                px[i*4+3] = 255;
+                /* A solid texture rather than thin strokes, so at equal
+                   weight it reads as a slab. Held right down, it becomes a
+                   wash in both themes. */
+                put(i, (1 - v) * 0.34);
               }
             }
           };
         }
 
-        /* ---- 2. Cascade field ---------------------------------------- */
-        function cascade() {
-          /* Random per-cell thresholds render as uniform noise: nothing
-             propagates visibly. Spatially correlated thresholds give the field
-             terrain — cascades then run along channels of low resistance, and
-             painting activity rather than load makes the avalanche the subject
-             instead of the background. */
-          const rand = prng(SEED + 11);
-          const w = W >> 1, hh = H >> 1, n = w * hh;
-          const thr = new Float32Array(n), tmp = new Float32Array(n);
-          for (let i = 0; i < n; i++) thr[i] = rand();
-          for (let pass = 0; pass < 6; pass++) {           // smooth into terrain
-            for (let y = 0; y < hh; y++) for (let x = 0; x < w; x++) {
-              const i = y*w + x;
-              tmp[i] = 0.25*thr[i]
-                + 0.1875*(thr[y*w+((x+1)%w)] + thr[y*w+((x-1+w)%w)]
-                        + thr[((y+1)%hh)*w+x] + thr[((y-1+hh)%hh)*w+x]);
-            }
-            thr.set(tmp);
-          }
-          let lo = 1, hi = 0;
-          for (let i = 0; i < n; i++) { if (thr[i] < lo) lo = thr[i]; if (thr[i] > hi) hi = thr[i]; }
-          for (let i = 0; i < n; i++) thr[i] = 0.55 + 0.55 * ((thr[i]-lo)/(hi-lo));
-
-          const load = new Float32Array(n), act = new Float32Array(n), links = new Int32Array(n);
-          for (let i = 0; i < n; i++) { load[i] = rand()*0.25; links[i] = (rand()*n)|0; }
-          let t = 0;
-          return {
-            name: "CASCADE FIELD", project: "emergence", warm: 120, perStep: 3,
-            step() {
-              t++;
-              if (t % 26 === 0) load[(rand()*n)|0] += 3.2;    // sparse seeded shocks
-              for (let i = 0; i < n; i++) load[i] += 0.0009;
-              for (let y = 0; y < hh; y++) for (let x = 0; x < w; x++) {
-                const i = y*w + x;
-                if (load[i] > thr[i]) {
-                  const share = load[i] * 0.30;
-                  load[i] = 0; act[i] = 1;
-                  load[y*w+((x+1)%w)]      += share*0.28;
-                  load[y*w+((x-1+w)%w)]    += share*0.28;
-                  load[((y+1)%hh)*w+x]     += share*0.28;
-                  load[((y-1+hh)%hh)*w+x]  += share*0.28;
-                  load[links[i]]           += share*0.55;    // long-range coupling
-                }
-              }
-              for (let i = 0; i < n; i++) act[i] *= 0.935;
-            },
-            poke(cx, cy) { load[((cy>>1)%hh)*w + ((cx>>1)%w)] += 4.5; },
-            paint() {
-              for (let y = 0; y < H; y++) { const sy = (y>>1)*w, row = y*W;
-                for (let x = 0; x < W; x++) {
-                  const s = sy + (x>>1), i = (row + x)*4;
-                  const terr = (thr[s]-0.55)/0.55;           // faint landscape
-                  const a2 = act[s], glow = a2*a2;
-                  px[i  ] = terr*16 + glow*225;
-                  px[i+1] = terr*10 + glow*105;
-                  px[i+2] = terr*34 + glow*250;
-                  px[i+3] = 255;
-                } }
-            }
-          };
-        }
-
-        /* ---- 3. Neural field ----------------------------------------- */
+        /* ---- 2. Neural field ----------------------------------------- */
         function neuralField() {
-          /* A difference of Gaussians is separable: exp(-(dx²+dy²)/s) factors
-             into exp(-dx²/s)·exp(-dy²/s). Two 1D passes per lobe replace an
-             81-tap 2D convolution. Run at half resolution and upscale on
-             paint: together that took 110ms/step down to single digits. */
+          /* A difference of Gaussians is separable, so two 1D passes per lobe
+             replace a 2D convolution. Run on a half-resolution grid and
+             upscaled on paint. */
           const rand = prng(SEED + 23);
           const w = W >> 1, hh = H >> 1, n = w * hh;
           let u = new Float32Array(n), tmp = new Float32Array(n),
@@ -586,6 +726,25 @@
             for (let d = -R; d <= R; d++) { const v = Math.exp(-(d*d)/s); k.push(v); sum += v; }
             return k.map((v) => v / sum); };
           const gE = mk(3.2), gI = mk(16);
+
+          /* Bilinear sampling tables for the upscale. Computing the indices
+             and weights per output pixel — two floors and four modulos inside
+             the full output loop — cost 40ms a tick. Precomputed per axis it is a
+             handful of array reads. */
+          const xi0 = new Int32Array(W), xi1 = new Int32Array(W), xwt = new Float32Array(W);
+          for (let x = 0; x < W; x++) {
+            const fx = (x - 0.5) * 0.5, x0 = Math.floor(fx);
+            xi0[x] = ((x0 % w) + w) % w;
+            xi1[x] = (((x0 + 1) % w) + w) % w;
+            xwt[x] = fx - x0;
+          }
+          const yi0 = new Int32Array(H), yi1 = new Int32Array(H), ywt = new Float32Array(H);
+          for (let y = 0; y < H; y++) {
+            const fy = (y - 0.5) * 0.5, y0 = Math.floor(fy);
+            yi0[y] = ((((y0 % hh) + hh) % hh)) * w;
+            yi1[y] = (((((y0 + 1) % hh) + hh) % hh)) * w;
+            ywt[y] = fy - y0;
+          }
 
           function blur(src, dst, k) {
             for (let y = 0; y < hh; y++) { const row = y*w;
@@ -599,7 +758,7 @@
           }
 
           return {
-            name: "NEURAL FIELD", project: "Neural Field Study", warm: 80, perStep: 2,
+            name: "Neural field", warm: 60, perStep: 1, tickMs: 100,
             step() {
               blur(u, exc, gE); blur(u, inh, gI);
               for (let i = 0; i < n; i++) {
@@ -609,185 +768,679 @@
             },
             poke(cx, cy) {
               const x = cx >> 1, y = cy >> 1;
-              for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++)
+              for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++)
                 u[(((y+dy+hh)%hh))*w + ((x+dx+w)%w)] = 1;
             },
             paint() {
-              for (let y = 0; y < H; y++) { const sy = (y>>1)*w, row = y*W;
+              /* Bilinear across the half-resolution grid. Nearest-neighbour
+                 here is what made the labyrinth look like stairs once the
+                 canvas got large. This field also fills most of the frame, so
+                 it is painted lighter than the sparser ones to keep the
+                 ground's average weight even as the simulations rotate. */
+              for (let y = 0; y < H; y++) {
+                const r0 = yi0[y], r1 = yi1[y], ty = ywt[y], row = y * W;
                 for (let x = 0; x < W; x++) {
-                  const v0 = u[sy + (x>>1)], v = v0 < 0 ? 0 : v0 > 1 ? 1 : v0, i = (row + x)*4;
-                  px[i  ] = v*236;
-                  px[i+1] = v*150;
-                  px[i+2] = v*52;
-                  px[i+3] = 255;
-                } }
+                  const c0 = xi0[x], c1 = xi1[x], tx = xwt[x];
+                  const p = u[r0 + c0], q = u[r0 + c1], r = u[r1 + c0], s = u[r1 + c1];
+                  const top = p + (q - p) * tx, bot = r + (s - r) * tx;
+                  let v = top + (bot - top) * ty;
+                  v = v < 0 ? 0 : v > 1 ? 1 : v;
+                  put(row + x, v * 0.68);
+                }
+              }
             }
           };
         }
 
-        /* ---- 4. Order book ------------------------------------------- */
-        function orderBook() {
-          const rand = prng(SEED + 37);
-          const LV = 48;
-          const bid = new Float32Array(LV), ask = new Float32Array(LV);
-          for (let i = 0; i < LV; i++) { bid[i] = 0.35 + rand()*0.5; ask[i] = 0.35 + rand()*0.5; }
-          let mid = H/2, drift = 0, t = 0;
-          const trail = new Float32Array(N);
+        /* ---- 3. Wave interference ------------------------------------ */
+        function waveField() {
+          const rand = prng(SEED + 47);
+          const TAU = Math.PI * 2;
+          let phase = 0, nudge = 0;
+
+          /* Standing waves are separable. Precomputing their spatial bases
+             turns every later frame into multiply-adds instead of hundreds
+             of thousands of trigonometric calls. */
+          function basis(length, frequency, offset) {
+            const sin = new Float32Array(length), cos = new Float32Array(length);
+            for (let i = 0; i < length; i++) {
+              const a = i * frequency + offset;
+              sin[i] = Math.sin(a); cos[i] = Math.cos(a);
+            }
+            return { sin, cos };
+          }
+
+          const xA = basis(W, 0.036 + rand() * 0.024, rand() * TAU);
+          const yA = basis(H, 0.054 + rand() * 0.030, rand() * TAU);
+          const xB = basis(W, 0.061 + rand() * 0.032, rand() * TAU);
+          const yB = basis(H, 0.031 + rand() * 0.025, rand() * TAU);
+
           return {
-            name: "ORDER BOOK", project: "DeepLOB", warm: 40, perStep: 2,
-            step() {
-              t++;
-              drift = drift*0.94 + (rand()-0.5)*0.55;
-              mid = Math.max(H*0.25, Math.min(H*0.75, mid + drift*1.15));
-              for (let i = 0; i < LV; i++) {
-                bid[i] = Math.max(0.05, Math.min(1, bid[i] + (rand()-0.5)*0.16 - drift*0.01));
-                ask[i] = Math.max(0.05, Math.min(1, ask[i] + (rand()-0.5)*0.16 + drift*0.01));
-              }
-              for (let i = 0; i < N; i++) trail[i] *= 0.965;
-              const c = t % W;
+            name: "Wave interference", warm: 0, perStep: 1, tickMs: 90,
+            step() { phase += 0.052; nudge *= 0.94; },
+            poke(cx, cy) {
+              nudge = ((cx / W - 0.5) * 1.4 + (cy / H - 0.5) * 0.8) * Math.PI;
+            },
+            paint() {
+              const a = phase + nudge;
+              const b = -phase * 0.73 + nudge * 0.36;
+              const ca = Math.cos(a), sa = Math.sin(a);
+              const cb = Math.cos(b), sb = Math.sin(b);
+
               for (let y = 0; y < H; y++) {
-                const d = y - mid;
-                const lvl = Math.min(LV-1, (Math.abs(d) * (48/(H*0.42)))|0);
-                const depth = d < 0 ? ask[lvl] : bid[lvl];
-                trail[idx(c,y)] = Math.abs(d) < 2 ? 1 : depth * Math.exp(-Math.abs(d)/(H*0.145));
+                const ay = yA.sin[y] * ca + yA.cos[y] * sa;
+                const by = yB.sin[y] * cb + yB.cos[y] * sb;
+                const row = y * W;
+                for (let x = 0; x < W; x++) {
+                  const ax = xA.sin[x] * ca + xA.cos[x] * sa;
+                  const bx = xB.sin[x] * cb + xB.cos[x] * sb;
+                  let v = Math.abs((ax * ay + 0.72 * bx * by) / 1.72);
+                  v = Math.max(0, (v - 0.11) / 0.89);
+                  put(row + x, v * v * 0.64);
+                }
+              }
+            }
+          };
+        }
+
+        /* ---- 4. Advected flow --------------------------------------- */
+        function flowField() {
+          const rand = prng(SEED + 71);
+          const TAU = Math.PI * 2;
+          const count = narrow ? 460 : 820;
+          const x = new Float32Array(count), y = new Float32Array(count);
+          const life = new Uint16Array(count);
+          const trail = new Float32Array(N);
+          const flowX = new Float32Array(N), flowY = new Float32Array(N);
+          const aspect = W / H;
+          let time = 0, focusX = W / 2, focusY = H / 2, focus = 0;
+
+          function reset(i) {
+            x[i] = rand() * W;
+            y[i] = rand() * H;
+            life[i] = 55 + (rand() * 140) | 0;
+          }
+          function splat(px, py, amount) {
+            const p = idx(px, py);
+            trail[p] = Math.min(1.2, trail[p] + amount);
+          }
+          function deposit(qx, qy, amount) {
+            const px = Math.floor(qx), py = Math.floor(qy);
+            const fx = qx - px, fy = qy - py;
+            splat(px, py, amount * (1 - fx) * (1 - fy));
+            splat(px + 1, py, amount * fx * (1 - fy));
+            splat(px, py + 1, amount * (1 - fx) * fy);
+            splat(px + 1, py + 1, amount * fx * fy);
+          }
+          for (let i = 0; i < count; i++) reset(i);
+
+          return {
+            name: "Flow field", warm: narrow ? 72 : 104, perStep: 1, tickMs: 65,
+            step() {
+              time += 0.017;
+              focus *= 0.955;
+              for (let i = 0; i < N; i++) trail[i] *= 0.968;
+
+              for (let i = 0; i < count; i++) {
+                const nx = (x[i] / W) * TAU, ny = (y[i] / H) * TAU;
+                /* Velocity is derived from a scalar stream function. Its
+                   crossed partials cancel, so the base flow has no sinks to
+                   collapse particles into bright, shapeless clumps. */
+                const a = nx * 1.35 + time * 0.42;
+                const b = ny * 1.70 - time * 0.34;
+                const c = nx * 2.20 - ny * 1.25 + time * 0.27;
+                const sc = Math.sin(c);
+                let vx = aspect * (1.70 * Math.sin(a) * Math.cos(b) + 0.425 * sc);
+                let vy = -1.35 * Math.cos(a) * Math.sin(b) + 0.748 * sc;
+
+                if (focus > 0.002) {
+                  const dx = focusX - x[i], dy = focusY - y[i];
+                  const d2 = dx * dx + dy * dy + 120;
+                  vx += (-dy / d2) * focus * 72;
+                  vy += ( dx / d2) * focus * 72;
+                }
+
+                /* Preserve the velocity magnitude: normalising each vector
+                   would reintroduce compression and bunch the streamlines. */
+                const dx = vx * 0.44, dy = vy * 0.44;
+                const samples = Math.max(1, Math.ceil(Math.max(Math.abs(dx), Math.abs(dy))));
+                const amount = 0.24 / samples;
+                for (let sample = 1; sample <= samples; sample++) {
+                  const t = sample / samples;
+                  deposit(x[i] + dx * t, y[i] + dy * t, amount);
+                }
+                x[i] = (x[i] + dx + W) % W;
+                y[i] = (y[i] + dy + H) % H;
+
+                if (life[i] > 0) life[i]--;
+                else reset(i);
               }
             },
-            poke(cx, cy) { mid = cy; },
+            poke(cx, cy) { focusX = cx; focusY = cy; focus = 1; },
             paint() {
-              const c = t % W;
-              for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
-                const i = idx(x,y);
-                const v = trail[i];
-                const bidSide = y > mid;
-                const head = ((x - c + W) % W) < 6;
-                px[i*4  ] = v*(bidSide?  40 : 236) + (head ? 40 : 0);
-                px[i*4+1] = v*(bidSide? 200 : 118) + (head ? 40 : 0);
-                px[i*4+2] = v*(bidSide? 170 :  62) + (head ? 40 : 0);
-                px[i*4+3] = 255;
+              /* A five-tap separable Gaussian joins adjacent deposits into
+                 continuous filaments without increasing simulation size.
+                 Reused typed arrays keep the live path allocation-free. */
+              for (let y = 0; y < H; y++) {
+                const row = y * W;
+                for (let x = 0; x < W; x++) {
+                  const x2L = x < 2 ? x + W - 2 : x - 2;
+                  const xL = x === 0 ? W - 1 : x - 1;
+                  const xR = x === W - 1 ? 0 : x + 1;
+                  const x2R = x > W - 3 ? x - W + 2 : x + 2;
+                  flowX[row + x] = (
+                    trail[row + x2L] + 4 * trail[row + xL] + 6 * trail[row + x]
+                    + 4 * trail[row + xR] + trail[row + x2R]
+                  ) * 0.0625;
+                }
+              }
+              for (let y = 0; y < H; y++) {
+                const row = y * W;
+                const y2U = (y < 2 ? y + H - 2 : y - 2) * W;
+                const yU = (y === 0 ? H - 1 : y - 1) * W;
+                const yD = (y === H - 1 ? 0 : y + 1) * W;
+                const y2D = (y > H - 3 ? y - H + 2 : y + 2) * W;
+                for (let x = 0; x < W; x++) {
+                  const i = row + x;
+                  flowY[i] = (
+                    flowX[y2U + x] + 4 * flowX[yU + x] + 6 * flowX[i]
+                    + 4 * flowX[yD + x] + flowX[y2D + x]
+                  ) * 0.0625;
+                  /* Exponential tone mapping has no hard ceiling, so dense
+                     crossings retain gradation instead of forming slabs. */
+                  const v = 1 - Math.exp(-flowY[i] * 1.65);
+                  put(i, v * (0.42 + 0.08 * v));
+                }
               }
             }
           };
         }
 
-        const builders = [grayScott, cascade, neuralField, orderBook];
-        const DWELL = 15000, FADE = 900;
-        let cur = builders[0](), nextSim = null, curIdx = 0;
-        let steps = 0, running = true, fadeStart = 0, lastSwap = performance.now();
+        const builders = [grayScott, neuralField, waveField, flowField];
+        /* This is ground beneath the type, so its dwell is deliberately long:
+           frequent swaps read as distraction rather than ambient change. */
+        const DWELL = 26000, FADE = 1800;
+
+        /* Warm-up is expensive at this grid: several hundred steps of a few
+           milliseconds each. Run in one go it froze the page for well over a
+           second on load, which is the sort of thing a background is never
+           allowed to cost. It is spread across frames under a time budget
+           instead, so the field resolves out of its seed without monopolising
+           a frame. Startup itself waits until the page has loaded. */
+        const PRIME_MS = narrow ? 4 : 6;
+
+        let curIdx = 0, nextIdx = 0;
+        let cur = null, nextSim = null;
+        let steps = 0, running = !document.hidden, fading = false, fadeStart = 0;
+        let lastSwap = performance.now(), lastTickA = 0, lastTickB = 0, dirty = true;
         const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+        let inViewport = true, pausedAt = 0, raf = 0, settleRaf = 0;
 
-        function label(sim) { nameOut.textContent = sim.name; projOut.textContent = sim.project; }
-        function warm(sim) { for (let i = 0; i < sim.warm; i++) sim.step(); }
+        function make(i) { const s = builders[i](); s.pending = s.warm; return s; }
+        function prime(sim, budget, count) {
+          const t0 = performance.now();
+          while (sim.pending > 0 && performance.now() - t0 < budget) {
+            sim.step(); sim.pending--; if (count) steps++;
+          }
+          return sim.pending === 0;
+        }
 
-        warm(cur); label(cur); cur.paint(); ctx.putImageData(img, 0, 0);
+        /* -- display surface ------------------------------------------- */
+        let vw = 0, vh = 0;
+        function resize() {
+          const r = view.getBoundingClientRect();
+          if (!r.width || !r.height) return;
+          /* Cap the ratio and the total, so a 5K display does not ask the
+             compositor for a twenty-megapixel plate every frame. */
+          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+          let w = Math.round(r.width * dpr), h = Math.round(r.height * dpr);
+          const MAX = 5.2e6;
+          if (w * h > MAX) { const s = Math.sqrt(MAX / (w * h)); w = Math.round(w * s); h = Math.round(h * s); }
+          if (w === vw && h === vh) return;
+          vw = view.width = w; vh = view.height = h;
+          vctx.imageSmoothingEnabled = true;
+          vctx.imageSmoothingQuality = "high";
+          dirty = true;
+        }
+        resize();
+        if ("ResizeObserver" in window) new ResizeObserver(resize).observe(view);
+        else window.addEventListener("resize", resize, { passive: true });
 
+        function blit(target) {
+          sctx.putImageData(img, 0, 0);
+          target.ctx.drawImage(scratch, 0, 0);
+        }
+        function compose(k) {
+          if (!vw) return;
+          vctx.globalAlpha = 1;
+          vctx.drawImage(plateA.el, 0, 0, vw, vh);
+          if (fading) {
+            vctx.globalAlpha = k;
+            vctx.drawImage(plateB.el, 0, 0, vw, vh);
+            vctx.globalAlpha = 1;
+          }
+        }
+
+        function label(sim, i) {
+          nameOut.textContent = sim.name;
+          segs.forEach((s, n) => {
+            const active = n === i;
+            s.classList.toggle("is-active", active);
+            s.setAttribute("aria-pressed", String(active));
+          });
+          view.setAttribute(
+            "aria-label",
+            `${sim.name} simulation, deterministic seed ${SEED}. Replay restarts this seeded sequence.`
+          );
+        }
+
+        cur = make(0);
+        label(cur, 0);
+        cur.paint(); blit(plateA); compose(0);
+        if (fieldLayer) fieldLayer.classList.add("is-live");
+
+        /* The canvas sits behind the copy and takes no pointer events, so the
+           hero listens on its behalf. Text stays selectable; the field still
+           responds. */
         let lastPoke = 0;
-        canvas.addEventListener("pointermove", (e) => {
+        const stage = view.closest(".hero") || view;
+        stage.addEventListener("pointermove", (e) => {
           const now = performance.now();
-          if (now - lastPoke < 90) return;
+          if (!running || now - lastPoke < 90 || cur.pending) return;
           lastPoke = now;
-          const r = canvas.getBoundingClientRect();
+          const r = view.getBoundingClientRect();
+          if (!r.width) return;
           cur.poke(
             Math.floor(((e.clientX - r.left) / r.width) * W),
             Math.floor(((e.clientY - r.top) / r.height) * H)
           );
         });
 
+        function queueFrame() {
+          if (!reduce.matches && running && !raf) raf = requestAnimationFrame(frame);
+        }
+
+        function setRunning(next) {
+          if (next === running) return;
+          const now = performance.now();
+          if (!next) {
+            running = false;
+            pausedAt = now;
+            if (raf) { cancelAnimationFrame(raf); raf = 0; }
+            return;
+          }
+          const pause = pausedAt ? now - pausedAt : 0;
+          lastSwap += pause;
+          if (fading) fadeStart += pause;
+          lastTickA = lastTickB = now;
+          running = true;
+          queueFrame();
+        }
+
         if ("IntersectionObserver" in window) {
-          new IntersectionObserver((es) => { running = es[0].isIntersecting; }, { threshold: 0 })
-            .observe(canvas);
+          new IntersectionObserver((es) => {
+            inViewport = es[0].isIntersecting;
+            setRunning(inViewport && !document.hidden);
+          }, { threshold: 0 }).observe(view);
+        }
+        document.addEventListener("visibilitychange", () => setRunning(inViewport && !document.hidden));
+
+        function beginFade(to) {
+          if (nextSim) return;
+          const t = ((to === undefined ? curIdx + 1 : to) + builders.length) % builders.length;
+          if (t === curIdx) return;
+          nextIdx = t;
+          nextSim = make(t);
+          fading = false;
+        }
+
+        let lastProgress = 0;
+        function readout(now) {
+          if (now - lastProgress < 120) return;
+          lastProgress = now;
+          stepOut.textContent = String(steps);
+          const p = cur.pending ? 0 : fading || nextSim ? 1 : Math.min(1, (now - lastSwap) / DWELL);
+          segs.forEach((s, n) => s.style.setProperty("--p", n === curIdx ? p.toFixed(3) : "0"));
         }
 
         function frame(now) {
-          requestAnimationFrame(frame);
-          if (!running) { lastSwap = now - (now - lastSwap); return; }
+          raf = 0;
+          if (!running) return;
 
-          if (!nextSim && now - lastSwap > DWELL) {
-            curIdx = (curIdx + 1) % builders.length;
-            nextSim = builders[curIdx]();
-            warm(nextSim);
-            fadeStart = now;
+          if (cur.pending) {
+            prime(cur, PRIME_MS, true);
+            cur.paint(); blit(plateA); compose(0);
+            lastTickA = now; lastSwap = now;
+            readout(now);
+            queueFrame();
+            return;
           }
 
-          for (let i = 0; i < cur.perStep; i++) cur.step();
-          steps += cur.perStep;
+          if (!nextSim && now - lastSwap > DWELL) beginFade();
 
-          if (nextSim) {
+          if (nextSim && !fading && (!nextSim.pending || prime(nextSim, PRIME_MS, false))) {
+            nextSim.paint(); blit(plateB);
+            fadeStart = now; lastTickB = now; fading = true;
+          }
+
+          if (now - lastTickA >= cur.tickMs) {
+            for (let i = 0; i < cur.perStep; i++) cur.step();
+            steps += cur.perStep;
+            cur.paint(); blit(plateA);
+            lastTickA = now; dirty = true;
+          }
+
+          if (fading) {
+            if (now - lastTickB >= nextSim.tickMs) {
+              for (let i = 0; i < nextSim.perStep; i++) nextSim.step();
+              nextSim.paint(); blit(plateB);
+              lastTickB = now;
+            }
             const k = Math.min(1, (now - fadeStart) / FADE);
-            for (let i = 0; i < nextSim.perStep; i++) nextSim.step();
-            cur.paint();
-            const under = new Uint8ClampedArray(px);
-            nextSim.paint();
-            for (let i = 0; i < px.length; i++) px[i] = lerp(under[i], px[i], k);
-            if (k >= 1) { cur = nextSim; nextSim = null; lastSwap = now; label(cur); steps = 0; }
-            else if (k > 0.5) label(nextSim);
-          } else {
-            cur.paint();
+            compose(k);
+            if (k > 0.5 && nameOut.textContent !== nextSim.name) label(nextSim, nextIdx);
+            if (k >= 1) {
+              cur = nextSim; curIdx = nextIdx; nextSim = null; fading = false;
+              lastSwap = now; steps = 0;
+              cur.paint(); blit(plateA); compose(0);
+            }
+            dirty = false;
+          } else if (dirty) {
+            compose(0);
+            dirty = false;
           }
 
-          ctx.putImageData(img, 0, 0);
-          stepOut.textContent = String(steps);
-          bar.style.width = nextSim ? "100%" : ((now - lastSwap) / DWELL * 100).toFixed(1) + "%";
+          readout(now);
+          queueFrame();
         }
 
-        function restart(newSeed) {
-          if (newSeed !== undefined) { SEED = newSeed >>> 0; seedOut.textContent = String(SEED); }
-          nextSim = null;
-          cur = builders[curIdx]();
-          warm(cur);
-          label(cur);
+        /* Reduced motion: let the field settle out of its seed once, then
+           leave it alone. The readout stops changing with the settled field. */
+        function settle() {
+          settleRaf = 0;
+          prime(cur, PRIME_MS, true);
+          cur.paint(); blit(plateA); compose(0);
+          stepOut.textContent = String(steps);
+          if (cur.pending) settleRaf = requestAnimationFrame(settle);
+        }
+
+        function restart(newSeed, publishSeed) {
+          if (newSeed !== undefined) {
+            SEED = newSeed >>> 0;
+            seedOut.textContent = String(SEED);
+            let context = "Shareable seed";
+            if (publishSeed) {
+              try {
+                const shareUrl = new URL(location.href);
+                shareUrl.searchParams.set("seed", String(SEED));
+                history.replaceState(null, "", shareUrl);
+              } catch (error) {
+                context = "Local seed";
+              }
+            }
+            contextOut.textContent = context;
+          }
+          if (settleRaf) { cancelAnimationFrame(settleRaf); settleRaf = 0; }
+          nextSim = null; fading = false;
+          cur = make(curIdx);
+          label(cur, curIdx);
+          if (reduce.matches) segs.forEach((s, n) =>
+            s.style.setProperty("--p", n === curIdx ? "1" : "0")
+          );
           steps = 0;
           lastSwap = performance.now();
-          cur.paint();
-          ctx.putImageData(img, 0, 0);
+          cur.paint(); blit(plateA); compose(0);
           stepOut.textContent = "0";
+          if (reduce.matches) settle();
         }
 
         const replayBtn = document.getElementById("field-replay");
         const seedBtn = document.getElementById("field-newseed");
         if (replayBtn) replayBtn.addEventListener("click", () => restart());
         if (seedBtn) seedBtn.addEventListener("click", () => {
-          // Deterministic even in how it picks the next seed: derived from the
-          // current one, so the sequence of seeds is itself reproducible.
-          restart((SEED * 1103515245 + 12345) >>> 8);
+          /* Deterministic even in how it picks the next seed: derived from the
+             current one with explicit 32-bit arithmetic, so the sequence of
+             seeds is itself reproducible without floating-point truncation. */
+          restart((Math.imul(SEED, 1664525) + 1013904223) >>> 0, true);
+        });
+        segs.forEach((s, n) => s.addEventListener("click", () => {
+          if (n === curIdx) { restart(); return; }
+          if (reduce.matches) { curIdx = n; restart(); }
+          else beginFade(n);
+        }));
+
+        /* A still frame still has to follow the theme. */
+        window.addEventListener("themechange", () => {
+          INVERT = document.documentElement.getAttribute("data-theme") !== "dark";
+          cur.paint(); blit(plateA);
+          if (nextSim && !nextSim.pending) { nextSim.paint(); blit(plateB); }
+          dirty = true;
+          compose(fading ? Math.min(1, (performance.now() - fadeStart) / FADE) : 0);
         });
 
-        if (!reduce.matches) requestAnimationFrame(frame);
-        else { bar.style.width = "100%"; }
+        if (!reduce.matches) queueFrame();
+        else {
+          settle();
+          segs.forEach((s, n) => s.style.setProperty("--p", n === curIdx ? "1" : "0"));
+        }
+      }
+
+      /* Let the document, fonts and still fallback paint before allocating or
+         evolving the live field. The simulation is ornamental; it must never
+         delay the page's actual content. */
+      (function scheduleHeroField() {
+        const launch = () => {
+          if ("requestIdleCallback" in window) {
+            requestIdleCallback(heroField, { timeout: 900 });
+          } else {
+            setTimeout(heroField, 120);
+          }
+        };
+        if (document.readyState === "complete") launch();
+        else window.addEventListener("load", launch, { once: true });
       })();
     </script>
 
     <script>
+      /* ---------------------------------------------------------------
+         Technical murmuration. Real notation from the work follows its own
+         closed, harmonic flight path below the hero. Scale and opacity create
+         depth without borrowing footage or allocating a canvas. It remains
+         atmosphere rather than content: assistive technology never receives
+         it, reduced-motion users never see it, and every path is deterministic.
+      --------------------------------------------------------------- */
+      (function technicalManuscript() {
+        const fields = [...document.querySelectorAll(".notation-field")];
+        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+        if (!fields.length || reduce.matches) return;
+
+        const KEYFRAME_COUNT = 25;
+        const TAU = Math.PI * 2;
+
+        const notationFragments = Object.freeze([
+          { kind: "equation", text: "∂u/∂t = D∇²u + f(u)" },
+          { kind: "equation", text: "arg minθ  𝔼[L(y, fθ(x))]" },
+          { kind: "equation", text: "p(yₜ₊ₕ | x₁:ₜ)" },
+          { kind: "equation", text: "H(X) = −Σ p(x) log p(x)" },
+          { kind: "equation", text: "λₘₐₓ(J) < 1" },
+          { kind: "equation", text: "∫₀ᵀ L(θ, t) dt" },
+          { kind: "tensor", text: "X ∈ ℝᴮ×ᵀ×ᶠ" },
+          { kind: "tensor", text: "Wq, Wk, Wv ∈ ℝᵈ×ᵈ" },
+          { kind: "tensor", text: "A : [nodes × nodes]" },
+          { kind: "tensor", text: "Ŷ : [batch × horizon × class]" },
+          { kind: "tensor", text: "state ∈ ℝᴴ×ᵂ×ᶜ" },
+          { kind: "split", text: "train 0…t₀−h   │ gap h │   validation t₀…t₁" },
+          { kind: "split", text: "overlap(train, validation) = 0" },
+          { kind: "split", text: "purge = lookback + horizon − 1" },
+          { kind: "split", text: "fit X[train_idx]  →  transform X[val_idx]" },
+          { kind: "split", text: "fold k  │ embargo │  fold k+1" },
+          { kind: "code", text: "assert overlap === 0" },
+          { kind: "code", text: "await pipeline.run(batch)" },
+          { kind: "code", text: "field.step({ seed, dt })" },
+          { kind: "code", text: "snapshot = replay(seed, step)" },
+          { kind: "code", text: "with torch.no_grad(): model(x)" },
+          { kind: "code", text: "SELECT event_time, value FROM stream" },
+          { kind: "code", text: "MERGE INTO target USING changes" },
+          { kind: "code", text: "for edge in graph: propagate(edge)" },
+          { kind: "code", text: "if (!contract.holds) fail();" },
+          { kind: "code", text: "yield Evidence(observed, unseen)" }
+        ]);
+
+        const density = { work: 22, practice: 18, about: 12, contact: 8 };
+        const fieldAnimations = new WeakMap();
+        const fieldVisibility = new WeakMap();
+
+        function hash(value) {
+          let h = 2166136261;
+          for (let i = 0; i < value.length; i++) {
+            h ^= value.charCodeAt(i);
+            h = Math.imul(h, 16777619);
+          }
+          return h >>> 0;
+        }
+
+        function seeded(seed) {
+          let s = seed >>> 0;
+          return () => {
+            s = (s + 0x6d2b79f5) >>> 0;
+            let t = s;
+            t = Math.imul(t ^ (t >>> 15), t | 1);
+            t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+            return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+          };
+        }
+
+        /* A closed three-harmonic path gives every fragment a different curl
+           while keeping the endpoints identical. The scale pulse is its depth
+           axis: marks approach, turn and recede instead of sliding as a sheet. */
+        function makeDriftPath(rand, depth, handedness) {
+          const phase = rand() * TAU;
+          const twist = rand() * TAU;
+          const radiusX = 4.2 + rand() * 10.8;
+          const radiusY = 28 + rand() * 88;
+          const baseScale = 0.74 + depth * 0.30;
+          const scaleRange = 0.055 + depth * 0.10;
+          const baseOpacity = 0.62 + depth * 0.24;
+          const tilt = -4 + rand() * 8;
+
+          return Array.from({ length: KEYFRAME_COUNT }, (_, step) => {
+            const t = (step / (KEYFRAME_COUNT - 1)) * TAU;
+            const dx = handedness * (
+              Math.cos(t + phase) * radiusX
+              + Math.sin(2 * t + twist) * radiusX * 0.36
+              + Math.cos(3 * t - twist) * radiusX * 0.13
+            );
+            const dy =
+              Math.sin(t + phase) * radiusY
+              + Math.cos(2 * t + twist) * radiusY * 0.29
+              + Math.sin(3 * t + phase) * radiusY * 0.09;
+            const scale = baseScale + Math.sin(t + twist) * scaleRange;
+            const rotation = tilt + handedness * (
+              Math.sin(2 * t + phase) * 5.5 + Math.cos(3 * t + twist) * 2
+            );
+            const opacity = Math.max(
+              0.42,
+              Math.min(1, baseOpacity + Math.cos(t + twist) * 0.14)
+            );
+
+            return {
+              offset: step / (KEYFRAME_COUNT - 1),
+              transform: `translate3d(${dx.toFixed(2)}vw, ${dy.toFixed(2)}px, 0) rotate(${rotation.toFixed(2)}deg) scale(${scale.toFixed(3)})`,
+              opacity: opacity.toFixed(3)
+            };
+          });
+        }
+
+        function setFieldMotion(field, isVisible) {
+          fieldVisibility.set(field, isVisible);
+          const running = isVisible && !reduce.matches;
+          field.classList.toggle("is-running", running);
+          (fieldAnimations.get(field) || []).forEach((animation) => {
+            if (running === (animation.playState === "running")) return;
+            animation[running ? "play" : "pause"]();
+          });
+        }
+
+        fields.forEach((field) => {
+          const key = field.dataset.notation;
+          const count = density[key] || 10;
+          const rand = seeded(hash("manuscript:" + key));
+          const start = Math.floor(rand() * notationFragments.length);
+          const handedness = hash(key) % 2 ? 1 : -1;
+          const animations = [];
+
+          for (let layerIndex = 0; layerIndex < 2; layerIndex++) {
+            const layer = document.createElement("div");
+            layer.className = "notation-layer notation-layer-" + (layerIndex + 1);
+            const layerCount = Math.ceil(count / 2);
+
+            for (let i = 0; i < layerCount; i++) {
+              const fragment = notationFragments[
+                (start + layerIndex * 11 + i * 7) % notationFragments.length
+              ];
+              const mark = document.createElement("span");
+              mark.className = "notation-mark is-" + fragment.kind;
+              mark.textContent = fragment.text;
+              const depth = 0.18 + rand() * 0.82;
+              mark.style.setProperty("--x", (2 + rand() * 92).toFixed(2) + "%");
+              mark.style.setProperty("--y", (-3 + ((i + rand() * 0.72) / layerCount) * 106).toFixed(2) + "%");
+              mark.style.setProperty("--size", (9.8 + depth * 5.4).toFixed(2) + "px");
+              mark.style.setProperty("--tilt", (-2.5 + rand() * 5).toFixed(2) + "deg");
+              layer.append(mark);
+
+              if (typeof mark.animate === "function") {
+                const duration = 24000 + rand() * 26000;
+                const animation = mark.animate(makeDriftPath(rand, depth, handedness), {
+                  duration,
+                  delay: -rand() * duration,
+                  iterations: Infinity,
+                  easing: "linear",
+                  fill: "both"
+                });
+                animation.pause();
+                animations.push(animation);
+              }
+            }
+            field.append(layer);
+          }
+
+          fieldAnimations.set(field, animations);
+          field.dataset.motion = animations.length ? "curved" : "static";
+        });
+
+        if ("IntersectionObserver" in window) {
+          const observer = new IntersectionObserver(
+            (entries) => entries.forEach((entry) =>
+              setFieldMotion(entry.target, entry.isIntersecting)
+            ),
+            { rootMargin: "18% 0px", threshold: 0 }
+          );
+          fields.forEach((field) => observer.observe(field));
+        } else {
+          fields.forEach((field) => setFieldMotion(field, true));
+        }
+
+        reduce.addEventListener?.("change", () => {
+          fields.forEach((field) => setFieldMotion(field, fieldVisibility.get(field) || false));
+        });
+      })();
+
       /* Copy buttons on terminal blocks. */
       document.querySelectorAll(".copy-btn").forEach((btn) => {
         btn.addEventListener("click", async () => {
           const code = btn.parentElement.querySelector("code");
           try {
             await navigator.clipboard.writeText(code.textContent.trim());
-            btn.textContent = "copied";
-            setTimeout(() => (btn.textContent = "copy"), 1600);
-          } catch { btn.textContent = "select it"; }
+            btn.textContent = "Copied";
+            setTimeout(() => (btn.textContent = "Copy"), 1600);
+          } catch { btn.textContent = "Select it"; }
         });
       });
 
-      /* Live npm metadata. The site checks its own claim rather than asserting it. */
-      (async function npmLive() {
-        const el = document.getElementById("npm-live");
-        if (!el) return;
-        try {
-          const r = await fetch("https://registry.npmjs.org/trace-npm", { cache: "no-store" });
-          if (!r.ok) return;
-          const j = await r.json();
-          const v = (j["dist-tags"] && (j["dist-tags"].latest || j["dist-tags"].alpha)) || null;
-          if (!v) return;
-          el.textContent = "v" + v + " on npm";
-          el.hidden = false;
-        } catch { /* offline or blocked — the card reads fine without it */ }
-      })();
-
-      /* Reveal on scroll. Respects reduced motion. */
+      /* Reveal on scroll. Opacity only, and nothing at all under reduced motion. */
       (function reveal() {
         const rm = window.matchMedia("(prefers-reduced-motion: reduce)");
-        const targets = document.querySelectorAll(".card, .stream-head, .principle, .section-heading");
+        const targets = document.querySelectorAll(".card, .stream-head, .principle, .rule, .section-head");
         if (rm.matches || !("IntersectionObserver" in window)) {
           targets.forEach((t) => t.classList.add("is-in"));
           return;
@@ -796,174 +1449,43 @@
           (entries) => entries.forEach((e) => {
             if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); }
           }),
-          { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+          { threshold: 0.08, rootMargin: "0px 0px -32px 0px" }
         );
         targets.forEach((t) => { t.classList.add("reveal"); io.observe(t); });
       })();
 
-      /* Command palette. ⌘K / Ctrl+K. */
-      (function palette() {
-        const items = [
-          { label: "Work", hint: "section", href: "#work" },
-          { label: "Method", hint: "section", href: "#approach" },
-          { label: "The Standard", hint: "seven rules", href: "#standard" },
-          { label: "About", hint: "section", href: "#about" },
-          { label: "Contact", hint: "section", href: "#contact" },
-          { label: "Neural Field Study", hint: "live study", href: "https://joshuadefreitas.github.io/neural-field-study/" },
-          { label: "DeepLOB", hint: "repository", href: "https://github.com/joshuadefreitas/deep-lob" },
-          { label: "trace-npm", hint: "npm package", href: "https://www.npmjs.com/package/trace-npm" },
-          { label: "dbx-core", hint: "repository", href: "https://github.com/joshuadefreitas/dbx-core" },
-          { label: "GitHub", hint: "profile", href: "https://github.com/joshuadefreitas" },
-          { label: "LinkedIn", hint: "profile", href: "https://www.linkedin.com/in/defreitasjoshua/" },
-          { label: "Email", hint: "jamesdefreitas@outlook.com", href: "mailto:jamesdefreitas@outlook.com" }
-        ];
-        const root = document.getElementById("palette");
-        const input = document.getElementById("palette-input");
-        const list = document.getElementById("palette-list");
-        let filtered = items, active = 0;
-
-        function render() {
-          list.innerHTML = filtered
-            .map((it, i) =>
-              `<li role="option" aria-selected="${i === active}" class="${i === active ? "is-active" : ""}" data-i="${i}">` +
-              `<span>${it.label}</span><em>${it.hint}</em></li>`)
-            .join("");
-        }
-        function open() {
-          root.hidden = false; input.value = ""; filtered = items; active = 0; render();
-          requestAnimationFrame(() => input.focus());
-        }
-        function close() { root.hidden = true; }
-        function go() {
-          const it = filtered[active];
-          if (!it) return;
-          close();
-          if (it.href.startsWith("#")) document.querySelector(it.href).scrollIntoView({ behavior: "smooth" });
-          else window.open(it.href, it.href.startsWith("mailto:") ? "_self" : "_blank", "noopener");
-        }
-
-        document.getElementById("palette-open").addEventListener("click", open);
-        document.addEventListener("keydown", (e) => {
-          if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); root.hidden ? open() : close(); }
-          if (root.hidden) return;
-          if (e.key === "Escape") close();
-          if (e.key === "ArrowDown") { e.preventDefault(); active = (active + 1) % filtered.length; render(); }
-          if (e.key === "ArrowUp") { e.preventDefault(); active = (active - 1 + filtered.length) % filtered.length; render(); }
-          if (e.key === "Enter") { e.preventDefault(); go(); }
-        });
-        input.addEventListener("input", () => {
-          const q = input.value.toLowerCase();
-          filtered = items.filter((it) => (it.label + " " + it.hint).toLowerCase().includes(q));
-          active = 0; render();
-        });
-        list.addEventListener("click", (e) => {
-          const li = e.target.closest("li"); if (!li) return;
-          active = Number(li.dataset.i); go();
-        });
-        root.addEventListener("click", (e) => { if (e.target === root) close(); });
-      })();
-
-      /* ---------------------------------------------------------------
-         v19 — depth interactions.
-
-         Two effects, both cheap and both disabled under
-         prefers-reduced-motion:
-
-         1. Scroll progress. A 2px bar driven by transform: scaleX, so
-            it never triggers layout. Updated inside rAF and coalesced,
-            so a fast scroll produces one write per frame rather than
-            one per event.
-
-         2. Card tilt. Pointer position is mapped to at most 4 degrees
-            of rotation about each axis. The values are written as CSS
-            custom properties and the transform itself lives in the
-            stylesheet, so the motion stays declarative and the reduced
-            motion media query can cancel it without touching this code.
-      --------------------------------------------------------------- */
-      (function () {
-        const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        if (reduced) return;
-
-        /* -- scroll progress ---------------------------------------- */
-        const bar = document.getElementById("scroll-progress");
-        if (bar) {
-          let ticking = false;
-          const update = () => {
-            const max = document.documentElement.scrollHeight - window.innerHeight;
-            const pct = max > 0 ? window.scrollY / max : 0;
-            bar.style.transform = "scaleX(" + Math.min(1, Math.max(0, pct)) + ")";
-            ticking = false;
-          };
-          const onScroll = () => {
-            if (ticking) return;
-            ticking = true;
-            requestAnimationFrame(update);
-          };
-          window.addEventListener("scroll", onScroll, { passive: true });
-          window.addEventListener("resize", onScroll, { passive: true });
-          update();
-        }
-
-        /* -- active section in the nav ------------------------------ */
-        /* With a sticky header there is now a persistent place to show
-           where you are. rootMargin pulls the detection line down to
-           just under the header so a section counts as current when it
-           reaches the reading position, not when it first peeks in. */
+      /* Current section in the nav. The detection line sits just under the
+         sticky header, so a section counts as current when it reaches the
+         reading position rather than when it first peeks in. */
+      (function currentSection() {
         const navLinks = [...document.querySelectorAll('.site-nav a[href^="#"]')];
         const targets = navLinks
           .map((a) => document.querySelector(a.getAttribute("href")))
           .filter(Boolean);
-        if (targets.length && "IntersectionObserver" in window) {
-          const seen = new Map();
-          const io = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((e) => seen.set(e.target.id, e.intersectionRatio));
-              let best = null, bestRatio = 0;
-              seen.forEach((ratio, id) => {
-                if (ratio > bestRatio) { bestRatio = ratio; best = id; }
-              });
-              navLinks.forEach((a) =>
-                a.classList.toggle("is-current", best !== null && a.getAttribute("href") === "#" + best)
-              );
-            },
-            { rootMargin: "-88px 0px -55% 0px", threshold: [0, 0.15, 0.4, 0.75, 1] }
+        if (!targets.length || !("IntersectionObserver" in window)) return;
+        const header = document.querySelector(".site-header");
+        const seen = new Map();
+        let io = null;
+        const onIntersect = (entries) => {
+          entries.forEach((e) => seen.set(e.target.id, e.intersectionRatio));
+          let best = null, bestRatio = 0;
+          seen.forEach((ratio, id) => { if (ratio > bestRatio) { bestRatio = ratio; best = id; } });
+          navLinks.forEach((a) =>
+            a.classList.toggle("is-current", best !== null && a.getAttribute("href") === "#" + best)
           );
+        };
+        const observe = () => {
+          if (io) io.disconnect();
+          seen.clear();
+          const headerHeight = Math.ceil(header ? header.getBoundingClientRect().height : 80);
+          io = new IntersectionObserver(onIntersect, {
+            rootMargin: `-${headerHeight}px 0px -55% 0px`,
+            threshold: [0, 0.15, 0.4, 0.75, 1]
+          });
           targets.forEach((t) => io.observe(t));
-        }
-
-        /* -- card tilt ---------------------------------------------- */
-        const MAX_TILT = 4; // degrees. Past ~6 it stops reading as material.
-        document.querySelectorAll(".card").forEach((card) => {
-          let frame = 0;
-          const move = (e) => {
-            if (frame) return;
-            frame = requestAnimationFrame(() => {
-              frame = 0;
-              const r = card.getBoundingClientRect();
-              const x = (e.clientX - r.left) / r.width;
-              const y = (e.clientY - r.top) / r.height;
-              card.style.setProperty("--tilt-y", ((x - 0.5) * 2 * MAX_TILT).toFixed(2) + "deg");
-              card.style.setProperty("--tilt-x", ((0.5 - y) * 2 * MAX_TILT).toFixed(2) + "deg");
-              card.style.setProperty("--px", (x * 100).toFixed(1) + "%");
-              card.style.setProperty("--py", (y * 100).toFixed(1) + "%");
-            });
-          };
-          card.addEventListener("pointerenter", (e) => {
-            if (e.pointerType === "touch") return;
-            card.classList.add("is-tilting");
-            move(e);
-          });
-          card.addEventListener("pointermove", (e) => {
-            if (e.pointerType === "touch") return;
-            move(e);
-          });
-          card.addEventListener("pointerleave", () => {
-            if (frame) { cancelAnimationFrame(frame); frame = 0; }
-            card.classList.remove("is-tilting");
-            card.style.setProperty("--tilt-x", "0deg");
-            card.style.setProperty("--tilt-y", "0deg");
-          });
-        });
+        };
+        observe();
+        if (header && "ResizeObserver" in window) new ResizeObserver(observe).observe(header);
       })();
     </script>
   </body>

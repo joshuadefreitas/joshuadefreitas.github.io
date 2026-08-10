@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">Joshua de Freitas — Senior Data Engineer</title>
+  <desc id="description">A monochrome editorial card with Joshua de Freitas's name and a quiet deterministic field motif.</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0c0d0f"/>
+      <stop offset="1" stop-color="#15171b"/>
+    </linearGradient>
+    <linearGradient id="silver" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#777d86"/>
+      <stop offset="0.45" stop-color="#e3e6ea"/>
+      <stop offset="1" stop-color="#747a83"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="72%" cy="42%" r="48%">
+      <stop offset="0" stop-color="#d7dbe1" stop-opacity="0.11"/>
+      <stop offset="1" stop-color="#d7dbe1" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="58" height="58" patternUnits="userSpaceOnUse">
+      <path d="M58 0H0V58" fill="none" stroke="#e3e6ea" stroke-opacity="0.045"/>
+    </pattern>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+    <clipPath id="field-clip"><rect x="660" width="540" height="630"/></clipPath>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#paper)"/>
+  <rect x="640" width="560" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <g clip-path="url(#field-clip)" fill="none" stroke-linecap="round">
+    <g filter="url(#soft)" stroke="#e7eaee" stroke-opacity="0.18" stroke-width="18">
+      <path d="M655 172C744 72 804 264 887 166S1024 99 1212 176"/>
+      <path d="M653 300C744 199 819 385 906 287s176-59 311 37"/>
+      <path d="M676 442c83-91 151 60 233-31s171-61 310 27"/>
+    </g>
+    <g stroke="#cfd4db" stroke-opacity="0.31" stroke-width="1.5">
+      <path d="M632 161C731 42 808 253 890 151s174-68 335 21"/>
+      <path d="M625 189C728 86 796 282 884 184s188-69 343 30"/>
+      <path d="M631 285C726 170 814 377 900 273s176-63 329 33"/>
+      <path d="M620 316C727 210 807 403 902 303s187-55 333 37"/>
+      <path d="M644 425c93-105 173 73 258-30s181-62 327 35"/>
+      <path d="M652 458c92-92 166 71 254-26s176-55 319 38"/>
+    </g>
+    <g fill="#dce0e5">
+      <circle cx="768" cy="129" r="3" opacity="0.7"/>
+      <circle cx="891" cy="151" r="3" opacity="0.45"/>
+      <circle cx="818" cy="322" r="3" opacity="0.55"/>
+      <circle cx="997" cy="269" r="3" opacity="0.35"/>
+      <circle cx="904" cy="395" r="3" opacity="0.5"/>
+    </g>
+  </g>
+
+  <path d="M80 95H1120" stroke="url(#silver)" stroke-opacity="0.62"/>
+  <text x="80" y="72" fill="#a4aab2" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" letter-spacing="3">SENIOR DATA ENGINEER · MADRID</text>
+
+  <text x="76" y="249" fill="#f0f1f3" font-family="Georgia, 'Times New Roman', serif" font-size="84" letter-spacing="-3">Joshua de Freitas</text>
+  <text x="82" y="316" fill="#b8bdc5" font-family="Helvetica Neue, Arial, sans-serif" font-size="24" letter-spacing="0.2">Data platforms and the systems that keep them dependable.</text>
+
+  <g fill="#9298a1" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" letter-spacing="1.1">
+    <text x="82" y="494">DATA PLATFORMS</text>
+    <text x="256" y="494">/</text>
+    <text x="284" y="494">APPLIED AI</text>
+    <text x="408" y="494">/</text>
+    <text x="436" y="494">SYSTEMS</text>
+  </g>
+
+  <path d="M80 544H1120" stroke="#d7dbe1" stroke-opacity="0.14"/>
+  <text x="80" y="583" fill="#747a83" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" letter-spacing="1.5">JOSHUADEFREITAS.GITHUB.IO</text>
+</svg>
