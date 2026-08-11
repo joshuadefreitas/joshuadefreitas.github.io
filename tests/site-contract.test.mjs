@@ -98,11 +98,36 @@ test("external new-tab links carry an isolation relationship", () => {
 test("metadata has a complete canonical and social identity", () => {
   assert.match(html, /rel="canonical" href="https:\/\/joshuadefreitas\.github\.io\/"/);
   assert.match(html, /property="og:type" content="website"/);
-  assert.match(html, /property="og:image" content="https:\/\/joshuadefreitas\.github\.io\/assets\/social-card\.jpg"/);
+  assert.match(html, /property="og:image" content="https:\/\/joshuadefreitas\.github\.io\/assets\/social-card\.jpg\?v=3"/);
   assert.match(html, /name="twitter:card" content="summary_large_image"/);
   assert.ok(existsSync(localPath("assets/social-card.jpg")));
+  assert.ok(existsSync(localPath("assets/emblem.svg")));
+  assert.ok(existsSync(localPath("assets/emblem-touch.svg")));
   assert.ok(existsSync(localPath("assets/icon-32.png")));
   assert.ok(existsSync(localPath("assets/icon-180.png")));
+  assert.match(html, /class="wordmark-mark" src="assets\/emblem\.svg\?v=3"/);
+  assert.match(html, /rel="icon" type="image\/svg\+xml" href="assets\/emblem\.svg\?v=3"/);
+  assert.match(html, /rel="apple-touch-icon" sizes="180x180" href="assets\/icon-180\.png\?v=3"/);
+
+  const emblem = readFileSync(localPath("assets/emblem.svg"), "utf8");
+  const touchIcon = readFileSync(localPath("assets/emblem-touch.svg"), "utf8");
+  const socialCard = readFileSync(localPath("assets/social-card.svg"), "utf8");
+  assert.match(emblem, /data-identity-mark="operator"/);
+  assert.match(emblem, /data-monogram="jf"/);
+  assert.match(emblem, /data-layer="response"/);
+  assert.match(emblem, /data-layer="vector"/);
+  assert.match(emblem, /data-layer="equilibrium"/);
+  assert.match(emblem, /id="platinum-response"/);
+  assert.match(socialCard, /data-identity-mark="operator"/);
+  assert.doesNotMatch(emblem, /#f65b14|<text\b|viper|serpent|aria-label="JD"|<(?:rect|circle)[^>]+class="(?:frame|ground)"/i);
+
+  const masterGeometry = [...emblem.matchAll(/<path(?:\s[^>]*)?\sd="([^"]+)"/g)]
+    .map((match) => match[1]);
+  assert.ok(masterGeometry.length >= 4, "the master emblem should expose its layered geometry");
+  masterGeometry.forEach((path) => {
+    assert.ok(touchIcon.includes(`d="${path}"`), "the touch export has drifted from the master emblem");
+    assert.ok(socialCard.includes(`d="${path}"`), "the social export has drifted from the master emblem");
+  });
 });
 
 test("all referenced local assets exist", () => {
@@ -126,6 +151,8 @@ test("fonts are self-hosted and transfer assets stay within their budgets", () =
     ["assets/hero-field-study-800.webp", 60_000],
     ["assets/hero-field-study.webp", 150_000],
     ["assets/social-card.jpg", 150_000],
+    ["assets/emblem.svg", 5_000],
+    ["assets/emblem-touch.svg", 3_000],
     ["assets/icon-32.png", 8_000],
     ["assets/icon-180.png", 30_000],
     ["assets/trace-npm-demo.webp", 70_000],

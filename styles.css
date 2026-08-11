@@ -306,6 +306,9 @@ code {
 
 .wordmark {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
   margin-right: auto;
   color: var(--ink);
   font-family: var(--serif);
@@ -315,6 +318,17 @@ code {
   text-decoration: none;
   white-space: nowrap;
 }
+.wordmark-mark {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  object-fit: contain;
+  transition: filter 260ms var(--ease), opacity 260ms var(--ease);
+}
+[data-theme="light"] .wordmark-mark { filter: brightness(0.24) contrast(1.18); }
+[data-theme="dark"] .wordmark-mark { filter: none; }
+.wordmark:hover .wordmark-mark,
+.wordmark:focus-visible .wordmark-mark { opacity: 0.82; }
 .wordmark::after {
   position: absolute;
   left: 0;
