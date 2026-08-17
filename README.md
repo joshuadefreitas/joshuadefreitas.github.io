@@ -8,6 +8,47 @@ The public portfolio of [Joshua de Freitas](https://github.com/joshuadefreitas),
 
 I work across dependable data products, intelligent software, analytical research, simulation, and visual computing. This site is the front door to that work: a small, dependency-free GitHub Pages project with the code and decisions kept intentionally visible.
 
+## What this site is for
+
+It is the **front door**, not a portfolio of everything. Two research
+laboratories have their own surfaces and their own audiences:
+
+| Surface | Audience | Job |
+| --- | --- | --- |
+| This site | anyone who found me | who I am, and whether to take the work seriously |
+| Lathilda | people interested in large-scale visual computing | the engine, the pipeline, its studies |
+| Ghalvera | people interested in security research | boundaries, evidence, findings |
+
+The two labs are linked from **Research**; this site does not duplicate them.
+
+### The asymmetry it exists to correct
+
+Most of the research is private, and will stay private until its publication
+gates are met. That leaves the public surface showing the smaller half of the
+work. Three things close that gap without disclosing anything:
+
+1. **Findings published without their code.** A result can stand on its own —
+   the observation, the eliminated hypotheses, the stated scope — without
+   exposing the harness that produced it.
+2. **Small tools that graduate** out of a lab once they are standalone and
+   carry no research.
+3. **Writing.** The strongest artifact here has always been an article rather
+   than a repository.
+
+### Findings
+
+Short dated technical notes with their limits stated. Two rules:
+
+- **Published when there is something, never on a schedule.** A blog demands
+  feeding and decays into content; a findings surface only accumulates.
+- **An open question is publishable.** If a result is reproduced and the cause
+  is unknown, that is what gets written — including where an earlier
+  conclusion was wrong, with the wrong version left in the history rather than
+  edited away.
+
+Each entry states what it did not establish. A finding reported without its
+scope is reported as more general than it is.
+
 ## Design contract
 
 The site should feel editorial rather than fashionable: restrained typography, a neutral scale, generous measure, and motion that reveals mechanism rather than decorating empty space.

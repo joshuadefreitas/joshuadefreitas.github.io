@@ -73,7 +73,8 @@
         </a>
         <nav class="site-nav" aria-label="Primary">
           <a href="#work">Work</a>
-          <a href="#practice">Practice</a>
+          <a href="#research">Research</a>
+          <a href="#findings">Findings</a>
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
         </nav>
@@ -110,9 +111,11 @@
           <p class="rail-label hero-eyebrow">Senior Data Engineer <i>/</i> Madrid</p>
           <h1>Joshua de Freitas</h1>
           <p class="hero-lede">
-            I design data platforms and the systems that keep them dependable — pipeline
+            I build data platforms and the systems that keep them dependable — pipeline
             architecture, analytical workflows and applied AI for organisations with real
-            complexity to handle.
+            complexity to handle. Alongside that I run two small research laboratories:
+            one building instruments for data that has outgrown the tools built to look at
+            it, one studying what a machine can be made to prove about itself.
           </p>
           <p class="hero-supporting">
             The public work here spans deterministic simulation, neural architectures, WebGPU,
@@ -296,11 +299,115 @@
         </div>
       </section>
 
+      <section class="section section-raised ground ground-sheen" id="research">
+        <div class="notation-field" data-notation="practice" aria-hidden="true"></div>
+        <div class="shell section-inner">
+          <div class="rail">
+            <p class="rail-label">02 &mdash; Research</p>
+          </div>
+          <div class="column">
+            <div class="section-head">
+              <h2>Two laboratories</h2>
+              <p class="section-summary">
+                Independent research, run in the evenings and at weekends. They share an
+                evidence standard and nothing else — different questions, different
+                methods, separate publication decisions.
+              </p>
+            </div>
+
+            <div class="labs">
+              <article class="lab">
+                <p class="lab-name">Lathilda</p>
+                <p class="lab-thesis">Instruments for seeing data that has outgrown the tools built to look at it.</p>
+                <p class="lab-body">
+                  Browser-based interactive rendering plateaus around a hundred thousand
+                  nodes while native tools reach millions. The work is a GPU compute and
+                  rendering engine, the data pipeline that feeds it, and the studies that
+                  prove both.
+                </p>
+                <p class="lab-meta">WebGPU &middot; layout at scale &middot; out-of-core pipelines</p>
+              </article>
+
+              <article class="lab">
+                <p class="lab-name">Ghalvera</p>
+                <p class="lab-thesis">Boundaries — where they fail, and whether crossing them leaves provable evidence.</p>
+                <p class="lab-body">
+                  Every security claim is a claim about a boundary. This lab crosses them
+                  under controlled conditions and then asks the question that usually goes
+                  unasked afterwards: could anyone have proven it happened?
+                </p>
+                <p class="lab-meta">Linux &middot; kernels &middot; evidence integrity</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section ground ground-contour" id="findings">
+        <div class="notation-field" data-notation="work" aria-hidden="true"></div>
+        <div class="shell section-inner">
+          <div class="rail">
+            <p class="rail-label">03 &mdash; Findings</p>
+          </div>
+          <div class="column">
+            <div class="section-head">
+              <h2>Things I found, including the ones I cannot explain</h2>
+              <p class="section-summary">
+                Short technical notes with their limits stated. Published when there is
+                something to publish, not on a schedule — and published while a question
+                is still open, if that is where it honestly stands.
+              </p>
+            </div>
+
+            <ol class="findings">
+              <li class="finding">
+                <div class="finding-meta">
+                  <span class="finding-date">17 Aug 2026</span>
+                  <span class="finding-tag finding-open">unresolved</span>
+                </div>
+                <div class="finding-body">
+                  <h3>Evidence that exists and cannot be retrieved</h3>
+                  <p>
+                    192 Linux Audit records carrying my key sit in
+                    <code>/var/log/audit/audit.log</code>. <code>ausearch</code> returns
+                    <em>no matches</em> for all of them — with a time bound, without one,
+                    and with a successful exit status. No error, no warning.
+                  </p>
+                  <p>
+                    A collection failure is loud: the log is empty and anyone who looks
+                    sees it. A retrieval failure is silent and self-confirming. The
+                    evidence is on disk, the standard tool says there is none, every
+                    follow-up query through that tool agrees, and nothing suggests
+                    checking the raw log. An investigator closes the case with the
+                    contradicting data sitting right there.
+                  </p>
+                  <p class="finding-limit">
+                    Three candidate causes tested and eliminated: the distribution's
+                    default <code>-a never,task</code> rule, a missing <code>audit=1</code>
+                    kernel argument, and the architecture filter. Clock skew and time
+                    windows ruled out. Subject execution verified rather than assumed.
+                    <strong>The cause is unknown and I am not claiming one.</strong>
+                    Scope: one Fedora 44 guest, kernel 6.19.10 aarch64, under
+                    virtualisation.
+                  </p>
+                  <p class="finding-note">
+                    I first concluded the opposite — that audit had recorded nothing — by
+                    inferring absence from the tool's silence. That is the same mistake
+                    the finding is about, so the wrong version stays in the history rather
+                    than being edited away.
+                  </p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
       <section class="section section-raised ground ground-sheen" id="practice">
         <div class="notation-field" data-notation="practice" aria-hidden="true"></div>
         <div class="shell section-inner">
           <div class="rail">
-            <p class="rail-label">02 &mdash; Practice</p>
+            <p class="rail-label">04 &mdash; Practice</p>
           </div>
           <div class="column">
             <div class="section-head">
@@ -343,7 +450,7 @@
         <div class="notation-field" data-notation="about" aria-hidden="true"></div>
         <div class="shell section-inner">
           <div class="rail">
-            <p class="rail-label">03 &mdash; About</p>
+            <p class="rail-label">05 &mdash; About</p>
           </div>
           <div class="column">
             <div class="section-head">
@@ -403,7 +510,7 @@
         <div class="notation-field" data-notation="contact" aria-hidden="true"></div>
         <div class="shell section-inner">
           <div class="rail">
-            <p class="rail-label">04 &mdash; Contact</p>
+            <p class="rail-label">06 &mdash; Contact</p>
           </div>
           <div class="column">
             <div class="section-head">

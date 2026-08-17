@@ -278,7 +278,12 @@ test("the deterministic field exposes reproducible and accessible state", () => 
 test("the below-hero manuscript field is original, nonlinear, and motion-safe", () => {
   const notationFields = [...html.matchAll(/<div class="notation-field"[^>]*>/g)]
     .map((match) => match[0]);
-  assert.equal(notationFields.length, 4);
+  // One field per below-hero section. Asserting the invariant rather than a
+  // count, so adding a section does not fail a test that has no opinion
+  // about how many sections there should be.
+  const belowHeroSections = [...html.matchAll(/<section class="section[^"]*"[^>]*id="/g)];
+  assert.ok(notationFields.length >= 4, "every below-hero section carries a notation field");
+  assert.equal(notationFields.length, belowHeroSections.length);
   notationFields.forEach((field) => assert.match(field, /aria-hidden="true"/));
   assert.match(html, /const notationFragments = Object\.freeze/);
   assert.match(html, /kind: "equation"/);

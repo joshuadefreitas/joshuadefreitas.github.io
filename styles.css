@@ -1494,3 +1494,162 @@ code {
   .site-header, .hero-field, .hero-meta, .notation-field, .theme-toggle, .copy-btn { display: none; }
   body { background: #fff; color: #000; }
 }
+
+/* ============================================================================
+   Research — the two laboratories
+
+   Deliberately quieter than the project cards. These are ongoing programmes,
+   not shipped artifacts, and the typography should say so: no imagery, no
+   call to action, just a name, a thesis and an honest description.
+   ========================================================================= */
+.labs {
+  display: grid;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+@media (min-width: 760px) {
+  .labs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.lab {
+  background: var(--surface);
+  padding: clamp(20px, 3vw, 30px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lab-name {
+  margin: 0;
+  font-family: var(--serif-display);
+  font-size: clamp(1.35rem, 2.6vw, 1.7rem);
+  font-weight: 300;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.lab-thesis {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+  max-width: 42ch;
+}
+
+.lab-body {
+  margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.66;
+  color: var(--ink-3);
+  max-width: 46ch;
+}
+
+.lab-meta {
+  margin: auto 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+}
+
+/* ============================================================================
+   Findings — dated technical notes
+
+   The limit paragraph is part of the artifact, not a footnote. It is styled
+   to be read, because a finding without its scope is reported as more general
+   than it is.
+   ========================================================================= */
+.findings {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--line);
+  border-block: 1px solid var(--line);
+}
+
+.finding {
+  background: var(--surface);
+  padding: clamp(20px, 3vw, 30px);
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 820px) {
+  .finding { grid-template-columns: 9rem minmax(0, 1fr); gap: 28px; align-items: start; }
+}
+
+.finding-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+
+.finding-date {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+.finding-tag {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border: 1px solid var(--line-2);
+  border-radius: 2px;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+.finding-open { color: var(--ink-2); border-color: var(--line-3); }
+
+.finding-body { display: flex; flex-direction: column; gap: 12px; }
+
+.finding-body h3 {
+  margin: 0;
+  font-family: var(--serif-display);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+  line-height: 1.24;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.finding-body p {
+  margin: 0;
+  font-size: 0.97rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+  max-width: 64ch;
+}
+
+.finding-body code {
+  font-family: var(--mono);
+  font-size: 0.85em;
+  color: var(--ink);
+}
+
+.finding-limit {
+  border-left: 1px solid var(--line-2);
+  padding-left: 14px;
+  color: var(--ink-3) !important;
+  font-size: 0.92rem !important;
+}
+
+.finding-limit strong { color: var(--ink-2); font-weight: 500; }
+
+.finding-note {
+  font-size: 0.88rem !important;
+  color: var(--ink-3) !important;
+  font-style: italic;
+}
