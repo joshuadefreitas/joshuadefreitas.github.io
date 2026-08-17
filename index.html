@@ -72,8 +72,8 @@
           <span>Joshua de Freitas</span>
         </a>
         <nav class="site-nav" aria-label="Primary">
-          <a href="#work">Work</a>
           <a href="#research">Research</a>
+          <a href="#work">Work</a>
           <a href="#findings">Findings</a>
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
@@ -152,11 +152,58 @@
         </div>
       </section>
 
+      <section class="section section-raised ground ground-sheen" id="research">
+        <div class="notation-field" data-notation="practice" aria-hidden="true"></div>
+        <div class="shell section-inner">
+          <div class="rail">
+            <p class="rail-label">01 &mdash; Research</p>
+          </div>
+          <div class="column">
+            <div class="section-head">
+              <h2>Two laboratories</h2>
+              <p class="section-summary">
+                Independent research, run in the evenings and at weekends. They share an
+                evidence standard and nothing else — different questions, different
+                methods, separate publication decisions.
+              </p>
+            </div>
+
+            <div class="labs">
+              <article class="lab">
+                <p class="lab-name">Lathilda</p>
+                <p class="lab-thesis">Instruments for seeing data that has outgrown the tools built to look at it.</p>
+                <p class="lab-body">
+                  Browser-based interactive rendering plateaus around a hundred thousand
+                  nodes while native tools reach millions. The work is a GPU compute and
+                  rendering engine, the data pipeline that feeds it, and the studies that
+                  prove both.
+                </p>
+                <p class="lab-meta">WebGPU &middot; layout at scale &middot; out-of-core pipelines</p>
+                <p class="lab-link"><a href="https://lathilda.github.io" rel="noopener">lathilda.github.io &rarr;</a></p>
+              </article>
+
+              <article class="lab">
+                <p class="lab-name">Ghalvera</p>
+                <p class="lab-thesis">Whether a record can be trusted — and whether you would know if it couldn't.</p>
+                <p class="lab-body">
+                  Security, forensics and accountability all rest on records that are
+                  assumed to be true. This lab crosses boundaries under controlled
+                  conditions so the ground truth is known, then checks whether the
+                  evidence agrees. Usually something is missing.
+                </p>
+                <p class="lab-meta">Linux &middot; kernels &middot; evidence integrity</p>
+                <p class="lab-link"><a href="https://ghalvera.github.io" rel="noopener">ghalvera.github.io &rarr;</a></p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="section ground ground-grid" id="work">
         <div class="notation-field" data-notation="work" aria-hidden="true"></div>
         <div class="shell section-inner">
           <div class="rail">
-            <p class="rail-label">01 &mdash; Work</p>
+            <p class="rail-label">02 &mdash; Work</p>
           </div>
           <div class="column">
             <div class="section-head">
@@ -271,73 +318,8 @@
                   </div>
                 </article>
 
-                <article class="card">
-                  <div class="card-visual core-visual" aria-hidden="true">
-                    <span class="visual-kicker">dbx-core &middot; 2026</span>
-                    <div class="core-grid"></div>
-                    <div class="core-pipeline"><span>Local</span><i></i><span>Test</span><i></i><span>Jobs</span><i></i><span>Remote</span></div>
-                    <span class="visual-caption">Packages, not notebooks</span>
-                  </div>
-                  <div class="card-body">
-                    <div class="card-heading">
-                      <h4>dbx-core</h4>
-                      <span class="card-tag">Data engineering</span>
-                    </div>
-                    <p>Databricks without the notebook sprawl: real Python packages, local tests, remote execution. The foundation a data platform should actually rest on.</p>
-                    <pre class="card-terminal"><button class="copy-btn" type="button" aria-label="Copy command">Copy</button><code>pytest tests/ &amp;&amp; dbx deploy</code></pre>
-                    <p class="card-limit"><span>Opinionated</span> about jobs over notebooks. That constraint is the point, and it will not suit every team.</p>
-                    <div class="card-meta"><span>Python</span><span>Databricks</span><span>Jobs over notebooks</span></div>
-                    <div class="card-links">
-                      <a class="text-link" href="https://github.com/joshuadefreitas/dbx-core" target="_blank" rel="noreferrer">Repository <span class="ext" aria-hidden="true">↗</span></a>
-                      <a class="text-link" href="https://github.com/joshuadefreitas/dbx-core#readme" target="_blank" rel="noreferrer">Documentation <span class="ext" aria-hidden="true">↗</span></a>
-                    </div>
-                  </div>
-                </article>
+                
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section section-raised ground ground-sheen" id="research">
-        <div class="notation-field" data-notation="practice" aria-hidden="true"></div>
-        <div class="shell section-inner">
-          <div class="rail">
-            <p class="rail-label">02 &mdash; Research</p>
-          </div>
-          <div class="column">
-            <div class="section-head">
-              <h2>Two laboratories</h2>
-              <p class="section-summary">
-                Independent research, run in the evenings and at weekends. They share an
-                evidence standard and nothing else — different questions, different
-                methods, separate publication decisions.
-              </p>
-            </div>
-
-            <div class="labs">
-              <article class="lab">
-                <p class="lab-name">Lathilda</p>
-                <p class="lab-thesis">Instruments for seeing data that has outgrown the tools built to look at it.</p>
-                <p class="lab-body">
-                  Browser-based interactive rendering plateaus around a hundred thousand
-                  nodes while native tools reach millions. The work is a GPU compute and
-                  rendering engine, the data pipeline that feeds it, and the studies that
-                  prove both.
-                </p>
-                <p class="lab-meta">WebGPU &middot; layout at scale &middot; out-of-core pipelines</p>
-              </article>
-
-              <article class="lab">
-                <p class="lab-name">Ghalvera</p>
-                <p class="lab-thesis">Boundaries — where they fail, and whether crossing them leaves provable evidence.</p>
-                <p class="lab-body">
-                  Every security claim is a claim about a boundary. This lab crosses them
-                  under controlled conditions and then asks the question that usually goes
-                  unasked afterwards: could anyone have proven it happened?
-                </p>
-                <p class="lab-meta">Linux &middot; kernels &middot; evidence integrity</p>
-              </article>
             </div>
           </div>
         </div>
@@ -382,19 +364,27 @@
                     contradicting data sitting right there.
                   </p>
                   <p class="finding-limit">
-                    Three candidate causes tested and eliminated: the distribution's
-                    default <code>-a never,task</code> rule, a missing <code>audit=1</code>
-                    kernel argument, and the architecture filter. Clock skew and time
-                    windows ruled out. Subject execution verified rather than assumed.
-                    <strong>The cause is unknown and I am not claiming one.</strong>
-                    Scope: one Fedora 44 guest, kernel 6.19.10 aarch64, under
-                    virtualisation.
+                    Three candidate causes were tested and eliminated first: the
+                    distribution's default <code>-a never,task</code> rule, a missing
+                    <code>audit=1</code> kernel argument, and the architecture filter.
+                    Clock skew and time windows ruled out. Subject execution verified
+                    rather than assumed. <strong>Resolved 17 Aug 2026:</strong>
+                    <code>ausearch</code> reads standard input unless given
+                    <code>--input-logs</code>. With no input it reaches end-of-file
+                    immediately and reports an absence of <em>matches</em> rather than an
+                    absence of <em>input</em> — exit status 0. Confirmed against the
+                    tool's own manual page. Scope: one Fedora 44 guest, kernel 6.19.10
+                    aarch64, under virtualisation; not established for x86-64 or bare
+                    metal.
                   </p>
                   <p class="finding-note">
                     I first concluded the opposite — that audit had recorded nothing — by
                     inferring absence from the tool's silence. That is the same mistake
                     the finding is about, so the wrong version stays in the history rather
-                    than being edited away.
+                    than being edited away. It was then published a second time as
+                    <em>cause unknown</em>, which this page carried until the cause was
+                    found. Findings are now published by the laboratory that produced
+                    them — <a href="https://ghalvera.github.io" rel="noopener">ghalvera.github.io</a>.
                   </p>
                 </div>
               </li>
