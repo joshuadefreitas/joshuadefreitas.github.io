@@ -1500,7 +1500,8 @@ code {
 
    Deliberately quieter than the project cards. These are ongoing programmes,
    not shipped artifacts, and the typography should say so: no imagery, no
-   call to action, just a name, a thesis and an honest description.
+   sales call to action, just a name, a thesis, an honest description and one
+   restrained pointer to the laboratory's own surface.
    ========================================================================= */
 .labs {
   display: grid;
@@ -1632,7 +1633,7 @@ code {
   white-space: nowrap;
 }
 
-.finding-open { color: var(--ink-2); border-color: var(--line-3); }
+.finding-resolved { color: var(--ink-2); border-color: var(--line-3); }
 
 .finding-body { display: flex; flex-direction: column; gap: 12px; }
 

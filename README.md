@@ -16,8 +16,8 @@ laboratories have their own surfaces and their own audiences:
 | Surface | Audience | Job |
 | --- | --- | --- |
 | This site | anyone who found me | who I am, and whether to take the work seriously |
-| Lathilda | people interested in large-scale visual computing | the engine, the pipeline, its studies |
-| Ghalvera | people interested in security research | boundaries, evidence, findings |
+| Lathilda | people interested in other ways to compute | computational substrates, execution models, public instruments |
+| Ghalvera | people interested in security evidence | evidentiary sufficiency under valid verification |
 
 The two labs are linked from **Research**; this site does not duplicate them.
 

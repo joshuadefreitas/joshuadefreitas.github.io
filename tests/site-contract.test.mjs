@@ -8,6 +8,8 @@ import test from "node:test";
 const root = fileURLToPath(new URL("..", import.meta.url));
 const html = readFileSync(path.join(root, "index.html"), "utf8");
 const css = readFileSync(path.join(root, "styles.css"), "utf8");
+const readme = readFileSync(path.join(root, "README.md"), "utf8");
+const now = readFileSync(path.join(root, "NOW.md"), "utf8");
 const workflowPath = path.join(root, ".github/workflows/site-contract.yml");
 const workflow = existsSync(workflowPath) ? readFileSync(workflowPath, "utf8") : "";
 
@@ -208,6 +210,52 @@ test("each study explains its mechanism before its specialist framing", () => {
   assert.match(html, /near-duplicates appear in both training and validation/);
   assert.match(html, /which patterns come from the rule and which depend on numerical choices/);
   assert.match(html, /how a flawed test can manufacture confidence/);
+});
+
+test("the two laboratories use their current canonical identities", () => {
+  assert.match(html, /Lathilda explores other ways computers can be built, programmed and experienced/);
+  assert.match(html, /Other ways to compute\./);
+  assert.match(html, /alternative computational substrates, execution models and public instruments/);
+  assert.match(html, /href="https:\/\/lathilda\.com"/);
+  assert.doesNotMatch(html, /href="https:\/\/lathilda\.github\.io"/);
+
+  assert.match(html, /Ghalvera studies evidentiary sufficiency under valid verification/);
+  assert.match(html, /The record can be true while the conclusion is false\./);
+  assert.match(html, /authorization[^<]*&middot;[^<]*attribution[^<]*&middot;[^<]*completeness[^<]*&middot;[^<]*consequence/i);
+  assert.equal((html.match(/href="https:\/\/ghalvera\.github\.io"/g) || []).length, 2);
+  assert.match(html, /Ghalvera tests whether a genuine security record supports the exact conclusion\s+attached to it/);
+
+  assert.doesNotMatch(html, /Instruments for seeing data that has outgrown/);
+  assert.doesNotMatch(html, /crosses boundaries under controlled conditions/);
+  assert.doesNotMatch(html, /WebGPU &middot; layout at scale &middot; out-of-core pipelines/);
+  assert.doesNotMatch(html, /what a machine can be made to prove about itself/i);
+  assert.doesNotMatch(html, /Whether a record can be trusted — and whether you would know if it couldn't/i);
+  assert.doesNotMatch(html, /Linux &middot; kernels &middot; evidence integrity/);
+  assert.doesNotMatch(html, /Boundaries — where they fail/i);
+  assert.doesNotMatch(html, /Building a WebGPU compute engine/i);
+  assert.doesNotMatch(html, /first-project candidates|selected Lathilda flagship|Foundation threshold/i);
+  assert.match(html, /Maintaining Lathilda's alternative-computation programme, developing\s+Ghalvera's evidentiary-sufficiency model/);
+
+  assert.match(readme, /Lathilda \| people interested in other ways to compute \| computational substrates, execution models, public instruments/);
+  assert.match(readme, /Ghalvera \| people interested in security evidence \| evidentiary sufficiency under valid verification/);
+  assert.match(now, /publication is not\s+authorized by this unit/i);
+  assert.doesNotMatch(readme + now, /large-scale visual computing|the engine, the pipeline, its studies/);
+});
+
+test("resolved findings cannot retain an open status", () => {
+  const findings = [...html.matchAll(/<li class="[^"]*\bfinding\b[^"]*">([\s\S]*?)<\/li>/g)].map((match) => match[1]);
+  assert.ok(findings.length > 0, "at least one finding must be inspected");
+  findings.forEach((finding) => {
+    const resolvedCopy = /\bResolved\b/i.test(finding);
+    const resolvedState = /finding-resolved|>resolved</i.test(finding);
+    const openState = /finding-open|>unresolved</i.test(finding);
+    assert.ok(!(resolvedCopy || resolvedState) || !openState, "resolved and open states cannot coexist");
+  });
+  const ausearchFinding = findings.find((finding) => /<code>ausearch<\/code>/.test(finding));
+  assert.ok(ausearchFinding, "the audit-retrieval finding must remain in the inspected set");
+  assert.match(ausearchFinding, /finding-resolved">resolved</i);
+  assert.match(ausearchFinding, /\bResolved 17 Aug 2026:/);
+  assert.doesNotMatch(ausearchFinding, /finding-open|>unresolved</i);
 });
 
 test("the personal-work boundary cannot read as a job or consulting solicitation", () => {
