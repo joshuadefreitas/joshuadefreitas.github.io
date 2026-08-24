@@ -1633,7 +1633,8 @@ code {
   white-space: nowrap;
 }
 
-.finding-resolved { color: var(--ink-2); border-color: var(--line-3); }
+.finding-resolved { color: var(--ink-3); border-color: var(--line-2); }
+.finding-open { color: var(--ink-2); border-color: var(--line-3); }
 
 .finding-body { display: flex; flex-direction: column; gap: 12px; }
 

@@ -234,18 +234,22 @@ test("the two laboratories use their current canonical identities", () => {
   assert.doesNotMatch(html, /Boundaries — where they fail/i);
   assert.doesNotMatch(html, /Building a WebGPU compute engine/i);
   assert.doesNotMatch(html, /first-project candidates|selected Lathilda flagship|Foundation threshold/i);
+  assert.doesNotMatch(readme, /first-project candidates|selected Lathilda flagship|Foundation threshold/i);
   assert.match(html, /Maintaining Lathilda's alternative-computation programme, developing\s+Ghalvera's evidentiary-sufficiency model/);
 
   assert.match(readme, /Lathilda \| people interested in other ways to compute \| computational substrates, execution models, public instruments/);
   assert.match(readme, /Ghalvera \| people interested in security evidence \| evidentiary sufficiency under valid verification/);
   assert.match(now, /publication is not\s+authorized by this unit/i);
   assert.doesNotMatch(readme + now, /large-scale visual computing|the engine, the pipeline, its studies/);
+  assert.doesNotMatch(html + readme, /lathilda\.github\.io/i);
 });
 
 test("resolved findings cannot retain an open status", () => {
   const findings = [...html.matchAll(/<li class="[^"]*\bfinding\b[^"]*">([\s\S]*?)<\/li>/g)].map((match) => match[1]);
   assert.ok(findings.length > 0, "at least one finding must be inspected");
   findings.forEach((finding) => {
+    const statusClasses = [...finding.matchAll(/finding-(open|resolved)/g)];
+    assert.equal(statusClasses.length, 1, "every finding must carry exactly one open or resolved status class");
     const resolvedCopy = /\bResolved\b/i.test(finding);
     const resolvedState = /finding-resolved|>resolved</i.test(finding);
     const openState = /finding-open|>unresolved</i.test(finding);
@@ -256,6 +260,8 @@ test("resolved findings cannot retain an open status", () => {
   assert.match(ausearchFinding, /finding-resolved">resolved</i);
   assert.match(ausearchFinding, /\bResolved 17 Aug 2026:/);
   assert.doesNotMatch(ausearchFinding, /finding-open|>unresolved</i);
+  assert.match(css, /\.finding-resolved\s*\{[^}]*color: var\(--ink-3\);[^}]*border-color: var\(--line-2\);[^}]*\}/);
+  assert.match(css, /\.finding-open\s*\{[^}]*color: var\(--ink-2\);[^}]*border-color: var\(--line-3\);[^}]*\}/);
 });
 
 test("the personal-work boundary cannot read as a job or consulting solicitation", () => {
