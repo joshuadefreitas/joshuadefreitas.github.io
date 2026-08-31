@@ -4,19 +4,19 @@
 
 Active published portfolio surface. `LAT-92` — realign the two laboratory
 descriptions with their live identities — is **complete and accepted**, and is
-`Done` in Linear. It is committed locally and **not pushed**. The published
-mirror still serves the pre-realignment copy; publication was never authorized
-by that unit and is not authorized here.
+`Done` in Linear. Its realignment history was accepted before this
+reconciliation. For `LAT-92`, publication is not authorized by this unit; this
+separate, guarded publication reconciliation may publish it after the remote
+and live site checks pass.
 
-**Last reconciled:** 2026-08-29 (estate reconciliation) against live Git state,
-a live `ls-remote` of the public origin, and Linear `LAT-92`.
+**Last reconciled:** 2026-08-31 against live Git state, the public origin and
+the deployed site.
 
 ## Current bounded unit
 
-None. `LAT-92` closed on 2026-08-24; this file went on declaring it active for
-five days and Cairn surfaced it as this repository's live unit throughout.
-Pushing the accepted commits and any publication decision are separate steps,
-not a continuation of that unit.
+None. This is an accepted, static public surface. `LAT-92` closed on
+2026-08-24; its already-accepted source is now being reconciled for publication,
+not extended as new portfolio work.
 
 ## Last accepted evidence
 
@@ -28,35 +28,26 @@ not a continuation of that unit.
   state; the seal record is
   `docs/reviews/line/2026-08-24T050837Z-portfolio-lab-realignment-final-seal-964b2ea-grok.md`.
 - Browser verification at 1440x1000 and 390x844 was performed on 2026-08-24.
-- 19/19 site contract tests pass at the current head `f01ade1` (re-run
-  2026-08-29).
+- 19/19 site contract tests pass for the accepted source history (re-run
+  2026-08-31).
 
 ## Next gate
 
-Obtain independent review of the source change. Publication remains a separate
-Joshua decision after review and browser evidence.
+No content gate remains after this guarded publication. Any future public-site
+change needs its own bounded authorization.
 
 ## Git and publication state
 
-- Branch `main` is at `f01ade1`, **three commits ahead of `origin/main` and
-  zero behind**. Verified live: `git ls-remote` reports `origin/main` at
-  `cee653e7`, matching the local tracking ref. This repository is public, so
-  the remote comparison is direct evidence, not a tracking-ref inference.
-- The three commits were **rebased onto `origin/main` on 2026-08-29**, so their
-  hashes changed: `d1c3156`/`964b2ea`/`523884f` became
-  `2375eb5`/`73b72dd`/`f01ade1`. The accepted line-review and seal records
-  committed here still name the pre-rebase hashes. They were not rewritten;
-  the old commits remain reachable in this clone.
-- The rebase changed content in exactly one way: `AGENTS.md`, `CLAUDE.md` and
-  `GEMINI.md` are deleted, per workspace ADR-0011. `git diff 523884f f01ade1`
-  is those three deletions and nothing else, so every byte of the accepted
-  realignment survived unchanged. The three files remain on disk and are
-  excluded through `.git/info/exclude`.
-- **Not pushed.** The 2026-08-29 estate reconciliation held no Git credentials
-  for GitHub and could not push. Nothing blocks the push on evidence: the work
-  is accepted, green and correctly represented.
-- Publication of the mirror remains a separate Joshua decision and is not
-  authorized here.
+- The accepted content history is `2375eb5`, `73b72dd`, and `f01ade1`, followed
+  by the historical status reconciliation `635a216`. It is based on public
+  `origin/main` commit `cee653e7` and contains no tracked agent-orchestration
+  files.
+- The acceptance trail remains preserved under `docs/reviews/line/`; the review
+  records retain their pre-rebase hashes rather than rewriting history.
+- This status-only reconciliation is intentionally non-visual and is included
+  in the guarded publication. After the push, the local branch and
+  `origin/main` must be verified equal and the live site checked against the
+  canonical source.
 
 ## Do not start
 
