@@ -10,16 +10,16 @@ I work across dependable data products, intelligent software, analytical researc
 
 ## What this site is for
 
-It is the **front door**, not a portfolio of everything. Two research
-laboratories have their own surfaces and their own audiences:
+It is the **front door**, not a portfolio of everything. The research has its
+own surface and its own audience:
 
 | Surface | Audience | Job |
 | --- | --- | --- |
 | This site | anyone who found me | who I am, and whether to take the work seriously |
-| Lathilda | people interested in other ways to compute | computational substrates, execution models, public instruments |
-| Ghalvera | people interested in security evidence | evidentiary sufficiency under valid verification |
+| [Sekiya](https://sekiyalab.github.io) | anyone following the research itself | the institute: studies, findings, instruments, questions |
 
-The two labs are linked from **Research**; this site does not duplicate them.
+Sekiya is linked from **Research**; this site does not duplicate it. Earlier
+laboratory sites (Lathilda, Ghalvera) are preserved as they were.
 
 ### The asymmetry it exists to correct
 

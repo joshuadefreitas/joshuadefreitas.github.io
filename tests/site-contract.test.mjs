@@ -212,33 +212,31 @@ test("each study explains its mechanism before its specialist framing", () => {
   assert.match(html, /how a flawed test can manufacture confidence/);
 });
 
-test("the two laboratories use their current canonical identities", () => {
-  assert.match(html, /Lathilda explores other ways computers can be built, programmed and experienced/);
-  assert.match(html, /Other ways to compute\./);
-  assert.match(html, /alternative computational substrates, execution models and public instruments/);
-  assert.match(html, /href="https:\/\/lathilda\.com"/);
+test("research is presented as one institute with Sekiya as its home", () => {
+  // Sekiya is the current research home — the single strong block in Research.
+  assert.match(html, /I run Sekiya — a small independent\s+research institute for computer science, mathematics and computational\s+experimentation/);
+  assert.match(html, /<p class="lab-name">Sekiya<\/p>/);
+  assert.match(html, /Curiosity is the motive\. Experiment is the method\./);
+  assert.match(html, /Models &amp; Statistics &middot; Systems &amp; Security &middot; Agentic Systems &middot; Computation/);
+  assert.match(html, /href="https:\/\/sekiyalab\.github\.io"/);
+
+  // Mundias is separate from the institute and not presented as a laboratory.
+  assert.match(html, /<p class="lab-name">Mundias<\/p>/);
+  assert.match(html, /Separate from the institute and not a laboratory/);
+
+  // Historical work appears naturally — no public archive framing, no stale lab links.
+  assert.match(html, /Previously: Lathilda \(alternative computation\) and Ghalvera\s+\(security evidence\), both preserved as they were\./);
+  assert.match(html, /Findings now continue at\s*<a href="https:\/\/sekiyalab\.github\.io">Sekiya<\/a>/);
+  assert.equal((html.match(/href="https:\/\/ghalvera\.github\.io"/g) || []).length, 1);
+  assert.doesNotMatch(html, /Two laboratories|two small research laboratories/);
+  assert.doesNotMatch(html, /href="https:\/\/lathilda\.com"/);
   assert.doesNotMatch(html, /href="https:\/\/lathilda\.github\.io"/);
+  assert.doesNotMatch(html, /Maintaining Lathilda's alternative-computation programme/);
 
-  assert.match(html, /Ghalvera studies evidentiary sufficiency under valid verification/);
-  assert.match(html, /The record can be true while the conclusion is false\./);
-  assert.match(html, /authorization[^<]*&middot;[^<]*attribution[^<]*&middot;[^<]*completeness[^<]*&middot;[^<]*consequence/i);
-  assert.equal((html.match(/href="https:\/\/ghalvera\.github\.io"/g) || []).length, 2);
-  assert.match(html, /Ghalvera tests whether a genuine security record supports the exact conclusion\s+attached to it/);
-
-  assert.doesNotMatch(html, /Instruments for seeing data that has outgrown/);
-  assert.doesNotMatch(html, /crosses boundaries under controlled conditions/);
-  assert.doesNotMatch(html, /WebGPU &middot; layout at scale &middot; out-of-core pipelines/);
-  assert.doesNotMatch(html, /what a machine can be made to prove about itself/i);
-  assert.doesNotMatch(html, /Whether a record can be trusted — and whether you would know if it couldn't/i);
-  assert.doesNotMatch(html, /Linux &middot; kernels &middot; evidence integrity/);
-  assert.doesNotMatch(html, /Boundaries — where they fail/i);
-  assert.doesNotMatch(html, /Building a WebGPU compute engine/i);
   assert.doesNotMatch(html, /first-project candidates|selected Lathilda flagship|Foundation threshold/i);
   assert.doesNotMatch(readme, /first-project candidates|selected Lathilda flagship|Foundation threshold/i);
-  assert.match(html, /Maintaining Lathilda's alternative-computation programme, developing\s+Ghalvera's evidentiary-sufficiency model/);
 
-  assert.match(readme, /Lathilda \| people interested in other ways to compute \| computational substrates, execution models, public instruments/);
-  assert.match(readme, /Ghalvera \| people interested in security evidence \| evidentiary sufficiency under valid verification/);
+  assert.match(readme, /Sekiya\]\(https:\/\/sekiyalab\.github\.io\) \| anyone following the research itself/);
   assert.match(now, /publication is not\s+authorized by this unit/i);
   assert.doesNotMatch(readme + now, /large-scale visual computing|the engine, the pipeline, its studies/);
   assert.doesNotMatch(html + readme, /lathilda\.github\.io/i);

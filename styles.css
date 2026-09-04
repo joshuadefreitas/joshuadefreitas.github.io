@@ -1581,6 +1581,32 @@ code {
   border-bottom-color: currentColor;
 }
 
+/* The institute is the single research surface; Mundias is deliberately
+   not presented as a laboratory — a quieter, unlinked aside. */
+.lab-feature {
+  grid-column: 1 / -1;
+}
+
+.lab-feature .lab-body {
+  max-width: 58ch;
+}
+
+.mundias-note {
+  margin-top: clamp(18px, 2.6vw, 26px);
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  max-width: 58ch;
+}
+
+.mundias-note .lab-name {
+  font-size: 1.05rem;
+  letter-spacing: 0;
+}
+
+.mundias-note .lab-body {
+  margin-top: 8px;
+}
+
 /* ============================================================================
    Findings — dated technical notes
 
