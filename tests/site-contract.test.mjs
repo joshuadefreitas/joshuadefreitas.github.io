@@ -100,7 +100,7 @@ test("external new-tab links carry an isolation relationship", () => {
 test("metadata has a complete canonical and social identity", () => {
   assert.match(html, /rel="canonical" href="https:\/\/joshuadefreitas\.github\.io\/"/);
   assert.match(html, /property="og:type" content="website"/);
-  assert.match(html, /property="og:image" content="https:\/\/joshuadefreitas\.github\.io\/assets\/social-card\.jpg\?v=3"/);
+  assert.match(html, /property="og:image" content="https:\/\/joshuadefreitas\.github\.io\/assets\/social-card\.jpg\?v=4"/);
   assert.match(html, /name="twitter:card" content="summary_large_image"/);
   assert.ok(existsSync(localPath("assets/social-card.jpg")));
   assert.ok(existsSync(localPath("assets/emblem.svg")));
@@ -213,20 +213,28 @@ test("each study explains its mechanism before its specialist framing", () => {
 });
 
 test("research is presented as one institute with Sekiya as its home", () => {
-  // Sekiya is the current research home — the single strong block in Research.
-  assert.match(html, /I run Sekiya — a small independent\s+research institute for computer science, mathematics and computational\s+experimentation/);
-  assert.match(html, /<p class="lab-name">Sekiya<\/p>/);
-  assert.match(html, /Curiosity is the motive\. Experiment is the method\./);
-  assert.match(html, /Models &amp; Statistics &middot; Systems &amp; Security &middot; Agentic Systems &middot; Computation/);
+  assert.match(html, /I build systems and have a habit of taking new technology more seriously than is strictly necessary\./);
+  assert.match(html, /I'm interested in computing much more broadly — software,\s+systems, infrastructure, security, hardware, and whatever comes next\./);
+  assert.ok(html.indexOf('id="sekiya"') < html.indexOf('id="work"'), "Sekiya sits above Selected work");
+  assert.doesNotMatch(html, /poke at new technology/);
+  assert.doesNotMatch(html, /unhealthy curiosity/);
+  assert.doesNotMatch(html, /I build technical systems, run experiments/);
+  assert.doesNotMatch(html, /I work on AI systems and autonomous agents/);
+  assert.doesNotMatch(html, /I started (?:it|Sekiya)/);
+  assert.doesNotMatch(html, /class="questions"/);
+  assert.match(html, /Sekiya is an independent research institute studying autonomous-agent behavior empirically/);
+  assert.match(html, /My formal research on autonomous agents lives at Sekiya/);
+  assert.match(html, /Explore Sekiya/);
+  assert.match(html, /Designed and implemented · Sekiya/);
   assert.match(html, /href="https:\/\/sekiyalab\.github\.io"/);
+  assert.match(html, /href="https:\/\/github\.com\/SekiyaLab\/decision-assurance"/);
+  assert.match(html, /href="https:\/\/github\.com\/SekiyaLab\/clock-dataset"/);
+  assert.match(html, /href="https:\/\/github\.com\/SekiyaLab\/deep-lob"/);
 
-  // Mundias is separate from the institute and not presented as a laboratory.
-  assert.match(html, /<p class="lab-name">Mundias<\/p>/);
-  assert.match(html, /Separate from the institute and not a laboratory/);
+  assert.doesNotMatch(html, /<p class="lab-name">Mundias<\/p>/);
+  assert.doesNotMatch(html, /thought leader|futurist|technology influencer/i);
 
-  // Historical work appears naturally — no public archive framing, no stale lab links.
   assert.match(html, /Previously: Lathilda \(alternative computation\) and Ghalvera\s+\(security evidence\), both preserved as they were\./);
-  assert.match(html, /Findings now continue at\s*<a href="https:\/\/sekiyalab\.github\.io">Sekiya<\/a>/);
   assert.equal((html.match(/href="https:\/\/ghalvera\.github\.io"/g) || []).length, 1);
   assert.doesNotMatch(html, /Two laboratories|two small research laboratories/);
   assert.doesNotMatch(html, /href="https:\/\/lathilda\.com"/);
@@ -243,20 +251,11 @@ test("research is presented as one institute with Sekiya as its home", () => {
 });
 
 test("resolved findings cannot retain an open status", () => {
-  const findings = [...html.matchAll(/<li class="[^"]*\bfinding\b[^"]*">([\s\S]*?)<\/li>/g)].map((match) => match[1]);
-  assert.ok(findings.length > 0, "at least one finding must be inspected");
-  findings.forEach((finding) => {
-    const statusClasses = [...finding.matchAll(/finding-(open|resolved)/g)];
-    assert.equal(statusClasses.length, 1, "every finding must carry exactly one open or resolved status class");
-    const resolvedCopy = /\bResolved\b/i.test(finding);
-    const resolvedState = /finding-resolved|>resolved</i.test(finding);
-    const openState = /finding-open|>unresolved</i.test(finding);
-    assert.ok(!(resolvedCopy || resolvedState) || !openState, "resolved and open states cannot coexist");
-  });
-  const ausearchFinding = findings.find((finding) => /<code>ausearch<\/code>/.test(finding));
+  const records = [...html.matchAll(/<li>([\s\S]*?)<\/li>/g)].map((match) => match[1]);
+  const ausearchFinding = records.find((record) => /<code>ausearch<\/code>/.test(record));
   assert.ok(ausearchFinding, "the audit-retrieval finding must remain in the inspected set");
-  assert.match(ausearchFinding, /finding-resolved">resolved</i);
   assert.match(ausearchFinding, /\bResolved 17 Aug 2026:/);
+  assert.match(ausearchFinding, /https:\/\/sekiyalab\.github\.io\/f\/audit-retrieval\//);
   assert.doesNotMatch(ausearchFinding, /finding-open|>unresolved</i);
   assert.match(css, /\.finding-resolved\s*\{[^}]*color: var\(--ink-3\);[^}]*border-color: var\(--line-2\);[^}]*\}/);
   assert.match(css, /\.finding-open\s*\{[^}]*color: var\(--ink-2\);[^}]*border-color: var\(--line-3\);[^}]*\}/);

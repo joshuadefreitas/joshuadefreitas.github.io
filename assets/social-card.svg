@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
-  <title id="title">Joshua de Freitas — Senior Data Engineer</title>
+  <title id="title">Joshua de Freitas</title>
   <desc id="description">A monochrome editorial card with Joshua de Freitas's platinum operator emblem and a quiet deterministic field motif.</desc>
   <defs>
     <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
@@ -58,7 +58,7 @@
   </g>
 
   <path d="M80 95H1120" stroke="url(#silver)" stroke-opacity="0.62"/>
-  <text x="80" y="72" fill="#a4aab2" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" letter-spacing="3">SENIOR DATA ENGINEER · MADRID</text>
+  <text x="80" y="72" fill="#a4aab2" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" letter-spacing="3">MADRID</text>
   <!-- Standalone export variant of emblem.svg for reliable social rasterisation. -->
   <g transform="translate(1046 8) scale(.8)" data-identity-mark="operator" data-monogram="jf">
     <g data-layer="response">
@@ -71,14 +71,14 @@
   </g>
 
   <text x="76" y="249" fill="#f0f1f3" font-family="Georgia, 'Times New Roman', serif" font-size="84" letter-spacing="-3">Joshua de Freitas</text>
-  <text x="82" y="316" fill="#b8bdc5" font-family="Helvetica Neue, Arial, sans-serif" font-size="24" letter-spacing="0.2">Data platforms and the systems that keep them dependable.</text>
+  <text x="82" y="316" fill="#b8bdc5" font-family="Helvetica Neue, Arial, sans-serif" font-size="24" letter-spacing="0.2">Studies, software, and notes.</text>
 
   <g fill="#9298a1" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" letter-spacing="1.1">
-    <text x="82" y="494">DATA PLATFORMS</text>
-    <text x="256" y="494">/</text>
-    <text x="284" y="494">APPLIED AI</text>
-    <text x="408" y="494">/</text>
-    <text x="436" y="494">SYSTEMS</text>
+    <text x="82" y="494">RESEARCH</text>
+    <text x="196" y="494">/</text>
+    <text x="224" y="494">SOFTWARE</text>
+    <text x="348" y="494">/</text>
+    <text x="376" y="494">NOTES</text>
   </g>
 
   <path d="M80 544H1120" stroke="#d7dbe1" stroke-opacity="0.14"/>

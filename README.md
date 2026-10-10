@@ -6,7 +6,7 @@ The public portfolio of [Joshua de Freitas](https://github.com/joshuadefreitas),
 
 **LinkedIn:** [linkedin.com/in/defreitasjoshua](https://www.linkedin.com/in/defreitasjoshua/)
 
-I work across dependable data products, intelligent software, analytical research, simulation, and visual computing. This site is the front door to that work: a small, dependency-free GitHub Pages project with the code and decisions kept intentionally visible.
+I build, experiment with, and write about technical systems. This site is the record of that work: a small, dependency-free GitHub Pages project. The current research concentration is autonomous agents. It is not a permanent boundary around the site.
 
 ## What this site is for
 
@@ -15,7 +15,7 @@ own surface and its own audience:
 
 | Surface | Audience | Job |
 | --- | --- | --- |
-| This site | anyone who found me | who I am, and whether to take the work seriously |
+| This site | anyone who found the work | the record: contribution, software, notes |
 | [Sekiya](https://sekiyalab.github.io) | anyone following the research itself | the institute: studies, findings, instruments, questions |
 
 Sekiya is linked from **Research**; this site does not duplicate it. Earlier

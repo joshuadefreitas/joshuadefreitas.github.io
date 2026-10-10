@@ -2,12 +2,9 @@
 
 ## State
 
-Active published portfolio surface. `LAT-92` — realign the two laboratory
-descriptions with their live identities — is **complete and accepted**, and is
-`Done` in Linear. Its realignment history was accepted before this
-reconciliation. For `LAT-92`, publication is not authorized by this unit; this
-separate, guarded publication reconciliation may publish it after the remote
-and live site checks pass.
+Local revision of the public record, not deployed. The page is a technical
+record: studies, software, and notes. It does not state a personal thesis.
+For this revision, publication is not authorized by this unit.
 
 **Last reconciled:** 2026-08-31 against live Git state, the public origin and
 the deployed site.

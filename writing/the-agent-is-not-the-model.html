@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A model and the agent built around it are different objects. Observed behavior belongs to the system: instructions, tools, memory, environment, feedback, permissions and orchestration, held fixed or not."
+    />
+    <meta name="author" content="Joshua de Freitas" />
+    <meta name="theme-color" id="theme-color" content="#fafafb" />
+    <link rel="canonical" href="https://joshuadefreitas.github.io/writing/the-agent-is-not-the-model.html" />
+    <title>The agent is not the model — Joshua de Freitas</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/emblem.svg?v=3" />
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          var theme = stored === "light" || stored === "dark"
+            ? stored
+            : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+          document.getElementById("theme-color").setAttribute(
+            "content",
+            theme === "dark" ? "#0c0d0f" : "#fafafb"
+          );
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      })();
+    </script>
+    <link rel="stylesheet" href="../styles.css?v=42" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="shell header-inner">
+        <a class="wordmark" href="../#top" aria-label="Joshua de Freitas — home">
+          <img class="wordmark-mark" src="../assets/emblem.svg?v=3" width="36" height="36" alt="" aria-hidden="true" />
+          <span>Joshua de Freitas</span>
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="../#sekiya">Sekiya</a>
+          <a href="../#work">Work</a>
+          <a href="../#writing">Writing</a>
+          <a href="../#research">Research</a>
+          <a href="../#about">About</a>
+        </nav>
+        <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Switch colour theme">
+          <span data-theme-label>Dark</span>
+        </button>
+      </div>
+    </header>
+    <main id="main">
+      <article class="shell essay">
+        <p class="essay-kicker">30 September 2026 · Essay</p>
+        <h1>The agent is not the model</h1>
+        <p class="lede">
+          A model answers the next local question it is given. An agent is what you get
+          after that model is placed in a system. Reporting the system's behavior as the
+          model's capability changes the subject of the measurement.
+        </p>
+
+        <h2>Two objects</h2>
+        <p>
+          Zaharia, Khattab, Chen, Davis, Miller, Potts, Zou, Carbin, Frankle, Rao and
+          Ghodsi drew the distinction cleanly in February 2024. An AI model, in their
+          terms, is a statistical model: a transformer that predicts a token. A compound
+          system tackles a task with several interacting parts, including repeated model
+          calls, retrievers and external tools. The control logic may be ordinary code,
+          or it may itself be a model calling tools. Either way, the thing that acts is
+          no longer the weights.
+        </p>
+        <p>
+          An agent is a compound system with a loop. At each step the model is asked for
+          an action, the environment answers, and the next call sees that answer. Yao and
+          colleagues made the loop explicit in ReAct: reasoning traces and task actions
+          are interleaved, and the action's observation comes back into the context. The
+          trace is not a property of the pretrained model. It is a property of the model
+          plus the instruction that demanded the trace, plus the tool that produced the
+          observation, plus whatever was allowed to remain in context.
+        </p>
+        <p>
+          Write the observed behavior as a function of the parts that can actually change it:
+        </p>
+        <p class="formula">B = A(m, i, t, μ, e, f, p, o)</p>
+        <p>
+          m is the model. i is the instruction. t is the set of tools. μ is memory, including
+          whatever the scaffold keeps or discards between steps. e is the environment.
+          f is feedback, including tests, rewards and human corrections. p is permission.
+          o is orchestration: who is called, in what order, and when the loop stops.
+          A is the agent, meaning the whole arrangement. B is what a log, a benchmark or
+          a user can observe.
+        </p>
+        <p>
+          This is a map, not an identification theorem. The terms are not independent.
+          A tool definition changes the instruction. A permission changes which tools exist
+          in practice. Memory changes what the model is shown, which is a change to the
+          input, not to the weights. The point of the map is narrower. If two runs differ
+          in any argument other than m, a difference in B is not evidence about m.
+        </p>
+
+        <h2>What you are looking at</h2>
+        <p>
+          Turn parts off. The model stays the same. The behavior you would be scoring does not.
+        </p>
+        <div class="system-board">
+          <div class="parts" role="group" aria-label="Parts of the system included in the observation">
+            <button type="button" data-part="m" aria-pressed="true">Model</button>
+            <button type="button" data-part="i" aria-pressed="true">Instructions</button>
+            <button type="button" data-part="t" aria-pressed="true">Tools</button>
+            <button type="button" data-part="mu" aria-pressed="true">Memory</button>
+            <button type="button" data-part="e" aria-pressed="true">Environment</button>
+            <button type="button" data-part="f" aria-pressed="false">Feedback</button>
+            <button type="button" data-part="p" aria-pressed="true">Permissions</button>
+            <button type="button" data-part="o" aria-pressed="false">Orchestration</button>
+          </div>
+          <p class="system-readout" id="system-readout" aria-live="polite"></p>
+        </div>
+
+        <h2>The same model, a different system</h2>
+        <p>
+          Yang, Jimenez, Wettig, Lieret, Yao, Narasimhan and Press built SWE-agent around
+          one claim: a language-model agent is a new kind of user, and the interface it is
+          given changes what it can do. Holding GPT-4 Turbo fixed, their agent-computer
+          interface resolved 12.47% of SWE-bench. On the Lite split, that interface solved
+          10.7 percentage points more instances than the same model given only a Linux shell.
+          They also report a 64% relative increase over that shell-only setting, again with
+          the same model. Linting inside the editor, the shape of search results, the size
+          of the file window and how much history is kept each moved the result. None of
+          those are training runs.
+        </p>
+        <p>
+          The interface was designed by watching failures on a development split. That is
+          the ordinary way an engineer improves a system, and it is also how a result stops
+          being a pure measurement of the model. The paper is honest about the object it
+          measured: an agent using a particular interface. It does not say that GPT-4 Turbo,
+          as a model, "scores 12.47% at software engineering."
+        </p>
+        <p>
+          The other direction matters just as much. Kapoor, Stroebl, Siegel, Nadgir and
+          Narayanan showed that several agent architectures reported as state of the art on
+          HumanEval did not beat much simpler baselines once cost was held in view. Retrying,
+          warming and escalating a model produced no significant accuracy gain over the best
+          of those architectures in their comparison, at lower cost. They had not found a
+          paper that had run those simple baselines against the complex agents. A gain
+          attributed to an agent design can be a gain from calling the model again.
+        </p>
+        <p>
+          Those two results do not cancel. SWE-agent is evidence that the surrounding system
+          can dominate on a hard, interactive task. Kapoor and colleagues are evidence that
+          a leaderboard gain can be the model, used more than once, wearing an architecture's
+          name. You cannot tell which paper you are in unless the comparison says what was
+          held fixed.
+        </p>
+
+        <h2>What the slogan gets wrong</h2>
+        <p>
+          "The model does not matter" is the equal and opposite mistake. A weak model inside
+          a careful scaffold still proposes the action. SWE-agent's own transfer is uneven:
+          the interface built for GPT-4 Turbo, run with Claude 3 Opus, resolved 10.5% of
+          SWE-bench, not the same figure. Kapoor and colleagues' other warning is the pair
+          of this one. Benchmarks built to compare models, and benchmarks built to choose a
+          system for a real task, answer different questions. A downstream choice cares about
+          the dollar cost of the whole loop. A model comparison that folds an agent around
+          each model has measured A, then talked about m.
+        </p>
+        <p>
+          Tool use can also be moved into training. Schick and colleagues' Toolformer trains
+          a model to decide when to call a calculator, a search engine or a translation
+          system, and to continue from the result. After that, "the model" already contains
+          a habit of tool use. The map still applies. It tells you to say which part moved.
+          Fine-tuning m is not the same intervention as editing t at inference, even when
+          both increase B.
+        </p>
+
+        <h2>What this does not establish</h2>
+        <ul>
+          <li>It does not estimate the share of recent agent progress that belongs to models, scaffolds, tools or evaluation practice. That would be a factorial comparison, model by system, on a task whose holdout was not used to design the system.</li>
+          <li>SWE-agent's margin is one benchmark family and one generation of models. A later model can shrink a scaffold gap, or move it somewhere the scaffold was never tested.</li>
+          <li>HumanEval is a weak stand-in for software engineering. Kapoor and colleagues say so. A result there is evidence about that benchmark's agents, not about agents in general.</li>
+          <li>The eight-term map will not survive contact with a real log unchanged. Use it to force the question "what else changed?", not as a taxonomy to file work into.</li>
+          <li>This is not a Sekiya result. Sekiya's public programme on autonomous-agent behavior has not yet established findings. Nothing here should be read as that programme.</li>
+        </ul>
+
+        <h2>The comparison worth running</h2>
+        <p>
+          The useful next measurement is boring on purpose. Fix m. Vary one of i, t, μ, e,
+          f, p, o. Report B, and report the cost of producing B. Then fix the system and
+          vary m. The two tables answer different questions: what the scaffold is worth,
+          and what the model is worth inside that scaffold. A single leaderboard number
+          answers neither.
+        </p>
+        <p>
+          Until that table exists, the disciplined sentence is the long one. Name the model.
+          Name the interface, the tools, the memory policy, the permissions and the stop
+          rule. Say which of them the comparison changed. Then say what was observed.
+        </p>
+
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>Zaharia, Khattab, Chen, Davis, Miller, Potts, Zou, Carbin, Frankle, Rao and Ghodsi. "The Shift from Models to Compound AI Systems." Berkeley Artificial Intelligence Research Blog, 18 February 2024.</li>
+          <li>Yao, Zhao, Yu, Du, Shafran, Narasimhan and Cao. "ReAct: Synergizing Reasoning and Acting in Language Models." International Conference on Learning Representations, 2023. arXiv:2210.03629.</li>
+          <li>Yang, Jimenez, Wettig, Lieret, Yao, Narasimhan and Press. "SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering." NeurIPS, 2024. arXiv:2405.15793. Figures used here: 12.47% resolve rate with GPT-4 Turbo; 10.7 percentage points over the shell-only agent on SWE-bench Lite; 64% relative increase versus that shell-only setting; 10.5% with Claude 3 Opus.</li>
+          <li>Kapoor, Stroebl, Siegel, Nadgir and Narayanan. "AI Agents That Matter." arXiv:2407.01502, 2024.</li>
+          <li>Schick, Dwivedi-Yu, Dessì, Raileanu, Lomeli, Hambro, Zettlemoyer, Cancedda and Scialom. "Toolformer: Language Models Can Teach Themselves to Use Tools." NeurIPS, 2023. arXiv:2302.04761.</li>
+        </ol>
+      </article>
+    </main>
+    <footer class="site-footer">
+      <div class="shell footer-inner">
+        <span>&copy; <span id="year"></span> Joshua de Freitas</span>
+        <a class="text-link" href="../#writing">Writing</a>
+      </div>
+    </footer>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+      (function theme() {
+        const root = document.documentElement;
+        const btn = document.getElementById("theme-toggle");
+        const label = btn && btn.querySelector("[data-theme-label]");
+        const themeMeta = document.getElementById("theme-color");
+        function sync() {
+          const current = root.getAttribute("data-theme");
+          const next = current === "dark" ? "light" : "dark";
+          if (label) label.textContent = next === "dark" ? "Dark" : "Light";
+          if (btn) btn.setAttribute("aria-label", "Switch to " + next + " theme");
+          if (themeMeta) themeMeta.setAttribute("content", current === "dark" ? "#0c0d0f" : "#fafafb");
+        }
+        function set(theme, persist) {
+          root.setAttribute("data-theme", theme);
+          if (persist) { try { localStorage.setItem("theme", theme); } catch (e) {} }
+          sync();
+        }
+        sync();
+        if (btn) btn.addEventListener("click", () => {
+          set(root.getAttribute("data-theme") === "dark" ? "light" : "dark", true);
+        });
+      })();
+
+      const meaning = {
+        m: "the model proposes the next action",
+        i: "instructions decide what kind of action is even asked for",
+        t: "tools decide what the action can touch",
+        mu: "memory decides which earlier observations the model still sees",
+        e: "the environment decides what comes back",
+        f: "feedback can accept, reject or reshape the next step",
+        p: "permissions decide which of the above are real rather than described",
+        o: "orchestration decides the order, the retries and the stop"
+      };
+      const buttons = [...document.querySelectorAll("[data-part]")];
+      const readout = document.getElementById("system-readout");
+      function render() {
+        const on = buttons.filter((button) => button.getAttribute("aria-pressed") === "true");
+        const bits = on.map((button) => meaning[button.dataset.part]);
+        const modelOn = on.some((button) => button.dataset.part === "m");
+        const rest = on.filter((button) => button.dataset.part !== "m").length;
+        let claim;
+        if (!modelOn && rest === 0) {
+          claim = "Nothing in the map is turned on. There is no observation to attribute.";
+        } else if (modelOn && rest === 0) {
+          claim = "Only the model is in view. That is a model measurement. It is not yet an agent.";
+        } else if (!modelOn) {
+          claim = "The model is off and other parts remain. This is no longer a well-posed agent. The scaffolding is not a behavior by itself.";
+        } else {
+          claim = "The model is held fixed. " + rest + (rest === 1 ? " other part is" : " other parts are") + " still in the observation, so a score of this run is a score of the system.";
+        }
+        readout.textContent = claim + (bits.length ? " In view: " + bits.join("; ") + "." : "");
+      }
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const pressed = button.getAttribute("aria-pressed") === "true";
+          button.setAttribute("aria-pressed", String(!pressed));
+          render();
+        });
+      });
+      render();
+    </script>
+  </body>
+</html>
