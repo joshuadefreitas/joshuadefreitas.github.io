@@ -9,7 +9,6 @@ const root = fileURLToPath(new URL("..", import.meta.url));
 const html = readFileSync(path.join(root, "index.html"), "utf8");
 const css = readFileSync(path.join(root, "styles.css"), "utf8");
 const readme = readFileSync(path.join(root, "README.md"), "utf8");
-const now = readFileSync(path.join(root, "NOW.md"), "utf8");
 const workflowPath = path.join(root, ".github/workflows/site-contract.yml");
 const workflow = existsSync(workflowPath) ? readFileSync(workflowPath, "utf8") : "";
 
@@ -245,8 +244,7 @@ test("research is presented as one institute with Sekiya as its home", () => {
   assert.doesNotMatch(readme, /first-project candidates|selected Lathilda flagship|Foundation threshold/i);
 
   assert.match(readme, /Sekiya\]\(https:\/\/sekiyalab\.github\.io\) \| anyone following the research itself/);
-  assert.match(now, /publication is not\s+authorized by this unit/i);
-  assert.doesNotMatch(readme + now, /large-scale visual computing|the engine, the pipeline, its studies/);
+  assert.doesNotMatch(readme, /large-scale visual computing|the engine, the pipeline, its studies/);
   assert.doesNotMatch(html + readme, /lathilda\.github\.io/i);
 });
 

@@ -18,8 +18,7 @@ own surface and its own audience:
 | This site | anyone who found the work | the record: contribution, software, notes |
 | [Sekiya](https://sekiyalab.github.io) | anyone following the research itself | the institute: studies, findings, instruments, questions |
 
-Sekiya is linked from **Research**; this site does not duplicate it. Earlier
-laboratory sites (Lathilda, Ghalvera) are preserved as they were.
+Sekiya is linked from **Research**; this site does not duplicate it.
 
 ### The asymmetry it exists to correct
 
