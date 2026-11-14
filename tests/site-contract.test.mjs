@@ -45,6 +45,10 @@ test("inline scripts are syntactically valid", () => {
   const scripts = [...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)];
   assert.ok(scripts.length >= 3, "expected theme, field, and site scripts");
   scripts.forEach((match, index) => {
+    if (/type="application\/ld\+json"/.test(match[0])) {
+      assert.doesNotThrow(() => JSON.parse(match[1]), "structured data must be valid JSON");
+      return;
+    }
     assert.doesNotThrow(() => new Function(match[1]), `inline script ${index + 1} must compile`);
   });
 });
@@ -213,7 +217,7 @@ test("each study explains its mechanism before its specialist framing", () => {
 
 test("research is presented as one institute with Sekiya as its home", () => {
   assert.match(html, /I build systems and have a habit of taking new technology more seriously than is strictly necessary\./);
-  assert.match(html, /I'm interested in computing much more broadly — software,\s+systems, infrastructure, security, hardware, and whatever comes next\./);
+  assert.match(html, /Computing is the subject;\s+infrastructure, security, hardware and whatever comes next are in scope\./);
   assert.ok(html.indexOf('id="sekiya"') < html.indexOf('id="work"'), "Sekiya sits above Selected work");
   assert.doesNotMatch(html, /poke at new technology/);
   assert.doesNotMatch(html, /unhealthy curiosity/);
@@ -381,4 +385,28 @@ test("the page has one primary heading and no third-party analytics", () => {
   assert.doesNotMatch(html, /<(?:img|script)\b[^>]*src="https?:/i);
   assert.doesNotMatch(html, /<link\b[^>]*rel="(?:stylesheet|preload|icon|apple-touch-icon)"[^>]*href="https?:/i);
   assert.doesNotMatch(html, /fetch\("https?:/i);
+});
+
+test("the front door states what is built and keeps its voice", () => {
+  const description = html.match(/<meta\s+name="description"\s+content="([^"]+)"/)[1];
+  assert.match(description, /software, numerical systems, scientific tools and agent infrastructure/);
+  assert.match(description, /trace-npm/);
+  assert.match(html, /habit of taking new technology\s+more seriously than is strictly necessary/);
+  const ld = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+  assert.equal(ld["@type"], "Person");
+  assert.equal(ld.url, "https://joshuadefreitas.github.io/");
+  ld.sameAs.forEach((url) => assert.match(url, /^https:\/\/(github\.com\/joshuadefreitas|www\.linkedin\.com\/in\/defreitasjoshua)/));
+});
+
+test("discoverability files exist and agree with the canonical host", () => {
+  const sitemap = readFileSync(localPath("sitemap.xml"), "utf8");
+  const robots = readFileSync(localPath("robots.txt"), "utf8");
+  assert.match(robots, /Sitemap: https:\/\/joshuadefreitas\.github\.io\/sitemap\.xml/);
+  [...sitemap.matchAll(/<loc>https:\/\/joshuadefreitas\.github\.io\/([^<]*)<\/loc>/g)].forEach((m) => {
+    if (m[1]) assert.ok(existsSync(localPath(m[1])), `sitemap lists a missing page: ${m[1]}`);
+  });
+  const notFound = readFileSync(localPath("404.html"), "utf8");
+  assert.match(notFound, /name="robots" content="noindex"/);
+  assert.equal((notFound.match(/<h1\b/g) || []).length, 1);
+  assert.doesNotMatch(notFound, /href="(?!\/|https:)[^"#]*"/, "404 must use root-relative links");
 });

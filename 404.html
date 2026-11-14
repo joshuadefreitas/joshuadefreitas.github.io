@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta name="description" content="This address does not lead anywhere. Joshua de Freitas, software and scientific tools." />
+    <meta name="theme-color" id="theme-color" content="#fafafb" />
+    <title>Not found — Joshua de Freitas</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/emblem.svg?v=3" />
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          var theme = stored === "light" || stored === "dark"
+            ? stored
+            : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+          document.getElementById("theme-color").setAttribute(
+            "content",
+            theme === "dark" ? "#0c0d0f" : "#fafafb"
+          );
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      })();
+    </script>
+    <link rel="stylesheet" href="/styles.css?v=42" />
+  </head>
+  <body>
+    <main id="main">
+      <section class="section">
+        <div class="shell section-inner">
+          <div class="column">
+            <p class="rail-label">404</p>
+            <h1>Nothing here</h1>
+            <div class="prose">
+              <p>
+                This address does not lead to a page. That is all this response establishes:
+                it does not say the page was moved, retired or never existed.
+              </p>
+              <p>
+                <a class="text-link" href="/">Start from the front page</a> or read
+                <a class="text-link" href="/writing/the-agent-is-not-the-model.html">the essay</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
