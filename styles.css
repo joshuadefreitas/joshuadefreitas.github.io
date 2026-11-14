@@ -1394,6 +1394,22 @@ code {
   border-top: 1px solid var(--invert-line);
   font-size: 12.5px;
 }
+.footer-elsewhere {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+}
+.footer-elsewhere a {
+  color: var(--invert-ink-2);
+  text-decoration: underline;
+  text-decoration-color: var(--invert-line);
+  text-underline-offset: 3px;
+}
+.footer-elsewhere a:hover,
+.footer-elsewhere a:focus-visible {
+  color: var(--invert-ink);
+  text-decoration-color: currentColor;
+}
 
 /* ============================================================================
    Reveal — opacity and a two-pixel lift, nothing more

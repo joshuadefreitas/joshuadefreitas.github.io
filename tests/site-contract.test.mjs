@@ -395,7 +395,7 @@ test("the front door states what is built and keeps its voice", () => {
   const ld = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
   assert.equal(ld["@type"], "Person");
   assert.equal(ld.url, "https://joshuadefreitas.github.io/");
-  ld.sameAs.forEach((url) => assert.match(url, /^https:\/\/(github\.com\/joshuadefreitas|www\.linkedin\.com\/in\/defreitasjoshua)/));
+  ld.sameAs.forEach((url) => assert.match(url, /^https:\/\/(github\.com\/joshuadefreitas|www\.linkedin\.com\/in\/defreitasjoshua|www\.reddit\.com\/user\/JoshuaJDF)/));
 });
 
 test("discoverability files exist and agree with the canonical host", () => {
@@ -409,4 +409,16 @@ test("discoverability files exist and agree with the canonical host", () => {
   assert.match(notFound, /name="robots" content="noindex"/);
   assert.equal((notFound.match(/<h1\b/g) || []).length, 1);
   assert.doesNotMatch(notFound, /href="(?!\/|https:)[^"#]*"/, "404 must use root-relative links");
+});
+
+test("elsewhere links are understated, identity-linked and agree with structured data", () => {
+  const footer = html.slice(html.indexOf('<footer'));
+  const links = [...footer.matchAll(/<a href="(https:[^"]+)"[^>]*rel="me noreferrer"/g)].map((m) => m[1]);
+  assert.deepEqual(links, [
+    "https://github.com/joshuadefreitas",
+    "https://www.linkedin.com/in/defreitasjoshua/",
+    "https://www.reddit.com/user/JoshuaJDF/",
+  ]);
+  const ld = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+  links.forEach((url) => assert.ok(ld.sameAs.includes(url), `structured data is missing ${url}`));
 });
