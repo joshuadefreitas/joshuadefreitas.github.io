@@ -216,8 +216,8 @@ test("each study explains its mechanism before its specialist framing", () => {
 });
 
 test("research is presented as one institute with Sekiya as its home", () => {
-  assert.match(html, /I build systems and have a habit of taking new technology more seriously than is strictly necessary\./);
-  assert.match(html, /Computing is the subject;\s+infrastructure, security, hardware and whatever comes next are in scope\./);
+  assert.match(html, /Software, numerical systems, scientific tools and agent infrastructure\./);
+  assert.match(html, /Infrastructure, security,\s+hardware and whatever comes next are all fair game\./);
   assert.ok(html.indexOf('id="sekiya"') < html.indexOf('id="work"'), "Sekiya sits above Selected work");
   assert.doesNotMatch(html, /poke at new technology/);
   assert.doesNotMatch(html, /unhealthy curiosity/);
@@ -390,8 +390,8 @@ test("the page has one primary heading and no third-party analytics", () => {
 test("the front door states what is built and keeps its voice", () => {
   const description = html.match(/<meta\s+name="description"\s+content="([^"]+)"/)[1];
   assert.match(description, /software, numerical systems, scientific tools and agent infrastructure/);
-  assert.match(description, /trace-npm/);
-  assert.match(html, /habit of taking new technology\s+more seriously than is strictly necessary/);
+  assert.match(description, /npm script tracing/);
+  assert.match(html, /I enjoy building systems and figuring out how they work/);
   const ld = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
   assert.equal(ld["@type"], "Person");
   assert.equal(ld.url, "https://joshuadefreitas.github.io/");
