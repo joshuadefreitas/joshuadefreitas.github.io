@@ -395,7 +395,7 @@ test("the front door states what is built and keeps its voice", () => {
   const ld = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
   assert.equal(ld["@type"], "Person");
   assert.equal(ld.url, "https://joshuadefreitas.github.io/");
-  ld.sameAs.forEach((url) => assert.match(url, /^https:\/\/(github\.com\/joshuadefreitas|www\.linkedin\.com\/in\/defreitasjoshua|www\.reddit\.com\/user\/JoshuaJDF)/));
+  ld.sameAs.forEach((url) => assert.match(url, /^https:\/\/(github\.com\/joshuadefreitas|www\.linkedin\.com\/in\/defreitasjoshua|www\.reddit\.com\/user\/JoshuaJDF|x\.com\/joshuablazed|www\.instagram\.com\/joshuablazed)/));
 });
 
 test("discoverability files exist and agree with the canonical host", () => {
@@ -418,6 +418,8 @@ test("elsewhere links are understated, identity-linked and agree with structured
     "https://github.com/joshuadefreitas",
     "https://www.linkedin.com/in/defreitasjoshua/",
     "https://www.reddit.com/user/JoshuaJDF/",
+    "https://x.com/joshuablazed",
+    "https://www.instagram.com/joshuablazed/",
   ]);
   const ld = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
   links.forEach((url) => assert.ok(ld.sameAs.includes(url), `structured data is missing ${url}`));
