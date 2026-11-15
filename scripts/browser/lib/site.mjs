@@ -2,7 +2,7 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { delay } from "./cdp.mjs";
-export const pages = ["/", "/software/", "/software/workbench/", "/software/trace-npm/", "/software/agent-runs/", "/software/numerical-parity/", "/software/point-in-time/", "/systems/", "/writing/", "/writing/the-agent-is-not-the-model/", "/about/", "/contact/"];
+export const pages = ["/", "/software/", "/software/workbench/", "/software/trace-npm/", "/software/agent-runs/", "/software/numerical-parity/", "/software/point-in-time/", "/systems/", "/tools/", "/writing/", "/writing/the-agent-is-not-the-model/", "/about/", "/contact/"];
 export function absolute(ctx, page) { return new URL(page, ctx.base).href; }
 export async function session(ctx) { const target = await ctx.cdp.send("Target.createTarget", { url: "about:blank" }); const attached = await ctx.cdp.send("Target.attachToTarget", { targetId: target.targetId, flatten: true }); const s = attached.sessionId; for (const domain of ["Page", "Runtime", "Network", "Log", "DOM", "Accessibility", "Performance"]) await ctx.cdp.send(`${domain}.enable`, {}, s).catch(() => {}); await ctx.cdp.send("Storage.clearDataForOrigin", { origin: new URL(ctx.base || "http://127.0.0.1:8750").origin, storageTypes: "local_storage,session_storage" }, s).catch(() => {}); return { id: s, targetId: target.targetId }; }
 export async function destroy(ctx, s) { await ctx.cdp.send("Target.closeTarget", { targetId: s.targetId }).catch(() => {}); }

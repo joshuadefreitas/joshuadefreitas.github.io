@@ -9,7 +9,7 @@ import { parseHTML, textContent } from "./lib/html.mjs";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const origin = "https://joshuadefreitas.github.io";
-const pages = ["/", "/software/", "/software/workbench/", "/software/trace-npm/", "/software/agent-runs/", "/software/numerical-parity/", "/software/point-in-time/", "/systems/", "/writing/", "/writing/the-agent-is-not-the-model/", "/about/", "/contact/"];
+const pages = ["/", "/software/", "/software/workbench/", "/software/trace-npm/", "/software/agent-runs/", "/software/numerical-parity/", "/software/point-in-time/", "/systems/", "/tools/", "/writing/", "/writing/the-agent-is-not-the-model/", "/about/", "/contact/"];
 const pageFile = (url) => url === "/" ? path.join(root, "index.html") : path.join(root, url.slice(1), "index.html");
 const pagePath = (url) => url === "/" ? "/index.html" : `${url}index.html`;
 const existingPages = () => pages.filter((url) => existsSync(pageFile(url)));
@@ -94,7 +94,7 @@ test("structured data has required schema types", () => {
 });
 
 test("local references resolve, fragments exist, and outbound links are restricted", () => {
-  const allowed = new Set(["github.com", "www.linkedin.com", "x.com", "www.instagram.com", "www.npmjs.com", "joshuadefreitas.github.io"]);
+  const allowed = new Set(["github.com", "www.linkedin.com", "x.com", "www.instagram.com", "www.npmjs.com", "simpleicons.org", "joshuadefreitas.github.io"]);
   for (const item of existingPages().map(page)) for (const tag of item.tags) for (const attribute of ["src", "href"]) {
     const value = tag.attrs.get(attribute); if (!value || value.startsWith("#")) continue;
     if (/^https?:/i.test(value)) {
@@ -159,4 +159,19 @@ test("release byte budgets are respected", () => {
   const css = path.join(root, "assets/css/site.css"); if (existsSync(css)) assert.ok(statSync(css).size <= 45_000, "site.css exceeds 45 KB");
   const jsDir = path.join(root, "assets/js"); if (existsSync(jsDir)) { const bytes = readdirSync(jsDir).filter((name) => name.endsWith(".js")).reduce((total, name) => total + statSync(path.join(jsDir, name)).size, 0); console.log(`total JS: ${bytes} bytes`); assert.ok(bytes <= 40_000, "total JS exceeds 40 KB"); }
   const images = path.join(root, "assets/img"); if (existsSync(images)) for (const name of readdirSync(images, { recursive: true })) { const file = path.join(images, name); if (statSync(file).isFile()) assert.ok(statSync(file).size <= 400_000, `image exceeds 400 KB: ${path.relative(root, file)}`); }
+});
+
+test("technology page: every icon exists, every entry has a tier and a note, and nothing is overclaimed", () => {
+  const data = JSON.parse(readFileSync(path.join(root, "src/tools.json"), "utf8"));
+  assert.ok(existsSync(path.join(root, "assets/icons/LICENSE-simple-icons.txt")), "icon licence is kept with the icons");
+  for (const category of data.categories) for (const tool of category.tools) {
+    assert.ok(data.tiers[tool.tier], `${tool.name}: unknown tier ${tool.tier}`);
+    assert.ok(tool.note && tool.note.length > 10, `${tool.name}: missing note`);
+    assert.ok(tool.basis, `${tool.name}: no recorded basis`);
+    if (tool.icon) assert.ok(existsSync(path.join(root, "assets/icons/generic", `${tool.icon}.svg`)) || existsSync(path.join(root, "assets/icons", `${tool.icon}.svg`)), `${tool.name}: icon ${tool.icon} missing`);
+    if (tool.tier === "tried") assert.ok(!tool.pro, `${tool.name}: a tool that is only tried cannot be marked professional`);
+  }
+  const html = readFileSync(path.join(root, "tools/index.html"), "utf8");
+  assert.ok(!/expert|proficien|mastery/i.test(html), "no expertise claims on the tools page");
+  assert.ok(/Set up and tried/.test(html) && /Day to day/.test(html), "tiers are visible");
 });
