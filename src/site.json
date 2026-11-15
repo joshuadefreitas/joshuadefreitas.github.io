@@ -1,0 +1,17 @@
+{
+  "url": "https://joshuadefreitas.github.io",
+  "name": "Joshua de Freitas",
+  "ogImage": "/assets/img/social-card.png",
+  "nav": [
+    { "label": "Software", "href": "/software/", "key": "software" },
+    { "label": "Systems", "href": "/systems/", "key": "systems" },
+    { "label": "Writing", "href": "/writing/", "key": "writing" },
+    { "label": "About", "href": "/about/", "key": "about" }
+  ],
+  "social": [
+    { "label": "GitHub", "href": "https://github.com/joshuadefreitas" },
+    { "label": "LinkedIn", "href": "https://www.linkedin.com/in/defreitasjoshua/" },
+    { "label": "X", "href": "https://x.com/joshuablazed" },
+    { "label": "Instagram", "href": "https://www.instagram.com/joshuablazed/" }
+  ]
+}

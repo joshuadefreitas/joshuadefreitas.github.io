@@ -1,13 +1,14 @@
 {
   "name": "joshuadefreitas.github.io",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
-  "engines": {
-    "node": ">=22"
-  },
+  "engines": { "node": ">=22" },
   "scripts": {
-    "test": "node --test tests/*.test.mjs",
-    "check": "npm test"
+    "build": "node scripts/build.mjs",
+    "build:check": "node scripts/build.mjs --check",
+    "test": "node --test tests/",
+    "qa": "node scripts/browser/run.mjs --base http://127.0.0.1:8750",
+    "serve": "python3 -m http.server 8750 --bind 127.0.0.1"
   }
 }

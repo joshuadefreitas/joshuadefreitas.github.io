@@ -1,0 +1,25 @@
+<!--meta {"path":"/software/point-in-time/","title":"Point-in-time auditor — Joshua de Freitas","description":"An early, private prototype that checks whether a dataset or a forecast used only what was knowable at the time, given when each value happened and when it became known.","nav":"software"} -->
+<div class="wrap">
+<header class="open plain">
+  <div class="kicker"><i></i><span class="mono">Software · Data tooling</span></div>
+  <h1>Point-in-time auditor</h1>
+  <p class="dek">A number can describe last quarter and still not have existed last quarter. This checks whether an analysis used a value before anyone could have known it.</p>
+  <div class="status-line"><span class="mono st pv"><b>Early prototype · private for now</b></span><span class="mono">Python</span></div>
+  <figure class="plate bigplate">{{> rails}}<figcaption><span class="mono"><b>An illustration of the idea</b> &nbsp;Each value happens on the upper rail and becomes known later on the lower one. One is later revised. Anything to the right of the cutoff could not have been used.</span></figcaption></figure>
+</header>
+
+<section class="block">
+  <h2>What it checks</h2>
+  <ul class="limits">
+    <li><b>Availability</b>Given a table of values with the dates they became known, which ones could an analysis legitimately use at a given cutoff?</li>
+    <li><b>Revisions</b>How large and how late the corrections to a series are, which is often the quantity you need.</li>
+    <li><b>Forecast inputs</b>Whether each input a forecast used was already known at the stated origin, and whether the target was.</li>
+    <li><b>Leaks you can’t see</b>A perturbation test: change the future, and see whether a forecast changes.</li>
+  </ul>
+</section>
+
+<section class="block" style="padding-bottom:clamp(60px,8vw,110px)">
+  <h2>Where it stands, and what it can’t do</h2>
+  <p class="t">It is an early prototype, in active development, and not public. It audits consistency with the availability dates you give it. It does not discover those dates, so it can’t tell you the true release time of a data point, and its answers are only as good as the vintages it is shown.</p>
+</section>
+</div>

@@ -1,0 +1,25 @@
+<!--meta {"path":"/software/numerical-parity/","title":"Numerical parity — Joshua de Freitas","description":"A private prototype that checks whether the same computation gives the same numbers on different hardware, with the standard of equivalence declared before anything runs.","nav":"software"} -->
+<div class="wrap">
+<header class="open plain">
+  <div class="kicker"><i></i><span class="mono">Software · Scientific computing</span></div>
+  <h1>Numerical parity</h1>
+  <p class="dek">Run the same small computation on a CPU and on different graphics chips, and ask whether the answers are the same. It is harder than it sounds, and “the same” turns out to mean several different things.</p>
+  <div class="status-line"><span class="mono st pv"><b>Early prototype · private for now</b></span><span class="mono">Working name: parity</span><span class="mono">Rust · wgpu</span></div>
+</header>
+
+<section class="block">
+  <h2>The idea</h2>
+  <p class="t">Floating-point arithmetic is deterministic on one machine and surprisingly slippery across several: a fused multiply-add here, a different order of summation there, a driver that rounds differently. So before running anything, the tool requires a statement of what counts as equivalent for that computation: exactly equal integers, or floating-point results within a stated number of units in the last place.</p>
+  <p class="t">Then it runs a plain CPU reference and each device, and reports pass, fail, incomparable or error per device, with the first point where they diverge, whether repeated runs agree, and enough about the device and driver to know when a result has gone stale.</p>
+</section>
+
+<section class="block" style="padding-bottom:clamp(60px,8vw,110px)">
+  <h2>Where it stands</h2>
+  <ul class="limits">
+    <li><b>Small on purpose</b>A couple of fixtures, with the equivalence standard written down before any device is tried.</li>
+    <li><b>Not a benchmark</b>It says nothing about speed or energy.</li>
+    <li><b>Private for now</b>Nothing from it is published yet, including any results.</li>
+    <li><b>Name not final</b>“Parity” is a working name.</li>
+  </ul>
+</section>
+</div>

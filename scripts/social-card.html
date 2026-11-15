@@ -1,0 +1,9 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="/assets/css/site.css"><style>
+html,body{width:1200px;height:630px;overflow:hidden;background:var(--bg)}body{display:block;padding:0}
+.c{position:relative;width:1200px;height:630px;padding:56px 64px;display:flex;flex-direction:column;justify-content:space-between}
+canvas{position:absolute;left:0;right:0;bottom:0;height:200px;width:1200px;opacity:.9;border-top:1px solid var(--ink)}
+h1{font:300 58px/1.04 var(--serif);letter-spacing:-.03em;max-width:15em}.n{font:400 22px var(--serif)}
+</style></head><body data-theme="light"><div class="c"><span class="mono">Software · simulations · writing</span>
+<h1>Developer tools, simulations, research systems, and <em>whatever else</em> seemed like a good idea at the time.</h1>
+<span class="n" style="position:relative;z-index:1;margin-bottom:210px">Joshua de Freitas</span><canvas id="p"></canvas></div>
+<script src="/assets/js/chladni.js"></script><script>document.documentElement.dataset.theme='light';Chladni(document.getElementById('p'),{seed:'overtone',still:true,cell:4.4,t0:21});</script></body></html>

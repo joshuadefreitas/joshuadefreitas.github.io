@@ -1,0 +1,50 @@
+<!--meta {"path":"/software/workbench/","title":"Engineering Workbench — Joshua de Freitas","description":"Engineering Workbench shows how a codebase is put together and how it changed: architecture, dependencies that came and went, and the evidence behind each claim. A prototype, checked against pytest, ripgrep and Express.","nav":"software"} -->
+<div class="wrap">
+<header class="open">
+  <div class="kicker"><i></i><span class="mono">Software · Developer tool</span></div>
+  <h1>Engineering Workbench</h1>
+  <p class="dek">Shows how a codebase is put together and how it changed: the architecture, the dependencies that came and went, and the evidence behind each claim.</p>
+  <div class="status-line"><span class="mono st pv"><b>Prototype · not yet released</b></span><span class="mono">Reads Python, Rust and JavaScript</span><span class="mono">Written by me</span></div>
+  <figure class="plate bigplate">{{> arcs}}<figcaption><span class="mono"><b>Fig. 1</b> &nbsp;The 852 import dependencies between 206 files in pytest, November 2026. Blue arcs join files in different packages (437); grey arcs stay within one (415).</span><span class="mono">Drawn from the tool’s own model</span></figcaption></figure>
+</header>
+<dl class="facts">
+  <div><dt class="mono">What it needs</dt><dd>Python 3 and Git. Nothing else.</dd></div>
+  <div><dt class="mono">What it never does</dt><dd>Run the code it is reading.</dd></div>
+  <div><dt class="mono">Every claim has</dt><dd>A file, a line and a commit to point at.</dd></div>
+  <div><dt class="mono">Output</dt><dd>One HTML file that works offline.</dd></div>
+</dl>
+
+<div class="q"><div><span class="mono">01</span><h2>What changed between two releases, and where?</h2><p>Pick two snapshots and it ranks where the change concentrates: the packages that gained or lost dependencies, then each dependency with the line that created it.</p><p>Every view has a link, so the answer can be sent to someone else.</p></div>
+<figure class="shot"><img src="/assets/img/pytest-compare-2019-2026.webp" width="1500" height="949" alt="Engineering Workbench comparing two pytest snapshots: a graph of packages with added dependencies in green, and a ranked list of where the change concentrates" loading="lazy"><figcaption class="mono">pytest, 2019 against 2026</figcaption></figure></div>
+
+<div class="q"><div><span class="mono">02</span><h2>What depends on this, and what would break?</h2><p>Select a module and the picture reduces to its neighbourhood: dependents in green, dependencies in blue, and the evidence for each edge underneath.</p></div>
+<figure class="shot"><img src="/assets/img/pytest-focus-fixtures.webp" width="1500" height="949" alt="The Workbench focused on one pytest module, showing what depends on it and what it depends on" loading="lazy"><figcaption class="mono">pytest’s fixtures module, with its dependents and dependencies</figcaption></figure></div>
+
+<div class="q"><div><span class="mono">03</span><h2>Is the architecture still what we meant?</h2><p>It finds the places where one part of a system reaches into another it shouldn’t, and shows when that import appeared and in which commit.</p></div>
+<figure class="shot"><img src="/assets/img/layering-violation.webp" width="1500" height="949" alt="A domain module importing storage, in the built-in demonstration repository" loading="lazy"><figcaption class="mono">A domain module importing storage, in the built-in demonstration repository</figcaption></figure></div>
+
+<div class="q"><div><span class="mono">04</span><h2>Has anything tangled?</h2><p>Dependency cycles are flagged when they appear, and again when they are repaired, with the added and removed imports listed by file and line.</p></div>
+<figure class="shot"><img src="/assets/img/cycle-introduced-and-repaired.webp" width="1500" height="949" alt="A dependency cycle introduced and later repaired, in the built-in demonstration repository" loading="lazy"><figcaption class="mono">A cycle introduced and later repaired, in the built-in demonstration repository</figcaption></figure></div>
+
+<section class="block">
+  <h2>How it was checked</h2>
+  <p class="t">I ran it on three open-source projects I didn’t write, and compared its dependency edges with a separate parser written for the purpose, one that never imports the tool’s code.</p>
+  <table class="checked">
+    <tr><th>Project</th><th>Dependencies compared</th><th>Result</th></tr>
+    <tr><td>pytest</td><td>852 import edges across 274 modules</td><td><b>850</b> agree directly; the other two are package re-exports the tool expands on purpose</td></tr>
+    <tr><td>ripgrep</td><td>117 crate and module edges (Rust)</td><td><b>117 of 117</b></td></tr>
+    <tr><td>Express</td><td>154 file edges (JavaScript)</td><td><b>154 of 154</b></td></tr>
+  </table>
+  <p class="s2">Several bugs showed up this way and were fixed, including Rust restricted-visibility modules and a Cargo manifest parser that invented dependency names. File renames matched git’s own records in all 139 ripgrep and 156 Express cases.</p>
+</section>
+
+<section class="block" style="padding-bottom:clamp(60px,8vw,110px)">
+  <h2>Limits, stated plainly</h2>
+  <ul class="limits">
+    <li><b>Static reading only</b>Lexical analysis of imports. It can’t follow imports computed at run time, or code that macros generate.</li>
+    <li><b>History is sampled</b>Eight snapshots, with the most recent 1,200 commits. “When did this dependency appear?” is a bound, not an exact date.</li>
+    <li><b>Moves are git’s call</b>Renames come from git, with a similarity score. A file moved and heavily edited at once can still look like a deletion and a new file.</li>
+    <li><b>Three languages</b>Python, Rust and JavaScript. Everything else is counted but not analyzed.</li>
+  </ul>
+</section>
+</div>
