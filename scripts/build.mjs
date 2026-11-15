@@ -38,7 +38,7 @@ for (const { meta, body, file } of pages) {
   const jsonld = (meta.jsonld || []).map((j) => `<script type="application/ld+json">${JSON.stringify(j).replace(/</g, '\\u003c')}</script>`).join('\n');
   const head = fill(partial('head'), {
     title: meta.title, description: meta.description, canonical, ogTitle: meta.ogTitle || meta.title, ogType: meta.ogType || 'website',
-    ogImage: site.url + (meta.ogImage || site.ogImage), robots: meta.noindex ? '<meta name="robots" content="noindex">\n' : '', jsonld,
+    ogImage: site.url + (meta.ogImage || site.ogImage), italic: meta.italic ? '<link rel="preload" href="/assets/fonts/newsreader-italic-var.woff2" as="font" type="font/woff2" crossorigin>' : '', robots: meta.noindex ? '<meta name="robots" content="noindex">\n' : '', jsonld,
   });
   let html;
   if (meta.stub) {
@@ -46,7 +46,7 @@ for (const { meta, body, file } of pages) {
   } else {
     const mast = fill(partial('masthead'), { nav: nav(meta.nav) });
     const foot = fill(partial('footer'), { elsewhere });
-    html = `<!doctype html>\n<html lang="en" data-theme="light">\n<head>\n${head}\n</head>\n<body>\n${meta.progress ? '<div class="progress" id="progress" aria-hidden="true"></div>\n' : ''}${mast}\n<main id="main">\n${withMail(body.trim())}\n</main>\n${foot}\n</body>\n</html>\n`;
+    html = `<!doctype html>\n<html lang="en" data-theme="light">\n<head>\n${head}\n</head>\n<body>\n${meta.progress ? '<div class="progress" id="progress" aria-hidden="true"></div>\n' : ''}${mast}\n<main id="main" tabindex="-1">\n${withMail(body.trim())}\n</main>\n${foot}\n</body>\n</html>\n`;
   }
   outputs.set(meta.path.endsWith('/') ? meta.path + 'index.html' : meta.path, html);
 }

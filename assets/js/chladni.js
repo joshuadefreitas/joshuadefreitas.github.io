@@ -47,20 +47,39 @@
       ctx.strokeStyle = css('--cobalt'); ctx.lineWidth = o.hard || 1.15; ctx.stroke(hard);
       return performance.now() - t0;
     }
-    size(); draw();
-    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, visible = true, last = 0, raf = 0, still = o.still || reduce;
-    function report() { canvas.dataset.fps = String(paused || still ? 0 : fps); canvas.dataset.scale = String(scale); if (stopped) canvas.dataset.governor = 'stopped'; }
+    // Pick a quality tier from what a frame actually costs on this device (cold frame, then warm), not from a guess.
+    size(); draw(); var ms0 = draw(), budget = o.budget || 14, tooSlow = false;
+    if (ms0 > 10 && dpr > 1) { dpr = 1; size(); draw(); ms0 = draw(); } // raster cost scales with pixels: drop to 1x first
+    scale = Math.min(1, Math.sqrt(budget / Math.max(ms0, 1)));
+    if (scale < .999) { size(); ms0 = draw(); }
+    fps = ms0 < 5 ? 30 : ms0 < 9 ? 20 : 12;
+    if (scale < .42) tooSlow = true;
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, visible = true, last = 0, raf = 0, still = o.still || reduce || tooSlow;
+    if (tooSlow && !o.still) { scale = 1; size(); draw(); canvas.dataset.governor = 'static'; }
+    function report() { canvas.dataset.fps = String(paused || still ? 0 : fps); canvas.dataset.scale = String(scale); if (stopped && !canvas.dataset.governor) canvas.dataset.governor = 'stopped'; }
     function loop(ts) {
       raf = requestAnimationFrame(loop);
       if (stopped || paused || !visible || document.hidden || ts - last < 1000 / fps) return;
       var dt = (ts - last) / 1000; last = ts; t += Math.min(dt, .1) * (o.speed || 1); px += (tx - px) * .06; py += (ty - py) * .06;
-      var ms = draw(); ema = ema ? ema * .9 + ms * .1 : ms;
-      if (ema > 9 && fps > 12) { fps = 12; } else if (ema > 12 && scale > .55) { scale = .6; size(); ema = 0; } else if (ema > 16) { stopped = true; }
+      var ms = draw(); ema = ema ? ema * .75 + ms * .25 : ms;
+      if (ema > budget * 1.6) { stopped = true; scale = 1; size(); draw(); canvas.dataset.governor = 'stopped'; }
+      else if (ema > budget && fps > 12) { fps = 12; }
       report();
+    }
+    // Frame time seen by the browser (not just our own draw time): three long tasks in four seconds means this device cannot keep up.
+    if (!still && window.PerformanceObserver && (PerformanceObserver.supportedEntryTypes || []).indexOf('longtask') >= 0) {
+      setTimeout(function () {
+        var longs = 0, t0 = performance.now();
+        try { new PerformanceObserver(function (l) {
+          var n = performance.now(); if (n - t0 > 4000) { t0 = n; longs = 0; }
+          longs += l.getEntries().length;
+          if (longs >= 3 && !stopped) { stopped = true; scale = 1; size(); draw(); canvas.dataset.governor = 'stopped'; report(); }
+        }).observe({ entryTypes: ['longtask'] }); } catch (e) {}
+      }, 1200);
     }
     if (!still) {
       new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }).observe(canvas);
-      if (o.pointer) canvas.addEventListener('pointermove', function (e) { var r = canvas.getBoundingClientRect(); tx = ((e.clientX - r.left) / r.width - .5) * 3; ty = ((e.clientY - r.top) / r.height - .5) * 3; });
+      if (o.pointer) canvas.addEventListener('pointermove', function (e) { var r = canvas.getBoundingClientRect(); tx = ((e.clientX - r.left) / r.width - .5) * 3; ty = ((e.clientY - r.top) / r.height - .5) * 3; canvas.dataset.pointer = tx.toFixed(2) + ',' + ty.toFixed(2); });
       raf = requestAnimationFrame(loop);
     }
     addEventListener('resize', function () { size(); draw(); }); addEventListener('themechange', draw);
