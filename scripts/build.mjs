@@ -83,7 +83,7 @@ outputs.set('/robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${site.url}/site
 let stale = 0;
 for (const [path, content] of outputs) {
   const dest = join(root, path.replace(/^\//, ''));
-  if (check) { if (!existsSync(dest) || readFileSync(dest, 'utf8') !== content) { console.error('out of date:', path); stale++; } }
+  if (check) { const norm = (x) => x.replace(/mailto:[^"']*/g, 'mailto:~'); if (!existsSync(dest) || norm(readFileSync(dest, 'utf8')) !== norm(content)) { console.error('out of date:', path); stale++; } } // the contact address is configured locally, so it is ignored when comparing
   else { mkdirSync(dirname(dest), { recursive: true }); writeFileSync(dest, content); }
 }
 if (check) { if (stale) process.exit(1); console.log(`build is current (${outputs.size} files)`); }

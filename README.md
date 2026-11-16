@@ -13,6 +13,6 @@ tests/           static checks (npm test)
 
 Preview: `npm run serve`, then open http://127.0.0.1:8750/ (absolute URLs mean it needs to be served from the root, not opened as a file).
 
-The contact address is not stored in the repository. Build with `SITE_EMAIL=you@example.com npm run build`, or put `{"email": "…"}` in `src/site.local.json` (git-ignored). Without it the Email link is a visible placeholder.
+The contact address is configured locally, not in source: put `{"email": "…"}` in `src/site.local.json` (git-ignored) or set `SITE_EMAIL`, then `npm run build`. Without it the Email link is a visible placeholder, and `npm run release:check` (also run on every pull request to `main`) fails until it is set. The address appears only in the built pages' `mailto:` links.
 
 `scripts/arcs.py` redraws the Engineering Workbench arc figure from a model produced by that tool (`src/partials/arcs.html` is its checked-in output).

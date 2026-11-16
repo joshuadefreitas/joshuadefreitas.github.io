@@ -167,7 +167,7 @@ test("technology page: every icon exists, every entry has a tier and a note, and
   for (const category of data.categories) for (const tool of category.tools) {
     assert.ok(data.tiers[tool.tier], `${tool.name}: unknown tier ${tool.tier}`);
     assert.ok(tool.note && tool.note.length > 10, `${tool.name}: missing note`);
-    assert.ok(tool.basis, `${tool.name}: no recorded basis`);
+    assert.ok(!("basis" in tool), `${tool.name}: evidence notes stay out of the public repository`);
     if (tool.icon) assert.ok(existsSync(path.join(root, "assets/icons/generic", `${tool.icon}.svg`)) || existsSync(path.join(root, "assets/icons", `${tool.icon}.svg`)), `${tool.name}: icon ${tool.icon} missing`);
     if (tool.tier === "tried") assert.ok(!tool.pro, `${tool.name}: a tool that is only tried cannot be marked professional`);
   }
