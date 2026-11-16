@@ -213,7 +213,7 @@
   function build(o) {
     var c = o.c, r = c.getBoundingClientRect(), W = Math.max(40, Math.round(r.width)), H = Math.max(40, Math.round(r.height)), dpr = Math.min(devicePixelRatio || 1, innerWidth < 700 ? 1 : 1.5) * scale;
     c.width = Math.round(W * dpr); c.height = Math.round(H * dpr); var ctx = c.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    var t0 = performance.now(); o.art = ARTISTS[c.dataset.art](ctx, W, H, rng(hash(c.dataset.art))); o.built = true; o.buildMs = performance.now() - t0; o.ema = 0; o.dead = false; o.last = 0; c.dataset.state = 'still';
+    var t0 = performance.now(); o.art = ARTISTS[c.dataset.art](ctx, W, H, rng(hash(c.dataset.art))); o.built = true; o.buildMs = performance.now() - t0; lastBuild = performance.now(); o.ema = 0; o.dead = false; o.last = 0; c.dataset.state = 'still';
   }
   var queue = [], building = false;
   function pump() { if (building || !queue.length) return; building = true; setTimeout(function () { var o = queue.shift(); if (o && !o.built) build(o); building = false; report(); pump(); }, 30); }
@@ -229,11 +229,13 @@
   }
   function halt(why) { stopped = true; document.documentElement.dataset.gallery = 'stopped:' + why; report(); }
   function report() { document.documentElement.dataset.galleryFps = String(reduce || paused || stopped ? 0 : fpsCap); cards.forEach(function (o) { if (!o.built) return; o.c.dataset.state = (reduce || paused || stopped || o.dead) ? 'still' : (o.visible ? 'live' : 'idle'); }); }
-  var lastRaf = 0, gapEma = 0, gapN = 0;
+  var lastRaf = 0, gaps = [], lastBuild = 0, nTick = 0;
+  function median(a) { var s = a.slice().sort(function (x, y) { return x - y; }); return s[s.length >> 1]; }
   function loop(now) {
     requestAnimationFrame(loop);
-    if (paused || stopped || document.hidden) { lastRaf = 0; return; }
-    if (lastRaf) { var gap = now - lastRaf; if (gap < 500) { gapEma = gapEma ? gapEma * .9 + gap * .1 : gap; if (++gapN > 45 && gapEma > 55) { halt('frames'); return; } } } lastRaf = now;
+    if (paused || stopped || document.hidden) { lastRaf = 0; gaps.length = 0; return; }
+    // Delivered frame rate, judged by the median of the last 60 frames, ignoring the moments scenes are being built.
+    if (lastRaf) { var gap = now - lastRaf; if (gap < 500 && now - lastBuild > 400) { gaps.push(gap); if (gaps.length > 60) gaps.shift(); if (gaps.length === 60 && (++nTick % 20 === 0) && median(gaps) > 45) { halt('frames'); return; } } else gaps.length = 0; } lastRaf = now;
     var total = 0, any = false;
     cards.forEach(function (o) {
       if (!o.built || !o.visible || o.dead) return;
