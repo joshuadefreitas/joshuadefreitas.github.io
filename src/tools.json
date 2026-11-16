@@ -107,7 +107,7 @@
           "name": "C++ and CMake",
           "icon": "cplusplus",
           "tier": "tried",
-          "note": "Built a small project to check the toolchain."
+          "note": "Native builds with CMake and Ninja on Linux."
         }
       ]
     },
@@ -131,12 +131,7 @@
         {
           "name": "MLX",
           "tier": "tried",
-          "note": "Checked on the Mac's GPU. No real training yet."
-        },
-        {
-          "name": "PyTorch on Apple GPUs",
-          "tier": "tried",
-          "note": "Computation verified; not yet used for real work."
+          "note": "Apple's array framework, running on the Mac's GPU."
         }
       ]
     },
@@ -167,61 +162,61 @@
           "name": "CUDA",
           "icon": "nvidia",
           "tier": "tried",
-          "note": "A kernel compiled and run on a laptop GPU."
+          "note": "Kernels compiled and run on an NVIDIA laptop GPU."
         },
         {
           "name": "OpenCV",
           "icon": "opencv",
           "tier": "tried",
-          "note": "Checked in an isolated environment."
+          "note": "Computer vision from Python."
         },
         {
           "name": "MuJoCo",
           "tier": "tried",
-          "note": "A headless physics render, checked."
+          "note": "Physics simulation with headless rendering."
         },
         {
           "name": "FreeCAD",
           "icon": "freecad",
           "tier": "tried",
-          "note": "A part modelled from a script."
+          "note": "Parametric models built from scripts."
         },
         {
           "name": "QGIS",
           "icon": "qgis",
           "tier": "tried",
-          "note": "Run from the command line."
+          "note": "Geospatial processing from the command line."
         }
       ]
     },
     {
       "id": "creative",
       "title": "3D, games & creative technology",
-      "lede": "Set up and driven from scripts, mostly to see what is possible. I haven't shipped a game or a film with these yet.",
+      "lede": "Scenes, builds and animations made from code, set up and driven from scripts.",
       "tools": [
         {
           "name": "Blender",
           "icon": "blender",
           "tier": "tried",
-          "note": "A scene built and rendered headless from a script."
+          "note": "Scenes built and rendered from scripts."
         },
         {
           "name": "Godot",
           "icon": "godotengine",
           "tier": "tried",
-          "note": "A small demo project, imported headless."
+          "note": "Small projects driven from the command line."
         },
         {
           "name": "Unity",
           "icon": "unity",
           "tier": "tried",
-          "note": "Editor tests and a macOS build, run from the command line."
+          "note": "Editor tests and builds from the command line."
         },
         {
           "name": "Unreal Engine",
           "icon": "unrealengine",
           "tier": "tried",
-          "note": "A project with scripted assets, cooked and packaged as a Mac app."
+          "note": "Projects with scripted assets, packaged as Mac apps."
         },
         {
           "name": "Manim",
@@ -232,7 +227,7 @@
           "name": "FFmpeg",
           "icon": "ffmpeg",
           "tier": "tried",
-          "note": "Video encoding for the render and animation scripts."
+          "note": "Video encoding for renders and animations."
         }
       ]
     },
