@@ -21,16 +21,15 @@ function renderTools() {
   let out = `<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">${used.map(symbol).join('')}</svg>\n`;
   tools.categories.forEach((c, i) => {
     out += `<section class="s tcat" id="${c.id}"><div class="wrap grid"><div class="rail"><h2><span>${String(i + 1).padStart(2, '0')}</span>${eh(c.title)}</h2></div><div>\n<p class="lede">${eh(c.lede)}</p>\n`;
-    for (const tier of ['daily', 'regular', 'tried']) {
-      const list = c.tools.filter((t) => t.tier === tier); if (!list.length) continue;
-      out += `<div class="tier"><h3 class="tier-h mono">${tools.tiers[tier]}</h3><ul class="tl">`;
-      for (const t of list) {
-        const mark = t.icon ? `<svg class="ti" aria-hidden="true" focusable="false"><use href="#i-${t.icon}"/></svg>` : `<span class="ti ti-none" aria-hidden="true">${eh(t.name[0])}</span>`;
-        const pro = t.pro ? `<span class="pro" title="${eh(tools.legend)}"><span class="vh"> (${eh(tools.legend.toLowerCase())})</span></span>` : '';
-        out += `<li class="tool ${tier}"><span class="tname">${mark}<b>${eh(t.name)}</b>${pro}</span><span class="tnote">${eh(t.note)}</span></li>`;
-      }
-      out += `</ul></div>\n`;
+    const order = ['daily', 'regular', 'tried'];
+    const list = [...c.tools].sort((x, y) => order.indexOf(x.tier) - order.indexOf(y.tier));
+    out += `<ul class="tl">`;
+    for (const t of list) {
+      const mark = t.icon ? `<svg class="ti" aria-hidden="true" focusable="false"><use href="#i-${t.icon}"/></svg>` : `<span class="ti ti-none" aria-hidden="true">${eh(t.name[0])}</span>`;
+      const pro = t.pro ? `<span class="pro" title="${eh(tools.legend)}"><span class="vh"> (${eh(tools.legend.toLowerCase())})</span></span>` : '';
+      out += `<li class="tool"><span class="tname">${mark}<b>${eh(t.name)}</b>${pro}</span><span class="tnote">${eh(t.note)}</span></li>`;
     }
+    out += `</ul>\n`;
     out += `</div></div></section>\n`;
   });
   return out;

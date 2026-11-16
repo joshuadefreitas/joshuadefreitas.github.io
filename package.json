@@ -9,7 +9,7 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "build:check": "node scripts/build.mjs --check",
-    "test": "node --test tests/",
+    "test": "node --test tests/*.test.mjs",
     "qa": "node scripts/browser/run.mjs --base http://127.0.0.1:8750",
     "serve": "python3 -m http.server 8750 --bind 127.0.0.1",
     "release:check": "node scripts/release-gate.mjs"

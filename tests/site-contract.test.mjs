@@ -173,5 +173,5 @@ test("technology page: every icon exists, every entry has a tier and a note, and
   }
   const html = readFileSync(path.join(root, "tools/index.html"), "utf8");
   assert.ok(!/expert|proficien|mastery/i.test(html), "no expertise claims on the tools page");
-  assert.ok(/Set up and tried/.test(html) && /Day to day/.test(html), "tiers are visible");
+  assert.ok(!/how well I know|Day to day|Set up and tried/.test(html), "no proficiency framing on the tools page");
 });
