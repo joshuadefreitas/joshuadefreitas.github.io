@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent run recorder — Joshua de Freitas</title>
+<meta name="description" content="A private tool that keeps track of coding agents: what ran, what finished, what stopped, and where to pick it back up. Version 1, read-only, working name agentctl.">
+<meta name="author" content="Joshua de Freitas">
+<meta name="theme-color" content="#f5f2eb">
+<link rel="canonical" href="https://joshuadefreitas.github.io/software/agent-runs/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Joshua de Freitas">
+<meta property="og:title" content="Agent run recorder — Joshua de Freitas">
+<meta property="og:description" content="A private tool that keeps track of coding agents: what ran, what finished, what stopped, and where to pick it back up. Version 1, read-only, working name agentctl.">
+<meta property="og:url" content="https://joshuadefreitas.github.io/software/agent-runs/">
+<meta property="og:image" content="https://joshuadefreitas.github.io/assets/img/social-card.png">
+<meta property="og:image:alt" content="Joshua de Freitas. Developer tools, simulations, research systems.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agent run recorder — Joshua de Freitas">
+<meta name="twitter:description" content="A private tool that keeps track of coding agents: what ran, what finished, what stopped, and where to pick it back up. Version 1, read-only, working name agentctl.">
+<meta name="twitter:image" content="https://joshuadefreitas.github.io/assets/img/social-card.png">
+<link rel="icon" type="image/svg+xml" href="/assets/emblem.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icon-32.png">
+<link rel="apple-touch-icon" href="/assets/icon-180.png">
+<link rel="preload" href="/assets/fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/dm-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+
+<script src="/assets/js/theme.js"></script>
+<link rel="stylesheet" href="/assets/css/site.css">
+
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="mast"><div class="wrap">
+  <a class="wordmark" href="/">Joshua de Freitas</a>
+  <nav aria-label="Primary"><a href="/software/" aria-current="page">Software</a><a href="/systems/">Systems</a><a href="/tools/">Tools</a><a href="/writing/">Writing</a><a href="/about/">About</a></nav>
+  <button class="theme" id="theme" type="button" aria-label="Switch to the dark theme">Dark</button>
+</div></header>
+
+<main id="main" tabindex="-1">
+<div class="wrap">
+<header class="open plain">
+  <div class="kicker"><i></i><span class="mono">Software · Developer tool</span></div>
+  <h1>Agent run recorder</h1>
+  <p class="dek">When you run several coding agents at once, it gets hard to say what each one did, which ones finished, and which ones stopped partway. This keeps that record, and tells you where to pick up.</p>
+  <div class="status-line"><span class="mono st pv"><b>Version 1 · private for now</b></span><span class="mono">Working name: agentctl</span><span class="mono">Python · standard library only</span></div>
+</header>
+
+<section class="block">
+  <h2>What it does</h2>
+  <ul class="limits">
+    <li><b>Lifecycle</b>Whether a run is running, finished, stale or in conflict, decided from evidence (an exit marker, a live process) rather than guessed.</li>
+    <li><b>Linkage</b>Groups the runs that belong to one piece of work, so everything done to it reads as one story.</li>
+    <li><b>Provenance</b>Which model and provider produced each run, and what a reviewer concluded.</li>
+    <li><b>Interruptions</b>Spots runs that stopped on a usage limit rather than failing, and prints the command that would resume them.</li>
+  </ul>
+</section>
+
+<section class="block" style="padding-bottom:clamp(60px,8vw,110px)">
+  <h2>What it deliberately doesn’t do</h2>
+  <ul class="limits">
+    <li><b>It only reads</b>It never launches an agent, sends a prompt, or writes anything back.</li>
+    <li><b>It never resumes anything</b>Resume commands are advice. It prints them; you decide.</li>
+    <li><b>It keeps to metadata</b>By default the record comes from run metadata and process state, not from transcripts or credentials.</li>
+    <li><b>It doesn’t guess</b>Where the evidence is thin it says “unknown” instead of inventing a status.</li>
+  </ul>
+  <p class="s2">It is built and tested: 71 automated tests and 22 acceptance checks against live runs. It is not released. The licence is undecided, and the name is a working name that will probably change.</p>
+</section>
+</div>
+</main>
+<footer class="site"><div class="wrap">
+  <nav aria-label="Elsewhere"><a class="ul" href="mailto:joshuadefreitas@icloud.com">Email</a><a class="ul" href="https://github.com/joshuadefreitas" target="_blank" rel="me noopener noreferrer">GitHub ↗</a><a class="ul" href="https://www.linkedin.com/in/defreitasjoshua/" target="_blank" rel="me noopener noreferrer">LinkedIn ↗</a><a class="ul" href="https://x.com/joshuablazed" target="_blank" rel="me noopener noreferrer">X ↗</a><a class="ul" href="https://www.instagram.com/joshuablazed/" target="_blank" rel="me noopener noreferrer">Instagram ↗</a></nav>
+  <span class="mono">© <span id="year">2026</span> Joshua de Freitas · Madrid</span>
+</div></footer>
+<script src="/assets/js/chladni.js" defer></script>
+<script src="/assets/js/site.js" defer></script>
+
+</body>
+</html>

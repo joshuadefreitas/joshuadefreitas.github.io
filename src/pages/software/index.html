@@ -1,0 +1,40 @@
+<!--meta {"path":"/software/","title":"Software — Joshua de Freitas","description":"Developer tools by Joshua de Freitas: Engineering Workbench, trace-npm, an agent run recorder, numerical parity and point-in-time data tooling. Public releases and private prototypes are marked.","nav":"software"} -->
+<div class="wrap">
+<header class="open plain">
+  <div class="kicker"><i></i><span class="mono">Software</span></div>
+  <h1>Software I build.</h1>
+  <p class="dek">Developer tools, scientific software and the occasional experiment. Each entry says whether it is public, private for now, or still an idea, and what it can’t do.</p>
+</header>
+
+<section class="s" style="margin-top:clamp(36px,5vw,64px)"><div class="grid">
+  <div class="rail"><h2><span>·</span>Public</h2></div>
+  <div>
+    <a class="feature" href="/software/trace-npm/">
+      <div class="ftitle"><h3>trace-npm</h3><span class="mono st">Public · alpha on npm · Apache-2.0</span></div>
+      <p class="ftext">Runs an npm install script under a syscall tracer and reports what it read, started and connected to. Linux, Node 20 or later, no dependencies.</p>
+      <span class="mono ul" style="justify-self:start">Details and demo →</span>
+    </a>
+    <div class="rows">
+      <a class="row" href="https://joshuadefreitas.github.io/neural-field-study/"><h3>Neural Field Study<small class="mono st">Public · interactive study</small></h3><p>A small mathematical toy you can run in the browser: what happens when nearby activity helps and distant activity pushes back.</p><span class="mono">Open ↗</span></a>
+    </div>
+  </div>
+</div></section>
+
+<section class="s"><div class="grid">
+  <div class="rail"><h2><span>·</span>Private for now</h2></div>
+  <div>
+    <a class="feature" href="/software/workbench/">
+      {{> arcs}}
+      <div class="ftitle"><h3>Engineering Workbench</h3><span class="mono st pv">Prototype · not yet released</span></div>
+      <p class="ftext">Shows how a codebase is put together and how it changed: the architecture, the dependencies that came and went, and the evidence behind each claim.</p>
+      <span class="mono ul" style="justify-self:start">Details and screenshots →</span>
+    </a>
+    <div class="rows">
+      <a class="row" href="/software/agent-runs/"><h3>Agent run recorder<small class="mono st pv">Version 1 · private · working name agentctl</small></h3><p>Keeps track of coding agents: what ran, what finished, what stopped, and where to pick it back up.</p><span class="mono">Details →</span></a>
+      <a class="row" href="/software/numerical-parity/"><h3>Numerical parity<small class="mono st pv">Prototype · private · working name parity</small></h3><p>Checks that the same computation gives the same numbers on different hardware.</p><span class="mono">Details →</span></a>
+      <a class="row" href="/software/point-in-time/"><h3>Point-in-time auditor<small class="mono st pv">Early prototype · private</small></h3><p>Checks whether a dataset or a forecast only used what was knowable at the time.</p><span class="mono">Details →</span></a>
+    </div>
+    <p class="note" style="margin:26px 0 0">Everything here is software I maintain. If I contribute to other people’s projects in a way worth listing, it will get its own list.</p>
+  </div>
+</div></section>
+</div>

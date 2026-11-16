@@ -1,0 +1,283 @@
+{
+  "legend": "Used in my professional work too",
+  "tiers": {
+    "daily": "Day to day",
+    "regular": "Regularly",
+    "tried": "Set up and tried"
+  },
+  "categories": [
+    {
+      "id": "data",
+      "title": "Data engineering & platforms",
+      "lede": "The foundation of my professional work: building data platforms, and the analytics and applied AI that run on them.",
+      "tools": [
+        {
+          "name": "Databricks",
+          "icon": "databricks",
+          "tier": "daily",
+          "pro": true,
+          "note": "A core platform in my professional work. I also keep a small public project on notebook-free Databricks engineering."
+        },
+        {
+          "name": "Apache Spark",
+          "icon": "apachespark",
+          "tier": "daily",
+          "pro": true,
+          "note": "Distributed data processing, mostly through PySpark."
+        },
+        {
+          "name": "Delta Lake",
+          "tier": "daily",
+          "pro": true,
+          "note": "Table storage for those platforms.",
+          "icon": "delta"
+        },
+        {
+          "name": "SQL",
+          "tier": "daily",
+          "pro": true,
+          "note": "A constant at work, and in my own projects too.",
+          "icon": "database"
+        },
+        {
+          "name": "Snowflake",
+          "icon": "snowflake",
+          "tier": "daily",
+          "pro": true,
+          "note": "Another data platform I work with."
+        },
+        {
+          "name": "Neo4j",
+          "icon": "neo4j",
+          "tier": "regular",
+          "pro": true,
+          "note": "Graph data."
+        },
+        {
+          "name": "SQLite",
+          "icon": "sqlite",
+          "tier": "tried",
+          "note": "Schemas for my own projects."
+        },
+        {
+          "name": "DuckDB",
+          "icon": "duckdb",
+          "tier": "tried",
+          "note": "Analytical schemas for my own projects."
+        }
+      ]
+    },
+    {
+      "id": "software",
+      "title": "Programming & software development",
+      "lede": "Most of my own code is Python, with Rust and TypeScript where the work calls for them.",
+      "tools": [
+        {
+          "name": "Python",
+          "icon": "python",
+          "tier": "daily",
+          "pro": true,
+          "note": "Most of what I write, at work and on my own."
+        },
+        {
+          "name": "Rust",
+          "icon": "rust",
+          "tier": "regular",
+          "note": "Numerical work that has to behave the same on different devices."
+        },
+        {
+          "name": "TypeScript",
+          "icon": "typescript",
+          "tier": "regular",
+          "note": "Browser GPU and simulation packages."
+        },
+        {
+          "name": "JavaScript and Node.js",
+          "icon": "nodedotjs",
+          "tier": "regular",
+          "note": "Developer tools, this site, and the Neural Field Study."
+        },
+        {
+          "name": "Shell",
+          "icon": "gnubash",
+          "tier": "regular",
+          "note": "Glue and automation."
+        },
+        {
+          "name": "C++ and CMake",
+          "icon": "cplusplus",
+          "tier": "tried",
+          "note": "Built a small project to check the toolchain."
+        }
+      ]
+    },
+    {
+      "id": "ai",
+      "title": "AI & machine learning",
+      "lede": "Applied AI at work, and a lot of time spent directing AI coding agents and building the tooling around them.",
+      "tools": [
+        {
+          "name": "AI coding agents",
+          "tier": "daily",
+          "note": "Directing agent workers on real projects, and keeping a record of what they did.",
+          "icon": "terminal"
+        },
+        {
+          "name": "PyTorch",
+          "icon": "pytorch",
+          "tier": "regular",
+          "note": "Used for a public negative-control study of a limit-order-book model."
+        },
+        {
+          "name": "MLX",
+          "tier": "tried",
+          "note": "Checked on the Mac's GPU. No real training yet."
+        },
+        {
+          "name": "PyTorch on Apple GPUs",
+          "tier": "tried",
+          "note": "Computation verified; not yet used for real work."
+        }
+      ]
+    },
+    {
+      "id": "science",
+      "title": "Scientific & computational engineering",
+      "lede": "Numerical computing, simulation and GPU work, where much of the effort goes into checking that the numbers are right.",
+      "tools": [
+        {
+          "name": "WebGPU and WGSL",
+          "icon": "webgpu",
+          "tier": "regular",
+          "note": "GPU simulation in the browser: reaction–diffusion and a lattice model."
+        },
+        {
+          "name": "wgpu",
+          "icon": "wgpu",
+          "tier": "regular",
+          "note": "Running one computation on a CPU and several GPUs, to compare the answers."
+        },
+        {
+          "name": "Vulkan",
+          "icon": "vulkan",
+          "tier": "regular",
+          "note": "One of the backends I compare."
+        },
+        {
+          "name": "CUDA",
+          "icon": "nvidia",
+          "tier": "tried",
+          "note": "A kernel compiled and run on a laptop GPU."
+        },
+        {
+          "name": "OpenCV",
+          "icon": "opencv",
+          "tier": "tried",
+          "note": "Checked in an isolated environment."
+        },
+        {
+          "name": "MuJoCo",
+          "tier": "tried",
+          "note": "A headless physics render, checked."
+        },
+        {
+          "name": "FreeCAD",
+          "icon": "freecad",
+          "tier": "tried",
+          "note": "A part modelled from a script."
+        },
+        {
+          "name": "QGIS",
+          "icon": "qgis",
+          "tier": "tried",
+          "note": "Run from the command line."
+        }
+      ]
+    },
+    {
+      "id": "creative",
+      "title": "3D, games & creative technology",
+      "lede": "Set up and driven from scripts, mostly to see what is possible. I haven't shipped a game or a film with these yet.",
+      "tools": [
+        {
+          "name": "Blender",
+          "icon": "blender",
+          "tier": "tried",
+          "note": "A scene built and rendered headless from a script."
+        },
+        {
+          "name": "Godot",
+          "icon": "godotengine",
+          "tier": "tried",
+          "note": "A small demo project, imported headless."
+        },
+        {
+          "name": "Unity",
+          "icon": "unity",
+          "tier": "tried",
+          "note": "Editor tests and a macOS build, run from the command line."
+        },
+        {
+          "name": "Unreal Engine",
+          "icon": "unrealengine",
+          "tier": "tried",
+          "note": "A project with scripted assets, cooked and packaged as a Mac app."
+        },
+        {
+          "name": "Manim",
+          "tier": "tried",
+          "note": "Mathematical animation from code."
+        },
+        {
+          "name": "FFmpeg",
+          "icon": "ffmpeg",
+          "tier": "tried",
+          "note": "Video encoding for the render and animation scripts."
+        }
+      ]
+    },
+    {
+      "id": "infra",
+      "title": "Infrastructure & systems",
+      "lede": "Linux and macOS machines working together, with everything in Git.",
+      "tools": [
+        {
+          "name": "Linux",
+          "icon": "linux",
+          "tier": "daily",
+          "note": "Arch and Debian, for development and long-running jobs."
+        },
+        {
+          "name": "macOS",
+          "icon": "apple",
+          "tier": "daily",
+          "note": "A Mac as the main workstation."
+        },
+        {
+          "name": "Git",
+          "icon": "git",
+          "tier": "daily",
+          "note": "Everything I build lives in it, history intact."
+        },
+        {
+          "name": "Containers",
+          "icon": "podman",
+          "tier": "regular",
+          "note": "Podman and Docker, for demos and isolated runs."
+        },
+        {
+          "name": "Virtual machines",
+          "icon": "qemu",
+          "tier": "regular",
+          "note": "QEMU for isolated experiments."
+        },
+        {
+          "name": "Tailscale",
+          "icon": "tailscale",
+          "tier": "regular",
+          "note": "One private network across my machines."
+        }
+      ]
+    }
+  ]
+}

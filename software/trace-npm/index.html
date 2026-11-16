@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>trace-npm — Joshua de Freitas</title>
+<meta name="description" content="trace-npm runs an npm lifecycle script under strace and reports the files it touched, the programs it started and the network endpoints it contacted. Public alpha, Apache-2.0, Linux.">
+<meta name="author" content="Joshua de Freitas">
+<meta name="theme-color" content="#f5f2eb">
+<link rel="canonical" href="https://joshuadefreitas.github.io/software/trace-npm/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Joshua de Freitas">
+<meta property="og:title" content="trace-npm — Joshua de Freitas">
+<meta property="og:description" content="trace-npm runs an npm lifecycle script under strace and reports the files it touched, the programs it started and the network endpoints it contacted. Public alpha, Apache-2.0, Linux.">
+<meta property="og:url" content="https://joshuadefreitas.github.io/software/trace-npm/">
+<meta property="og:image" content="https://joshuadefreitas.github.io/assets/img/social-card.png">
+<meta property="og:image:alt" content="Joshua de Freitas. Developer tools, simulations, research systems.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="trace-npm — Joshua de Freitas">
+<meta name="twitter:description" content="trace-npm runs an npm lifecycle script under strace and reports the files it touched, the programs it started and the network endpoints it contacted. Public alpha, Apache-2.0, Linux.">
+<meta name="twitter:image" content="https://joshuadefreitas.github.io/assets/img/social-card.png">
+<link rel="icon" type="image/svg+xml" href="/assets/emblem.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icon-32.png">
+<link rel="apple-touch-icon" href="/assets/icon-180.png">
+<link rel="preload" href="/assets/fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/dm-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+
+<script src="/assets/js/theme.js"></script>
+<link rel="stylesheet" href="/assets/css/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"trace-npm","applicationCategory":"DeveloperApplication","operatingSystem":"Linux","softwareVersion":"0.1.0-alpha","license":"https://www.apache.org/licenses/LICENSE-2.0","codeRepository":"https://github.com/joshuadefreitas/trace-npm","url":"https://joshuadefreitas.github.io/software/trace-npm/","author":{"@type":"Person","name":"Joshua de Freitas"}}</script>
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="mast"><div class="wrap">
+  <a class="wordmark" href="/">Joshua de Freitas</a>
+  <nav aria-label="Primary"><a href="/software/" aria-current="page">Software</a><a href="/systems/">Systems</a><a href="/tools/">Tools</a><a href="/writing/">Writing</a><a href="/about/">About</a></nav>
+  <button class="theme" id="theme" type="button" aria-label="Switch to the dark theme">Dark</button>
+</div></header>
+
+<main id="main" tabindex="-1">
+<div class="wrap">
+<header class="open">
+  <div class="kicker"><i></i><span class="mono">Software · Developer tool</span></div>
+  <h1>trace-npm</h1>
+  <p class="dek">npm now asks you to approve install scripts. Nothing tells you what they do. trace-npm runs one under a syscall tracer and reports what it read, started and connected to.</p>
+  <div class="status-line"><span class="mono st"><b>Public · alpha</b></span><span class="mono">0.1.0-alpha on npm</span><span class="mono">Apache-2.0</span><span class="mono">Linux · Node 20+ · no dependencies</span></div>
+  <p class="links" style="margin-top:22px"><a class="mono ul" href="https://github.com/joshuadefreitas/trace-npm" target="_blank" rel="noopener noreferrer">Source on GitHub ↗</a><a class="mono ul" href="https://www.npmjs.com/package/trace-npm" target="_blank" rel="noopener noreferrer">Package on npm ↗</a></p>
+</header>
+
+<div class="q" style="margin-top:clamp(36px,5vw,64px)"><div><span class="mono">Demo</span><h2>A script that reads a credential and sends it away.</h2><p>This is a recorded run against a demo package built to read a credential and send it away. The credentials trace-npm offers a script are synthetic canaries in a throwaway home directory, so reading one is evidence the script went looking for something it had no reason to need.</p></div>
+<figure class="shot demo"><img id="demo-img" src="/assets/img/trace-npm-demo-still.webp" data-live="/assets/img/trace-npm-demo.webp" width="960" height="540" alt="A terminal report from trace-npm: a postinstall script reads a planted credential file and connects to a remote host" loading="lazy"><figcaption><span class="mono">Recording from the repository’s demo</span><button class="demo-btn" type="button" data-demo="demo-img" aria-pressed="false">Play the recording</button></figcaption></figure></div>
+
+<section class="block">
+  <h2>What it reports</h2>
+  <ul class="limits">
+    <li><b>Files</b>Read or written, with suspicious paths flagged: ~/.ssh, ~/.aws, .env files, shell profiles, keychains.</li>
+    <li><b>Programs</b>Every child process the script started, attributed to the script that started it.</li>
+    <li><b>Network</b>The endpoints it connected to. Endpoint-level for now, not DNS names.</li>
+    <li><b>Honesty about itself</b>Visible accounting for any trace it lost, and a limitations block in every report. JSON output for CI.</li>
+  </ul>
+  <p class="t" style="margin-top:22px">Try it on a package you’d like to look at. It executes the script, so use a disposable machine or container.</p>
+  <pre class="code">npx trace-npm run --package some-package --script postinstall \
+  --i-understand-this-executes-untrusted-code</pre>
+  <p class="s2">Already have a saved trace? <span style="font-family:var(--mono);font-size:.9em">trace-npm report</span> reads it on any platform.</p>
+</section>
+
+<section class="block">
+  <h2>What it is not</h2>
+  <ul class="limits">
+    <li><b>Not a sandbox</b>The script really runs. The host runner uses a synthetic home directory and a timeout, which limits the damage; it does not remove the risk.</li>
+    <li><b>Not a verdict</b>A clean report is not proof that a package is safe, and a flagged read is evidence, not proof of intent.</li>
+    <li><b>Not cross-platform yet</b>Live tracing needs Linux and strace. On macOS or Windows, run it in a container.</li>
+    <li><b>Not complete</b>Attribution is per script rather than per nested package, and file contents are never captured.</li>
+  </ul>
+</section>
+
+<section class="block" style="padding-bottom:clamp(60px,8vw,110px)">
+  <h2>How it was tested</h2>
+  <p class="t">Six automated tests replay saved traces of an adversarial and a benign package: parsing, the suspicious-path report, process attribution in both, a payload run through a shell, and suppression of noisy path probes. They cover parsing and reporting. Live tracing needs Linux and strace, and is the newer half of the tool, which is part of why this is an alpha.</p>
+</section>
+</div>
+</main>
+<footer class="site"><div class="wrap">
+  <nav aria-label="Elsewhere"><a class="ul" href="mailto:joshuadefreitas@icloud.com">Email</a><a class="ul" href="https://github.com/joshuadefreitas" target="_blank" rel="me noopener noreferrer">GitHub ↗</a><a class="ul" href="https://www.linkedin.com/in/defreitasjoshua/" target="_blank" rel="me noopener noreferrer">LinkedIn ↗</a><a class="ul" href="https://x.com/joshuablazed" target="_blank" rel="me noopener noreferrer">X ↗</a><a class="ul" href="https://www.instagram.com/joshuablazed/" target="_blank" rel="me noopener noreferrer">Instagram ↗</a></nav>
+  <span class="mono">© <span id="year">2026</span> Joshua de Freitas · Madrid</span>
+</div></footer>
+<script src="/assets/js/chladni.js" defer></script>
+<script src="/assets/js/site.js" defer></script>
+
+</body>
+</html>

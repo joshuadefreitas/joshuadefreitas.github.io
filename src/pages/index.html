@@ -1,0 +1,71 @@
+<!--meta {"italic":true,"path":"/","title":"Joshua de Freitas","description":"Developer tools, simulations, research systems, and whatever else seemed like a good idea at the time. Software and writing by Joshua de Freitas, a senior data engineer based in Madrid.","nav":"","jsonld":[{"@context":"https://schema.org","@type":"Person","name":"Joshua de Freitas","url":"https://joshuadefreitas.github.io/","jobTitle":"Senior data engineer","knowsAbout":["Data engineering","Databricks","Apache Spark","Delta Lake","SQL","Snowflake","Python","Rust","TypeScript","PyTorch","GPU computing","Numerical computing","Simulation","Developer tools"],"homeLocation":{"@type":"Place","name":"Madrid, Spain"},"sameAs":["https://github.com/joshuadefreitas","https://www.linkedin.com/in/defreitasjoshua/","https://x.com/joshuablazed","https://www.instagram.com/joshuablazed/"]},{"@context":"https://schema.org","@type":"WebSite","name":"Joshua de Freitas","url":"https://joshuadefreitas.github.io/"}]} -->
+<section class="hero"><div class="wrap">
+  <div class="kicker"><i></i><span class="mono">Software, simulations and writing</span></div>
+  <h1>Developer tools, simulations, research systems, and <em>whatever else</em> seemed like a good idea at the time.</h1>
+  <p class="dek">I’m Joshua, a senior data engineer based in Madrid. This is where I keep the software I’m building and the things I write.</p>
+  <figure class="plate">
+    <canvas class="art" id="plate" data-seed="overtone" role="img" aria-label="Nodal lines of a vibrating plate, drawn in blue and slowly changing"></canvas>
+    <figcaption><span class="mono"><b>Fig. 1</b> &nbsp;Nodal lines of a vibrating plate, mixed from four standing modes. Computed live; move across it.</span><button class="plate-toggle" type="button" aria-pressed="false">Pause</button></figcaption>
+  </figure>
+</div></section>
+
+<section class="s" id="software"><div class="wrap grid">
+  <div class="rail"><h2><span>01</span>Software</h2></div>
+  <div>
+    <p class="lede">Developer tools and scientific software I’m building.</p>
+    <p class="note">Some of it is public. Some of it isn’t yet, and I’ll say which.</p>
+    <a class="feature" href="/software/workbench/">
+      {{> arcs}}
+      <div class="ftitle"><h3>Engineering Workbench</h3><span class="mono st pv">Prototype · not yet released</span></div>
+      <p class="ftext">Shows how a codebase is put together and how it changed: the architecture, the dependencies that came and went, and the evidence behind each claim. Above, the 852 dependencies between 206 files in pytest.</p>
+    </a>
+    <div class="rows">
+      <a class="row" href="/software/trace-npm/"><h3>trace-npm<small class="mono st">Public · alpha on npm</small></h3><p>Runs an npm install script under a syscall tracer and reports what it read, started and connected to.</p><span class="mono">Details →</span></a>
+      <a class="row" href="/software/agent-runs/"><h3>Agent run recorder<small class="mono st pv">Private · working name agentctl</small></h3><p>Keeps track of coding agents: what ran, what finished, what stopped, and where to pick it back up.</p><span class="mono">Details →</span></a>
+      <a class="row" href="/software/numerical-parity/"><h3>Numerical parity<small class="mono st pv">Private prototype</small></h3><p>Checks that the same computation gives the same numbers on different hardware.</p><span class="mono">Details →</span></a>
+      <a class="row" href="/software/point-in-time/"><h3>Point-in-time auditor<small class="mono st pv">Private prototype</small></h3><p>Checks whether a dataset or a forecast only used what was knowable at the time.</p><span class="mono">Details →</span></a>
+      <a class="row" href="https://joshuadefreitas.github.io/neural-field-study/"><h3>Neural Field Study<small class="mono st">Public · interactive</small></h3><p>A small mathematical toy you can run in the browser: what happens when nearby activity helps and distant activity pushes back.</p><span class="mono">Open ↗</span></a>
+    </div>
+  </div>
+</div></section>
+
+<section class="s" id="systems"><div class="wrap grid">
+  <div class="rail"><h2><span>02</span>Systems</h2></div>
+  <div>
+    <p class="lede">Longer projects, described at the level of what they’re for.</p>
+    <div class="sys">
+      <article><h3>Sekiya</h3><p>An experimental scientific software system for studying how autonomous agents behave: strategic interaction and multi-agent environments.</p></article>
+      <article><h3>Lathilda</h3><p>Quantitative research on economics, forecasting and financial markets, and the computational methods that go with them.</p></article>
+      <article><h3>Palinoir</h3><p>Scientific and numerical computing: simulation, computational experiments, and how the same numbers behave across different devices.</p></article>
+    </div>
+    <p style="margin-top:26px"><a class="mono ul more" href="/systems/">About these projects →</a></p>
+  </div>
+</div></section>
+
+<section class="s" id="tools"><div class="wrap grid">
+  <div class="rail"><h2><span>03</span>Tools</h2></div>
+  <div>
+    <p class="lede">What I work with, from data platforms to GPUs and game engines.</p>
+    {{{toolsSummary}}}
+    <p style="margin-top:26px"><a class="mono ul more" href="/tools/">Everything I work with →</a></p>
+  </div>
+</div></section>
+
+<section class="s" id="writing"><div class="wrap grid">
+  <div class="rail"><h2><span>04</span>Writing</h2></div>
+  <div>
+    <p class="lede">Essays and notes, when there is something worth saying.</p>
+    <div class="posts">
+      <a class="post" href="/writing/the-agent-is-not-the-model/"><div><h3>The agent is not the model</h3><p>Behavior you see from an agent belongs to the whole system around the model, not to the model alone.</p></div><span class="mono">30 September 2026 · Essay</span></a>
+    </div>
+    <p style="margin-top:26px"><a class="mono ul more" href="/writing/">All writing →</a></p>
+  </div>
+</div></section>
+
+<section class="s" id="about"><div class="wrap grid">
+  <div class="rail"><h2><span>05</span>About</h2></div>
+  <div class="prose">
+    <p>I’m a senior data engineer based in Madrid. At work I build data platforms and applied AI. Outside work I build developer tools and scientific software, and I enjoy economics, literature, culture and ideas more broadly.</p>
+    <p><a class="mono ul more" href="/about/">More about me →</a></p>
+  </div>
+</div></section>

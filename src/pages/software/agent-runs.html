@@ -1,0 +1,30 @@
+<!--meta {"path":"/software/agent-runs/","title":"Agent run recorder — Joshua de Freitas","description":"A private tool that keeps track of coding agents: what ran, what finished, what stopped, and where to pick it back up. Version 1, read-only, working name agentctl.","nav":"software"} -->
+<div class="wrap">
+<header class="open plain">
+  <div class="kicker"><i></i><span class="mono">Software · Developer tool</span></div>
+  <h1>Agent run recorder</h1>
+  <p class="dek">When you run several coding agents at once, it gets hard to say what each one did, which ones finished, and which ones stopped partway. This keeps that record, and tells you where to pick up.</p>
+  <div class="status-line"><span class="mono st pv"><b>Version 1 · private for now</b></span><span class="mono">Working name: agentctl</span><span class="mono">Python · standard library only</span></div>
+</header>
+
+<section class="block">
+  <h2>What it does</h2>
+  <ul class="limits">
+    <li><b>Lifecycle</b>Whether a run is running, finished, stale or in conflict, decided from evidence (an exit marker, a live process) rather than guessed.</li>
+    <li><b>Linkage</b>Groups the runs that belong to one piece of work, so everything done to it reads as one story.</li>
+    <li><b>Provenance</b>Which model and provider produced each run, and what a reviewer concluded.</li>
+    <li><b>Interruptions</b>Spots runs that stopped on a usage limit rather than failing, and prints the command that would resume them.</li>
+  </ul>
+</section>
+
+<section class="block" style="padding-bottom:clamp(60px,8vw,110px)">
+  <h2>What it deliberately doesn’t do</h2>
+  <ul class="limits">
+    <li><b>It only reads</b>It never launches an agent, sends a prompt, or writes anything back.</li>
+    <li><b>It never resumes anything</b>Resume commands are advice. It prints them; you decide.</li>
+    <li><b>It keeps to metadata</b>By default the record comes from run metadata and process state, not from transcripts or credentials.</li>
+    <li><b>It doesn’t guess</b>Where the evidence is thin it says “unknown” instead of inventing a status.</li>
+  </ul>
+  <p class="s2">It is built and tested: 71 automated tests and 22 acceptance checks against live runs. It is not released. The licence is undecided, and the name is a working name that will probably change.</p>
+</section>
+</div>

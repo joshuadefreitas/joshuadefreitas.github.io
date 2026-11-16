@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Point-in-time auditor — Joshua de Freitas</title>
+<meta name="description" content="An early, private prototype that checks whether a dataset or a forecast used only what was knowable at the time, given when each value happened and when it became known.">
+<meta name="author" content="Joshua de Freitas">
+<meta name="theme-color" content="#f5f2eb">
+<link rel="canonical" href="https://joshuadefreitas.github.io/software/point-in-time/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Joshua de Freitas">
+<meta property="og:title" content="Point-in-time auditor — Joshua de Freitas">
+<meta property="og:description" content="An early, private prototype that checks whether a dataset or a forecast used only what was knowable at the time, given when each value happened and when it became known.">
+<meta property="og:url" content="https://joshuadefreitas.github.io/software/point-in-time/">
+<meta property="og:image" content="https://joshuadefreitas.github.io/assets/img/social-card.png">
+<meta property="og:image:alt" content="Joshua de Freitas. Developer tools, simulations, research systems.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Point-in-time auditor — Joshua de Freitas">
+<meta name="twitter:description" content="An early, private prototype that checks whether a dataset or a forecast used only what was knowable at the time, given when each value happened and when it became known.">
+<meta name="twitter:image" content="https://joshuadefreitas.github.io/assets/img/social-card.png">
+<link rel="icon" type="image/svg+xml" href="/assets/emblem.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icon-32.png">
+<link rel="apple-touch-icon" href="/assets/icon-180.png">
+<link rel="preload" href="/assets/fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/dm-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+
+<script src="/assets/js/theme.js"></script>
+<link rel="stylesheet" href="/assets/css/site.css">
+
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="mast"><div class="wrap">
+  <a class="wordmark" href="/">Joshua de Freitas</a>
+  <nav aria-label="Primary"><a href="/software/" aria-current="page">Software</a><a href="/systems/">Systems</a><a href="/tools/">Tools</a><a href="/writing/">Writing</a><a href="/about/">About</a></nav>
+  <button class="theme" id="theme" type="button" aria-label="Switch to the dark theme">Dark</button>
+</div></header>
+
+<main id="main" tabindex="-1">
+<div class="wrap">
+<header class="open plain">
+  <div class="kicker"><i></i><span class="mono">Software · Data tooling</span></div>
+  <h1>Point-in-time auditor</h1>
+  <p class="dek">A number can describe last quarter and still not have existed last quarter. This checks whether an analysis used a value before anyone could have known it.</p>
+  <div class="status-line"><span class="mono st pv"><b>Early prototype · private for now</b></span><span class="mono">Python</span></div>
+  <figure class="plate bigplate"><svg class="rails" viewBox="0 0 1200 330" role="img" aria-label="Two horizontal rails. The upper rail shows when seven values happened; the lower rail shows when each became known, later and unevenly. One later value is a correction. A vertical line marks an information cutoff: values known only after it could not have been used."><path class="l" d="M50 110H1150M50 250H1150"/><text x="50" y="84">Happened</text><text x="50" y="284">Known</text><path class="c" d="M138.0 110C138.0 180.0 204.0 180.0 204.0 250"/><circle class="d" cx="138.0" cy="110" r="4"/><circle class="k" cx="204.0" cy="250" r="4"/><path class="c" d="M270.0 110C270.0 180.0 369.0 180.0 369.0 250"/><circle class="d" cx="270.0" cy="110" r="4"/><circle class="k" cx="369.0" cy="250" r="4"/><path class="c" d="M413.0 110C413.0 180.0 468.0 180.0 468.0 250"/><circle class="d" cx="413.0" cy="110" r="4"/><circle class="k" cx="468.0" cy="250" r="4"/><path class="c" d="M556.0 110C556.0 180.0 666.0 180.0 666.0 250"/><circle class="d" cx="556.0" cy="110" r="4"/><circle class="k" cx="666.0" cy="250" r="4"/><path class="c" d="M710.0 110C710.0 180.0 787.0 180.0 787.0 250"/><circle class="d" cx="710.0" cy="110" r="4"/><circle class="k" cx="787.0" cy="250" r="4"/><path class="c" d="M864.0 110C864.0 180.0 952.0 180.0 952.0 250"/><circle class="d" cx="864.0" cy="110" r="4"/><circle class="k" cx="952.0" cy="250" r="4"/><path class="c" d="M1018.0 110C1018.0 180.0 1073.0 180.0 1073.0 250"/><circle class="d" cx="1018.0" cy="110" r="4"/><circle class="k" cx="1073.0" cy="250" r="4"/><circle class="rv" cx="776.0" cy="250" r="9"/><path class="rv" d="M468.0 250H767.0"/><text x="776.0" y="284" text-anchor="end">Revised</text><path class="cut" d="M776.0 60V300"/><text x="786.0" y="70">Cutoff</text></svg><figcaption><span class="mono"><b>An illustration of the idea</b> &nbsp;Each value happens on the upper rail and becomes known later on the lower one. One is later revised. Anything to the right of the cutoff could not have been used.</span></figcaption></figure>
+</header>
+
+<section class="block">
+  <h2>What it checks</h2>
+  <ul class="limits">
+    <li><b>Availability</b>Given a table of values with the dates they became known, which ones could an analysis legitimately use at a given cutoff?</li>
+    <li><b>Revisions</b>How large and how late the corrections to a series are, which is often the quantity you need.</li>
+    <li><b>Forecast inputs</b>Whether each input a forecast used was already known at the stated origin, and whether the target was.</li>
+    <li><b>Leaks you can’t see</b>A perturbation test: change the future, and see whether a forecast changes.</li>
+  </ul>
+</section>
+
+<section class="block" style="padding-bottom:clamp(60px,8vw,110px)">
+  <h2>Where it stands, and what it can’t do</h2>
+  <p class="t">It is an early prototype, in active development, and not public. It audits consistency with the availability dates you give it. It does not discover those dates, so it can’t tell you the true release time of a data point, and its answers are only as good as the vintages it is shown.</p>
+</section>
+</div>
+</main>
+<footer class="site"><div class="wrap">
+  <nav aria-label="Elsewhere"><a class="ul" href="mailto:joshuadefreitas@icloud.com">Email</a><a class="ul" href="https://github.com/joshuadefreitas" target="_blank" rel="me noopener noreferrer">GitHub ↗</a><a class="ul" href="https://www.linkedin.com/in/defreitasjoshua/" target="_blank" rel="me noopener noreferrer">LinkedIn ↗</a><a class="ul" href="https://x.com/joshuablazed" target="_blank" rel="me noopener noreferrer">X ↗</a><a class="ul" href="https://www.instagram.com/joshuablazed/" target="_blank" rel="me noopener noreferrer">Instagram ↗</a></nav>
+  <span class="mono">© <span id="year">2026</span> Joshua de Freitas · Madrid</span>
+</div></footer>
+<script src="/assets/js/chladni.js" defer></script>
+<script src="/assets/js/site.js" defer></script>
+
+</body>
+</html>
