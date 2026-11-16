@@ -71,7 +71,7 @@ for (const { meta, body, file } of pages) {
   } else {
     const mast = fill(partial('masthead'), { nav: nav(meta.nav) });
     const foot = fill(partial('footer'), { elsewhere });
-    html = `<!doctype html>\n<html lang="en" data-theme="light">\n<head>\n${head}\n</head>\n<body>\n${meta.progress ? '<div class="progress" id="progress" aria-hidden="true"></div>\n' : ''}${mast}\n<main id="main" tabindex="-1">\n${withMail(body.trim())}\n</main>\n${foot}\n</body>\n</html>\n`;
+    html = `<!doctype html>\n<html lang="en" data-theme="light">\n<head>\n${head}\n</head>\n<body>\n${meta.progress ? '<div class="progress" id="progress" aria-hidden="true"></div>\n' : ''}${mast}\n<main id="main" tabindex="-1">\n${withMail(body.trim())}\n</main>\n${foot}\n${(meta.scripts || []).map((u) => `<script src="${u}" defer></script>`).join('\n')}\n</body>\n</html>\n`;
   }
   outputs.set(meta.path.endsWith('/') ? meta.path + 'index.html' : meta.path, html);
 }

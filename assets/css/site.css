@@ -184,6 +184,23 @@ footer.site nav a{font-size:15px;padding:12px 6px;min-width:44px;text-align:cent
 .legend{display:flex;gap:10px;align-items:center;margin:26px 0 clamp(36px,5vw,56px)}
 @media (max-width:900px){.tool{grid-template-columns:minmax(0,1fr);gap:4px}.tnote{padding-left:42px}}
 
+
+/* systems gallery: cinematic cards inside the Journal's editorial frame */
+.gal-h{margin:0 0 20px;padding-top:12px;border-top:1px solid var(--ink);font-weight:400}
+.gal-grid{display:grid;gap:clamp(26px,3vw,44px) clamp(18px,2.4vw,34px);margin-bottom:clamp(40px,5vw,72px)}
+.gal-grid.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.gal-grid.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.sys-art{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:16/11;background:#050816;isolation:isolate;border:1px solid var(--rule2)}
+.g3 .sys-art{aspect-ratio:4/5}
+.sys-art canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.sys-art::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(2,4,12,.45) 0,rgba(2,4,12,0) 26%,rgba(2,4,12,0) 48%,rgba(2,4,12,.86) 100%)}
+.sys-top{position:absolute;left:18px;right:18px;top:16px;display:flex;justify-content:space-between;gap:12px;z-index:2}
+.sys-top .mono{color:rgba(236,238,248,.9)}
+.sys-top .st::before{background:#7be0ff}.sys-top .st.pv::before{background:none;border-color:rgba(236,238,248,.7)}
+.sys-art h3{position:absolute;left:18px;right:18px;bottom:18px;z-index:2;margin:0;font:300 clamp(25px,2.5vw,36px)/1.06 var(--serif);letter-spacing:-.02em;color:#f4f2ec;text-wrap:balance}
+.sys-p{font:300 19px/1.5 var(--serif);color:var(--ink2);margin:16px 0 8px;max-width:30em}
+.sys-card .cap{margin:0}
+@media (max-width:900px){.gal-grid.g2,.gal-grid.g3{grid-template-columns:minmax(0,1fr)}.sys-art,.g3 .sys-art{aspect-ratio:4/3.3}}
+
 /* 404 */
 .lost{padding:clamp(70px,12vw,170px) 0}
 
