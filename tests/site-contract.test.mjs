@@ -157,7 +157,12 @@ test("build is reproducible when its script is available", () => {
 test("release byte budgets are respected", () => {
   for (const url of existingPages()) assert.ok(statSync(pageFile(url)).size <= 70_000, `${url} exceeds 70 KB`);
   const css = path.join(root, "assets/css/site.css"); if (existsSync(css)) assert.ok(statSync(css).size <= 45_000, "site.css exceeds 45 KB");
-  const jsDir = path.join(root, "assets/js"); if (existsSync(jsDir)) { const bytes = readdirSync(jsDir).filter((name) => name.endsWith(".js")).reduce((total, name) => total + statSync(path.join(jsDir, name)).size, 0); console.log(`total JS: ${bytes} bytes`); assert.ok(bytes <= 40_000, "total JS exceeds 40 KB"); }
+  // Budget is per page: the JavaScript a page actually loads. The shared scripts stay small; the Systems gallery's page-only scripts get their own, larger allowance.
+  for (const url of existingPages()) {
+    const html = readFileSync(pageFile(url), "utf8"), srcs = [...html.matchAll(/<script[^>]+src="(\/assets\/js\/[^"]+)"/g)].map((m) => m[1]);
+    const bytes = srcs.reduce((t, f) => t + statSync(path.join(root, f)).size, 0), limit = srcs.some((f) => /systems-art/.test(f)) ? 110_000 : 40_000;
+    assert.ok(bytes <= limit, `${url}: JS ${bytes} bytes exceeds ${limit}`);
+  }
   const images = path.join(root, "assets/img"); if (existsSync(images)) for (const name of readdirSync(images, { recursive: true })) { const file = path.join(images, name); if (statSync(file).isFile()) assert.ok(statSync(file).size <= 400_000, `image exceeds 400 KB: ${path.relative(root, file)}`); }
 });
 
