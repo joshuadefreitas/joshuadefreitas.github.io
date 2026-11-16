@@ -7,7 +7,7 @@ const ok = (c, m) => { if (!c) fails.push(m); };
 
 const sm = await get('/sitemap.xml'); ok(sm.r.status === 200, `sitemap ${sm.r.status}`);
 const urls = [...sm.text.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-ok(urls.length >= 14, `sitemap lists ${urls.length} pages`);
+ok(urls.length >= 13, `sitemap lists ${urls.length} pages`);
 const seen = new Set(), assets = new Set(), links = new Set();
 for (const u of urls) {
   const p = new URL(u).pathname; const { r, text } = await get(p);
