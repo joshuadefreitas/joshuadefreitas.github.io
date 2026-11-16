@@ -59,6 +59,32 @@
     });
   });
 
+
+  // Home: load the scene scripts only when the projects strip is near the viewport; drive the strip's controls.
+  var lazy = document.querySelector('[data-lazy-gallery]');
+  if (lazy) {
+    var loaded = false, load = function () { if (loaded) return; loaded = true; ['/assets/js/world-mask.js', '/assets/js/gs-state.js', '/assets/js/systems-art.js'].reduce(function (p, src) { return p.then(function () { return new Promise(function (res) { var sc = document.createElement('script'); sc.src = src; sc.onload = sc.onerror = res; document.body.appendChild(sc); }); }); }, Promise.resolve()); };
+    if ('IntersectionObserver' in window) { var lio = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { load(); lio.disconnect(); } }, { rootMargin: '600px 0px' }); lio.observe(lazy); } else load();
+    var strip = document.getElementById('strip'), wrap = strip && strip.parentNode, prev = document.getElementById('strip-prev'), next = document.getElementById('strip-next'), bar = document.getElementById('strip-bar'), nEl = document.getElementById('strip-n');
+    if (strip) {
+      var pad = function () { var vw = document.documentElement.clientWidth, w = Math.min(1240, vw), p = Math.max(vw - w, 0) / 2 + Math.min(Math.max(vw * .05, 20), 56); strip.style.setProperty('--strip-pad', p + 'px'); };
+      var step = function () { var it = strip.querySelector('.strip-item'); return it ? it.getBoundingClientRect().width + parseFloat(getComputedStyle(strip).columnGap || 20) : 320; };
+      var sync = function () {
+        var max = strip.scrollWidth - strip.clientWidth, x = strip.scrollLeft, items = strip.querySelectorAll('.strip-item'), first = 0, k, left = strip.getBoundingClientRect().left + parseFloat(getComputedStyle(strip).paddingLeft || 0) - 10;
+        for (k = 0; k < items.length; k++) { if (items[k].getBoundingClientRect().left >= left) { first = k; break; } first = items.length - 1; }
+        if (nEl) nEl.textContent = String(x > max - 4 ? items.length : first + 1);
+        if (prev) prev.disabled = x < 4; if (next) next.disabled = x > max - 4;
+        if (bar) { var frac = Math.min(1, strip.clientWidth / strip.scrollWidth); bar.style.width = (frac * 100) + '%'; bar.style.transform = 'translateX(' + ((max > 0 ? x / max : 0) * (1 / frac - 1) * 100) + '%)'; }
+        wrap.classList.toggle('end', x > max - 4);
+      };
+      var reduceM = matchMedia('(prefers-reduced-motion: reduce)').matches, go = function (dir) { strip.scrollBy({ left: dir * step() * (innerWidth > 900 ? 2 : 1), behavior: reduceM ? 'auto' : 'smooth' }); };
+      if (prev) prev.addEventListener('click', function () { go(-1); }); if (next) next.addEventListener('click', function () { go(1); });
+      strip.addEventListener('scroll', function () { if (!sync.t) sync.t = requestAnimationFrame(function () { sync.t = 0; sync(); }); }, { passive: true });
+      strip.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') { go(1); e.preventDefault(); } else if (e.key === 'ArrowLeft') { go(-1); e.preventDefault(); } });
+      addEventListener('resize', function () { pad(); sync(); }); pad(); sync();
+    }
+  }
+
   // The essay's interactive map: turn parts of the system off and see what the claim becomes.
   var parts = [].slice.call(document.querySelectorAll('[data-part]')), readout = document.getElementById('system-readout');
   if (parts.length && readout) {

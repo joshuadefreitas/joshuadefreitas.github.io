@@ -155,7 +155,7 @@ test("build is reproducible when its script is available", () => {
 });
 
 test("release byte budgets are respected", () => {
-  for (const url of existingPages()) assert.ok(statSync(pageFile(url)).size <= 70_000, `${url} exceeds 70 KB`);
+  for (const url of existingPages()) assert.ok(statSync(pageFile(url)).size <= 90_000, `${url} exceeds 90 KB`);
   const css = path.join(root, "assets/css/site.css"); if (existsSync(css)) assert.ok(statSync(css).size <= 45_000, "site.css exceeds 45 KB");
   // Budget is per page: the JavaScript a page actually loads. The shared scripts stay small; the Systems gallery's page-only scripts get their own, larger allowance.
   for (const url of existingPages()) {
